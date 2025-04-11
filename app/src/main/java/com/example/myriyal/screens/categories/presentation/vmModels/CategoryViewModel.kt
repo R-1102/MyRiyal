@@ -25,12 +25,7 @@ class CategoryViewModel(private val repository: CategoryRepository) : ViewModel(
     // Filters out INACTIVE (soft-deleted) categories.
     // Used directly in: CategoryScreen
     val categories: StateFlow<List<CategoryEntity>> = repository
-        .getAllCategories() // Data from repository (which pulls from DAO)
-        .map { list -> list.filter { it.status == CategoryStatus.ACTIVE } } // Filter out inactive items
         .stateIn(
-            scope = viewModelScope, // Scoped to ViewModel lifecycle
-            started = SharingStarted.WhileSubscribed(5000), // Keeps the flow active while subscribed
-            initialValue = emptyList() // Initial empty value before data loads
         )
 
     // Inserts a new category (user-created or predefined)

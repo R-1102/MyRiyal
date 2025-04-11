@@ -28,8 +28,6 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         enableEdgeToEdge()
 
 
@@ -42,6 +40,8 @@ class MainActivity : ComponentActivity() {
 
         // COMPOSE UI ENTRY POINT
         // Starts the Jetpack Compose rendering
+        val dao = DatabaseProvider.getDatabase(this).categoryDao()
+
         setContent {
             MyRiyalTheme {
                 Scaffold(
@@ -60,3 +60,5 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+                //CategoryScreen(viewModel = viewModel)
+
