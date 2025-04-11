@@ -14,6 +14,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.myriyal.core.local.db.DatabaseProvider
+import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
+import com.example.myriyal.screens.categories.presentation.CategoryScreen
+import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
 import com.example.myriyal.ui.theme.MyRiyalTheme
 
@@ -22,25 +26,24 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val dao = DatabaseProvider.getDatabase(this).categoryDao()
+        val repo = CategoryRepositoryImpl(applicationContext)
+        val viewModel = CategoryViewModel(repo)
+
         setContent {
             MyRiyalTheme {
                 Scaffold(
                     modifier = Modifier
                         .background(color = MaterialTheme.colorScheme.background)
                 ) {
-                    SignUpScreen()
+                    //SignUpScreen()
                 }
 
+                //Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    CategoryScreen(viewModel = viewModel)
+                //}
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
