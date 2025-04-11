@@ -16,15 +16,24 @@ import com.example.myriyal.core.local.enums.CategoryType
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import androidx.compose.material.icons.filled.Star
 
+// UI layer of the category feature.
+// Displays the category list and a form for adding/editing categories.
+//
+// Data flows:
+// - Reads data from: CategoryViewModel.categories (StateFlow)
+// - Sends user input/actions to: CategoryViewModel.insert/update/delete/seed
+
 @Composable
 fun CategoryScreen(viewModel: CategoryViewModel) {
+    // Collect category list as State from ViewModel
     val categories by viewModel.categories.collectAsState()
 
+    // Trigger predefined category seeding on first composition
     LaunchedEffect(Unit) {
         viewModel.seedPredefinedCategories()
     }
 
-
+    // Form state variables
     var selectedCategory by remember { mutableStateOf<CategoryEntity?>(null) }
     var name by remember { mutableStateOf("") }
     var color by remember { mutableStateOf("#FF0000") }
@@ -33,6 +42,7 @@ fun CategoryScreen(viewModel: CategoryViewModel) {
     var type by remember { mutableStateOf(CategoryType.EXPENSE) }
     var isPredefined by remember { mutableStateOf(false) }
 
+    // Resets form fields after submission
     fun resetForm() {
         selectedCategory = null
         name = ""
@@ -43,6 +53,7 @@ fun CategoryScreen(viewModel: CategoryViewModel) {
         isPredefined = false
     }
 
+    // Loads category fields into the form for editing
     fun loadCategoryForEdit(category: CategoryEntity) {
         selectedCategory = category
         name = category.name
@@ -53,10 +64,10 @@ fun CategoryScreen(viewModel: CategoryViewModel) {
         isPredefined = category.isPredefined
     }
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)) {
+    // Main screen layout
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
 
+        // Reusable form Composable for adding/updating category
         CategoryForm(
             selectedCategory = selectedCategory,
             name = name,
@@ -95,6 +106,7 @@ fun CategoryScreen(viewModel: CategoryViewModel) {
 
         Divider(modifier = Modifier.padding(vertical = 16.dp))
 
+        // Category list section
         if (categories.isEmpty()) {
             Text("No categories found.")
         } else {
@@ -112,9 +124,11 @@ fun CategoryScreen(viewModel: CategoryViewModel) {
     }
 }
 
+
+
 @Composable
 fun CategoryForm(
-    selectedCategory: CategoryEntity?,
+    selectedCategory: CategoryEntity?, // Null = create mode, Non-null = edit mode
     name: String,
     onNameChange: (String) -> Unit,
     color: String,
@@ -127,8 +141,9 @@ fun CategoryForm(
     onTypeChange: (CategoryType) -> Unit,
     isPredefined: Boolean,
     onPredefinedChange: (Boolean) -> Unit,
-    onSubmit: () -> Unit
+    onSubmit: () -> Unit // Action triggered when Add/Update button is clicked
 ) {
+    // Input for category name
     OutlinedTextField(
         value = name,
         onValueChange = onNameChange,
@@ -138,24 +153,30 @@ fun CategoryForm(
 
     Spacer(modifier = Modifier.height(8.dp))
 
+    // Row: Input for color and icon (emoji)
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         OutlinedTextField(
             value = color,
             onValueChange = onColorChange,
             label = { Text("Color") },
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f) // Half width
         )
         OutlinedTextField(
             value = icon,
             onValueChange = onIconChange,
             label = { Text("Icon") },
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f) // Half width
         )
     }
 
     Spacer(modifier = Modifier.height(8.dp))
 
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    // Row: Dropdowns for status and type
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        // Uses generic dropdown composable (see below)
         DropdownMenuBox(
             label = "Status",
             selected = status,
@@ -163,6 +184,7 @@ fun CategoryForm(
             onSelect = onStatusChange,
             modifier = Modifier.weight(1f)
         )
+
         DropdownMenuBox(
             label = "Type",
             selected = type,
@@ -174,6 +196,7 @@ fun CategoryForm(
 
     Spacer(modifier = Modifier.height(8.dp))
 
+    // Checkbox to mark as predefined (seeded by app or created manually)
     Row(verticalAlignment = Alignment.CenterVertically) {
         Checkbox(
             checked = isPredefined,
@@ -185,6 +208,7 @@ fun CategoryForm(
 
     Spacer(modifier = Modifier.height(8.dp))
 
+    // Submit button. Label changes based on whether we're editing or creating
     Button(
         onClick = onSubmit,
         modifier = Modifier.fillMaxWidth()
@@ -193,22 +217,26 @@ fun CategoryForm(
     }
 }
 
+
+
 @Composable
 fun <T : Enum<T>> DropdownMenuBox(
     label: String,
-    selected: T,
-    options: List<T>,
-    onSelect: (T) -> Unit,
+    selected: T, // Currently selected enum value
+    options: List<T>, // Full enum list (e.g., CategoryStatus.values())
+    onSelect: (T) -> Unit, // Callback when an option is chosen
     modifier: Modifier = Modifier
 ) {
-    var expanded by remember { mutableStateOf(false) }
+    var expanded by remember { mutableStateOf(false) } // Whether dropdown is open
 
     Column(modifier = modifier) {
         Text(text = label, style = MaterialTheme.typography.labelMedium)
+
         Box {
+            // Read-only field shows the selected option
             OutlinedTextField(
                 value = selected.name.lowercase().replaceFirstChar { it.uppercase() },
-                onValueChange = {},
+                onValueChange = {}, // No-op because it's read-only
                 readOnly = true,
                 modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {
@@ -218,6 +246,7 @@ fun <T : Enum<T>> DropdownMenuBox(
                 }
             )
 
+            // Dropdown with enum values as options
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false }
@@ -238,12 +267,14 @@ fun <T : Enum<T>> DropdownMenuBox(
     }
 }
 
+
+
 @Composable
 fun CategoryItem(
     category: CategoryEntity,
-    onEdit: () -> Unit,
-    onSoftDelete: () -> Unit,
-    onDeleteForever: () -> Unit
+    onEdit: () -> Unit,           // When user clicks Edit
+    onSoftDelete: () -> Unit,     // When user clicks "Deactivate"
+    onDeleteForever: () -> Unit   // When user clicks "Delete"
 ) {
     Card(
         modifier = Modifier
@@ -256,18 +287,28 @@ fun CategoryItem(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
+                // Display category data
                 Text("Name: ${category.name}", style = MaterialTheme.typography.bodyLarge)
                 Text("Status: ${category.status}", style = MaterialTheme.typography.bodyMedium)
                 Text("Type: ${category.type}", style = MaterialTheme.typography.bodySmall)
             }
+
             Column(horizontalAlignment = Alignment.End) {
+                // Actions that modify the category through the ViewModel
                 TextButton(onClick = onEdit) { Text("Edit") }
                 TextButton(onClick = onSoftDelete) { Text("Deactivate") }
                 TextButton(onClick = onDeleteForever) { Text("Delete") }
+
+                // Shows a visual tag if this is a predefined category
                 if (category.isPredefined) {
-                    Text("⭐ Predefined", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                    Text(
+                        "⭐ Predefined",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
                 }
             }
         }
     }
 }
+
