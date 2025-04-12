@@ -6,26 +6,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
 import com.example.myriyal.core.local.db.DatabaseProvider
 import com.example.myriyal.navigation.AppNavGraph
 import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
-import com.example.myriyal.screens.categories.presentation.CategoryScreen
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
-import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
-import com.example.myriyal.core.local.db.DatabaseProvider
-import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
-import com.example.myriyal.screens.categories.presentation.CategoryScreen
-import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
+
 import com.example.myriyal.ui.theme.MyRiyalTheme
 
 // MainActivity is the entry point of the app
@@ -55,17 +44,8 @@ class MainActivity : ComponentActivity() {
             MyRiyalTheme {
                 val navController = rememberNavController()
 
-//                 Scaffold(
-//                     modifier = Modifier
-//                         .background(color = MaterialTheme.colorScheme.background)
-//                 ) {
-//                     SignUpScreen()
-//                 }
-
-
                 // UI starts here. CategoryScreen is the first visible screen.
                 //CategoryScreen(viewModel = viewModel)
-             //CategoryScreen(viewModel = viewModel)
                 Scaffold(
                     modifier = Modifier
                         .background(color = MaterialTheme.colorScheme.background)
@@ -78,11 +58,4 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
