@@ -44,6 +44,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.myriyal.R
+import com.example.myriyal.screens.authentication.presentation.component.GradientButton
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import java.util.Date
 import java.text.DateFormat
@@ -54,12 +55,13 @@ fun AddCategory() {
     var categName by remember { mutableStateOf("") }
     var categType by remember { mutableStateOf("") }
 
+    var selectedColor by remember { mutableStateOf(Color(0xFF6200EE)) }
+    var categColor = rememberColorPickerController()
     var categIcon by remember { mutableStateOf("") }
+
     var categBudgAmount by remember { mutableStateOf("") }
     var startDate by remember { mutableStateOf<Long?>(null) }
 
-    var selectedColor by remember { mutableStateOf(Color(0xFF6200EE)) }
-    var categColor = rememberColorPickerController()
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -70,17 +72,16 @@ fun AddCategory() {
                 .padding(16.dp)
                 .wrapContentHeight()
                 .fillMaxWidth(),
-//        shape =
+//            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondary)
         ) {
             Column(
                 modifier = Modifier
-                    .padding(vertical = 16.dp)
+                    .padding(32.dp)
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
-
 
                 val context = LocalContext.current
                 //category name
@@ -112,7 +113,6 @@ fun AddCategory() {
                         containerColor = Color.Transparent /*categColor.selectedColor.value*/
                     ),
                     shape = RoundedCornerShape(4.dp),
-//                        .padding(64.dp)
                     modifier = Modifier
                         .width(280.dp)
                         .height(55.dp)
@@ -126,8 +126,8 @@ fun AddCategory() {
                             context.getString(R.string.chooseCategColor),
                             color = Color.DarkGray,
                             textAlign = TextAlign.Start,
-//                        modifier = Modifier.fillMaxWidth()
                         )
+                        //a Circle to show the selected color
                         Card(
                             modifier = Modifier
                                 .size(30.dp),
@@ -204,6 +204,11 @@ fun AddCategory() {
                         onDismiss = { showDatePicker = false }
                     )
                 }
+                GradientButton(text=context.getString(R.string.save),
+                    onClick = { TODO() })
+//                Spacer(Modifier.height(16.dp))
+                GradientButton(text=context.getString(R.string.cancel),
+                    onClick = { TODO() })
             }
         }
     }

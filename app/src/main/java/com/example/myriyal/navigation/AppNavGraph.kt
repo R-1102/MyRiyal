@@ -6,9 +6,11 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.composable
 import com.example.myriyal.screens.authentication.presentation.screens.LoginScreen
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
 import com.example.myriyal.screens.authentication.presentation.screens.SplashScreen
+import com.example.myriyal.screens.categories.presentation.screens.AddCategory
 
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -16,7 +18,7 @@ import com.example.myriyal.screens.authentication.presentation.screens.SplashScr
 fun AppNavGraph(navController: NavHostController) {
     AnimatedNavHost(
         navController = navController,
-        startDestination = Routes.SPLASH,
+        startDestination = Routes.ADDCATEG,
         enterTransition = {
             slideInVertically(
                 initialOffsetY = { it }, // Enter from bottom
@@ -39,6 +41,9 @@ fun AppNavGraph(navController: NavHostController) {
         }
         composable(Routes.SIGNUP) {
             SignUpScreen(navController)
+        }
+        composable(Routes.ADDCATEG) {
+            AddCategory()
         }
     }
 }

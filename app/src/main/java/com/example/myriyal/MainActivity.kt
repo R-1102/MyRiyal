@@ -5,6 +5,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.core.local.db.DatabaseProvider
 import com.example.myriyal.navigation.AppNavGraph
@@ -91,7 +95,7 @@ class MainActivity : ComponentActivity() {
 //                     categoryViewModel = categoryViewModel,
 //                     recordViewModel = recordViewModel
 //                 )
-                AddCategory()
+
             }
         }
     }
