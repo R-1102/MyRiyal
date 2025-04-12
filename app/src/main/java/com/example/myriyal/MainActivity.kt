@@ -5,27 +5,22 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-
-import androidx.compose.foundation.background
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.core.local.db.DatabaseProvider
 import com.example.myriyal.navigation.AppNavGraph
-
-import androidx.navigation.compose.rememberNavController
-import com.example.myriyal.navigation.testing.AppNavGraph
 import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
 import com.example.myriyal.screens.categories.domian.useCases.*
-import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
-
-import com.example.myriyal.screens.records.data.repository.RecordRepositoryImpl
-import com.example.myriyal.screens.records.domain.useCases.*
-import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
-
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.myriyal.screens.categories.presentation.screens.AddCategory
+import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
+import com.example.myriyal.screens.records.data.repository.RecordRepositoryImpl
+import com.example.myriyal.screens.records.domain.useCases.DeleteRecordUseCase
+import com.example.myriyal.screens.records.domain.useCases.GetAllRecordsUseCase
+import com.example.myriyal.screens.records.domain.useCases.GetRecordByIdUseCase
+import com.example.myriyal.screens.records.domain.useCases.GetRecordsByCategoryUseCase
+import com.example.myriyal.screens.records.domain.useCases.InsertRecordUseCase
+import com.example.myriyal.screens.records.domain.useCases.RecordUseCases
+import com.example.myriyal.screens.records.domain.useCases.UpdateRecordUseCase
+import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 import com.example.myriyal.ui.theme.MyRiyalTheme
 
 // MainActivity is the entry point of the app.
@@ -96,6 +91,7 @@ class MainActivity : ComponentActivity() {
 //                     categoryViewModel = categoryViewModel,
 //                     recordViewModel = recordViewModel
 //                 )
+                AddCategory()
             }
         }
     }

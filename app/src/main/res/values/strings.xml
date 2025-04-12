@@ -16,8 +16,6 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="dont_have_account"> Don\'t have an account?</string>
 
-    <string name="app_name">My Riyal</string>
-
     <string name="enterCategName">Enter Category Name</string>
     <string name="enterCategType">Category Type</string>
     <string name="chooseCategColor">Select Color</string>
