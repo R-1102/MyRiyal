@@ -42,6 +42,7 @@ android {
 
 dependencies {
 
+    // Core dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -52,6 +53,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.room.common.jvm)
     implementation(libs.androidx.room.runtime.android)
+
+    // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -60,18 +63,18 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    //icons
+    // Icons and Material
     implementation(platform(libs.androidx.compose.bom.v20250200))
-    implementation (libs.androidx.material.icons.extended)
-    implementation (libs.androidx.compose.material3.material3)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.compose.material3.material3)
 
-    //Room
-    implementation (libs.androidx.room.runtime)
-    kapt (libs.androidx.room.compiler)
+    // Room dependencies
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
 
-    //Navigation
+    // Navigation dependencies
     implementation(libs.androidx.navigation.compose)
 
-    //animation
-    implementation(libs.accompanist.navigation.animation) 
+    // Accompanist Animation (Consider replacing with androidx.navigation)
+    implementation(libs.accompanist.navigation.animation)
 }
