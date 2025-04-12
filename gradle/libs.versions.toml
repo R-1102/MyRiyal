@@ -16,6 +16,7 @@ roomCommonJvm = "2.7.0"
 roomCompiler = "2.7.0"
 roomRuntime = "2.7.0"
 roomRuntimeAndroid = "2.7.0"
+androidxNavigation = "2.8.9" # For androidx.navigation.compose
 
 
 [libraries]
@@ -43,6 +44,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 material3 = { module = "androidx.compose.material3:material3" }
 androidx-room-common-jvm = { group = "androidx.room", name = "room-common-jvm", version.ref = "roomCommonJvm" }
 androidx-room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "roomRuntimeAndroid" }
+androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 
 
 [plugins]

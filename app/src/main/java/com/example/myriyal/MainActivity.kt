@@ -1,5 +1,6 @@
 package com.example.myriyal
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,8 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.core.local.db.DatabaseProvider
 import com.example.myriyal.navigation.AppNavGraph
-import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
-import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.navigation.testing.AppNavGraph
@@ -82,12 +81,12 @@ class MainActivity : ComponentActivity() {
 
                 // UI starts here. CategoryScreen is the first visible screen.
                 //CategoryScreen(viewModel = viewModel)
-//                 Scaffold(
-//                     modifier = Modifier
-//                         .background(color = MaterialTheme.colorScheme.background)
-//                 ) {
-//                     AppNavGraph(navController = navController)
-//                 }
+                 Scaffold(
+                     modifier = Modifier
+                         .background(color = MaterialTheme.colorScheme.background)
+                 ) {
+                     AppNavGraph(navController = navController)
+                 }
 
                 // Navigation Graph handles switching between screens
 //                 AppNavGraph(
@@ -99,6 +98,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-
-//
