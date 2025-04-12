@@ -1,71 +1,54 @@
 package com.example.myriyal
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
-import com.example.myriyal.core.local.db.DatabaseProvider
 import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
+import com.example.myriyal.screens.categories.domian.useCases.*
 import com.example.myriyal.screens.categories.presentation.CategoryScreen
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.ui.theme.MyRiyalTheme
 
-// MainActivity is the entry point of the app
-// It bootstraps the database, repository, and manually wires the ViewModel
+// MainActivity is the entry point of the app.
+// It manually wires the dependencies (repository, use cases, view model) and launches the UI.
+//
+// Architecture Flow:
+// - MainActivity builds the CategoryRepositoryImpl (data layer)
+// - Passes the repository to all Category use cases (domain layer)
+// - Combines use cases into a single container (CategoryUseCases)
+// - Injects the use cases into CategoryViewModel (presentation layer)
+// - ViewModel is passed to CategoryScreen (UI layer)
 class MainActivity : ComponentActivity() {
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        // Enables full edge-to-edge content rendering
         enableEdgeToEdge()
 
-
-        // 2. Create repository implementation (uses the DAO internally)
+        // Instantiate the repository that connects to the DAO
         val repo = CategoryRepositoryImpl(applicationContext)
 
-        // 3. Create ViewModel and pass in the repository
-        //    Normally done using ViewModelProvider or Hilt, but manual for now
-        val viewModel = CategoryViewModel(repo)
+        // Bundle all use cases related to the Category feature
+        val useCases = CategoryUseCases(
+            insert = InsertCategoryUseCase(repo),
+            update = UpdateCategoryUseCase(repo),
+            softDelete = SoftDeleteCategoryUseCase(repo),
+            delete = DeleteCategoryUseCase(repo),
+            getAll = GetAllCategoriesUseCase(repo),
+            seed = SeedPredefinedCategoriesUseCase(repo)
+        )
+
+        // ViewModel acts as the bridge between the UI and domain logic (use cases)
+        val viewModel = CategoryViewModel(useCases)
 
         // COMPOSE UI ENTRY POINT
-        // Starts the Jetpack Compose rendering
         setContent {
             MyRiyalTheme {
-//                 Scaffold(
-//                     modifier = Modifier
-//                         .background(color = MaterialTheme.colorScheme.background)
-//                 ) {
-//                     SignUpScreen()
-//                 }
-
-            }
-        }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-
-                // UI starts here. CategoryScreen is the first visible screen.
-                //CategoryScreen(viewModel = viewModel)
+                // CategoryScreen is the main UI screen for managing categories
+                // It receives the ViewModel, observes state, and triggers logic
+                CategoryScreen(viewModel = viewModel)
             }
         }
     }
