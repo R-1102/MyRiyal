@@ -72,7 +72,6 @@ fun AddCategory() {
                 .padding(16.dp)
                 .wrapContentHeight()
                 .fillMaxWidth(),
-//            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondary)
         ) {
             Column(
                 modifier = Modifier
@@ -82,6 +81,7 @@ fun AddCategory() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
+
 
                 val context = LocalContext.current
                 //category name
@@ -113,6 +113,7 @@ fun AddCategory() {
                         containerColor = Color.Transparent /*categColor.selectedColor.value*/
                     ),
                     shape = RoundedCornerShape(4.dp),
+//                        .padding(64.dp)
                     modifier = Modifier
                         .width(280.dp)
                         .height(55.dp)
@@ -126,6 +127,7 @@ fun AddCategory() {
                             context.getString(R.string.chooseCategColor),
                             color = Color.DarkGray,
                             textAlign = TextAlign.Start,
+//                        modifier = Modifier.fillMaxWidth()
                         )
                         //a Circle to show the selected color
                         Card(
