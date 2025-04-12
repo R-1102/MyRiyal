@@ -15,21 +15,40 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
+import com.example.myriyal.core.local.db.DatabaseProvider
+import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
+import com.example.myriyal.screens.categories.presentation.CategoryScreen
+import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.ui.theme.MyRiyalTheme
 
+// MainActivity is the entry point of the app
+// It bootstraps the database, repository, and manually wires the ViewModel
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         enableEdgeToEdge()
+
+
+        // 2. Create repository implementation (uses the DAO internally)
+        val repo = CategoryRepositoryImpl(applicationContext)
+
+        // 3. Create ViewModel and pass in the repository
+        //    Normally done using ViewModelProvider or Hilt, but manual for now
+        val viewModel = CategoryViewModel(repo)
+
+        // COMPOSE UI ENTRY POINT
+        // Starts the Jetpack Compose rendering
         setContent {
             MyRiyalTheme {
-                Scaffold(
-                    modifier = Modifier
-                        .background(color = MaterialTheme.colorScheme.background)
-                ) {
-                    SignUpScreen()
-                }
+//                 Scaffold(
+//                     modifier = Modifier
+//                         .background(color = MaterialTheme.colorScheme.background)
+//                 ) {
+//                     SignUpScreen()
+//                 }
 
             }
         }
@@ -44,3 +63,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
+
+                // UI starts here. CategoryScreen is the first visible screen.
+                //CategoryScreen(viewModel = viewModel)
+            }
+        }
+    }
+}
