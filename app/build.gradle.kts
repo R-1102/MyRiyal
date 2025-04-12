@@ -74,5 +74,4 @@ dependencies {
 
     //animation
     implementation(libs.accompanist.navigation.animation) 
-
 }

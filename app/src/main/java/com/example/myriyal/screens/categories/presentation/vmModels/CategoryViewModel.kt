@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
-import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
+import com.example.myriyal.screens.categories.domian.useCases.CategoryUseCases
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -12,64 +12,62 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 // ViewModel for the Category feature.
-// This is the presentation layer, responsible for exposing state and actions to the UI.
+// This class belongs to the presentation layer and acts as the middle layer between the UI and the domain layer (use cases).
 //
-// Data flows:
-// - Receives data from: CategoryRepository (domain layer)
-// - Sends data to: CategoryScreen (UI layer) as StateFlow
-// - Handles user actions (insert, update, delete) and triggers repository methods
+// Primary responsibilities:
+// - Hold and expose UI state (categories list)
+// - Handle user actions such as insert, update, delete
+// - Coordinate with use cases (domain layer) to execute business logic
+//
+// Data flow:
+// - Receives state: from CategoryUseCases → Repository → DAO
+// - Sends state: to CategoryScreen (UI layer)
+// - Triggers logic: insert, update, delete, seed, etc.
 
-class CategoryViewModel(private val repository: CategoryRepository) : ViewModel() {
+class CategoryViewModel(private val useCases: CategoryUseCases) : ViewModel() {
 
-    // Exposes a list of active categories as a reactive StateFlow to the UI.
-    // Filters out INACTIVE (soft-deleted) categories.
-    // Used directly in: CategoryScreen
-    val categories: StateFlow<List<CategoryEntity>> = repository
-        .getAllCategories() // Data from repository (which pulls from DAO)
-        .map { list -> list.filter { it.status == CategoryStatus.ACTIVE } } // Filter out inactive items
+    // Exposes a filtered list of ACTIVE categories using StateFlow.
+    // This list is observed in the UI and updates automatically when the database changes.
+    //
+    // Flow:
+    // Repository.getAllCategories() → UseCase → ViewModel
+    // Applies filter to exclude soft-deleted categories (status != ACTIVE)
+    val categories: StateFlow<List<CategoryEntity>> = useCases
+        .getAll()
+        .map { list -> list.filter { it.status == CategoryStatus.ACTIVE } }
         .stateIn(
-            scope = viewModelScope, // Scoped to ViewModel lifecycle
-            started = SharingStarted.WhileSubscribed(5000), // Keeps the flow active while subscribed
-            initialValue = emptyList() // Initial empty value before data loads
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
         )
 
-    // Inserts a new category (user-created or predefined)
-    // Called when user submits the form in the UI
-    fun insert(category: CategoryEntity) {
-        viewModelScope.launch {
-            repository.insertCategory(category)
-        }
+    // Triggered when a user adds a new category in the UI.
+    // This could be a user-defined or predefined category.
+    fun insert(category: CategoryEntity) = viewModelScope.launch {
+        useCases.insert(category)
     }
 
-    // Updates an existing category
-    // Called when user edits a category in the UI
-    fun update(category: CategoryEntity) {
-        viewModelScope.launch {
-            repository.updateCategory(category)
-        }
+    // Triggered when a user edits a category.
+    // Updates name, color, type, or other editable fields.
+    fun update(category: CategoryEntity) = viewModelScope.launch {
+        useCases.update(category)
     }
 
-    // Soft deletes a category by setting its status to INACTIVE
-    // Called when user taps "Deactivate" in the UI
-    fun softDelete(categoryId: Int) {
-        viewModelScope.launch {
-            repository.softDeleteCategory(categoryId)
-        }
+    // Triggered when user chooses to "Deactivate" a category.
+    // Instead of deleting it from the database, it updates the status to INACTIVE.
+    fun softDelete(categoryId: Int) = viewModelScope.launch {
+        useCases.softDelete(categoryId)
     }
 
-    // Permanently deletes a category
-    // Called when user taps "Delete Forever" in the UI
-    fun delete(category: CategoryEntity) {
-        viewModelScope.launch {
-            repository.deleteCategory(category)
-        }
+    // Triggered when user clicks "Delete Forever".
+    // This permanently removes the category from the database.
+    fun delete(category: CategoryEntity) = viewModelScope.launch {
+        useCases.delete(category)
     }
 
-    // Seeds predefined categories on first launch or when needed during development
-    // Called from: CategoryScreen using LaunchedEffect(Unit)
-    fun seedPredefinedCategories() {
-        viewModelScope.launch {
-            repository.seedPredefinedCategories()
-        }
+    // Seeds the database with predefined categories (e.g., Food, Salary).
+    // This runs on first launch (or each launch, depending on logic) from the UI screen.
+    fun seedPredefinedCategories() = viewModelScope.launch {
+        useCases.seed()
     }
 }
