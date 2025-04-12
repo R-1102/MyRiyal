@@ -59,6 +59,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation (libs.androidx.room.runtime)
+    kapt (libs.androidx.room.compiler)
+
+    //animation
+    implementation(libs.accompanist.navigation.animation)
+
     //icons
     implementation(platform(libs.androidx.compose.bom.v20250200))
     implementation (libs.androidx.material.icons.extended)

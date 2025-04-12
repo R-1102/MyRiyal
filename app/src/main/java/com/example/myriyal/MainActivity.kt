@@ -14,7 +14,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
 import com.example.myriyal.core.local.db.DatabaseProvider
+import com.example.myriyal.navigation.AppNavGraph
 import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
 import com.example.myriyal.screens.categories.presentation.CategoryScreen
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
@@ -28,6 +30,8 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         enableEdgeToEdge()
 
 
@@ -44,21 +48,25 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MyRiyalTheme {
+//                 Scaffold(
+//                     modifier = Modifier
+//                         .background(color = MaterialTheme.colorScheme.background)
+//                 ) {
+//                     SignUpScreen()
+//                 }
+
+
+                // UI starts here. CategoryScreen is the first visible screen.
+                //CategoryScreen(viewModel = viewModel)
+             //CategoryScreen(viewModel = viewModel)
                 Scaffold(
                     modifier = Modifier
                         .background(color = MaterialTheme.colorScheme.background)
                 ) {
-                    //SignUpScreen()
+                    //AppNavGraph(navController = navController)
                 }
 
-                //Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    CategoryScreen(viewModel = viewModel)
-                //}
-                // UI starts here. CategoryScreen is the first visible screen.
-                CategoryScreen(viewModel = viewModel)
             }
         }
     }
 }
-                //CategoryScreen(viewModel = viewModel)
-
