@@ -1,0 +1,18 @@
+<resources>
+    <string name="S1_header" >أنشئ حساب</string>
+
+    <string name="Signup">تسجيل</string>
+    <string name="Login">تسجيل الدخول </string>
+
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="confirmpassword">تأكيد كلمة المرور</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="phonenumber">رقم الهاتف</string>
+
+    <string name="already_have_account">لديك حساب بالفعل؟</string>
+    <string name="forgot_password">هل نسيت كلمة المرور؟</string>
+    <string name="dont_have_account">ليس لديك حساب؟</string>
+
+
+</resources>
