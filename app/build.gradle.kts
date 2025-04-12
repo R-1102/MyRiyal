@@ -64,11 +64,14 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom.v20250200))
     implementation (libs.androidx.material.icons.extended)
     implementation (libs.androidx.compose.material3.material3)
-    
+
     //Room
     implementation (libs.androidx.room.runtime)
-    kapt ("androidx.room:room-compiler:2.7.0")
+    kapt (libs.androidx.room.compiler)
 
     //Navigation
-    implementation("androidx.navigation:navigation-compose:2.7.6")
+    implementation(libs.androidx.navigation.compose)
+
+    //animation
+    implementation(libs.accompanist.navigation.animation) 
 }

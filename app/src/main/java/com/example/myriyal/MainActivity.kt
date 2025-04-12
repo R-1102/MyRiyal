@@ -4,6 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+
+import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.example.myriyal.core.local.db.DatabaseProvider
+import com.example.myriyal.navigation.AppNavGraph
+import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
+import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
+
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.navigation.testing.AppNavGraph
 import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
@@ -13,6 +24,7 @@ import com.example.myriyal.screens.categories.presentation.vmModels.CategoryView
 import com.example.myriyal.screens.records.data.repository.RecordRepositoryImpl
 import com.example.myriyal.screens.records.domain.useCases.*
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
+
 import com.example.myriyal.ui.theme.MyRiyalTheme
 
 // MainActivity is the entry point of the app.
@@ -25,6 +37,8 @@ import com.example.myriyal.ui.theme.MyRiyalTheme
 // - Presentation layer: ViewModels (CategoryViewModel, RecordViewModel)
 // - UI layer: Screens injected via NavGraph
 class MainActivity : ComponentActivity() {
+
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,18 +69,36 @@ class MainActivity : ComponentActivity() {
         )
         val recordViewModel = RecordViewModel(recordUseCases)
 
+        // COMPOSE UI ENTRY POINT
+        // Starts the Jetpack Compose rendering
+        val dao = DatabaseProvider.getDatabase(this).categoryDao()
+
         // ----- Compose Entry Point -----
+
         setContent {
             MyRiyalTheme {
                 val navController = rememberNavController()
 
+
+                // UI starts here. CategoryScreen is the first visible screen.
+                //CategoryScreen(viewModel = viewModel)
+//                 Scaffold(
+//                     modifier = Modifier
+//                         .background(color = MaterialTheme.colorScheme.background)
+//                 ) {
+//                     AppNavGraph(navController = navController)
+//                 }
+
                 // Navigation Graph handles switching between screens
-                AppNavGraph(
-                    navController = navController,
-                    categoryViewModel = categoryViewModel,
-                    recordViewModel = recordViewModel
-                )
+//                 AppNavGraph(
+//                     navController = navController,
+//                     categoryViewModel = categoryViewModel,
+//                     recordViewModel = recordViewModel
+//                 )
             }
         }
     }
 }
+
+
+//
