@@ -126,7 +126,7 @@ fun SignUpScreen( navController: NavHostController) {
                         onTogglePasswordVisibility = { showConfirmPassword = !showConfirmPassword },
                     )
                     GradientButton(
-                        onClick = { /* Handle sign up */ },
+                        onClick = { navController.navigate(Routes.BALANCE) },
                         text = stringResource(id = R.string.Signup)
                     )
 

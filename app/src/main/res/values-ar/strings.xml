@@ -14,5 +14,9 @@
     <string name="forgot_password">هل نسيت كلمة المرور؟</string>
     <string name="dont_have_account">ليس لديك حساب؟</string>
 
+    <string name="Balance_header">إضافة رصيدك</string>
+    <string name="enter_amount">أدخل رصيدك الحالي</string>
+    <string name="create_account">إنشاء الحساب</string>
+
 
 </resources>
