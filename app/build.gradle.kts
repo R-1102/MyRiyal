@@ -73,5 +73,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     //animation
-    implementation(libs.accompanist.navigation.animation) 
+    implementation(libs.accompanist.navigation.animation)
+
+    //for color picker
+    implementation("com.github.skydoves:colorpicker-compose:1.1.2")
 }

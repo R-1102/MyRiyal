@@ -25,6 +25,8 @@ import com.example.myriyal.screens.records.data.repository.RecordRepositoryImpl
 import com.example.myriyal.screens.records.domain.useCases.*
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.myriyal.screens.categories.presentation.screens.AddCategory
 import com.example.myriyal.ui.theme.MyRiyalTheme
 
 // MainActivity is the entry point of the app.
