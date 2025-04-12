@@ -4,51 +4,68 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.navigation.compose.rememberNavController
+import com.example.myriyal.navigation.testing.AppNavGraph
 import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
 import com.example.myriyal.screens.categories.domian.useCases.*
-import com.example.myriyal.screens.categories.presentation.CategoryScreen
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
+
+import com.example.myriyal.screens.records.data.repository.RecordRepositoryImpl
+import com.example.myriyal.screens.records.domain.useCases.*
+import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 import com.example.myriyal.ui.theme.MyRiyalTheme
 
 // MainActivity is the entry point of the app.
-// It manually wires the dependencies (repository, use cases, view model) and launches the UI.
+// It manually wires dependencies for both the Category and Record features,
+// and passes them to the navigation graph for screen routing.
 //
-// Architecture Flow:
-// - MainActivity builds the CategoryRepositoryImpl (data layer)
-// - Passes the repository to all Category use cases (domain layer)
-// - Combines use cases into a single container (CategoryUseCases)
-// - Injects the use cases into CategoryViewModel (presentation layer)
-// - ViewModel is passed to CategoryScreen (UI layer)
+// Layers involved:
+// - Data layer: Repositories (CategoryRepositoryImpl, RecordRepositoryImpl)
+// - Domain layer: UseCases (for each feature)
+// - Presentation layer: ViewModels (CategoryViewModel, RecordViewModel)
+// - UI layer: Screens injected via NavGraph
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Enables full edge-to-edge content rendering
         enableEdgeToEdge()
 
-        // Instantiate the repository that connects to the DAO
-        val repo = CategoryRepositoryImpl(applicationContext)
-
-        // Bundle all use cases related to the Category feature
-        val useCases = CategoryUseCases(
-            insert = InsertCategoryUseCase(repo),
-            update = UpdateCategoryUseCase(repo),
-            softDelete = SoftDeleteCategoryUseCase(repo),
-            delete = DeleteCategoryUseCase(repo),
-            getAll = GetAllCategoriesUseCase(repo),
-            seed = SeedPredefinedCategoriesUseCase(repo)
+        // ----- CATEGORY Feature Wiring -----
+        val categoryRepo = CategoryRepositoryImpl(applicationContext)
+        val categoryUseCases = CategoryUseCases(
+            insert = InsertCategoryUseCase(categoryRepo),
+            update = UpdateCategoryUseCase(categoryRepo),
+            softDelete = SoftDeleteCategoryUseCase(categoryRepo),
+            delete = DeleteCategoryUseCase(categoryRepo),
+            getAll = GetAllCategoriesUseCase(categoryRepo),
+            seed = SeedPredefinedCategoriesUseCase(categoryRepo)
         )
+        val categoryViewModel = CategoryViewModel(categoryUseCases)
 
-        // ViewModel acts as the bridge between the UI and domain logic (use cases)
-        val viewModel = CategoryViewModel(useCases)
+        // ----- RECORD Feature Wiring -----
+        val recordRepo = RecordRepositoryImpl(applicationContext)
+        val recordUseCases = RecordUseCases(
+            insert = InsertRecordUseCase(recordRepo),
+            update = UpdateRecordUseCase(recordRepo),
+            delete = DeleteRecordUseCase(recordRepo),
+            getAllRecords = GetAllRecordsUseCase(recordRepo),
+            getByCategory = GetRecordsByCategoryUseCase(recordRepo),
+            getRecordById = GetRecordByIdUseCase(recordRepo)
 
-        // COMPOSE UI ENTRY POINT
+        )
+        val recordViewModel = RecordViewModel(recordUseCases)
+
+        // ----- Compose Entry Point -----
         setContent {
             MyRiyalTheme {
-                // CategoryScreen is the main UI screen for managing categories
-                // It receives the ViewModel, observes state, and triggers logic
-                CategoryScreen(viewModel = viewModel)
+                val navController = rememberNavController()
+
+                // Navigation Graph handles switching between screens
+                AppNavGraph(
+                    navController = navController,
+                    categoryViewModel = categoryViewModel,
+                    recordViewModel = recordViewModel
+                )
             }
         }
     }
