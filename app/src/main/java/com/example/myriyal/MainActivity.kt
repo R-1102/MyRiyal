@@ -22,6 +22,10 @@ import com.example.myriyal.screens.categories.data.repository.CategoryRepository
 import com.example.myriyal.screens.categories.presentation.CategoryScreen
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
+import com.example.myriyal.core.local.db.DatabaseProvider
+import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
+import com.example.myriyal.screens.categories.presentation.CategoryScreen
+import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.ui.theme.MyRiyalTheme
 
 // MainActivity is the entry point of the app
@@ -73,3 +77,12 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
+

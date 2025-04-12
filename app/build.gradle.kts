@@ -71,8 +71,7 @@ dependencies {
     implementation (libs.androidx.compose.material3.material3)
 
 
+    //Room
     implementation (libs.androidx.room.runtime)
     kapt ("androidx.room:room-compiler:2.7.0")
-
-
 }
