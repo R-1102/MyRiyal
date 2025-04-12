@@ -77,4 +77,9 @@ dependencies {
 
     // Accompanist Animation (Consider replacing with androidx.navigation)
     implementation(libs.accompanist.navigation.animation)
+    //animation
+    implementation(libs.accompanist.navigation.animation)
+
+    //for color picker
+    implementation("com.github.skydoves:colorpicker-compose:1.1.2")
 }

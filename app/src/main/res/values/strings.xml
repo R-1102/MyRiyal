@@ -16,5 +16,18 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="dont_have_account"> Don\'t have an account?</string>
 
+    <string name="app_name">My Riyal</string>
+
+    <string name="enterCategName">Enter Category Name</string>
+    <string name="enterCategType">Category Type</string>
+    <string name="chooseCategColor">Select Color</string>
+    <string name="icon">Icon</string>
+    <string name="enterCategBudget">Enter Category Budget</string>
+    <string name="startDate">Track Starting Date</string>
+    <string name="addCateg">Add Category</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
 </resources>
 
