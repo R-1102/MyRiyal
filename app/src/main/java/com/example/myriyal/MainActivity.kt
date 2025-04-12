@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
 import com.example.myriyal.core.local.db.DatabaseProvider
 import com.example.myriyal.navigation.AppNavGraph
@@ -48,6 +49,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MyRiyalTheme {
+                val navController = rememberNavController()
+
 //                 Scaffold(
 //                     modifier = Modifier
 //                         .background(color = MaterialTheme.colorScheme.background)
@@ -63,7 +66,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier
                         .background(color = MaterialTheme.colorScheme.background)
                 ) {
-                    //AppNavGraph(navController = navController)
+                    AppNavGraph(navController = navController)
                 }
 
             }

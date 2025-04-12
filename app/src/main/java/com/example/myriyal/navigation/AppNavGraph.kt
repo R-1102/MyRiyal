@@ -19,13 +19,13 @@ fun AppNavGraph(navController: NavHostController) {
         startDestination = Routes.SPLASH,
         enterTransition = {
             slideInVertically(
-                initialOffsetY = { it }, // Enter from bottom
+                initialOffsetY = { it }, // Enter from bottom,
                 animationSpec = tween(900)
             )
         },
         popExitTransition = {
             slideOutVertically(
-                targetOffsetY = { it }, // Exit to bottom
+                targetOffsetY = { it }, // Exit to bottom,
                 animationSpec = tween(900)
             )
         },
