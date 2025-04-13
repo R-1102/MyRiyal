@@ -9,16 +9,32 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-// ViewModel for the Record feature.
-// Connects UI (RecordScreen) with the domain use cases.
-//
-// Responsibilities:
-// - Expose state to the UI
-// - Trigger use case functions based on user actions
+/**
+ * ViewModel for the Record feature.
+ *
+ * Acts as the bridge between:
+ * - UI layer (RecordScreen)
+ * - Domain layer (RecordUseCases)
+ *
+ * Responsibilities:
+ * - Exposes reactive state (list of records) to the UI
+ * - Handles user actions (insert, update, delete)
+ * - Communicates with domain layer via RecordUseCases
+ *
+ * Data Flow:
+ * - UI → ViewModel → UseCases → Repository → DAO
+ * - DAO (Room) → Repository → UseCases → ViewModel → UI
+ */
+class RecordViewModel(
+    private val useCases: RecordUseCases
+) : ViewModel() {
 
-class RecordViewModel(private val useCases: RecordUseCases) : ViewModel() {
-
-    // Expose all records as StateFlow
+    /**
+     * Exposes a list of all records as a reactive StateFlow.
+     *
+     * Observed from: RecordScreen
+     * Source: Room DB → Repository → UseCase → ViewModel
+     */
     val records: StateFlow<List<RecordEntity>> = useCases
         .getAllRecords()
         .stateIn(
@@ -27,22 +43,38 @@ class RecordViewModel(private val useCases: RecordUseCases) : ViewModel() {
             initialValue = emptyList()
         )
 
-    // Insert a new record (triggered from UI)
+    /**
+     * Inserts a new record into the database.
+     * Triggered from: RecordScreen form (when Add is pressed)
+     * Data goes to: insert → Repository → Room DAO
+     */
     fun insert(record: RecordEntity) = viewModelScope.launch {
         useCases.insert(record)
     }
 
-    // Update an existing record
+    /**
+     * Updates an existing record in the database.
+     * Triggered from: RecordScreen form (when Update is pressed)
+     * Data goes to: update → Repository → Room DAO
+     */
     fun update(record: RecordEntity) = viewModelScope.launch {
         useCases.update(record)
     }
 
-    // Delete a specific record
+    /**
+     * Deletes a record from the database.
+     * Triggered from: RecordItem delete button
+     * Data goes to: delete → Repository → Room DAO
+     */
     fun delete(record: RecordEntity) = viewModelScope.launch {
         useCases.delete(record)
     }
 
-    // Optionally expose a way to get a record by ID (used in detail/edit screens)
+    /**
+     * Fetches a specific record by ID.
+     * Can be used in: detail screens, preloading forms for edit, etc.
+     * Accessed via: getById → UseCase → Repository → Room DAO
+     */
     suspend fun getById(id: Int): RecordEntity? {
         return useCases.getRecordById(id)
     }
