@@ -20,5 +20,18 @@
     <string name="enter_amount">Enter Your Balance</string>
     <string name="create_account">Create the account</string>
 
+    <string name="forgotpassword_h">Forgot Password</string>
+    <string name="submit">Submit</string>
+    <string name="send">Send</string>
+
+    <string name="newpassword_h">New Password</string>
+
+
+
+
+
+
+
+
 </resources>
 
