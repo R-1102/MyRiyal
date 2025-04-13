@@ -1,18 +1,18 @@
 package com.example.myriyal.screens.authentication.presentation.screens
 
+
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,10 +28,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -42,16 +40,12 @@ import com.example.myriyal.screens.authentication.presentation.component.CustomT
 import com.example.myriyal.screens.authentication.presentation.component.GradientButton
 import com.example.myriyal.ui.theme.ThemedLogo
 
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun SignUpScreen(navController: NavHostController) {
-    var username by remember { mutableStateOf("") } //need to be deleted
-    var email by remember { mutableStateOf("") } //need to be deleted
-    var password by remember { mutableStateOf("") } //need to be deleted
-    var showPassword by remember { mutableStateOf(false) }
+fun NewPassword(navController: NavHostController) {
     var confirmPassword by remember { mutableStateOf("") } //need to be deleted
-    var showConfirmPassword by remember { mutableStateOf(false) }
-
+    var password by remember { mutableStateOf("") } //need to be deleted
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -63,11 +57,11 @@ fun SignUpScreen(navController: NavHostController) {
                 .size(74.dp, 94.dp),
         )
 
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(18.dp))
 
         CustomCard(
             modifier = Modifier
-                .size(width = 330.dp, height = 500.dp)
+                .size(width = 330.dp, height = 340.dp)
                 .align(CenterHorizontally),
         ) {
             Column(
@@ -76,70 +70,34 @@ fun SignUpScreen(navController: NavHostController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = stringResource(id = R.string.S1_header),
+                    text = stringResource(id = R.string.newpassword_h),
                     color = Color.Black,
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
                 )
 
-                CustomTextField(
-                    value = username,
-                    onValueChange = { username = it },
-                    label = stringResource(id = R.string.username)
-                )
-
-                CustomTextField(
-                    value = email,
-                    onValueChange = { email = it },
-                    label = stringResource(id = R.string.email),
-                )
+                Spacer(modifier = Modifier.height(18.dp))
 
                 CustomTextField(
                     value = password,
                     onValueChange = { password = it },
                     label = stringResource(id = R.string.password),
-                    isPassword = true,
-                    showPassword = showPassword,
-                    onTogglePasswordVisibility = { showPassword = !showPassword },
                 )
 
                 CustomTextField(
                     value = confirmPassword,
                     onValueChange = { confirmPassword = it },
                     label = stringResource(id = R.string.confirmpassword),
-                    isPassword = true,
-                    showPassword = showConfirmPassword,
-                    onTogglePasswordVisibility = { showConfirmPassword = !showConfirmPassword },
                 )
 
-                Spacer(modifier = Modifier.padding(10.dp))
+                Spacer(modifier = Modifier.height(26.dp))
 
                 GradientButton(
-                    onClick = { navController.navigate(Routes.BALANCE) },
-                    text = stringResource(id = R.string.Signup)
+                    onClick = { navController.navigate(Routes.LOGIN) },
+                    text = stringResource(id = R.string.submit)
                 )
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.already_have_account),
-                        fontSize = 15.sp,
-                        color = Color.Black,
-                        fontWeight = FontWeight.SemiBold,
-                    )
-                    Text(
-                        text = stringResource(id = R.string.Login),
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFF005430),
-                        modifier = Modifier.clickable { navController.navigate(Routes.LOGIN) }
-                    )
-                }
             }
         }
     }

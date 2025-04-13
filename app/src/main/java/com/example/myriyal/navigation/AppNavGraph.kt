@@ -7,7 +7,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.example.myriyal.screens.authentication.presentation.screens.BalanceScreen
+import com.example.myriyal.screens.authentication.presentation.screens.ForgotPassword
 import com.example.myriyal.screens.authentication.presentation.screens.LoginScreen
+import com.example.myriyal.screens.authentication.presentation.screens.NewPassword
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
 import com.example.myriyal.screens.authentication.presentation.screens.SplashScreen
 
@@ -44,6 +46,11 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Routes.BALANCE) {
             BalanceScreen(navController)
         }
-
+        composable(Routes.FORGOTPASSWORD) {
+            ForgotPassword(navController)
+        }
+        composable(Routes.NEWPASSWORD) {
+            NewPassword(navController)
+        }
     }
 }

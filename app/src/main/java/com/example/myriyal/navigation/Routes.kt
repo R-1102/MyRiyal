@@ -5,4 +5,7 @@ object Routes {
     const val LOGIN = "Login"
     const val SIGNUP = "Signup"
     const val BALANCE = "Balance"
+    const val FORGOTPASSWORD = "ForgotPassword"
+    const val NEWPASSWORD = "NewPassword"
+
 }
