@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -77,4 +78,32 @@ dependencies {
 
     // Accompanist Animation (Consider replacing with androidx.navigation)
     implementation(libs.accompanist.navigation.animation)
+
+    // Hilt core (DI engine)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+// Hilt Navigation for Fragments
+    implementation(libs.androidx.hilt.navigation.fragment)
+
+// Hilt Navigation for Jetpack Compose
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // For encrypted SharedPreferences
+    implementation(libs.androidx.security.crypto)
+
+
+    // Retrofit core library for making HTTP requests (GET, POST, etc.)
+    implementation(libs.retrofit)
+
+// Retrofit converter that parses JSON responses into Kotlin/Java objects using Gson
+    implementation(libs.converter.gson)
+
+// OkHttp logging interceptor for debugging network requests/responses in Logcat
+    implementation(libs.logging.interceptor)
+
+
+
+
+
 }

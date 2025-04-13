@@ -26,6 +26,8 @@ import com.example.myriyal.screens.records.domain.useCases.*
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 
 import com.example.myriyal.ui.theme.MyRiyalTheme
+import dagger.hilt.android.HiltAndroidApp
+
 
 class MainActivity : ComponentActivity() {
 
@@ -35,7 +37,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyRiyalTheme {
-               // MyRiyalApp() // ← only this one line for full app setup
+                MyRiyalApp() // ← only this one line for full app setup
 
 
 //                 val navController = rememberNavController()
