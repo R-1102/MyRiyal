@@ -53,7 +53,6 @@ fun GradientButton(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 16.dp)
-            .padding(horizontal = 8.dp)
             .height(45.dp)
             .clip(RoundedCornerShape(5.dp))
             .background(gradient)
@@ -70,3 +69,4 @@ fun GradientButton(
         )
     }
 }
+//

@@ -19,7 +19,9 @@ import com.example.myriyal.core.local.entities.TrackerEntity
 @Database(
     // These are the tables managed by Room
     entities = [UserEntity::class, CategoryEntity::class, RecordEntity::class, TrackerEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false  // Optionally export schema to a folder (set to false if not needed)
+
 )
 @TypeConverters(Converters::class) // Converts enums to strings and back for Room to store
 abstract class MyRiyalDatabase : RoomDatabase() {
