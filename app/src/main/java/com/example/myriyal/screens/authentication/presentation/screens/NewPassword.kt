@@ -2,14 +2,17 @@ package com.example.myriyal.screens.authentication.presentation.screens
 
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,37 +30,39 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
+import com.example.myriyal.navigation.Routes
 import com.example.myriyal.screens.authentication.presentation.component.CustomCard
 import com.example.myriyal.screens.authentication.presentation.component.CustomTextField
 import com.example.myriyal.screens.authentication.presentation.component.GradientButton
 import com.example.myriyal.ui.theme.ThemedLogo
 
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun BalanceScreen(navController: NavHostController) {
-    var balance by remember { mutableStateOf("") }
+fun NewPassword(navController: NavHostController) {
+    var confirmPassword by remember { mutableStateOf("") } //need to be deleted
+    var password by remember { mutableStateOf("") } //need to be deleted
 
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         ThemedLogo(
             modifier = Modifier
-                .padding(top = 80.dp)
+                .padding(top = 70.dp)
                 .align(CenterHorizontally)
                 .size(74.dp, 94.dp),
         )
 
-        Spacer(modifier = Modifier.padding(30.dp))
+        Spacer(modifier = Modifier.padding(18.dp))
 
-        CustomCard (
+        CustomCard(
             modifier = Modifier
-                .size(width = 330.dp, height = 270.dp)
-                .align(CenterHorizontally)
+                .size(width = 330.dp, height = 340.dp)
+                .align(CenterHorizontally),
         ) {
             Column(
                 modifier = Modifier
@@ -65,25 +70,34 @@ fun BalanceScreen(navController: NavHostController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = stringResource(id = R.string.Balance_header),
+                    text = stringResource(id = R.string.newpassword_h),
                     color = Color.Black,
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 10.dp, bottom = 30.dp)
+                    modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
+                )
+
+                Spacer(modifier = Modifier.height(18.dp))
+
+                CustomTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = stringResource(id = R.string.password),
                 )
 
                 CustomTextField(
-                    value = balance,
-                    onValueChange = { balance = it },
-                    label = stringResource(id = R.string.enter_amount),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                    value = confirmPassword,
+                    onValueChange = { confirmPassword = it },
+                    label = stringResource(id = R.string.confirmpassword),
                 )
+
                 Spacer(modifier = Modifier.height(26.dp))
 
                 GradientButton(
-                    onClick = { /* Handle sign up */ },
-                    text = stringResource(id = R.string.create_account)
+                    onClick = { navController.navigate(Routes.LOGIN) },
+                    text = stringResource(id = R.string.submit)
                 )
+
             }
         }
     }

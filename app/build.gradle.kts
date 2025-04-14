@@ -5,8 +5,10 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 
+
     //id("com.android.application")
     //id("com.google.gms.google-services")
+
 }
 
 android {
@@ -108,4 +110,32 @@ dependencies {
 // Allow references to generated code
 kapt {
     correctErrorTypes = true
+
+    // Hilt core (DI engine)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+// Hilt Navigation for Fragments
+    implementation(libs.androidx.hilt.navigation.fragment)
+
+// Hilt Navigation for Jetpack Compose
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // For encrypted SharedPreferences
+    implementation(libs.androidx.security.crypto)
+
+
+    // Retrofit core library for making HTTP requests (GET, POST, etc.)
+    implementation(libs.retrofit)
+
+// Retrofit converter that parses JSON responses into Kotlin/Java objects using Gson
+    implementation(libs.converter.gson)
+
+// OkHttp logging interceptor for debugging network requests/responses in Logcat
+    implementation(libs.logging.interceptor)
+
+
+
+
+
 }

@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 
+
 import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -25,6 +26,7 @@ import com.example.myriyal.screens.records.domain.useCases.*
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 
 import com.example.myriyal.ui.theme.MyRiyalTheme
+
 import dagger.hilt.android.AndroidEntryPoint
 
 // MainActivity is the entry point of the app.
@@ -37,65 +39,34 @@ import dagger.hilt.android.AndroidEntryPoint
 // - Presentation layer: ViewModels (CategoryViewModel, RecordViewModel)
 // - UI layer: Screens injected via NavGraph
 @AndroidEntryPoint
+
+import dagger.hilt.android.HiltAndroidApp
+
+
 class MainActivity : ComponentActivity() {
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         enableEdgeToEdge()
-
-        // ----- CATEGORY Feature Wiring -----
-        val categoryRepo = CategoryRepositoryImpl(applicationContext)
-        val categoryUseCases = CategoryUseCases(
-            insert = InsertCategoryUseCase(categoryRepo),
-            update = UpdateCategoryUseCase(categoryRepo),
-            softDelete = SoftDeleteCategoryUseCase(categoryRepo),
-            delete = DeleteCategoryUseCase(categoryRepo),
-            getAll = GetAllCategoriesUseCase(categoryRepo),
-            seed = SeedPredefinedCategoriesUseCase(categoryRepo)
-        )
-        val categoryViewModel = CategoryViewModel(categoryUseCases)
-
-        // ----- RECORD Feature Wiring -----
-        val recordRepo = RecordRepositoryImpl(applicationContext)
-        val recordUseCases = RecordUseCases(
-            insert = InsertRecordUseCase(recordRepo),
-            update = UpdateRecordUseCase(recordRepo),
-            delete = DeleteRecordUseCase(recordRepo),
-            getAllRecords = GetAllRecordsUseCase(recordRepo),
-            getByCategory = GetRecordsByCategoryUseCase(recordRepo),
-            getRecordById = GetRecordByIdUseCase(recordRepo)
-
-        )
-        val recordViewModel = RecordViewModel(recordUseCases)
-
-        // COMPOSE UI ENTRY POINT
-        // Starts the Jetpack Compose rendering
-        val dao = DatabaseProvider.getDatabase(this).categoryDao()
-
-        // ----- Compose Entry Point -----
-
         setContent {
             MyRiyalTheme {
-                val navController = rememberNavController()
+                MyRiyalApp() // ← only this one line for full app setup
 
 
-                // UI starts here. CategoryScreen is the first visible screen.
-                //CategoryScreen(viewModel = viewModel)
-                 Scaffold(
-                     modifier = Modifier
-                         .background(color = MaterialTheme.colorScheme.background)
-                 ) {
-                     AppNavGraph(navController = navController)
-                 }
+//                 val navController = rememberNavController()
 
-                // Navigation Graph handles switching between screens
-//                 AppNavGraph(
-//                     navController = navController,
-//                     categoryViewModel = categoryViewModel,
-//                     recordViewModel = recordViewModel
-//                 )
+
+//                 // UI starts here. CategoryScreen is the first visible screen.
+//                 //CategoryScreen(viewModel = viewModel)
+//                  Scaffold(
+//                      modifier = Modifier
+//                          .background(color = MaterialTheme.colorScheme.background)
+//                  ) {
+//                      AppNavGraph(navController = navController)
+//                  }
+
+
             }
         }
     }

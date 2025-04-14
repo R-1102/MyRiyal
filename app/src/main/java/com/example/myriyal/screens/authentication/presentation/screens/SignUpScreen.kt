@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
 import com.example.myriyal.navigation.Routes
+import com.example.myriyal.screens.authentication.presentation.component.CustomCard
 import com.example.myriyal.screens.authentication.presentation.component.CustomTextField
 import com.example.myriyal.screens.authentication.presentation.component.GradientButton
 import com.example.myriyal.screens.authentication.presentation.vmModels.SignUpVM
@@ -45,6 +46,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
+
 fun SignUpScreen( navController: NavHostController) {
 
     val viewModel: SignUpVM = hiltViewModel()
@@ -60,41 +62,47 @@ fun SignUpScreen( navController: NavHostController) {
 
 
     Box(
+
+fun SignUpScreen(navController: NavHostController) {
+    var username by remember { mutableStateOf("") } //need to be deleted
+    var email by remember { mutableStateOf("") } //need to be deleted
+    var password by remember { mutableStateOf("") } //need to be deleted
+    var showPassword by remember { mutableStateOf(false) }
+    var confirmPassword by remember { mutableStateOf("") } //need to be deleted
+    var showConfirmPassword by remember { mutableStateOf(false) }
+
+
+    Column(
+
         modifier = Modifier.fillMaxSize()
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize()
+        ThemedLogo(
+            modifier = Modifier
+                .padding(top = 70.dp)
+                .align(CenterHorizontally)
+                .size(74.dp, 94.dp),
+        )
+
+        Spacer(modifier = Modifier.padding(20.dp))
+
+        CustomCard(
+            modifier = Modifier
+                .size(width = 330.dp, height = 500.dp)
+                .align(CenterHorizontally),
         ) {
-            ThemedLogo(
+            Column(
                 modifier = Modifier
-                    .padding(top = 50.dp)
-                    .align(CenterHorizontally)
-                    .size(74.dp, 94.dp),
-            )
-
-            Spacer(modifier = Modifier.padding(8.dp))
-
-            Card(
-                modifier = Modifier
-                    .size(width = 330.dp, height = 580.dp)
-                    .padding(10.dp)
-                    .align(CenterHorizontally)
-                    .shadow(30.dp)
-                    .clip(RoundedCornerShape(8.dp)),
-                colors = CardDefaults.cardColors(Color.White)
+                    .padding(12.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Column(
-                    modifier = Modifier
-                        .padding(12.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.S1_header),
-                        color = Color.Black,
-                        fontSize = 28.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(top= 10.dp,bottom = 20.dp)
-                    )
+                Text(
+                    text = stringResource(id = R.string.S1_header),
+                    color = Color.Black,
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
+                )
+
 
                     CustomTextField(
                         value = username,
@@ -108,12 +116,7 @@ fun SignUpScreen( navController: NavHostController) {
                         label = stringResource(id = R.string.email),
                     )
 
-                    CustomTextField(
-                        value = phoneNumber,
-                        onValueChange = { phoneNumber = it },
-                        label = stringResource(id = R.string.phonenumber),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-                    )
+
 
                     CustomTextField(
                         value = password,
@@ -144,33 +147,35 @@ fun SignUpScreen( navController: NavHostController) {
                                   },
 
                         text = stringResource(id = R.string.Signup)
-                    )
 
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = stringResource(id = R.string.already_have_account),
-                            fontSize = 15.sp,
-                            color = Color.Black,
-                            fontWeight = FontWeight.SemiBold,
-                        )
-                        Text(
-                            text = stringResource(id = R.string.Login),
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF005430),
-                            modifier = Modifier.clickable { navController.navigate(Routes.LOGIN)}
-                        )
-                    }
+
+                Spacer(modifier = Modifier.padding(10.dp))
+
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(12.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.already_have_account),
+                        fontSize = 15.sp,
+                        color = Color.Black,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                    Text(
+                        text = stringResource(id = R.string.Login),
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF005430),
+                        modifier = Modifier.clickable { navController.navigate(Routes.LOGIN) }
+
+                    )
                 }
             }
         }
     }
 }
-//
 
 

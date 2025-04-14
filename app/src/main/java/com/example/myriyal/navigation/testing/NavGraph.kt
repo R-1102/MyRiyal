@@ -23,14 +23,16 @@ fun AppNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "category_screen" // <- must match the first screen route
+        startDestination = "category_screen"
     ) {
         composable("category_screen") {
             CategoryScreen(viewModel = categoryViewModel)
         }
         composable("record_screen") {
-            RecordScreen(viewModel = recordViewModel)
+            RecordScreen(
+                viewModel = recordViewModel,
+                categoryViewModel = categoryViewModel
+            )
         }
     }
-
 }

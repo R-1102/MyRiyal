@@ -18,5 +18,11 @@
     <string name="enter_amount">أدخل رصيدك الحالي</string>
     <string name="create_account">إنشاء الحساب</string>
 
+    <string name="forgotpassword_h">نسيت كلمة المرور</string>
+    <string name="submit">تأكيد</string>
+    <string name="send">ارسال</string>
+
+    <string name="newpassword_h">كلمة المرور الجديدة</string>
+
 
 </resources>
