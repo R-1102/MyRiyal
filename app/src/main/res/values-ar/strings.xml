@@ -23,6 +23,13 @@
     <string name="send">ارسال</string>
 
     <string name="newpassword_h">كلمة المرور الجديدة</string>
-
-
+    <string name="EnterCategoryName">أدخل اسم التصنيف</string>
+    <string name="EnterCategoryType">أدخل نوع التصنيف</string>
+    <string name="ChooseColor">إختر لون</string>
+    <string name="SelectIcon">إختر أيقونه</string>
+    <string name="EnterBudgetAmount">إختر مبلغ الميزانية</string>
+    <string name="StartingDate">تاريخ بدئ التتبع</string>
+    <string name="AddCategory">اضف التصنيف</string>
+    <string name="Save">حفظ</string>
+    <string name="Cancel">إلغاء</string>
 </resources>

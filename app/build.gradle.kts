@@ -102,7 +102,8 @@ dependencies {
 // OkHttp logging interceptor for debugging network requests/responses in Logcat
     implementation(libs.logging.interceptor)
 
-
+    //for color picker
+    implementation("com.github.skydoves:colorpicker-compose:1.1.2")
 
 
 

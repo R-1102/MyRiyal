@@ -26,8 +26,15 @@
 
     <string name="newpassword_h">New Password</string>
 
-
-
+    <string name="EnterCategoryName">Enter Category Name</string>
+    <string name="EnterCategoryType">Category Type</string>
+    <string name="ChooseColor">Choose Color</string>
+    <string name="SelectIcon">Select Icon</string>
+    <string name="EnterBudgetAmount">Enter Budget Amount</string>
+    <string name="StartingDate">Tracker Starting Date</string>
+    <string name="AddCategory">AddCategory</string>
+    <string name="Save">Save</string>
+    <string name="Cancel">Cancel</string>
 
 
 
