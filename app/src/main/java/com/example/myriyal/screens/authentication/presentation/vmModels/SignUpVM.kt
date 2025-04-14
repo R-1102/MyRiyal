@@ -1,12 +1,10 @@
 package com.example.myriyal.screens.authentication.presentation.vmModels
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import android.util.Log
-import androidx.compose.runtime.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myriyal.screens.authentication.domain.repository.BaseAuthRepository
@@ -18,18 +16,25 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-
 @HiltViewModel
-class SignUpVM @Inject constructor(private val repository: BaseAuthRepository) : ViewModel(){
+class SignUpVM @Inject constructor(
+    private val repository: BaseAuthRepository,
+    var username: String,
+    var email: String,
+    var password: String,
+    var confirmPassword: String
+) : ViewModel(){
 
     private val _firebaseUser = MutableLiveData<FirebaseUser?>()
     val firebaseUser: LiveData<FirebaseUser?> = _firebaseUser
 
     // User input
-    var username by mutableStateOf("")
-    var email by mutableStateOf("")
-    var password by mutableStateOf("")
-    var confirmPassword by mutableStateOf("")
+    //var username by mutableStateOf("")
+//    var email by mutableStateOf("")
+//    var password by mutableStateOf("")
+//    var confirmPassword by mutableStateOf("")
+
+
 
     //chanel for all the UI events
     private val eventsChannel = Channel<AllEvents>()
@@ -37,6 +42,7 @@ class SignUpVM @Inject constructor(private val repository: BaseAuthRepository) :
 
 
     // Input change functions, setting user input from UI in here to do the business logic
+
     fun onUsernameChange(value: String) {
         username = value
     }
@@ -81,7 +87,7 @@ class SignUpVM @Inject constructor(private val repository: BaseAuthRepository) :
             }
 
             else -> {
-                actualSignUpUser(username, email, password)
+                actualSignUpUser(username, email, password) //if passed validation, send to actual sign-up
             }
         }
     }

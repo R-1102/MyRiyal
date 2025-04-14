@@ -2,12 +2,12 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    //Hilt DI
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 
-
-    //id("com.android.application")
-    //id("com.google.gms.google-services")
+    id("com.google.gms.google-services")
 
 }
 
@@ -49,7 +49,6 @@ android {
 }
 
 dependencies {
-
     // Core dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -64,15 +63,11 @@ dependencies {
 
 // Google Play Services dependency
     //implementation(libs.play.services.auth)
-
     //Firebase dependencies
-    implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
-    //implementation(libs.firebase.bom)
     implementation(libs.firebase.analytics)
-    implementation ("com.google.android.gms:play-services:17.0.0")
-
 
     // Testing dependencies
     testImplementation(libs.junit)
@@ -95,8 +90,6 @@ dependencies {
     // Hilt dependencies
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.navigation.fragment)
-    implementation(libs.androidx.hilt.navigation.compose)
 
     // Navigation dependencies
     implementation(libs.androidx.navigation.compose)
@@ -104,26 +97,11 @@ dependencies {
     // Accompanist Animation (Consider replacing with androidx.navigation)
     implementation(libs.accompanist.navigation.animation)
 
-
-}
-
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
-
-    // Hilt core (DI engine)
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
-// Hilt Navigation for Fragments
-    implementation(libs.androidx.hilt.navigation.fragment)
-
 // Hilt Navigation for Jetpack Compose
     implementation(libs.androidx.hilt.navigation.compose)
 
     // For encrypted SharedPreferences
     implementation(libs.androidx.security.crypto)
-
 
     // Retrofit core library for making HTTP requests (GET, POST, etc.)
     implementation(libs.retrofit)
@@ -133,9 +111,10 @@ kapt {
 
 // OkHttp logging interceptor for debugging network requests/responses in Logcat
     implementation(libs.logging.interceptor)
+}
 
 
-
-
-
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

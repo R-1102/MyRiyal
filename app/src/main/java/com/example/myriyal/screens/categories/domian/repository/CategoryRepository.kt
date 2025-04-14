@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.Flow
 // - Implemented by: CategoryRepositoryImpl (data layer)
 // - Decouples business logic from storage logic (Room, DAO)
 
+
+//@Injet
 interface CategoryRepository {
 
     // Inserts a new category into the database.
