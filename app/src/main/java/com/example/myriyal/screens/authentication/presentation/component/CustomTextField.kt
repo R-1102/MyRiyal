@@ -65,3 +65,40 @@ fun CustomTextField(
         } else null
     )
 }
+
+@Composable
+fun CustomTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier,
+    onTogglePasswordVisibility: (() -> Unit)? = null,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    readOnly: Boolean = false,
+    trailingIcon: @Composable () -> Unit,
+) {
+    OutlinedTextField(
+        readOnly= readOnly,
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        singleLine = true,
+        shape = RoundedCornerShape(12.dp),
+        modifier = modifier
+            .fillMaxWidth(),
+        textStyle = LocalTextStyle.current.copy(color = Color.Black),
+        keyboardOptions = keyboardOptions,
+//        visualTransformation = if (isPassword && !showPassword) PasswordVisualTransformation() else VisualTransformation.None,
+        trailingIcon = trailingIcon
+//        {
+//            {
+//                IconButton(onClick = onTogglePasswordVisibility) {
+//                    Icon(
+//                        imageVector = if (showPassword) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
+//                        contentDescription = null
+//                    )
+//                }
+//            }
+//        } else null
+    )
+}

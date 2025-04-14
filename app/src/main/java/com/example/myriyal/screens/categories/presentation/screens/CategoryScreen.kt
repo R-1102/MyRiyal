@@ -1,3 +1,5 @@
+@file:JvmName("CategoryScreenKt")
+
 package com.example.myriyal.screens.categories.presentation
 
 import androidx.compose.foundation.layout.*
@@ -14,7 +16,6 @@ import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.core.local.enums.CategoryType
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
-import androidx.compose.material.icons.filled.Star
 
 // UI layer of the category feature.
 // Displays the category list and a form for adding/editing categories.
