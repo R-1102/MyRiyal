@@ -1,5 +1,6 @@
 package com.example.myriyal.screens.authentication.presentation.screens
 
+
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -31,6 +32,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -40,14 +42,11 @@ import com.example.myriyal.screens.authentication.presentation.component.CustomT
 import com.example.myriyal.screens.authentication.presentation.component.GradientButton
 import com.example.myriyal.ui.theme.ThemedLogo
 
-
-
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun LoginScreen( navController: NavHostController) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var showPassword by remember { mutableStateOf(false) }
+fun BalanceScreen( navController: NavHostController) {
+    var balance by remember { mutableStateOf("") }
+
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -62,11 +61,11 @@ fun LoginScreen( navController: NavHostController) {
                     .size(74.dp, 94.dp),
             )
 
-            Spacer(modifier = Modifier.padding(8.dp))
+            Spacer(modifier = Modifier.padding(40.dp))
 
             Card(
                 modifier = Modifier
-                    .size(width = 330.dp, height = 460.dp)
+                    .size(width = 330.dp, height = 300.dp)
                     .padding(10.dp)
                     .align(CenterHorizontally)
                     .shadow(30.dp)
@@ -79,7 +78,7 @@ fun LoginScreen( navController: NavHostController) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = stringResource(id = R.string.Login),
+                        text = stringResource(id = R.string.Balance_header),
                         color = Color.Black,
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Bold,
@@ -87,71 +86,21 @@ fun LoginScreen( navController: NavHostController) {
                     )
 
                     CustomTextField(
-                        value = email,
-                        onValueChange = { email = it },
-                        label = stringResource(id = R.string.email),
-                    )
-                    Spacer(modifier = Modifier.height(18.dp))
+                        value = balance,
+                        onValueChange = { balance = it },
+                        label = stringResource(id = R.string.enter_amount),
+                        keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Number)
 
-                    CustomTextField(
-                        value = password,
-                        onValueChange = { password = it },
-                        label = stringResource(id = R.string.password),
-                        isPassword = true,
-                        showPassword = showPassword,
-                        onTogglePasswordVisibility = { showPassword = !showPassword },
                     )
-
                     Spacer(modifier = Modifier.height(6.dp))
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.End
-                    ) {
-
-                        Text(
-                            text = stringResource(id = R.string.forgot_password),
-                            fontSize = 15.sp,
-                            color = Color(0xFFE86969),
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier
-                                .clickable { }
-                        )
-                    }
 
                     GradientButton(
                         onClick = { /* Handle sign up */ },
-                        text = stringResource(id = R.string.Login)
+                        text = stringResource(id = R.string.create_account)
                     )
-
-                    Spacer(modifier = Modifier.height(6.dp))
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = stringResource(id = R.string.dont_have_account),
-                            fontSize = 15.sp,
-                            color = Color.Black,
-                            fontWeight = FontWeight.SemiBold,
-                        )
-
-                        Text(
-                            text = stringResource(id = R.string.Signup),
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF005430),
-                            modifier = Modifier.clickable {navController.navigate(Routes.SIGNUP)
-                            }
-                        )
-                    }
                 }
             }
         }
     }
 }
+
