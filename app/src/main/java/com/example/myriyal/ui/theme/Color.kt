@@ -6,6 +6,7 @@ val PrimaryGreen = Color(0xFF005430)
 val SecondaryGreen = Color(0xFF209261)
 val LightSurface = Color(0xFFF8F8F8)
 val onSurface = Color(0xFF000000)
+val Gray = Color(0xFF87948E)
 
 
 

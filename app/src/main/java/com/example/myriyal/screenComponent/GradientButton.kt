@@ -1,4 +1,4 @@
-package com.example.myriyal.screens.authentication.presentation.component
+package com.example.myriyal.screenComponent
 
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -26,7 +25,6 @@ import androidx.compose.ui.unit.sp
 fun GradientButton(
     onClick: () -> Unit,
     text: String,
-
     lightGradient: Brush = Brush.linearGradient(
         colorStops = arrayOf(
             0.2f to Color(0xC9005732),
@@ -69,4 +67,3 @@ fun GradientButton(
         )
     }
 }
-//

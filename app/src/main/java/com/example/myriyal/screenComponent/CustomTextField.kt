@@ -1,7 +1,6 @@
-package com.example.myriyal.screens.authentication.presentation.component
+package com.example.myriyal.screenComponent
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -14,7 +13,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,15 +28,15 @@ fun CustomTextField(
     modifier: Modifier = Modifier,
     isPassword: Boolean = false,
     showPassword: Boolean = false,
+    singleLine: Boolean = true,
     onTogglePasswordVisibility: (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
 
-) {
-    OutlinedTextField(
-        value = value,
+    ) {
+    OutlinedTextField(value = value,
         onValueChange = onValueChange,
         label = { Text(label) },
-        singleLine = true,
+        singleLine = singleLine,
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = MaterialTheme.colorScheme.primary,
             unfocusedBorderColor = MaterialTheme.colorScheme.primary,
@@ -47,9 +45,7 @@ fun CustomTextField(
             unfocusedLabelColor = MaterialTheme.colorScheme.primary,
         ),
         shape = RoundedCornerShape(12.dp),
-        modifier = modifier
-            .fillMaxWidth()
-            ,
+        modifier = modifier.fillMaxWidth(),
         textStyle = LocalTextStyle.current.copy(color = Color.Black),
         keyboardOptions = keyboardOptions,
         visualTransformation = if (isPassword && !showPassword) PasswordVisualTransformation() else VisualTransformation.None,
@@ -63,5 +59,38 @@ fun CustomTextField(
                 }
             }
         } else null
+    )
+}
+
+@Composable
+fun CustomTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    readOnly: Boolean = false,
+    singleLine: Boolean = true,
+    trailingIcon: @Composable () -> Unit,
+) {
+
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        singleLine = singleLine,
+        readOnly = readOnly,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            unfocusedBorderColor = MaterialTheme.colorScheme.primary,
+            cursorColor = MaterialTheme.colorScheme.primary,
+            focusedLabelColor = MaterialTheme.colorScheme.primary,
+            unfocusedLabelColor = MaterialTheme.colorScheme.primary,
+        ),
+        shape = RoundedCornerShape(12.dp),
+        modifier = modifier.fillMaxWidth(),
+        textStyle = LocalTextStyle.current.copy(color = Color.Black),
+        keyboardOptions = keyboardOptions,
+        trailingIcon = trailingIcon,
     )
 }

@@ -8,10 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,11 +16,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,9 +26,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
-import com.example.myriyal.screens.authentication.presentation.component.CustomCard
-import com.example.myriyal.screens.authentication.presentation.component.CustomTextField
-import com.example.myriyal.screens.authentication.presentation.component.GradientButton
+import com.example.myriyal.navigation.Routes
+import com.example.myriyal.screenComponent.CustomCard
+import com.example.myriyal.screenComponent.CustomTextField
+import com.example.myriyal.screenComponent.GradientButton
 import com.example.myriyal.ui.theme.ThemedLogo
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -62,7 +57,7 @@ fun BalanceScreen(navController: NavHostController) {
             Column(
                 modifier = Modifier
                     .padding(12.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = CenterHorizontally
             ) {
                 Text(
                     text = stringResource(id = R.string.Balance_header),
@@ -81,7 +76,7 @@ fun BalanceScreen(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(26.dp))
 
                 GradientButton(
-                    onClick = { /* Handle sign up */ },
+                    onClick = { navController.navigate(Routes.LOGIN) },
                     text = stringResource(id = R.string.create_account)
                 )
             }
