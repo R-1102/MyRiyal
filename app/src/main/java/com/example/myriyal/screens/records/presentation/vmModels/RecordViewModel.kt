@@ -16,8 +16,6 @@ import kotlinx.coroutines.launch
 // - Expose state to the UI
 // - Trigger use case functions based on user actions
 
-
-//@HiltViewModel
 class RecordViewModel(private val useCases: RecordUseCases) : ViewModel() {
 
     // Expose all records as StateFlow
