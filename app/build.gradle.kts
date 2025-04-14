@@ -4,6 +4,11 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+
+
+    //id("com.android.application")
+    //id("com.google.gms.google-services")
+
 }
 
 android {
@@ -16,6 +21,8 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+
+        multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,6 +62,18 @@ dependencies {
     implementation(libs.androidx.room.common.jvm)
     implementation(libs.androidx.room.runtime.android)
 
+// Google Play Services dependency
+    //implementation(libs.play.services.auth)
+
+    //Firebase dependencies
+    implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
+    //implementation(libs.firebase.bom)
+    implementation(libs.firebase.analytics)
+    implementation ("com.google.android.gms:play-services:17.0.0")
+
+
     // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -73,11 +92,24 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
 
+    // Hilt dependencies
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.fragment)
+    implementation(libs.androidx.hilt.navigation.compose)
+
     // Navigation dependencies
     implementation(libs.androidx.navigation.compose)
 
     // Accompanist Animation (Consider replacing with androidx.navigation)
     implementation(libs.accompanist.navigation.animation)
+
+
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 
     // Hilt core (DI engine)
     implementation(libs.hilt.android)

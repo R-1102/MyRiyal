@@ -1,5 +1,18 @@
 package com.example.myriyal
 
+
+import android.app.Application
+import com.google.firebase.FirebaseApp
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class MyRiyalApp : Application(){
+    override fun onCreate() {
+        super.onCreate()
+        FirebaseApp.initializeApp(this)
+    }
+}
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
@@ -85,3 +98,4 @@ fun MyRiyalApp() {
         recordViewModel = recordViewModel
     )
 }
+

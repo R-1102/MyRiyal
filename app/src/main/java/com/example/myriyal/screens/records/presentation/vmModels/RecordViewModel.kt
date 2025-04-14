@@ -10,6 +10,38 @@ import com.example.myriyal.screens.records.domain.useCases.RecordUseCases
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
+
+
+// START POINT - AHAD CONFLICT
+
+// // ViewModel for the Record feature.
+// // Connects UI (RecordScreen) with the domain use cases.
+// //
+// // Responsibilities:
+// // - Expose state to the UI
+// // - Trigger use case functions based on user actions
+
+
+
+
+// //@HiltViewModel
+// class RecordViewModel(private val useCases: RecordUseCases) : ViewModel() {
+
+//     // Expose all records as StateFlow
+//     val records: StateFlow<List<RecordEntity>> = useCases
+//         .getAllRecords()
+//         .stateIn(
+//             scope = viewModelScope,
+//             started = SharingStarted.WhileSubscribed(5000),
+//             initialValue = emptyList()
+//         )
+
+//     // Insert a new record (triggered from UI)
+
+
+
+// END POINT - AHAD CONFLICT
+
 /**
  * ViewModel for the Record feature.
  *

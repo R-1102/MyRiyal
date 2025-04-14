@@ -28,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -40,10 +39,30 @@ import com.example.myriyal.navigation.Routes
 import com.example.myriyal.screens.authentication.presentation.component.CustomCard
 import com.example.myriyal.screens.authentication.presentation.component.CustomTextField
 import com.example.myriyal.screens.authentication.presentation.component.GradientButton
+import com.example.myriyal.screens.authentication.presentation.vmModels.SignUpVM
 import com.example.myriyal.ui.theme.ThemedLogo
+import androidx.hilt.navigation.compose.hiltViewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
+
+fun SignUpScreen( navController: NavHostController) {
+
+    val viewModel: SignUpVM = hiltViewModel()
+
+
+    val username = viewModel.username
+    val email = viewModel.email
+    val password = viewModel.password
+    val confirmPassword = viewModel.confirmPassword
+    var phoneNumber by remember { mutableStateOf("") }
+    var showPassword by remember { mutableStateOf(false) }
+    var showConfirmPassword by remember { mutableStateOf(false) }
+
+
+    Box(
+
 fun SignUpScreen(navController: NavHostController) {
     var username by remember { mutableStateOf("") } //need to be deleted
     var email by remember { mutableStateOf("") } //need to be deleted
@@ -54,6 +73,7 @@ fun SignUpScreen(navController: NavHostController) {
 
 
     Column(
+
         modifier = Modifier.fillMaxSize()
     ) {
         ThemedLogo(
@@ -83,42 +103,54 @@ fun SignUpScreen(navController: NavHostController) {
                     modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
                 )
 
-                CustomTextField(
-                    value = username,
-                    onValueChange = { username = it },
-                    label = stringResource(id = R.string.username)
-                )
 
-                CustomTextField(
-                    value = email,
-                    onValueChange = { email = it },
-                    label = stringResource(id = R.string.email),
-                )
+                    CustomTextField(
+                        value = username,
+                        onValueChange = viewModel::onUsernameChange,
+                        label = stringResource(id = R.string.username)
+                    )
 
-                CustomTextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    label = stringResource(id = R.string.password),
-                    isPassword = true,
-                    showPassword = showPassword,
-                    onTogglePasswordVisibility = { showPassword = !showPassword },
-                )
+                    CustomTextField(
+                        value = email,
+                        onValueChange = viewModel::onEmailChange,
+                        label = stringResource(id = R.string.email),
+                    )
 
-                CustomTextField(
-                    value = confirmPassword,
-                    onValueChange = { confirmPassword = it },
-                    label = stringResource(id = R.string.confirmpassword),
-                    isPassword = true,
-                    showPassword = showConfirmPassword,
-                    onTogglePasswordVisibility = { showConfirmPassword = !showConfirmPassword },
-                )
+
+
+                    CustomTextField(
+                        value = password,
+                        onValueChange = viewModel::onPasswordChange,
+                        label = stringResource(id = R.string.password),
+                        isPassword = true,
+                        showPassword = showPassword,
+                        onTogglePasswordVisibility = { showPassword = !showPassword },
+                    )
+
+                    CustomTextField(
+                        value = confirmPassword,
+                        onValueChange = viewModel::onConfirmPassword,
+                        label = stringResource(id = R.string.confirmpassword),
+                        isPassword = true,
+                        showPassword = showConfirmPassword,
+                        onTogglePasswordVisibility = { showConfirmPassword = !showConfirmPassword },
+                    )
+                    GradientButton(
+                        onClick = {
+                            viewModel.signUpValidation(
+                                username = username,
+                                email = email,
+                                password = password,
+                                confirmPassword = confirmPassword
+                            );
+                            navController.navigate(Routes.BALANCE)
+                                  },
+
+                        text = stringResource(id = R.string.Signup)
+
 
                 Spacer(modifier = Modifier.padding(10.dp))
 
-                GradientButton(
-                    onClick = { navController.navigate(Routes.BALANCE) },
-                    text = stringResource(id = R.string.Signup)
-                )
 
                 Row(
                     modifier = Modifier
@@ -138,6 +170,7 @@ fun SignUpScreen(navController: NavHostController) {
                         fontWeight = FontWeight.SemiBold,
                         color = Color(0xFF005430),
                         modifier = Modifier.clickable { navController.navigate(Routes.LOGIN) }
+
                     )
                 }
             }
