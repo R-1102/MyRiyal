@@ -1,5 +1,7 @@
 package com.example.myriyal.screens.records.presentation.screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,40 +17,51 @@ import androidx.compose.ui.unit.dp
 import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
+import com.example.myriyal.screens.records.domain.model.RecordFilterType
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 
 /**
- * Screen to display and manage financial records (income/expenses).
+ * Main screen to display and manage financial records (expenses or income).
  *
- * Responsibilities:
- * - Displays a form to create or update a record
- * - Shows a list of all existing records
- * - Allows editing or deleting records
+ * Fetches:
+ * - Categories from [CategoryViewModel]
+ * - Records from [RecordViewModel], filtered by day/week/month/year/all
  *
- * Data Flow:
- * - Fetches category list from: CategoryViewModel → categoryRepository → Room DAO
- * - Fetches records from: RecordViewModel → recordRepository → Room DAO
- * - Sends insert/update/delete actions to: RecordViewModel → UseCases → Repository
+ * Sends:
+ * - Insert/update/delete actions back to [RecordViewModel]
  */
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun RecordScreen(
     viewModel: RecordViewModel,
     categoryViewModel: CategoryViewModel
 ) {
-    // State from ViewModels
+    // Observe reactive states from ViewModels
     val records by viewModel.records.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
+    val selectedFilter by viewModel.filter.collectAsState()
 
-    // Form states
+    // Form state (controlled locally in this composable)
     var selectedRecord by remember { mutableStateOf<RecordEntity?>(null) }
     var selectedCategory by remember { mutableStateOf<CategoryEntity?>(null) }
     var name by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var amount by remember { mutableStateOf("") }
 
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+    ) {
+        // --- Filter Selection Chips ---
+        FilterSelector(
+            selectedFilter = selectedFilter,
+            onFilterSelected = { viewModel.setFilter(it) }
+        )
 
-        // --- FORM ---
+        Spacer(modifier = Modifier.height(6.dp))
+
+        // --- RECORD FORM ---
 
         OutlinedTextField(
             value = name,
@@ -57,7 +70,7 @@ fun RecordScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(6.dp))
 
         OutlinedTextField(
             value = description,
@@ -66,7 +79,7 @@ fun RecordScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(6.dp))
 
         OutlinedTextField(
             value = amount,
@@ -78,17 +91,18 @@ fun RecordScreen(
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(6.dp))
 
+        // Category dropdown (uses categoryViewModel)
         CategoryDropdownMenu(
             selectedCategory = selectedCategory,
             categories = categories,
             onCategorySelected = { selectedCategory = it }
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
-        // Button for Add or Update
+        // Button to insert or update a record
         Button(
             onClick = {
                 val timestamp = System.currentTimeMillis()
@@ -103,13 +117,10 @@ fun RecordScreen(
                     updatedAt = timestamp
                 )
 
-                if (selectedRecord == null) {
-                    viewModel.insert(record)
-                } else {
-                    viewModel.update(record)
-                }
+                if (selectedRecord == null) viewModel.insert(record)
+                else viewModel.update(record)
 
-                // Reset form after action
+                // Clear form after submission
                 name = ""
                 description = ""
                 amount = ""
@@ -122,9 +133,9 @@ fun RecordScreen(
             Text(if (selectedRecord == null) "Add Record" else "Update Record")
         }
 
-        Divider(modifier = Modifier.padding(vertical = 16.dp))
+        Divider(modifier = Modifier.padding(vertical = 12.dp))
 
-        // --- RECORD LIST ---
+        // --- LIST OF RECORDS ---
 
         LazyColumn {
             items(records) { record ->
@@ -145,8 +156,47 @@ fun RecordScreen(
 }
 
 /**
- * Dropdown menu for selecting a record category.
- * Displays all categories and returns the selected one.
+ * Filter options (Day, Week, Month, Year).
+ * Clicking again on a selected filter will unselect it (showing all).
+ */
+@Composable
+fun FilterSelector(
+    selectedFilter: RecordFilterType,
+    onFilterSelected: (RecordFilterType) -> Unit
+) {
+    val filterOptions = listOf(
+        RecordFilterType.DAY,
+        RecordFilterType.WEEK,
+        RecordFilterType.MONTH,
+        RecordFilterType.YEAR
+    )
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 6.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        filterOptions.forEach { filter ->
+            FilterChip(
+                selected = filter == selectedFilter,
+                onClick = {
+                    if (filter == selectedFilter) {
+                        // Tapping again toggles back to "All"
+                        onFilterSelected(RecordFilterType.ALL)
+                    } else {
+                        onFilterSelected(filter)
+                    }
+                },
+                label = { Text(filter.name.lowercase().replaceFirstChar { it.uppercase() }) }
+            )
+        }
+    }
+}
+
+/**
+ * Category selector dropdown (used in form).
+ * Data comes from: [CategoryViewModel]
  */
 @Composable
 fun CategoryDropdownMenu(
@@ -188,8 +238,8 @@ fun CategoryDropdownMenu(
 }
 
 /**
- * Represents a single Record item in the list.
- * Includes Edit and Delete actions.
+ * Displays a single record in the list.
+ * Includes Edit and Delete options.
  */
 @Composable
 fun RecordItem(
@@ -215,12 +265,8 @@ fun RecordItem(
                 }
             }
             Column(horizontalAlignment = Alignment.End) {
-                TextButton(onClick = onEdit) {
-                    Text("Edit")
-                }
-                TextButton(onClick = onDelete) {
-                    Text("Delete")
-                }
+                TextButton(onClick = onEdit) { Text("Edit") }
+                TextButton(onClick = onDelete) { Text("Delete") }
             }
         }
     }
