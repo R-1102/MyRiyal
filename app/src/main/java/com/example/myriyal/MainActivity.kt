@@ -25,7 +25,6 @@ import com.example.myriyal.screens.records.domain.useCases.*
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 
 import com.example.myriyal.ui.theme.MyRiyalTheme
-import dagger.hilt.android.AndroidEntryPoint
 
 // MainActivity is the entry point of the app.
 // It manually wires dependencies for both the Category and Record features,
@@ -36,7 +35,6 @@ import dagger.hilt.android.AndroidEntryPoint
 // - Domain layer: UseCases (for each feature)
 // - Presentation layer: ViewModels (CategoryViewModel, RecordViewModel)
 // - UI layer: Screens injected via NavGraph
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
