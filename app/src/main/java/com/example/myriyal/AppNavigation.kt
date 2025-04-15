@@ -6,12 +6,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.navigation.NavGraph
 import com.example.myriyal.screens.mainScreen.BottomNavigationBar
-import com.example.myriyal.utils.provideCategoryViewModel
-import com.example.myriyal.utils.provideRecordViewModel
 
 /**
  * Root Composable function to initialize and launch the MyRiyal app.

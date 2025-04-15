@@ -95,13 +95,6 @@ dependencies {
     // Accompanist Animation (Consider replacing with androidx.navigation)
     implementation(libs.accompanist.navigation.animation)
 
-    // Hilt core (DI engine)
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
-// Hilt Navigation for Fragments
-    implementation(libs.androidx.hilt.navigation.fragment)
-
 // Hilt Navigation for Jetpack Compose
     implementation(libs.androidx.hilt.navigation.compose)
 
@@ -119,7 +112,6 @@ dependencies {
 
     //for color picker
     implementation("com.github.skydoves:colorpicker-compose:1.1.2")
-
 
 
 }

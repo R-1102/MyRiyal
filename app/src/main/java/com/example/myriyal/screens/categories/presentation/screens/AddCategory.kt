@@ -34,7 +34,7 @@ import com.example.myriyal.R
 import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.core.local.enums.CategoryType
-import com.example.myriyal.screens.authentication.presentation.component.GradientButton
+import com.example.myriyal.screenComponent.GradientButton
 import com.example.myriyal.screens.categories.presentation.components.CategoryIconDropdown
 import com.example.myriyal.screens.categories.presentation.components.CategoryTypeDropdown
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
