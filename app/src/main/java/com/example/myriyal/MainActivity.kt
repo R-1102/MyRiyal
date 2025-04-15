@@ -8,6 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import com.example.myriyal.screens.categories.domian.useCases.*
 import com.example.myriyal.screens.records.domain.useCases.*
 import com.example.myriyal.ui.theme.MyRiyalTheme
+
+
 import dagger.hilt.android.AndroidEntryPoint
 
 // MainActivity is the entry point of the app.
@@ -30,7 +32,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyRiyalTheme {
-                MyRiyalApp() // ← only this one line for full app setup
+                AppNavigation() // ← only this one line for full app setup
 
 
 //                 val navController = rememberNavController()

@@ -1,6 +1,7 @@
 package com.example.myriyal
 
 
+
 import android.app.Application
 import com.google.firebase.FirebaseApp
 import dagger.hilt.android.HiltAndroidApp
@@ -12,5 +13,3 @@ class MyRiyalApp : Application(){
         FirebaseApp.initializeApp(this)
     }
 }
-
-
