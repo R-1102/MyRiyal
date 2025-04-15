@@ -8,8 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.myriyal.R
 import com.example.myriyal.navigation.Routes
 import com.example.myriyal.ui.theme.ThemedLogo
 import kotlinx.coroutines.delay
@@ -29,9 +31,8 @@ fun SplashScreen(navController: NavHostController) {
     ) {
         ThemedLogo(
             modifier = Modifier
-                .padding(top = 70.dp)
+                .padding(top = integerResource(id= R.integer.logoLargeSpace).dp)
                 .align(Alignment.Center)
-                .size(74.dp, 94.dp),
         )
     }
 }

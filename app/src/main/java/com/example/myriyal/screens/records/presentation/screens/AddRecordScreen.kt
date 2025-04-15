@@ -62,7 +62,7 @@ fun AddRecordScreen(
 
         CustomCard(
             modifier = Modifier
-                .size(width = (integerResource(id= R.integer.cardWidth)).dp, height = 590.dp)
+                .size(width = (integerResource(id= R.integer.cardWidth)).dp, height = integerResource(id= R.integer.cardHeightAddRecord).dp)
                 .align(CenterHorizontally),
         ) {
             Column(

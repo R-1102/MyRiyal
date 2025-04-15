@@ -44,14 +44,14 @@ fun LoginScreen(navController: NavHostController) {
     ) {
         ThemedLogo(
             modifier = Modifier
-                .padding(top = 80.dp)
+                .padding(top = integerResource(id= R.integer.logoExtraLargeSpace).dp)
                 .align(CenterHorizontally),
         )
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.smallLogoCardSpace).dp))
 
         CustomCard(
             modifier = Modifier
-                .size(width = 330.dp, height = 410.dp)
+                .size(width = integerResource(id= R.integer.cardWidth).dp, height = integerResource(id= R.integer.cardHeightLogin).dp)
                 .align(CenterHorizontally)
         ) {
             Column(
@@ -64,7 +64,7 @@ fun LoginScreen(navController: NavHostController) {
                     color = MaterialTheme.colorScheme.onSurface,
                     fontSize = integerResource(id= R.integer.cardHeaderSize).sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 10.dp, bottom = 30.dp)
+                    modifier = Modifier.padding(top = integerResource(id= R.integer.cardHeaderTopPadding).dp, bottom = integerResource(id= R.integer.cardHeaderBottomPadding).dp)
                 )
 
                 CustomTextField(
@@ -83,12 +83,12 @@ fun LoginScreen(navController: NavHostController) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(12.dp),
+                        .padding(integerResource(id= R.integer.smallSpace).dp),
                     horizontalArrangement = Arrangement.End
                 ) {
                     Text(
                         text = stringResource(id = R.string.forgot_password),
-                        fontSize = 15.sp,
+                        fontSize = integerResource(id= R.integer.smallText).sp,
                         color = Color(0xFFBE4A4A),
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier
@@ -99,23 +99,23 @@ fun LoginScreen(navController: NavHostController) {
                     onClick = { /* Handle Login */ },
                     text = stringResource(id = R.string.Login)
                 )
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(integerResource(id= R.integer.extraSmallSpace).dp))
 
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(12.dp),
+                        .padding(integerResource(id= R.integer.smallSpace).dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
                         text = stringResource(id = R.string.dont_have_account),
-                        fontSize = 15.sp,
+                        fontSize = integerResource(id= R.integer.smallText).sp,
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.SemiBold,
                     )
                     Text(
                         text = stringResource(id = R.string.Signup),
-                        fontSize = 15.sp,
+                        fontSize = integerResource(id= R.integer.smallText).sp,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.secondary,
                         modifier = Modifier.clickable {

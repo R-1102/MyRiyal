@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="extraSmallSpace">8</integer>
+    <integer name="extraSmallSpace">5</integer>
     <integer name="smallSpace">12</integer>
     <integer name="mediumSpace">16</integer>
     <integer name="largeSpace">18</integer>
     <integer name="extraLargeSpace">24</integer>
 
-
-
     <!-- space between button and text filed-->
     <integer name="buttonTextFieldSpace">26</integer>
 
+    <!-- space between logo and card-->
+    <integer name="smallLogoCardSpace">20</integer>
+    <integer name="logoCardSpace">30</integer>
+
     <!--space the logo-->
     <integer name="logoSmallSpace">20</integer>
+    <integer name="logoMediumSpace">30</integer>
+    <integer name="logoLargeSpace">70</integer>
+    <integer name="logoExtraLargeSpace">80</integer>
 
     <!--card Size-->
     <integer name="cardHeaderSize">28</integer>
     <integer name="cardWidth">330</integer>
-    <integer name="cardHeight">590</integer>
+    <integer name="cardHeightAddRecord">590</integer>
+    <integer name="cardHeightLogin">410</integer>
+    <integer name="cardHeightSmall">270</integer>
+    <integer name="cardHeightNewPassword">340</integer>
+    <integer name="cardHeightSignUp">500</integer>
 
     <!--Card Header-->
     <integer name="cardHeaderTopPadding">10</integer>
@@ -26,8 +35,8 @@
     <!--Record-->
     <integer name="recordDescription">130</integer>
 
-
-
-
+    <!--Authentication Screens Dimensions-->
+    <integer name="smallText">15</integer>
+    <integer name="logoHeight">100</integer>
 
 </resources>

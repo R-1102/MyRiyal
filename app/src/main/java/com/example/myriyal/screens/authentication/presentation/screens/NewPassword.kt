@@ -38,14 +38,14 @@ fun NewPassword(navController: NavHostController) {
     ) {
         ThemedLogo(
             modifier = Modifier
-                .padding(top = 70.dp)
+                .padding(top = integerResource(id= R.integer.logoLargeSpace).dp)
                 .align(CenterHorizontally),
         )
         Spacer(modifier = Modifier.padding(integerResource(id= R.integer.largeSpace).dp))
 
         CustomCard(
             modifier = Modifier
-                .size(width = 330.dp, height = 340.dp)
+                .size(width = integerResource(id= R.integer.cardWidth).dp, height = integerResource(id= R.integer.cardHeightNewPassword).dp)
                 .align(CenterHorizontally),
         ) {
             Column(
@@ -58,7 +58,7 @@ fun NewPassword(navController: NavHostController) {
                     color = Color.Black,
                     fontSize = integerResource(id= R.integer.cardHeaderSize).sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
+                    modifier = Modifier.padding(top = integerResource(id= R.integer.cardHeaderTopPadding).dp, bottom = integerResource(id= R.integer.cardHeaderBottomPadding).dp)
                 )
                 Spacer(modifier = Modifier.height(integerResource(id= R.integer.largeSpace).dp))
 
