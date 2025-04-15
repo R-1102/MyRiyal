@@ -36,6 +36,6 @@
     <integer name="recordDescription">128</integer>
 
     <!--Authentication Screens Dimensions-->
-    <integer name="smallText">15</integer>
+    <integer name="smallText">16</integer>
     
 </resources>

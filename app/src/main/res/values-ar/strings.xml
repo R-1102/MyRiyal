@@ -34,7 +34,6 @@
     <string name="recordCategory">فئة السجل</string>
     <string name="recordDate">تاريخ السجل</string>
 
-    <string name="newpassword_h">كلمة المرور الجديدة</string>
     <string name="EnterCategoryName">أدخل اسم التصنيف</string>
     <string name="EnterCategoryType">أدخل نوع التصنيف</string>
     <string name="ChooseColor">إختر لون</string>
@@ -57,6 +56,5 @@
 
     <string name="ok">موافق</string>
     <string name="cancel">إلغاء</string>
-
 
 </resources>
