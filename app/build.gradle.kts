@@ -2,13 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-
     //Hilt DI
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-
     id("com.google.gms.google-services")
-
 }
 
 android {
@@ -62,7 +59,7 @@ dependencies {
     implementation(libs.androidx.room.common.jvm)
     implementation(libs.androidx.room.runtime.android)
 
-// Google Play Services dependency
+    // Google Play Services dependency
     //implementation(libs.play.services.auth)
     //Firebase dependencies
     implementation(platform(libs.firebase.bom))
@@ -98,7 +95,7 @@ dependencies {
     // Accompanist Animation (Consider replacing with androidx.navigation)
     implementation(libs.accompanist.navigation.animation)
 
-// Hilt Navigation for Jetpack Compose
+    // Hilt Navigation for Jetpack Compose
     implementation(libs.androidx.hilt.navigation.compose)
 
     // For encrypted SharedPreferences
@@ -107,14 +104,12 @@ dependencies {
     // Retrofit core library for making HTTP requests (GET, POST, etc.)
     implementation(libs.retrofit)
 
-// Retrofit converter that parses JSON responses into Kotlin/Java objects using Gson
+    // Retrofit converter that parses JSON responses into Kotlin/Java objects using Gson
     implementation(libs.converter.gson)
 
-// OkHttp logging interceptor for debugging network requests/responses in Logcat
+    // OkHttp logging interceptor for debugging network requests/responses in Logcat
     implementation(libs.logging.interceptor)
 }
-
-
 // Allow references to generated code
 kapt {
     correctErrorTypes = true

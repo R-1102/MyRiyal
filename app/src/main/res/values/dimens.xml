@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="extraSmallSpace">8</integer>
+    <integer name="smallSpace">12</integer>
+    <integer name="mediumSpace">16</integer>
+    <integer name="largeSpace">18</integer>
+    <integer name="extraLargeSpace">24</integer>
+
+
+
+    <!-- space between button and text filed-->
+    <integer name="buttonTextFieldSpace">26</integer>
+
+    <!--space the logo-->
+    <integer name="logoSmallSpace">20</integer>
+
+    <!--card Size-->
+    <integer name="cardHeaderSize">28</integer>
+    <integer name="cardWidth">330</integer>
+    <integer name="cardHeight">590</integer>
+
+    <!--Card Header-->
+    <integer name="cardHeaderTopPadding">10</integer>
+    <integer name="cardHeaderBottomPadding">20</integer>
+
+    <!--Record-->
+    <integer name="recordDescription">130</integer>
+
+
+
+
+
+</resources>
