@@ -105,21 +105,11 @@ dependencies {
     implementation(libs.accompanist.navigation.animation)
 
 
-}
-
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
-
-    // Hilt core (DI engine)
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 
 // Hilt Navigation for Fragments
     implementation(libs.androidx.hilt.navigation.fragment)
 
-// Hilt Navigation for Jetpack Compose
-    implementation(libs.androidx.hilt.navigation.compose)
+
 
     // For encrypted SharedPreferences
     implementation(libs.androidx.security.crypto)
@@ -139,4 +129,10 @@ kapt {
 
 
 
+}
+
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
