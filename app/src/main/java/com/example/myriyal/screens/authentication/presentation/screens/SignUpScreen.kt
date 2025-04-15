@@ -112,7 +112,7 @@ fun SignUpScreen(navController: NavHostController) {
             }
             Spacer(modifier = Modifier.padding(10.dp))
 
-            Row(
+          Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(integerResource(id= R.integer.smallSpace).dp),
