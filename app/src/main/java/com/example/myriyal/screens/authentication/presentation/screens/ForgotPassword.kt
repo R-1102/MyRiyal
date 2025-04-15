@@ -37,14 +37,14 @@ fun ForgotPassword(navController: NavHostController) {
     ) {
         ThemedLogo(
             modifier = Modifier
-                .padding(top = 80.dp)
+                .padding(top = integerResource(id= R.integer.logoExtraLargeSpace).dp)
                 .align(CenterHorizontally),
         )
-        Spacer(modifier = Modifier.padding(30.dp))
+        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.logoCardSpace).dp))
 
         CustomCard(
             modifier = Modifier
-                .size(width = 330.dp, height = 270.dp)
+                .size(width = integerResource(id= R.integer.cardWidth).dp, height = integerResource(id= R.integer.cardHeightSmall).dp)
                 .align(CenterHorizontally)
         ) {
             Column(
@@ -57,7 +57,7 @@ fun ForgotPassword(navController: NavHostController) {
                     color = Color.Black,
                     fontSize = integerResource(id= R.integer.cardHeaderSize).sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 10.dp, bottom = 30.dp)
+                    modifier = Modifier.padding(top = integerResource(id= R.integer.cardHeaderTopPadding).dp, bottom = integerResource(id= R.integer.cardHeaderBottomPadding).dp)
                 )
                 CustomTextField(
                     value = email,

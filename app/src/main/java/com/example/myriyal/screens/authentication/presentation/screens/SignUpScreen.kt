@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -49,14 +50,14 @@ fun SignUpScreen(navController: NavHostController) {
     ) {
         ThemedLogo(
             modifier = Modifier
-                .padding(top = 70.dp)
+                .padding(top = integerResource(id= R.integer.logoLargeSpace).dp)
                 .align(CenterHorizontally),
         )
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.smallLogoCardSpace).dp))
 
         CustomCard(
             modifier = Modifier
-                .size(width = 330.dp, height = 500.dp)
+                .size(width = integerResource(id= R.integer.cardWidth).dp, height = integerResource(id= R.integer.cardHeightSignUp).dp)
                 .align(CenterHorizontally),
         ) {
             Column(
@@ -69,7 +70,7 @@ fun SignUpScreen(navController: NavHostController) {
                     color = Color.Black,
                     fontSize = integerResource(id= R.integer.cardHeaderSize).sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
+                    modifier = Modifier.padding(top = integerResource(id= R.integer.cardHeaderTopPadding).dp, bottom = integerResource(id= R.integer.cardHeaderBottomPadding).dp)
                 )
                 CustomTextField(
                     value = username,
@@ -110,7 +111,7 @@ fun SignUpScreen(navController: NavHostController) {
                     text = stringResource(id = R.string.Signup)
                 )
             }
-            Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(integerResource(id= R.integer.smallSpace).dp))
 
           Row(
                 modifier = Modifier
@@ -120,15 +121,15 @@ fun SignUpScreen(navController: NavHostController) {
             ) {
                 Text(
                     text = stringResource(id = R.string.already_have_account),
-                    fontSize = 15.sp,
+                    fontSize = integerResource(id= R.integer.smallText).sp,
                     color = Color.Black,
                     fontWeight = FontWeight.SemiBold,
                 )
                 Text(
                     text = stringResource(id = R.string.Login),
-                    fontSize = 15.sp,
+                    fontSize = integerResource(id= R.integer.smallText).sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color(0xFF005430),
+                    color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.clickable { navController.navigate(Routes.LOGIN) }
                 )
             }
