@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.myriyal.screens.categories.presentation.CategoryScreen
+
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.presentation.screens.RecordScreen
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
@@ -25,49 +25,49 @@ import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
  * - Sends: UI updates and user actions to the corresponding screens (CategoryScreen, RecordScreen)
  * - Fetches: UI state from the ViewModels via StateFlows
  */
-@Composable
-fun MainScreen(
-    navController: NavHostController,
-    categoryViewModel: CategoryViewModel,
-    recordViewModel: RecordViewModel
-) {
-    Scaffold(
-        // BottomNavigationBar allows switching between main feature screens
-        bottomBar = {
-            BottomNavigationBar(navController = navController)
-        }
-    ) { innerPadding ->
-
-        // Navigation graph that defines which screen to show based on route
-        NavHost(
-            navController = navController,
-            startDestination = "category_screen", // Default screen on app launch
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            // Category feature screen
-            composable("category_screen") {
-                CategoryScreen(viewModel = categoryViewModel)
-                // UI reads data from: CategoryViewModel
-                // UI sends actions to: CategoryViewModel.insert/update/delete
-            }
-
-            // Record feature screen
-            composable("record_screen") {
-                RecordScreen(
-                    viewModel = recordViewModel,
-                    categoryViewModel = categoryViewModel
-                )
-                // UI reads: records from RecordViewModel, categories from CategoryViewModel
-                // UI sends actions to: RecordViewModel.insert/update/delete
-            }
-        }
-    }
-}
-
-/**
- * BottomNavigationBar displays the bottom nav with tabs to switch between
- * the two main features: Categories and Records.
- */
+//@Composable
+//fun MainScreen(
+//    navController: NavHostController,
+//    categoryViewModel: CategoryViewModel,
+//    recordViewModel: RecordViewModel
+//) {
+//    Scaffold(
+//        // BottomNavigationBar allows switching between main feature screens
+//        bottomBar = {
+//            BottomNavigationBar(navController = navController)
+//        }
+//    ) { innerPadding ->
+//
+//        // Navigation graph that defines which screen to show based on route
+//        NavHost(
+//            navController = navController,
+//            startDestination = "category_screen", // Default screen on app launch
+//            modifier = Modifier.padding(innerPadding)
+//        ) {
+//            // Category feature screen
+//            composable("category_screen") {
+//                CategoryScreen(viewModel = categoryViewModel)
+//                // UI reads data from: CategoryViewModel
+//                // UI sends actions to: CategoryViewModel.insert/update/delete
+//            }
+//
+//            // Record feature screen
+//            composable("record_screen") {
+//                RecordScreen(
+//                    viewModel = recordViewModel,
+//                    categoryViewModel = categoryViewModel
+//                )
+//                // UI reads: records from RecordViewModel, categories from CategoryViewModel
+//                // UI sends actions to: RecordViewModel.insert/update/delete
+//            }
+//        }
+//    }
+//}
+//
+///**
+// * BottomNavigationBar displays the bottom nav with tabs to switch between
+// * the two main features: Categories and Records.
+// */
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     NavigationBar {

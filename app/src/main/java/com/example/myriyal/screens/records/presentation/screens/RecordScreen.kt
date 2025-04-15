@@ -1,7 +1,5 @@
 package com.example.myriyal.screens.records.presentation.screens
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,6 +10,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.core.local.entities.CategoryEntity
@@ -19,6 +18,9 @@ import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.domain.model.RecordFilterType
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
+import com.example.myriyal.utils.provideCategoryViewModel
+import com.example.myriyal.utils.provideRecordViewModel
+import kotlin.math.log
 
 /**
  * Main screen to display and manage financial records (expenses or income).
@@ -30,16 +32,18 @@ import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
  * Sends:
  * - Insert/update/delete actions back to [RecordViewModel]
  */
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun RecordScreen(
-    viewModel: RecordViewModel,
-    categoryViewModel: CategoryViewModel
+
 ) {
+    val context = LocalContext.current
+
+    val recordViewModel = provideRecordViewModel(context)
+    val categoryViewModel = provideCategoryViewModel((context))
     // Observe reactive states from ViewModels
-    val records by viewModel.records.collectAsState()
+    val records by recordViewModel.records.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
-    val selectedFilter by viewModel.filter.collectAsState()
+    val selectedFilter by recordViewModel.filter.collectAsState()
 
     // Form state (controlled locally in this composable)
     var selectedRecord by remember { mutableStateOf<RecordEntity?>(null) }
@@ -56,7 +60,7 @@ fun RecordScreen(
         // --- Filter Selection Chips ---
         FilterSelector(
             selectedFilter = selectedFilter,
-            onFilterSelected = { viewModel.setFilter(it) }
+            onFilterSelected = { recordViewModel.setFilter(it) }
         )
 
         Spacer(modifier = Modifier.height(6.dp))
@@ -117,8 +121,8 @@ fun RecordScreen(
                     updatedAt = timestamp
                 )
 
-                if (selectedRecord == null) viewModel.insert(record)
-                else viewModel.update(record)
+                if (selectedRecord == null) recordViewModel.insert(record)
+                else recordViewModel.update(record)
 
                 // Clear form after submission
                 name = ""
@@ -139,9 +143,10 @@ fun RecordScreen(
 
         LazyColumn {
             items(records) { record ->
+
                 RecordItem(
                     record = record,
-                    onDelete = { viewModel.delete(record) },
+                    onDelete = { recordViewModel.delete(record) },
                     onEdit = {
                         selectedRecord = record
                         name = record.name

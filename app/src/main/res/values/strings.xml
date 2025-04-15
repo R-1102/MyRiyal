@@ -35,6 +35,10 @@
     <string name="AddCategory">AddCategory</string>
     <string name="Save">Save</string>
     <string name="Cancel">Cancel</string>
+    <string name="icon">Icon</string>
+    <string name="categoryType">Category Type</string>
+
+
 
 
 

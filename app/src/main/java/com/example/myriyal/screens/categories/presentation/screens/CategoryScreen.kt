@@ -1,6 +1,4 @@
-@file:JvmName("CategoryScreenKt")
-
-package com.example.myriyal.screens.categories.presentation
+package com.example.myriyal.screens.categories.presentation.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,11 +9,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.core.local.enums.CategoryType
-import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
+import com.example.myriyal.utils.provideCategoryViewModel
 
 // UI layer of the category feature.
 // Displays the category list and a form for adding/editing categories.
@@ -25,13 +24,17 @@ import com.example.myriyal.screens.categories.presentation.vmModels.CategoryView
 // - Sends user input/actions to: CategoryViewModel.insert/update/delete/seed
 
 @Composable
-fun CategoryScreen(viewModel: CategoryViewModel) {
+fun CategoryScreen() {
+    val context = LocalContext.current
+    val categoryViewModel = provideCategoryViewModel(context)
     // Collect category list as State from ViewModel
-    val categories by viewModel.categories.collectAsState()
+    val categories by categoryViewModel.categories.collectAsState()
 
-    // Trigger predefined category seeding on first composition
-    LaunchedEffect(Unit) {
-        viewModel.seedPredefinedCategories()
+
+
+ //    Trigger predefined category seeding on first composition
+    LaunchedEffect(Unit) { // After i comment this block the recomposing rate became much less
+        categoryViewModel.seedPredefinedCategories()
     }
 
     // Form state variables
@@ -53,6 +56,7 @@ fun CategoryScreen(viewModel: CategoryViewModel) {
         type = CategoryType.EXPENSE
         isPredefined = false
     }
+
 
     // Loads category fields into the form for editing
     fun loadCategoryForEdit(category: CategoryEntity) {
@@ -97,15 +101,15 @@ fun CategoryScreen(viewModel: CategoryViewModel) {
                     updatedAt = timestamp
                 )
                 if (selectedCategory == null) {
-                    viewModel.insert(category)
+                    categoryViewModel.insert(category)
                 } else {
-                    viewModel.update(category)
+                    categoryViewModel.update(category)
                 }
                 resetForm()
             }
         )
 
-        Divider(modifier = Modifier.padding(vertical = 16.dp))
+        HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
 
         // Category list section
         if (categories.isEmpty()) {
@@ -116,8 +120,8 @@ fun CategoryScreen(viewModel: CategoryViewModel) {
                     CategoryItem(
                         category = category,
                         onEdit = { loadCategoryForEdit(category) },
-                        onSoftDelete = { viewModel.softDelete(category.categoryId) },
-                        onDeleteForever = { viewModel.delete(category) }
+                        onSoftDelete = { categoryViewModel.softDelete(category.categoryId) },
+                        onDeleteForever = { categoryViewModel.delete(category) }
                     )
                 }
             }

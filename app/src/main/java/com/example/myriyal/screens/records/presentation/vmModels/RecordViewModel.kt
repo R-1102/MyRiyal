@@ -7,7 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.screens.records.domain.model.RecordFilterType
 import com.example.myriyal.screens.records.domain.useCases.RecordUseCases
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 
@@ -75,7 +79,6 @@ class RecordViewModel(
      *
      * Used by: RecordScreen UI
      */
-    @RequiresApi(Build.VERSION_CODES.O)
     val records: StateFlow<List<RecordEntity>> = combine(
         useCases.getAllRecords(), // Fetches all records from database
         _filter // Current selected filter (day, week, etc.)
@@ -152,21 +155,23 @@ class RecordViewModel(
         return (time1 / oneWeekMillis) == (time2 / oneWeekMillis)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     private fun isSameMonth(time1: Long, time2: Long): Boolean {
-        val month1 = java.time.Instant.ofEpochMilli(time1)
-            .atZone(java.time.ZoneId.systemDefault()).month
-        val month2 = java.time.Instant.ofEpochMilli(time2)
-            .atZone(java.time.ZoneId.systemDefault()).month
-        return month1 == month2
+//        val month1 = java.time.Instant.ofEpochMilli(time1)
+//            .atZone(java.time.ZoneId.systemDefault()).month
+//        val month2 = java.time.Instant.ofEpochMilli(time2)
+//            .atZone(java.time.ZoneId.systemDefault()).month
+//        return month1 == month2
+        return true
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     private fun isSameYear(time1: Long, time2: Long): Boolean {
-        val year1 = java.time.Instant.ofEpochMilli(time1)
-            .atZone(java.time.ZoneId.systemDefault()).year
-        val year2 = java.time.Instant.ofEpochMilli(time2)
-            .atZone(java.time.ZoneId.systemDefault()).year
-        return year1 == year2
+//        val year1 = java.time.Instant.ofEpochMilli(time1)
+//            .atZone(java.time.ZoneId.systemDefault()).year
+//        val year2 = java.time.Instant.ofEpochMilli(time2)
+//            .atZone(java.time.ZoneId.systemDefault()).year
+//        return year1 == year2
+        return true
     }
 }

@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+
 
 package com.example.myriyal.screens.categories.presentation.screens
 
@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T> DropDownList(
     label: String,
