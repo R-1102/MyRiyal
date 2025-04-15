@@ -1,87 +1,48 @@
 package com.example.myriyal
 
-
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
-import com.example.myriyal.screens.categories.domian.useCases.*
-import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
-import com.example.myriyal.screens.records.data.repository.RecordRepositoryImpl
-import com.example.myriyal.screens.records.domain.useCases.*
-import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
-import com.example.myriyal.screens.mainScreen.MainScreen
+import com.example.myriyal.navigation.NavGraph
+import com.example.myriyal.screens.mainScreen.BottomNavigationBar
 
 /**
- * Root Composable for launching the MyRiyal app.
- * This function sets up all required dependencies for features and passes them into the UI layer.
+ * Root Composable function to initialize and launch the MyRiyal app.
  *
- * This approach follows Clean Architecture principles with clear separation of layers:
- * - Data Layer: Repository implementations (connect to DAOs)
- * - Domain Layer: Use cases (contain business logic)
- * - Presentation Layer: ViewModels (connect UI to domain)
- * - UI Layer: Composables (MainScreen)
+ * Responsibilities:
+ * - Initializes required dependencies (ViewModels for Category and Record).
+ * - Sets up a Scaffold with a bottom navigation bar.
+ * - Passes initialized ViewModels and navigation controller to NavGraph.
+ *
+ * Layers:
+ * - UI Layer: Scaffold, NavGraph
+ * - Presentation Layer: ViewModels (CategoryViewModel, RecordViewModel)
+ * - Domain Layer: UseCases (via ViewModel factories)
+ * - Data Layer: Repository (instantiated via utility functions)
  */
+
 @Composable
 fun AppNavigation() {
-    // Provides application context used by database + repository
-    val context = LocalContext.current
 
-    // ------------------------------------
-    // CATEGORY FEATURE SETUP
-    // ------------------------------------
-
-    // Repository implementation (data layer)
-    // Fetches/saves category data from/to Room DB
-    val categoryRepo = CategoryRepositoryImpl(context)
-
-    // UseCases (domain layer) for category logic
-    // Called by the ViewModel to perform actions
-    val categoryUseCases = CategoryUseCases(
-        insert = InsertCategoryUseCase(categoryRepo),
-        update = UpdateCategoryUseCase(categoryRepo),
-        softDelete = SoftDeleteCategoryUseCase(categoryRepo),
-        delete = DeleteCategoryUseCase(categoryRepo),
-        getAll = GetAllCategoriesUseCase(categoryRepo),
-        seed = SeedPredefinedCategoriesUseCase(categoryRepo)
-    )
-
-    // ViewModel (presentation layer)
-    // Exposes state and handles user actions from CategoryScreen
-    val categoryViewModel = CategoryViewModel(categoryUseCases)
-
-    // ------------------------------------
-    // RECORD FEATURE SETUP
-    // ------------------------------------
-
-    // Repository implementation for records (data layer)
-    val recordRepo = RecordRepositoryImpl(context)
-
-    // UseCases (domain layer) for record logic
-    val recordUseCases = RecordUseCases(
-        insert = InsertRecordUseCase(recordRepo),
-        update = UpdateRecordUseCase(recordRepo),
-        delete = DeleteRecordUseCase(recordRepo),
-        getAllRecords = GetAllRecordsUseCase(recordRepo),
-        getByCategory = GetRecordsByCategoryUseCase(recordRepo),
-        getRecordById = GetRecordByIdUseCase(recordRepo)
-    )
-
-    // ViewModel (presentation layer) for record screen
-    val recordViewModel = RecordViewModel(recordUseCases)
-
-    // ------------------------------------
-    // NAVIGATION
-    // ------------------------------------
-
-    // Compose Navigation controller to manage screen routing
+    // Navigation controller for handling screen routing
     val navController = rememberNavController()
 
-    // Inject ViewModels into the MainScreen (UI layer)
-    // MainScreen hosts the navigation graph and UI content
-    MainScreen(
-        navController = navController,
-        categoryViewModel = categoryViewModel,
-        recordViewModel = recordViewModel
-    )
+    // App structure wrapped in Material3 Scaffold
+    Scaffold(
+        modifier = Modifier.background(MaterialTheme.colorScheme.background),
+        bottomBar = {
+            // Bottom navigation bar (visible on all screens)
+            BottomNavigationBar(navController = navController)
+        }
+    ) { innerPadding ->
+        // Inject NavGraph inside Scaffold with correct inner padding
+        NavGraph(
+            navController = navController,
+            modifier = Modifier.padding(innerPadding)
+        )
+    }
 }

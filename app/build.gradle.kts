@@ -95,7 +95,7 @@ dependencies {
     // Accompanist Animation (Consider replacing with androidx.navigation)
     implementation(libs.accompanist.navigation.animation)
 
-    // Hilt Navigation for Jetpack Compose
+// Hilt Navigation for Jetpack Compose
     implementation(libs.androidx.hilt.navigation.compose)
 
     // For encrypted SharedPreferences
@@ -109,6 +109,11 @@ dependencies {
 
     // OkHttp logging interceptor for debugging network requests/responses in Logcat
     implementation(libs.logging.interceptor)
+
+    //for color picker
+    implementation("com.github.skydoves:colorpicker-compose:1.1.2")
+
+
 }
 // Allow references to generated code
 kapt {

@@ -25,7 +25,7 @@ object DatabaseProvider {
                 "myRiyalDB" // Name of the physical database file stored on device
             )
                 // Allows Room to reset the database if a schema version mismatch occurs
-                .fallbackToDestructiveMigration()
+
                 .build()
         }
         return dbInstance!!

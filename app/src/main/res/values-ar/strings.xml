@@ -34,6 +34,17 @@
     <string name="recordCategory">فئة السجل</string>
     <string name="recordDate">تاريخ السجل</string>
 
+    <string name="EnterCategoryName">أدخل اسم التصنيف</string>
+    <string name="EnterCategoryType">أدخل نوع التصنيف</string>
+    <string name="ChooseColor">إختر لون</string>
+    <string name="SelectIcon">إختر أيقونه</string>
+    <string name="EnterBudgetAmount">إختر مبلغ الميزانية</string>
+    <string name="StartingDate">تاريخ بدئ التتبع</string>
+    <string name="AddCategory">اضف التصنيف</string>
+    <string name="Save">حفظ</string>
+    <string name="Cancel">إلغاء</string>
+    <string name="icon">ايقونة</string>
+    <string name="categoryType">نوع التصنيف</string>
     <string name="selectCategory">اختر الفئة</string>
     <string name="gift">هدايا</string>
     <string name="food">طعام</string>
@@ -45,9 +56,5 @@
 
     <string name="ok">موافق</string>
     <string name="cancel">إلغاء</string>
-
-
-
-
 
 </resources>

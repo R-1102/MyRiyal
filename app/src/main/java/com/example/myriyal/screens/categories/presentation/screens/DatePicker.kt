@@ -1,21 +1,21 @@
-package com.example.myriyal.screenComponent
+package com.example.myriyal.screens.categories.presentation.screens
+
 
 import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.example.myriyal.R
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+
 fun DatePickerModal(
-    onDateSelected: (Long?) -> Unit, onDismiss: () -> Unit
+    onDateSelected: (Long?) -> Unit,
+    onDismiss: () -> Unit
 ) {
     val datePickerState = rememberDatePickerState()
     val context = LocalContext.current
@@ -27,17 +27,14 @@ fun DatePickerModal(
                 onDateSelected(datePickerState.selectedDateMillis)
                 onDismiss()
             }) {
-                Text(context.getString(R.string.ok))
+                Text(context.getString(R.string.Save))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(context.getString(R.string.cancel))
+                Text(context.getString(R.string.Cancel))
             }
-        },
-        colors = DatePickerDefaults.colors(
-            containerColor = MaterialTheme.colorScheme.surface,
-        ),
+        }
     ) {
         DatePicker(state = datePickerState)
     }
