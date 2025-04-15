@@ -24,5 +24,4 @@ fun ThemedLogo(
         contentDescription = contentDescription,
         modifier = modifier.size(74.dp, 94.dp),
     )
-
 }
