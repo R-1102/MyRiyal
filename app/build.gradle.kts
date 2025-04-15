@@ -58,7 +58,7 @@ dependencies {
     implementation(libs.androidx.room.common.jvm)
     implementation(libs.androidx.room.runtime.android)
 
-// Google Play Services dependency
+    // Google Play Services dependency
     //implementation(libs.play.services.auth)
     //Firebase dependencies
     implementation(platform(libs.firebase.bom))
@@ -109,7 +109,6 @@ dependencies {
     // OkHttp logging interceptor for debugging network requests/responses in Logcat
     implementation(libs.logging.interceptor)
 }
-
 // Allow references to generated code
 kapt {
     correctErrorTypes = true

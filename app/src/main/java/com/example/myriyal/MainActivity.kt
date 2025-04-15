@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.myriyal.screens.categories.domian.useCases.*
-import com.example.myriyal.screens.records.domain.useCases.*
 import com.example.myriyal.ui.theme.MyRiyalTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,8 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 // - Domain layer: UseCases (for each feature)
 // - Presentation layer: ViewModels (CategoryViewModel, RecordViewModel)
 // - UI layer: Screens injected via NavGraph
-
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
@@ -30,12 +26,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyRiyalTheme {
-                MyRiyalApp() // ← only this one line for full app setup
-
-
 //                 val navController = rememberNavController()
-
-
 //                 // UI starts here. CategoryScreen is the first visible screen.
 //                 //CategoryScreen(viewModel = viewModel)
 //                  Scaffold(
@@ -44,8 +35,6 @@ class MainActivity : ComponentActivity() {
 //                  ) {
 //                      AppNavGraph(navController = navController)
 //                  }
-
-
             }
         }
     }

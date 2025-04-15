@@ -1,7 +1,5 @@
 package com.example.myriyal.screenComponent
 
-
-
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -13,7 +11,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.MaterialTheme
-
 
 @Composable
 fun CustomCard(

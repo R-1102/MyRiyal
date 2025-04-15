@@ -31,7 +31,6 @@ fun CustomTextField(
     singleLine: Boolean = true,
     onTogglePasswordVisibility: (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-
     ) {
     OutlinedTextField(value = value,
         onValueChange = onValueChange,
@@ -73,7 +72,6 @@ fun CustomTextField(
     singleLine: Boolean = true,
     trailingIcon: @Composable () -> Unit,
 ) {
-
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,

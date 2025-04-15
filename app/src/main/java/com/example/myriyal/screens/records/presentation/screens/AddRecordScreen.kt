@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -39,7 +40,6 @@ import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 import java.text.DateFormat
 import java.util.Date
 
-
 @Composable
 fun AddRecordScreen(
     viewModel: RecordViewModel, categoryViewModel: CategoryViewModel
@@ -56,49 +56,44 @@ fun AddRecordScreen(
 
     var recordDate by remember { mutableStateOf<Long?>(null) }
 
-
     Column(modifier = Modifier.fillMaxSize()) {
 
         Spacer(modifier = Modifier.padding(top = 100.dp))
 
         CustomCard(
             modifier = Modifier
-                .size(width = 330.dp, height = 590.dp)
+                .size(width = (integerResource(id= R.integer.cardWidth)).dp, height = 590.dp)
                 .align(CenterHorizontally),
         ) {
             Column(
-                modifier = Modifier.padding(12.dp), horizontalAlignment = CenterHorizontally
+                modifier = Modifier.padding((integerResource(id= R.integer.smallSpace)).dp),
+                horizontalAlignment = CenterHorizontally
             ) {
                 Text(
                     text = stringResource(id = R.string.addRecord),
-                    fontSize = 28.sp,
+                    fontSize = integerResource(id= R.integer.cardHeaderSize).sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
+                    modifier = Modifier.padding(top = integerResource(id= R.integer.cardHeaderTopPadding).dp,
+                                                bottom = integerResource(id= R.integer.cardHeaderBottomPadding).dp)
                 )
-
                 CustomTextField(
                     value = recordName,
                     onValueChange = { recordName = it },
                     label = stringResource(id = R.string.recordName)
                 )
-
                 CustomTextField(
                     value = amount,
                     onValueChange = { amount = it },
                     label = stringResource(id = R.string.recordAmount),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
-
                 CustomTextField(
                     value = description,
                     onValueChange = { description = it },
                     label = stringResource(id = R.string.recordDescription),
-                    modifier = Modifier.height(130.dp),
+                    modifier = Modifier.height(integerResource(id= R.integer.recordDescription).dp),
                     singleLine = false
                 )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
                 CategoryDropdownMenu(selectedCategory = selectedCategory,
                     categories = categories,
                     onCategorySelected = { selectedCategory = it })
@@ -129,7 +124,7 @@ fun AddRecordScreen(
                     }, onDismiss = { showDatePicker = false })
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height((integerResource(id= R.integer.buttonTextFieldSpace)).dp))
 
                 // Button for Add or Update
                 GradientButton(

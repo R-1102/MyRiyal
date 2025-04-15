@@ -18,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -26,14 +27,14 @@ import androidx.navigation.NavHostController
 import com.example.myriyal.R
 import com.example.myriyal.navigation.Routes
 import com.example.myriyal.screens.authentication.presentation.vmModels.SignUpVM
+import com.example.myriyal.ui.theme.ThemedLogo
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.GradientButton
-import com.example.myriyal.ui.theme.ThemedLogo
-import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun SignUpScreen( navController: NavHostController) {
+fun SignUpScreen(navController: NavHostController) {
     val viewModel: SignUpVM = hiltViewModel()
 
     val username = viewModel.username
@@ -49,7 +50,7 @@ fun SignUpScreen( navController: NavHostController) {
         ThemedLogo(
             modifier = Modifier
                 .padding(top = 70.dp)
-                .align(CenterHorizontally)
+                .align(CenterHorizontally),
         )
         Spacer(modifier = Modifier.padding(20.dp))
 
@@ -60,78 +61,76 @@ fun SignUpScreen( navController: NavHostController) {
         ) {
             Column(
                 modifier = Modifier
-                    .padding(12.dp),
+                    .padding((integerResource(id= R.integer.smallSpace).dp)),
                 horizontalAlignment = CenterHorizontally
             ) {
                 Text(
                     text = stringResource(id = R.string.signUp_header),
                     color = Color.Black,
-                    fontSize = 28.sp,
+                    fontSize = integerResource(id= R.integer.cardHeaderSize).sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
                 )
-                    CustomTextField(
-                        value = username,
-                        onValueChange = viewModel::onUsernameChange,
-                        label = stringResource(id = R.string.username)
-                    )
+                CustomTextField(
+                    value = username,
+                    onValueChange = viewModel::onUsernameChange,
+                    label = stringResource(id = R.string.username)
+                )
+                CustomTextField(
+                    value = email,
+                    onValueChange = viewModel::onEmailChange,
+                    label = stringResource(id = R.string.email),
+                )
+                CustomTextField(
+                    value = password,
+                    onValueChange = viewModel::onPasswordChange,
+                    label = stringResource(id = R.string.password),
+                    isPassword = true,
+                    showPassword = showPassword,
+                    onTogglePasswordVisibility = { showPassword = !showPassword },
+                )
+                CustomTextField(
+                    value = confirmPassword,
+                    onValueChange = viewModel::onConfirmPassword,
+                    label = stringResource(id = R.string.confirmPassword),
+                    isPassword = true,
+                    showPassword = showConfirmPassword,
+                    onTogglePasswordVisibility = { showConfirmPassword = !showConfirmPassword },
+                )
+                GradientButton(
+                    onClick = {
+                        viewModel.signUpValidation(
+                            username = username,
+                            email = email,
+                            password = password,
+                            confirmPassword = confirmPassword
+                        );
+                        navController.navigate(Routes.BALANCE)
+                    },
+                    text = stringResource(id = R.string.Signup)
+                )
+            }
+            Spacer(modifier = Modifier.padding(10.dp))
 
-                    CustomTextField(
-                        value = email,
-                        onValueChange = viewModel::onEmailChange,
-                        label = stringResource(id = R.string.email),
-                    )
-                    CustomTextField(
-                        value = password,
-                        onValueChange = viewModel::onPasswordChange,
-                        label = stringResource(id = R.string.password),
-                        isPassword = true,
-                        showPassword = showPassword,
-                        onTogglePasswordVisibility = { showPassword = !showPassword },
-                    )
-                    CustomTextField(
-                        value = confirmPassword,
-                        onValueChange = viewModel::onConfirmPassword,
-                        label = stringResource(id = R.string.confirmPassword),
-                        isPassword = true,
-                        showPassword = showConfirmPassword,
-                        onTogglePasswordVisibility = { showConfirmPassword = !showConfirmPassword },
-                    )
-                    GradientButton(
-                        onClick = {
-                            viewModel.signUpValidation(
-                                username = username,
-                                email = email,
-                                password = password,
-                                confirmPassword = confirmPassword
-                            );
-                            navController.navigate(Routes.BALANCE)
-                                  },
-                        text = stringResource(id = R.string.Signup)
-                    )
-
-                Spacer(modifier = Modifier.padding(10.dp))
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.already_have_account),
-                        fontSize = 15.sp,
-                        color = Color.Black,
-                        fontWeight = FontWeight.SemiBold,
-                    )
-                    Text(
-                        text = stringResource(id = R.string.Login),
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFF005430),
-                        modifier = Modifier.clickable { navController.navigate(Routes.LOGIN) }
-                    )
-                }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(integerResource(id= R.integer.smallSpace).dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = stringResource(id = R.string.already_have_account),
+                    fontSize = 15.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.SemiBold,
+                )
+                Text(
+                    text = stringResource(id = R.string.Login),
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFF005430),
+                    modifier = Modifier.clickable { navController.navigate(Routes.LOGIN) }
+                )
             }
         }
     }

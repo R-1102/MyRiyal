@@ -1,6 +1,5 @@
 package com.example.myriyal.screens.authentication.presentation.screens
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -34,14 +33,11 @@ import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.GradientButton
 import com.example.myriyal.ui.theme.ThemedLogo
 
-
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun LoginScreen(navController: NavHostController) {
     var email by remember { mutableStateOf("") } //need to be deleted
     var password by remember { mutableStateOf("") } //need to be deleted
     var showPassword by remember { mutableStateOf(false) }
-
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -49,10 +45,8 @@ fun LoginScreen(navController: NavHostController) {
         ThemedLogo(
             modifier = Modifier
                 .padding(top = 80.dp)
-                .align(CenterHorizontally)
-                .size(74.dp, 94.dp),
+                .align(CenterHorizontally),
         )
-
         Spacer(modifier = Modifier.padding(20.dp))
 
         CustomCard(
@@ -62,13 +56,13 @@ fun LoginScreen(navController: NavHostController) {
         ) {
             Column(
                 modifier = Modifier
-                    .padding(12.dp),
+                    .padding(integerResource(id= R.integer.smallSpace).dp),
                 horizontalAlignment = CenterHorizontally
             ) {
                 Text(
                     text = stringResource(id = R.string.Login),
                     color = MaterialTheme.colorScheme.onSurface,
-                    fontSize = 28.sp,
+                    fontSize = integerResource(id= R.integer.cardHeaderSize).sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 10.dp, bottom = 30.dp)
                 )
@@ -78,7 +72,6 @@ fun LoginScreen(navController: NavHostController) {
                     onValueChange = { email = it },
                     label = stringResource(id = R.string.email),
                 )
-
                 CustomTextField(
                     value = password,
                     onValueChange = { password = it },
@@ -87,14 +80,12 @@ fun LoginScreen(navController: NavHostController) {
                     showPassword = showPassword,
                     onTogglePasswordVisibility = { showPassword = !showPassword },
                 )
-
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(12.dp),
                     horizontalArrangement = Arrangement.End
                 ) {
-
                     Text(
                         text = stringResource(id = R.string.forgot_password),
                         fontSize = 15.sp,
@@ -104,12 +95,10 @@ fun LoginScreen(navController: NavHostController) {
                             .clickable { navController.navigate(Routes.FORGOTPASSWORD) }
                     )
                 }
-
                 GradientButton(
                     onClick = { /* Handle Login */ },
                     text = stringResource(id = R.string.Login)
                 )
-
                 Spacer(modifier = Modifier.height(5.dp))
 
                 Row(
@@ -124,7 +113,6 @@ fun LoginScreen(navController: NavHostController) {
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.SemiBold,
                     )
-
                     Text(
                         text = stringResource(id = R.string.Signup),
                         fontSize = 15.sp,

@@ -1,14 +1,11 @@
 package com.example.myriyal.screens.authentication.presentation.screens
 
-
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -30,8 +28,6 @@ import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.GradientButton
 import com.example.myriyal.ui.theme.ThemedLogo
 
-
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun NewPassword(navController: NavHostController) {
     var confirmPassword by remember { mutableStateOf("") } //need to be deleted
@@ -43,11 +39,9 @@ fun NewPassword(navController: NavHostController) {
         ThemedLogo(
             modifier = Modifier
                 .padding(top = 70.dp)
-                .align(CenterHorizontally)
-                .size(74.dp, 94.dp),
+                .align(CenterHorizontally),
         )
-
-        Spacer(modifier = Modifier.padding(18.dp))
+        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.largeSpace).dp))
 
         CustomCard(
             modifier = Modifier
@@ -56,38 +50,34 @@ fun NewPassword(navController: NavHostController) {
         ) {
             Column(
                 modifier = Modifier
-                    .padding(12.dp),
+                    .padding((integerResource(id= R.integer.smallSpace).dp)),
                 horizontalAlignment = CenterHorizontally
             ) {
                 Text(
                     text = stringResource(id = R.string.newPassword),
                     color = Color.Black,
-                    fontSize = 28.sp,
+                    fontSize = integerResource(id= R.integer.cardHeaderSize).sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
                 )
-
-                Spacer(modifier = Modifier.height(18.dp))
+                Spacer(modifier = Modifier.height(integerResource(id= R.integer.largeSpace).dp))
 
                 CustomTextField(
                     value = password,
                     onValueChange = { password = it },
                     label = stringResource(id = R.string.password),
                 )
-
                 CustomTextField(
                     value = confirmPassword,
                     onValueChange = { confirmPassword = it },
                     label = stringResource(id = R.string.confirmPassword),
                 )
-
-                Spacer(modifier = Modifier.height(26.dp))
+                Spacer(modifier = Modifier.height(integerResource(id= R.integer.buttonTextFieldSpace).dp))
 
                 GradientButton(
                     onClick = { navController.navigate(Routes.LOGIN) },
                     text = stringResource(id = R.string.submit)
                 )
-
             }
         }
     }

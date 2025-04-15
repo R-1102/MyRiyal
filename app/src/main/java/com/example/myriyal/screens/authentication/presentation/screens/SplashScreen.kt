@@ -14,7 +14,6 @@ import com.example.myriyal.navigation.Routes
 import com.example.myriyal.ui.theme.ThemedLogo
 import kotlinx.coroutines.delay
 
-
 @Composable
 fun SplashScreen(navController: NavHostController) {
     LaunchedEffect(Unit) {
@@ -23,7 +22,6 @@ fun SplashScreen(navController: NavHostController) {
             popUpTo(Routes.SPLASH) { inclusive = true } // prevent going back to splash
         }
     }
-
     Box(
         modifier = Modifier
             .fillMaxSize(),
