@@ -61,17 +61,6 @@ fun SignUpScreen( navController: NavHostController) {
     var showConfirmPassword by remember { mutableStateOf(false) }
 
 
-    Box(
-
-fun SignUpScreen(navController: NavHostController) {
-    var username by remember { mutableStateOf("") } //need to be deleted
-    var email by remember { mutableStateOf("") } //need to be deleted
-    var password by remember { mutableStateOf("") } //need to be deleted
-    var showPassword by remember { mutableStateOf(false) }
-    var confirmPassword by remember { mutableStateOf("") } //need to be deleted
-    var showConfirmPassword by remember { mutableStateOf(false) }
-
-
     Column(
 
         modifier = Modifier.fillMaxSize()
@@ -148,7 +137,7 @@ fun SignUpScreen(navController: NavHostController) {
 
                         text = stringResource(id = R.string.Signup)
 
-
+                    )
                 Spacer(modifier = Modifier.padding(10.dp))
 
 

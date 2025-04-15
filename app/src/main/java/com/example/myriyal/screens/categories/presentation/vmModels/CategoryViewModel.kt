@@ -24,6 +24,9 @@ import kotlinx.coroutines.launch
 // - Sends state: to CategoryScreen (UI layer)
 // - Triggers logic: insert, update, delete, seed, etc.
 
+
+
+// @HiltViewModel.[
 class CategoryViewModel(private val useCases: CategoryUseCases) : ViewModel() {
 
     // Exposes a filtered list of ACTIVE categories using StateFlow.
