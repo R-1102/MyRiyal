@@ -2,8 +2,6 @@ package com.example.myriyal.di
 
 import com.example.myriyal.screens.authentication.data.repository.BaseAuthenticator
 import com.example.myriyal.screens.authentication.data.repository.FirebaseAuthenticator
-import com.example.myriyal.screens.authentication.domain.repository.BaseAuthRepository
-import com.example.myriyal.screens.authentication.domain.repository.AuthRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
