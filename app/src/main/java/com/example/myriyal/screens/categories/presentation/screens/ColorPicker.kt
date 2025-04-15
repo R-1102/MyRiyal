@@ -6,7 +6,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.Text
 import androidx.compose.ui.unit.dp
 import com.github.skydoves.colorpicker.compose.*
@@ -17,7 +16,7 @@ fun ColorPicker(
     title: String,
     /*selectedColor: String,
     onColorSelected: () -> Unit*/
-    categColor: ColorPickerController,
+    categoryColor: ColorPickerController,
 //    initialColor: Color,
 ) {
     Column(
@@ -35,7 +34,7 @@ fun ColorPicker(
                 .fillMaxWidth()
                 .height(250.dp)
                 .padding(10.dp),
-            controller = categColor,
+            controller = categoryColor,
 //            initialColor = initialColor
         )
 
@@ -45,7 +44,7 @@ fun ColorPicker(
                 .fillMaxWidth()
 //                .padding(10.dp)
                 .height(35.dp),
-            controller = categColor,
+            controller = categoryColor,
         )
         Spacer(Modifier.height(16.dp))
 
@@ -60,7 +59,7 @@ fun ColorPicker(
                     .fillMaxWidth()
                     .size(60.dp)
                     .clip(RoundedCornerShape(6.dp)),
-                controller = categColor
+                controller = categoryColor
             )
         }
     }

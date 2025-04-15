@@ -1,7 +1,5 @@
 package com.example.myriyal
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -29,15 +27,9 @@ import com.example.myriyal.utils.provideRecordViewModel
  * - Domain Layer: UseCases (via ViewModel factories)
  * - Data Layer: Repository (instantiated via utility functions)
  */
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun MyRiyalApp() {
-    // Context reference for providing dependencies
-    val context = LocalContext.current
 
-    // ViewModel providers (encapsulated wiring logic for better separation of concerns)
-    val categoryViewModel = provideCategoryViewModel(context)
-    val recordViewModel = provideRecordViewModel(context)
+@Composable
+fun AppNavigation() {
 
     // Navigation controller for handling screen routing
     val navController = rememberNavController()
@@ -53,8 +45,6 @@ fun MyRiyalApp() {
         // Inject NavGraph inside Scaffold with correct inner padding
         NavGraph(
             navController = navController,
-            categoryViewModel = categoryViewModel,
-            recordViewModel = recordViewModel,
             modifier = Modifier.padding(innerPadding)
         )
     }

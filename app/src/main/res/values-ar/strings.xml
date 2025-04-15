@@ -32,4 +32,6 @@
     <string name="AddCategory">اضف التصنيف</string>
     <string name="Save">حفظ</string>
     <string name="Cancel">إلغاء</string>
+    <string name="icon">ايقونة</string>
+    <string name="categoryType">نوع التصنيف</string>
 </resources>
