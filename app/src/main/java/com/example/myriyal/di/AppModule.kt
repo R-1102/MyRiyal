@@ -1,11 +1,12 @@
 package com.example.myriyal.di
 
-import com.example.myriyal.screens.authentication.data.repository.BaseAuthenticator
-import com.example.myriyal.screens.authentication.data.repository.FirebaseAuthenticator
-import com.example.myriyal.screens.authentication.domain.repository.BaseAuthRepository
-import com.example.myriyal.screens.authentication.domain.repository.AuthRepository
-import dagger.Binds
+import com.example.myriyal.screens.authentication.data.data_sources.AuthDataSource
+import com.example.myriyal.screens.authentication.data.repositories_imp.AuthRepoImp
+import com.example.myriyal.screens.authentication.domain.repository.AuthRepo
+import com.example.myriyal.screens.authentication.domain.useCases.SignUpUseCase
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -14,15 +15,25 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class AppModule {
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun bindAuthRepository(
-        authRepositoryImpl: AuthRepository
-    ): BaseAuthRepository
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun bindBaseAuthenticator(
-        firebaseAuthenticator: FirebaseAuthenticator
-    ): BaseAuthenticator
+    fun provideAuthDataSource(auth: FirebaseAuth): AuthDataSource {
+        return AuthDataSource(auth)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthRepo(dataSource: AuthDataSource): AuthRepo {
+        return AuthRepoImp(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSignUpUseCase(repo: AuthRepo): SignUpUseCase {
+        return SignUpUseCase(repo)
+    }
 }

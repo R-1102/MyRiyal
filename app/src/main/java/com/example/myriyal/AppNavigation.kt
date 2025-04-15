@@ -1,27 +1,16 @@
 package com.example.myriyal
 
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.screens.categories.data.repository.CategoryRepositoryImpl
-import com.example.myriyal.screens.categories.domian.useCases.CategoryUseCases
-import com.example.myriyal.screens.categories.domian.useCases.DeleteCategoryUseCase
-import com.example.myriyal.screens.categories.domian.useCases.GetAllCategoriesUseCase
-import com.example.myriyal.screens.categories.domian.useCases.InsertCategoryUseCase
-import com.example.myriyal.screens.categories.domian.useCases.SeedPredefinedCategoriesUseCase
-import com.example.myriyal.screens.categories.domian.useCases.SoftDeleteCategoryUseCase
-import com.example.myriyal.screens.categories.domian.useCases.UpdateCategoryUseCase
+import com.example.myriyal.screens.categories.domian.useCases.*
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
-import com.example.myriyal.screens.mainScreen.MainScreen
 import com.example.myriyal.screens.records.data.repository.RecordRepositoryImpl
-import com.example.myriyal.screens.records.domain.useCases.DeleteRecordUseCase
-import com.example.myriyal.screens.records.domain.useCases.GetAllRecordsUseCase
-import com.example.myriyal.screens.records.domain.useCases.GetRecordByIdUseCase
-import com.example.myriyal.screens.records.domain.useCases.GetRecordsByCategoryUseCase
-import com.example.myriyal.screens.records.domain.useCases.InsertRecordUseCase
-import com.example.myriyal.screens.records.domain.useCases.RecordUseCases
-import com.example.myriyal.screens.records.domain.useCases.UpdateRecordUseCase
+import com.example.myriyal.screens.records.domain.useCases.*
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
+import com.example.myriyal.screens.mainScreen.MainScreen
 
 /**
  * Root Composable for launching the MyRiyal app.
@@ -34,7 +23,7 @@ import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
  * - UI Layer: Composables (MainScreen)
  */
 @Composable
-fun MyRiyalApp() {
+fun AppNavigation() {
     // Provides application context used by database + repository
     val context = LocalContext.current
 
@@ -96,4 +85,3 @@ fun MyRiyalApp() {
         recordViewModel = recordViewModel
     )
 }
-

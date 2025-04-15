@@ -159,7 +159,6 @@ fun SignUpScreen( navController: NavHostController) {
                         fontWeight = FontWeight.SemiBold,
                         color = Color(0xFF005430),
                         modifier = Modifier.clickable { navController.navigate(Routes.LOGIN) }
-
                     )
                 }
             }

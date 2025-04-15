@@ -1,13 +1,15 @@
 package com.example.myriyal.screens.authentication.presentation.vmModels
 
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import android.util.Log
+import androidx.compose.runtime.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.myriyal.screens.authentication.domain.repository.BaseAuthRepository
+import com.example.myriyal.screens.authentication.domain.useCases.SignUpUseCase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -16,25 +18,18 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
+
 @HiltViewModel
-class SignUpVM @Inject constructor(
-    private val repository: BaseAuthRepository,
-    var username: String,
-    var email: String,
-    var password: String,
-    var confirmPassword: String
-) : ViewModel(){
+class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : ViewModel(){
 
     private val _firebaseUser = MutableLiveData<FirebaseUser?>()
     val firebaseUser: LiveData<FirebaseUser?> = _firebaseUser
 
     // User input
-    //var username by mutableStateOf("")
-//    var email by mutableStateOf("")
-//    var password by mutableStateOf("")
-//    var confirmPassword by mutableStateOf("")
-
-
+    var username by mutableStateOf("")
+    var email by mutableStateOf("")
+    var password by mutableStateOf("")
+    var confirmPassword by mutableStateOf("")
 
     //chanel for all the UI events
     private val eventsChannel = Channel<AllEvents>()
@@ -101,7 +96,7 @@ class SignUpVM @Inject constructor(
         password:String
     )= viewModelScope.launch{
         try{
-            val user = repository.signUpWithEmailPassword(username,email,password)
+            val user = signUpUseCase.signUpWithEmailPassword(username,email,password)
             user?.let {
                 val uid = it.uid
 
