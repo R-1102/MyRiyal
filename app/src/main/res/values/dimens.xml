@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="smallSpace">12</integer>
+    <integer name="mediumSpace">16</integer>
+    <integer name="largeSpace">18</integer>
+
+    //space between button and text filed
+    <integer name="buttonTextFieldSpace">26</integer>
+
+    //space the logo
+    <integer name="logoSmallSpace">20</integer>
+</resources>
