@@ -18,6 +18,9 @@ import kotlinx.coroutines.flow.Flow
 // - Sends data to: CategoryDao (via DatabaseProvider)
 // - Used in: CategoryScreen (via ViewModel)
 
+
+//@Inject
+
 class CategoryRepositoryImpl(
     private val context: Context
 ) : CategoryRepository {

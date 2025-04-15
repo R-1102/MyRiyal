@@ -2,8 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    //Hilt DI
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -16,6 +18,8 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+
+        multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,6 +59,14 @@ dependencies {
     implementation(libs.androidx.room.common.jvm)
     implementation(libs.androidx.room.runtime.android)
 
+    // Google Play Services dependency
+    //implementation(libs.play.services.auth)
+    //Firebase dependencies
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.analytics)
+
     // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -72,6 +84,10 @@ dependencies {
     // Room dependencies
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
+
+    // Hilt dependencies
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     // Navigation dependencies
     implementation(libs.androidx.navigation.compose)
@@ -92,14 +108,13 @@ dependencies {
     // For encrypted SharedPreferences
     implementation(libs.androidx.security.crypto)
 
-
     // Retrofit core library for making HTTP requests (GET, POST, etc.)
     implementation(libs.retrofit)
 
-// Retrofit converter that parses JSON responses into Kotlin/Java objects using Gson
+    // Retrofit converter that parses JSON responses into Kotlin/Java objects using Gson
     implementation(libs.converter.gson)
 
-// OkHttp logging interceptor for debugging network requests/responses in Logcat
+    // OkHttp logging interceptor for debugging network requests/responses in Logcat
     implementation(libs.logging.interceptor)
 
     //for color picker
@@ -107,4 +122,8 @@ dependencies {
 
 
 
+}
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
