@@ -1,6 +1,10 @@
 package com.example.myriyal.screens.categories.presentation.vmModels
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myriyal.core.local.entities.CategoryEntity
@@ -44,22 +48,21 @@ class CategoryViewModel @Inject constructor(
     /** Bound to the icon selection dropdown (emoji or icon string) */
     var categoryIcon by mutableStateOf("🔥")
 
-    /** Controls whether the color picker dialog is shown */
-    val showColorDialog = mutableStateOf(false)
-
     var selectedColor by mutableStateOf(Color(0xFF209261))
+
     var categoryBudgetAmount by mutableDoubleStateOf(0.0)
+
     var startDate by mutableStateOf<Long?>(null)
 
      // Input change functions, setting user input from UI in here to do the business logic
 
-     fun onCategoryNameChange(value: String) {
-         categoryName = value
-     }
-
-     fun onCategoryTypeChange(value: CategoryType) {
-         categoryType = value
-     }
+//     fun onCategoryNameChange(value: String) {
+//         categoryName = value
+//     }
+//
+//     fun onCategoryTypeChange(value: CategoryType) {
+//         categoryType = value
+//     }
 
      fun onCategoryColorChange(value: Color) {
          selectedColor = value

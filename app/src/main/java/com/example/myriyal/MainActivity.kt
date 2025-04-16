@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 // - Presentation layer: ViewModels (CategoryViewModel, RecordViewModel)
 // - UI layer: Screens injected via NavGraph
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

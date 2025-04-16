@@ -26,7 +26,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.AddCateogry.route, // Default screen when app starts
+        startDestination = Screen.AddCategory.route, // Default screen when app starts
         modifier = modifier
     ) {
         // Category Management Screen
@@ -44,7 +44,7 @@ fun NavGraph(
             SignUpScreenCopy(navController)
         }
 
-        composable(Screen.AddCateogry.route) {
+        composable(Screen.AddCategory.route) {
             AddCategory()
         }
     }
