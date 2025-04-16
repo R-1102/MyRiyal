@@ -11,7 +11,10 @@ val Gray = Color(0xFF87948E)
 val DarkGreen = Color(0xFF082B27)
 val GreenGrey40 = Color(0xFF335446)
 val DarkSurface = Color(0xFFC5C5C5)
-//val onSurfaceDark = Color(0xFFFFFFFF)
+
+val Expense = Color(0xFFBE3F3F)
+val Income = Color(0xFF005E1F)
+
 
 //GradientButton Colors
 val firstGreen = Color(0xC9005732)
@@ -21,4 +24,7 @@ val thirdGreen = Color(0xFFF00532F)
 val firstDarkGreen = Color(0xC9082B27)
 val secondDarkGreen = Color(0xEB082B27)
 val thirdDarkGreen = Color(0xFFF082B27)
+
+val firstDarkAdd = Color(0xC9949494)
+val secondDarkAdd= Color(0xEB757575)
 

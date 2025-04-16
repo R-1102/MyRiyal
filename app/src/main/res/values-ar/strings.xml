@@ -33,6 +33,7 @@
     <string name="recordAmount">قيمة السجل</string>
     <string name="recordCategory">فئة السجل</string>
     <string name="recordDate">تاريخ السجل</string>
+    <string name="updateRecord">تحديث السجل</string>
 
     <string name="EnterCategoryName">أدخل اسم التصنيف</string>
     <string name="EnterCategoryType">أدخل نوع التصنيف</string>

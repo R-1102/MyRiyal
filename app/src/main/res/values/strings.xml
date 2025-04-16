@@ -47,6 +47,7 @@
     <string name="recordAmount">Record Amount</string>
     <string name="recordCategory">Record Category</string>
     <string name="recordDate">Record Date</string>
+    <string name="updateRecord">Update Record</string>
 
     <string name="selectCategory">Select Category</string>
     <string name="gift">Gift</string>

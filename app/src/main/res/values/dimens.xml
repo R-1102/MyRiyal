@@ -37,5 +37,8 @@
 
     <!--Authentication Screens Dimensions-->
     <integer name="smallText">16</integer>
+
+    <!--Floating Button-->
+    <integer name="floatingButton">88</integer>
     
 </resources>
