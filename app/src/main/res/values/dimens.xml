@@ -37,5 +37,14 @@
 
     <!--Authentication Screens Dimensions-->
     <integer name="smallText">16</integer>
-    
+
+    <!--AddCategory Screen Dimensions-->
+    <integer name="columnPadding">32</integer>
+    <integer name="verticalSpacer">16</integer>
+    <integer name="RoundedCornerShape">12</integer>
+    <integer name="colorFieldWidth">280</integer>
+    <integer name="colorFieldHeight">55</integer>
+    <integer name="colorSampleSize">32</integer>
+    <integer name="tonalElevation">8</integer>
+
 </resources>

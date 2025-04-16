@@ -17,21 +17,25 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.example.myriyal.R
-import com.example.myriyal.core.local.enums.CategoryType
+import com.example.myriyal.screenComponent.CustomTextField
 
 @Composable
-fun CategoryTypeDropdown(
-    selected: CategoryType,
-    onSelect: (CategoryType) -> Unit
+fun <T> CustomDropdown(
+    value:String,
+    onValueChange : (T)-> Unit,
+    label: String,
+//    selected: String,
+    list: List<T>,
+    onSelect: (T) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
     Box {
-        OutlinedTextField(
-            value = selected.name.lowercase().replaceFirstChar { it.uppercase() },
-            onValueChange = {},
+        CustomTextField/*OutlinedTextField*/(
+            value = value,
+            onValueChange = {onValueChange},
             readOnly = true,
-            label = { Text(context.getString(R.string.categoryType)) },
+            label = label /*context.getString(R.string.categoryType)*/,
             trailingIcon = {
                 IconButton(onClick = { expanded = !expanded }) {
                     Icon(Icons.Default.ArrowDropDown, contentDescription = null)
@@ -43,11 +47,12 @@ fun CategoryTypeDropdown(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            CategoryType.entries.forEach { type ->
+           list.forEach { Item/*type*/ ->
+
                 DropdownMenuItem(
-                    text = { Text(type.name) },
+                    text = { Item/*type.name*/ },
                     onClick = {
-                        onSelect(type)
+                        onSelect(Item)
                         expanded = false
                     }
                 )

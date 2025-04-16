@@ -15,6 +15,7 @@
 //import androidx.compose.runtime.remember
 //import androidx.compose.runtime.setValue
 //import androidx.compose.ui.Modifier
+//import com.example.myriyal.core.local.enums.CategoryType
 //
 //
 //@OptIn(ExperimentalMaterial3Api::class)
@@ -23,8 +24,7 @@
 //    label: String,
 //    options: List<T>,
 //    selectedOption: T,
-//    onOptionSelected: (T) -> Unit,
-//    itemContent: @Composable (T) -> Unit = { Text(it.toString()) },
+//    onOptionSelected: @Composable (T) -> Unit,
 //) {
 //    var isExpanded by remember { mutableStateOf(false) }
 //    ExposedDropdownMenuBox(
