@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
-import com.example.myriyal.navigation.Routes
+import com.example.myriyal.navigation.Screen
 import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.GradientButton
@@ -67,7 +67,7 @@ fun ForgotPassword(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(integerResource(id= R.integer.buttonTextFieldSpace).dp))
 
                 GradientButton(
-                    onClick = { navController.navigate(Routes.NEWPASSWORD) },
+                    onClick = { navController.navigate(Screen.NewPass.route) },
                     text = stringResource(id = R.string.send)
                 )
             }

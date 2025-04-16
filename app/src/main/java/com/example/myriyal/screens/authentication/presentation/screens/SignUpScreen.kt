@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,10 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
-import com.example.myriyal.navigation.Routes
 import com.example.myriyal.screens.authentication.presentation.vmModels.SignUpVM
 import com.example.myriyal.ui.theme.ThemedLogo
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.myriyal.navigation.Screen
 import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.GradientButton
@@ -46,7 +48,10 @@ fun SignUpScreen(navController: NavHostController) {
     var showConfirmPassword by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+
     ) {
         ThemedLogo(
             modifier = Modifier
@@ -107,7 +112,7 @@ fun SignUpScreen(navController: NavHostController) {
                             password = password,
                             confirmPassword = confirmPassword
                         );
-                        navController.navigate(Routes.BALANCE)
+                        navController.navigate(Screen.Balance.route)
                     },
                     text = stringResource(id = R.string.Signup)
                 )
@@ -131,7 +136,7 @@ fun SignUpScreen(navController: NavHostController) {
                     fontSize = integerResource(id= R.integer.smallText).sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.clickable { navController.navigate(Routes.LOGIN) }
+                    modifier = Modifier.clickable { navController.navigate(Screen.LogIn.route) }
                 )
             }
         }

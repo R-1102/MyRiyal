@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
-import com.example.myriyal.navigation.Routes
+import com.example.myriyal.navigation.Screen
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.GradientButton
 import com.example.myriyal.screens.authentication.presentation.vmModels.SignUpVM
@@ -148,7 +148,7 @@ fun SignUpScreenCopy(navController: NavHostController){
                             fontSize = 15.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Color(0xFF005430),
-                            modifier = Modifier.clickable { navController.navigate(Routes.LOGIN)}
+                            modifier = Modifier.clickable { navController.navigate(Screen.LogIn.route)}
                         )
                     }
                 }
