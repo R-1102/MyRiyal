@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myriyal.screens.categories.presentation.screens.AddCategory
 import com.example.myriyal.ui.theme.MyRiyalTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyRiyalTheme {
                 AppNavigation() // ← handles everything including nav and UI
+
             }
         }
     }
