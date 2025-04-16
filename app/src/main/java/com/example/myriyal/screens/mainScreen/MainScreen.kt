@@ -2,6 +2,7 @@ package com.example.myriyal.screens.mainScreen
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Receipt
 import androidx.compose.material3.*
@@ -74,7 +75,7 @@ fun BottomNavigationBar(navController: NavHostController) {
         NavigationBarItem(
             selected = false,
             onClick = { navController.navigate("category_screen") },
-            icon = { Icon(Icons.Default.List, contentDescription = "Categories") },
+            icon = { Icon(Icons.AutoMirrored.Filled.List, contentDescription = "Categories") },
             label = { Text("Categories") }
         )
         NavigationBarItem(

@@ -1,10 +1,10 @@
 package com.example.myriyal.screens.categories.domian.useCases
 
-// Aggregates all category-related use cases into a single object.
-// This wrapper is passed to the ViewModel so it can access each individual use case.
+//Aggregates all category-related use cases into a single object.
+//Injected into the ViewModel via Hilt.
 //
-// Called from: MainActivity (manual dependency injection)
-// Used in: CategoryViewModel to perform actions like insert, update, delete, etc.
+//This makes it easier to pass one object instead of many use cases.
+
 
 data class CategoryUseCases(
     val insert: InsertCategoryUseCase,                // For inserting new categories

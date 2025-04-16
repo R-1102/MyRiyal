@@ -13,14 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.domain.model.RecordFilterType
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
-import com.example.myriyal.utils.provideCategoryViewModel
 import com.example.myriyal.utils.provideRecordViewModel
-import kotlin.math.log
+
 
 /**
  * Main screen to display and manage financial records (expenses or income).
@@ -39,7 +39,7 @@ fun RecordScreen(
     val context = LocalContext.current
 
     val recordViewModel = provideRecordViewModel(context)
-    val categoryViewModel = provideCategoryViewModel((context))
+    val categoryViewModel: CategoryViewModel = hiltViewModel()
     // Observe reactive states from ViewModels
     val records by recordViewModel.records.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
@@ -137,7 +137,7 @@ fun RecordScreen(
             Text(if (selectedRecord == null) "Add Record" else "Update Record")
         }
 
-        Divider(modifier = Modifier.padding(vertical = 12.dp))
+        HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))
 
         // --- LIST OF RECORDS ---
 

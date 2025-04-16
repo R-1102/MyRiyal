@@ -1,6 +1,7 @@
 package com.example.myriyal.utils
 
 import android.content.Context
+import com.example.myriyal.core.local.db.DatabaseProvider
 import com.example.myriyal.screens.records.data.repository.RecordRepositoryImpl
 import com.example.myriyal.screens.records.domain.useCases.*
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
@@ -21,7 +22,8 @@ import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
  */
 fun provideRecordViewModel(context: Context): RecordViewModel {
     // Create the repository instance that interacts with the Room DAO
-    val repo = RecordRepositoryImpl(context)
+    val dao = DatabaseProvider.getDatabase(context).recordDao()
+    val repo = RecordRepositoryImpl(dao)
 
     // Bundle all use cases into a single container for easier management
     val useCases = RecordUseCases(
