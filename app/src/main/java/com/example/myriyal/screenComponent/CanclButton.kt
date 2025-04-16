@@ -28,8 +28,8 @@ fun CustomButton(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(45.dp)
-            .clip(RoundedCornerShape(5.dp))
+            .height(integerResource(id = R.integer.buttonHeight).dp)
+            .clip(RoundedCornerShape(integerResource(id = R.integer.roundCornerShape).dp))
             .background(Transparent)
             .clickable(onClick = onClick)
             .border(3.dp, MaterialTheme.colorScheme.primary),

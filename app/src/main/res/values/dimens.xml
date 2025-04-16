@@ -9,24 +9,22 @@
     <!-- space between button and text filed-->
     <integer name="buttonTextFieldSpace">24</integer>
 
-    <!-- space between logo and card-->
-    <integer name="smallLogoCardSpace">20</integer>
-    <integer name="logoCardSpace">28</integer>
-
     <!--space the logo-->
-    <integer name="logoSmallSpace">20</integer>
+    <integer name="logoSmallSpace">16</integer>
     <integer name="logoMediumSpace">28</integer>
-    <integer name="logoLargeSpace">72</integer>
+    <integer name="logoLargeSpace">68</integer>
     <integer name="logoExtraLargeSpace">80</integer>
 
     <!--card Size-->
     <integer name="cardHeaderSize">28</integer>
     <integer name="cardWidth">332</integer>
     <integer name="cardHeightAddRecord">592</integer>
-    <integer name="cardHeightLogin">412</integer>
-    <integer name="cardHeightSmall">272</integer>
+    <integer name="cardHeightLogin">408</integer>
+    <integer name="cardHeightSmall">268</integer>
     <integer name="cardHeightNewPassword">340</integer>
     <integer name="cardHeightSignUp">500</integer>
+    <integer name="roundCardCornerShape">8</integer>
+    <integer name="cardShadow">12</integer>
 
     <!--Card Header-->
     <integer name="cardHeaderTopPadding">12</integer>
@@ -40,5 +38,9 @@
 
     <!--Floating Button-->
     <integer name="floatingButton">88</integer>
-    
+
+    <!--Floating Button-->
+    <integer name="buttonHeight">48</integer>
+    <integer name="roundCornerShape">4</integer>
+
 </resources>

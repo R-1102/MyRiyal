@@ -57,8 +57,8 @@ fun RecordItemCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = integerResource(id = R.integer.extraSmallSpace).dp)
-            .shadow(10.dp)
-            .clip(RoundedCornerShape(8.dp)),
+            .shadow(integerResource(id = R.integer.cardShadow).dp)
+            .clip(RoundedCornerShape(integerResource(id = R.integer.roundCardCornerShape).dp)),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Column(

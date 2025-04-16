@@ -61,7 +61,7 @@ fun ViewRecordScreen() {
 
     Column(
         Modifier.fillMaxWidth()
-            .padding(top=80.dp,bottom=100.dp),
+            .padding(top=80.dp,bottom=100.dp),//to be deleted
     ) {
         LazyColumn {
             items(records) { record ->

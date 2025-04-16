@@ -58,8 +58,8 @@ fun GradientButton(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(45.dp)
-            .clip(RoundedCornerShape(5.dp))
+            .height(integerResource(id = R.integer.buttonHeight).dp)
+            .clip(RoundedCornerShape(integerResource(id = R.integer.roundCornerShape).dp))
             .background(gradient)
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
@@ -68,7 +68,7 @@ fun GradientButton(
             text = text,
             style = TextStyle(
                 color = Color.White,
-                fontSize = 16.sp,
+                fontSize = integerResource(id= R.integer.smallText).sp,
                 fontWeight = FontWeight.Bold
             )
         )

@@ -38,7 +38,7 @@ fun NewPassword(navController: NavHostController) {
     ) {
         ThemedLogo(
             modifier = Modifier
-                .padding(top = integerResource(id= R.integer.logoLargeSpace).dp)
+                .padding(top = integerResource(id= R.integer.logoExtraLargeSpace).dp)
                 .align(CenterHorizontally),
         )
         Spacer(modifier = Modifier.padding(integerResource(id= R.integer.largeSpace).dp))

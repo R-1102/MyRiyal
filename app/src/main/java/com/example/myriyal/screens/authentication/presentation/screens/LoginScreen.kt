@@ -47,7 +47,7 @@ fun LoginScreen(navController: NavHostController) {
                 .padding(top = integerResource(id= R.integer.logoExtraLargeSpace).dp)
                 .align(CenterHorizontally),
         )
-        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.smallLogoCardSpace).dp))
+        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.logoSmallSpace).dp))
 
         CustomCard(
             modifier = Modifier
