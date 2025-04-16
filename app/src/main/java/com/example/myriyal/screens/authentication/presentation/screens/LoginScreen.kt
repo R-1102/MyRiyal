@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
-import com.example.myriyal.navigation.Routes
+import com.example.myriyal.navigation.Screen
 import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.GradientButton
@@ -40,7 +42,9 @@ fun LoginScreen(navController: NavHostController) {
     var showPassword by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
         ThemedLogo(
             modifier = Modifier
@@ -92,7 +96,7 @@ fun LoginScreen(navController: NavHostController) {
                         color = Color(0xFFBE4A4A),
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier
-                            .clickable { navController.navigate(Routes.FORGOTPASSWORD) }
+                            .clickable { navController.navigate(Screen.ForgotPass.route) }
                     )
                 }
                 GradientButton(
@@ -119,7 +123,7 @@ fun LoginScreen(navController: NavHostController) {
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.secondary,
                         modifier = Modifier.clickable {
-                            navController.navigate(Routes.SIGNUP)
+                            navController.navigate(Screen.SignUp.route)
                         }
                     )
                 }

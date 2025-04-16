@@ -12,7 +12,7 @@ import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
-import com.example.myriyal.navigation.Routes
+import com.example.myriyal.navigation.Screen
 import com.example.myriyal.ui.theme.ThemedLogo
 import kotlinx.coroutines.delay
 
@@ -20,8 +20,8 @@ import kotlinx.coroutines.delay
 fun SplashScreen(navController: NavHostController) {
     LaunchedEffect(Unit) {
         delay(2000)
-        navController.navigate(Routes.LOGIN) {
-            popUpTo(Routes.SPLASH) { inclusive = true } // prevent going back to splash
+        navController.navigate(Screen.LogIn.route) {
+            popUpTo(Screen.LogIn.route) { inclusive = true } // prevent going back to splash
         }
     }
     Box(
