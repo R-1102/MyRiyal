@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreenCopy
+import com.example.myriyal.screens.categories.presentation.screens.AddCategory
 import com.example.myriyal.screens.categories.presentation.screens.CategoryScreen
 import com.example.myriyal.screens.records.presentation.screens.RecordScreen
 
@@ -21,11 +22,11 @@ import com.example.myriyal.screens.records.presentation.screens.RecordScreen
 @Composable
 fun NavGraph(
     navController: NavHostController,
-    modifier: Modifier
+    modifier: Modifier,
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Category.route, // Default screen when app starts
+        startDestination = Screen.AddCategory.route, // Default screen when app starts
         modifier = modifier
     ) {
         // Category Management Screen
@@ -41,6 +42,10 @@ fun NavGraph(
         // Sign-Up Management Screen
         composable(Screen.SignUp.route){
             SignUpScreenCopy(navController)
+        }
+
+        composable(Screen.AddCategory.route) {
+            AddCategory()
         }
     }
 }

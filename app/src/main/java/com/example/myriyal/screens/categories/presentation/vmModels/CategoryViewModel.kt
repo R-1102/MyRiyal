@@ -1,6 +1,11 @@
 package com.example.myriyal.screens.categories.presentation.vmModels
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myriyal.core.local.entities.CategoryEntity
@@ -28,7 +33,7 @@ import javax.inject.Inject
 // - Sends state: to CategoryScreen (UI layer)
 // - Triggers logic: insert, update, delete, seed, etc.
 
- @HiltViewModel
+@HiltViewModel
 class CategoryViewModel @Inject constructor(
     private val useCases: CategoryUseCases
 ) : ViewModel() {
@@ -42,10 +47,17 @@ class CategoryViewModel @Inject constructor(
     val categoryType = mutableStateOf(CategoryType.EXPENSE)
 
     /** Bound to the icon selection dropdown (emoji or icon string) */
-    val categoryIcon = mutableStateOf("")
+    var categoryIcon by mutableStateOf("🔥")
 
-    /** Controls whether the color picker dialog is shown */
-    val showColorDialog = mutableStateOf(false)
+    var categoryBudgetAmount by mutableDoubleStateOf(0.0)
+
+    var startDate by mutableStateOf<Long?>(null)
+
+     // Input change functions, setting user input from UI in here to do the business logic
+
+     fun onCategoryIconChange(value: String) {
+         categoryIcon = value
+     }
 
     // -------------------- State Flow for Categories --------------------
 
