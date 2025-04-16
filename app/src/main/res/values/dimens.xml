@@ -39,8 +39,17 @@
     <!--Floating Button-->
     <integer name="floatingButton">88</integer>
 
-    <!--Floating Button-->
+    <!--Button-->
     <integer name="buttonHeight">48</integer>
     <integer name="roundCornerShape">4</integer>
+  
+    <!--AddCategory Screen Dimensions-->
+    <integer name="columnPadding">32</integer>
+    <integer name="verticalSpacer">16</integer>
+    <integer name="RoundedCornerShape">12</integer>
+    <integer name="colorFieldWidth">384</integer>
+    <integer name="colorFieldHeight">56</integer>
+    <integer name="colorSampleSize">32</integer>
+    <integer name="tonalElevation">8</integer>
 
 </resources>

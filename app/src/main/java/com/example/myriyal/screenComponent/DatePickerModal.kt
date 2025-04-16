@@ -15,7 +15,8 @@ import com.example.myriyal.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DatePickerModal(
-    onDateSelected: (Long?) -> Unit, onDismiss: () -> Unit
+    onDateSelected: (Long?) -> Unit,
+    onDismiss: () -> Unit
 ) {
     val datePickerState = rememberDatePickerState()
     val context = LocalContext.current
