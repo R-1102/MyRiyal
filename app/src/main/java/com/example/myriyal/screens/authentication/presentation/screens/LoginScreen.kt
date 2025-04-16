@@ -33,6 +33,7 @@ import com.example.myriyal.navigation.Screen
 import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.GradientButton
+import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
 import com.example.myriyal.ui.theme.ThemedLogo
 
 @Composable
@@ -100,7 +101,7 @@ fun LoginScreen(navController: NavHostController) {
                     )
                 }
                 GradientButton(
-                    onClick = { /* Handle Login */ },
+                    onClick = { navController.navigate(Screen.ViewRecord.route) },
                     text = stringResource(id = R.string.Login)
                 )
                 Spacer(modifier = Modifier.height(integerResource(id= R.integer.extraSmallSpace).dp))

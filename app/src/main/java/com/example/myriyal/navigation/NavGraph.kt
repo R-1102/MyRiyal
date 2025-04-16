@@ -15,6 +15,7 @@ import com.example.myriyal.screens.authentication.presentation.screens.SplashScr
 import com.example.myriyal.screens.categories.presentation.screens.AddCategory
 import com.example.myriyal.screens.categories.presentation.screens.CategoryScreen
 import com.example.myriyal.screens.records.presentation.screens.RecordScreen
+import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
 
 /**
  * Defines app-level navigation for the main features:
@@ -69,6 +70,10 @@ fun NavGraph(
 
         composable(Screen.AddCategory.route) {
             AddCategory()
+        }
+
+        composable(Screen.ViewRecord.route) {
+            ViewRecordScreen()
         }
     }
 }

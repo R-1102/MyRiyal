@@ -75,7 +75,7 @@ fun BottomNavigationBar(navController: NavHostController) {
         )
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate("record_screen") },
+            onClick = { navController.navigate("ViewRecord_Screen") },
             icon = { Icon(Icons.Default.Receipt, contentDescription = "Records") },
             label = { Text("Records") }
         )
