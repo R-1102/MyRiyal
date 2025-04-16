@@ -1,5 +1,6 @@
 package com.example.myriyal.screens.categories.presentation.vmModels
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -47,9 +48,6 @@ class CategoryViewModel @Inject constructor(
 
     /** Bound to the icon selection dropdown (emoji or icon string) */
     var categoryIcon by mutableStateOf("🔥")
-
-    /** Bound to the category color */
-    var selectedColor by mutableStateOf(Color(0xFF209261))
 
     var categoryBudgetAmount by mutableDoubleStateOf(0.0)
 

@@ -26,7 +26,6 @@ fun <T> CustomDropdown(
     value:String,
     onValueChange : (T)-> Unit,
     label: String,
-//    selected: String,
     list: List<T>,
     onSelect: (T) -> Unit,
 ) {
@@ -37,7 +36,7 @@ fun <T> CustomDropdown(
             value = value,
             onValueChange = {onValueChange},
             readOnly = true,
-            label = label /*context.getString(R.string.categoryType)*/,
+            label = label,
             trailingIcon = {
                 IconButton(onClick = { expanded = !expanded }) {
                     Icon(Icons.Default.ArrowDropDown, contentDescription = null)
