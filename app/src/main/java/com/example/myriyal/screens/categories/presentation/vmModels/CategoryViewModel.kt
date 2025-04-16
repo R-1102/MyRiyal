@@ -48,6 +48,7 @@ class CategoryViewModel @Inject constructor(
     /** Bound to the icon selection dropdown (emoji or icon string) */
     var categoryIcon by mutableStateOf("🔥")
 
+    /** Bound to the category color */
     var selectedColor by mutableStateOf(Color(0xFF209261))
 
     var categoryBudgetAmount by mutableDoubleStateOf(0.0)
@@ -56,28 +57,8 @@ class CategoryViewModel @Inject constructor(
 
      // Input change functions, setting user input from UI in here to do the business logic
 
-//     fun onCategoryNameChange(value: String) {
-//         categoryName = value
-//     }
-//
-//     fun onCategoryTypeChange(value: CategoryType) {
-//         categoryType = value
-//     }
-
-     fun onCategoryColorChange(value: Color) {
-         selectedColor = value
-     }
-
      fun onCategoryIconChange(value: String) {
          categoryIcon = value
-     }
-
-     fun onCategoryBudgetChange(value: Double) {
-         categoryBudgetAmount = value
-     }
-
-     fun onCategoryStartDateChange(value: Long) {
-         startDate = value
      }
 
     // -------------------- State Flow for Categories --------------------

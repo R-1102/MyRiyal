@@ -56,7 +56,6 @@ import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import java.text.DateFormat
 import java.util.Date
 
-
 @Composable
 fun AddCategory() {
     val viewModel: CategoryViewModel = hiltViewModel()
@@ -65,11 +64,8 @@ fun AddCategory() {
     var categoryType =viewModel.categoryType
 
     val categoryColorController = rememberColorPickerController()
-//    selectedColor = categoryColorController.selectedColor.value
-//    var selectedColor = viewModel.selectedColor
     var categoryIcon = viewModel.categoryIcon
 
-    val categoryBudgetAmount = viewModel.categoryBudgetAmount
     var startDate= viewModel.startDate
 
     Box(
@@ -79,24 +75,21 @@ fun AddCategory() {
     ) {
         CustomCard(
             modifier = Modifier
-//                .padding(16.dp)
-//                .wrapContentHeight()
                 .fillMaxWidth(),
-//            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary)
         ) {
             Column(
                 modifier = Modifier
-                    .padding(integerResource(id = R.integer.columnPadding).dp/*32.dp*/)
+                    .padding(integerResource(id = R.integer.columnPadding).dp)
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
 
-
                 val context = LocalContext.current
+
                 //category name
-                CustomTextField/*OutlinedTextField*/(
+                CustomTextField(
                     value = categoryName.value,
                     onValueChange = {viewModel.categoryName.value=it},
 //                    onValueChange = viewModel::onCategoryNameChange,/*{ categoryName = it },*/
@@ -108,9 +101,8 @@ fun AddCategory() {
 
                 //category type
                 CustomDropdown(
-                    value = categoryType.value.toString(),/*.name.lowercase().replaceFirstChar { it.uppercase() },*/
+                    value = categoryType.value.toString(),
                     onValueChange = {viewModel.categoryType.value},
-//                    onValueChange = viewModel::onCategoryTypeChange,
                     label = context.getString(R.string.categoryType),
 //                    selected = categoryType,
                     list = CategoryType.entries,
@@ -124,10 +116,9 @@ fun AddCategory() {
                 OutlinedButton(
                     onClick = { showDialog.value = true },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Transparent /*categColor.selectedColor.value*/
+                        containerColor = Color.Transparent
                     ),
                     shape = RoundedCornerShape(integerResource(R.integer.RoundedCornerShape).dp),
-//                        .padding(64.dp)
                     modifier = Modifier
                         .width(integerResource(R.integer.colorFieldWidth).dp)
                         .height(integerResource(R.integer.colorFieldHeight).dp)
@@ -141,7 +132,6 @@ fun AddCategory() {
                             context.getString(R.string.ChooseColor),
                             color = Color.DarkGray,
                             textAlign = TextAlign.Start,
-//                        modifier = Modifier.fillMaxWidth()
                         )
                         //a Circle to show the selected color
                         Card(
@@ -171,20 +161,10 @@ fun AddCategory() {
                 }
                 Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-                //category icon
-//                val icons = listOf("icon_1", "icon_2", "icon_3", "icon_4")
-//                DropdownMenu( //DropDownList
-//                    options = iconsList,
-//                    label = context.getString(R.string.icon),
-//                    selectedOption = categoryIcon,
-//                    onOptionSelected = { categoryIcon = it },
-//                )
-
                 CustomDropdown(
                     value = categoryIcon ,
                     onValueChange = viewModel::onCategoryIconChange,
                     label = context.getString(R.string.SelectIcon),
-        //            selected = categoryType,
                     list = iconsList,
                     onSelect = {categoryIcon = it},
                 )
@@ -251,9 +231,6 @@ fun AddCategory() {
                         viewModel.categoryName.value = ""
                         viewModel.categoryIcon = ""
                     })
-//                Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
-//                GradientButton(text = context.getString(R.string.cancel),
-//                    onClick = { TODO() })
             }
         }
     }
