@@ -53,7 +53,7 @@ fun SignUpScreen(navController: NavHostController) {
                 .padding(top = integerResource(id= R.integer.logoLargeSpace).dp)
                 .align(CenterHorizontally),
         )
-        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.smallLogoCardSpace).dp))
+        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.logoSmallSpace).dp))
 
         CustomCard(
             modifier = Modifier
@@ -98,6 +98,7 @@ fun SignUpScreen(navController: NavHostController) {
                     showPassword = showConfirmPassword,
                     onTogglePasswordVisibility = { showConfirmPassword = !showConfirmPassword },
                 )
+                Spacer(modifier = Modifier.padding(integerResource(id= R.integer.smallSpace).dp))
                 GradientButton(
                     onClick = {
                         viewModel.signUpValidation(
@@ -111,7 +112,7 @@ fun SignUpScreen(navController: NavHostController) {
                     text = stringResource(id = R.string.Signup)
                 )
             }
-            Spacer(modifier = Modifier.padding(integerResource(id= R.integer.smallSpace).dp))
+            //Spacer(modifier = Modifier.padding(integerResource(id= R.integer.smallSpace).dp))
 
           Row(
                 modifier = Modifier

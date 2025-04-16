@@ -40,7 +40,7 @@ fun ForgotPassword(navController: NavHostController) {
                 .padding(top = integerResource(id= R.integer.logoExtraLargeSpace).dp)
                 .align(CenterHorizontally),
         )
-        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.logoCardSpace).dp))
+        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.logoMediumSpace).dp))
 
         CustomCard(
             modifier = Modifier
