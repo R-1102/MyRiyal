@@ -9,12 +9,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.core.local.enums.CategoryType
-import com.example.myriyal.utils.provideCategoryViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
+
 
 // UI layer of the category feature.
 // Displays the category list and a form for adding/editing categories.
@@ -24,9 +25,8 @@ import com.example.myriyal.utils.provideCategoryViewModel
 // - Sends user input/actions to: CategoryViewModel.insert/update/delete/seed
 
 @Composable
-fun CategoryScreen() {
-    val context = LocalContext.current
-    val categoryViewModel = provideCategoryViewModel(context)
+fun CategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
+
     // Collect category list as State from ViewModel
     val categories by categoryViewModel.categories.collectAsState()
 
@@ -116,7 +116,7 @@ fun CategoryScreen() {
             Text("No categories found.")
         } else {
             LazyColumn {
-                items(categories) { category ->
+               items(items = categories, key = { it.categoryId }) { category ->
                     CategoryItem(
                         category = category,
                         onEdit = { loadCategoryForEdit(category) },

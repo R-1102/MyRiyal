@@ -5,10 +5,8 @@ import com.example.myriyal.screens.categories.domian.repository.CategoryReposito
 
 // Use case for permanently deleting a category from the database.
 // This is typically used for user-initiated hard deletion actions.
-//
-// Called from: CategoryViewModel → viewModelScope.launch { useCases.delete(category) }
-// Sends data to: CategoryRepository.deleteCategory()
-// Final destination: DAO deletes the CategoryEntity from the Room database
+
+// Use case for permanently deleting a category from the database
 
 class DeleteCategoryUseCase(
     private val repository: CategoryRepository
