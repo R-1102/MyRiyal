@@ -124,22 +124,44 @@ class RecordViewModel(
     }
 
 
+    /**
+     * Checks if two timestamps fall in the same calendar month and year.
+     *
+     * @param time1 The first timestamp in milliseconds.
+     * @param time2 The second timestamp in milliseconds.
+     * @return True if both timestamps are in the same month and year.
+     */
     private fun isSameMonth(time1: Long, time2: Long): Boolean {
-//        val month1 = java.time.Instant.ofEpochMilli(time1)
-//            .atZone(java.time.ZoneId.systemDefault()).month
-//        val month2 = java.time.Instant.ofEpochMilli(time2)
-//            .atZone(java.time.ZoneId.systemDefault()).month
-//        return month1 == month2
-        return true
+        val cal1 = java.util.Calendar.getInstance().apply {
+            timeInMillis = time1
+        }
+
+        val cal2 = java.util.Calendar.getInstance().apply {
+            timeInMillis = time2
+        }
+
+        return cal1.get(java.util.Calendar.YEAR) == cal2.get(java.util.Calendar.YEAR) &&
+                cal1.get(java.util.Calendar.MONTH) == cal2.get(java.util.Calendar.MONTH)
     }
 
 
+    /**
+     * Checks if two timestamps fall in the same calendar year.
+     *
+     * @param time1 The first timestamp in milliseconds.
+     * @param time2 The second timestamp in milliseconds.
+     * @return True if both timestamps are in the same year.
+     */
     private fun isSameYear(time1: Long, time2: Long): Boolean {
-//        val year1 = java.time.Instant.ofEpochMilli(time1)
-//            .atZone(java.time.ZoneId.systemDefault()).year
-//        val year2 = java.time.Instant.ofEpochMilli(time2)
-//            .atZone(java.time.ZoneId.systemDefault()).year
-//        return year1 == year2
-        return true
+        val cal1 = java.util.Calendar.getInstance().apply {
+            timeInMillis = time1
+        }
+
+        val cal2 = java.util.Calendar.getInstance().apply {
+            timeInMillis = time2
+        }
+
+        return cal1.get(java.util.Calendar.YEAR) == cal2.get(java.util.Calendar.YEAR)
     }
+
 }
