@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.navigation.NavGraph
 import com.example.myriyal.screens.mainScreen.BottomNavigationBar
@@ -31,12 +33,21 @@ fun AppNavigation() {
     // Navigation controller for handling screen routing
     val navController = rememberNavController()
 
+    // Observe current back stack entry to determine current screen
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    // Define routes where the bottom bar should NOT be shown
+    val bottomBarHiddenRoutes = listOf("Splash_screen", "Login_screen", "SignUp_Screen")
+
     // App structure wrapped in Material3 Scaffold
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         bottomBar = {
-            // Bottom navigation bar (visible on all screens)
-            BottomNavigationBar(navController = navController)
+            // Bottom navigation bar (visible on all screens except for Splash,SignUp and Log in)
+            if (currentRoute !in bottomBarHiddenRoutes) {
+                BottomNavigationBar(navController = navController)
+            }
         }
     ) { innerPadding ->
         // Inject NavGraph inside Scaffold with correct inner padding
