@@ -10,7 +10,6 @@ import com.example.myriyal.screens.authentication.presentation.screens.ForgotPas
 import com.example.myriyal.screens.authentication.presentation.screens.LoginScreen
 import com.example.myriyal.screens.authentication.presentation.screens.NewPassword
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
-import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreenCopy
 import com.example.myriyal.screens.authentication.presentation.screens.SplashScreen
 import com.example.myriyal.screens.categories.presentation.screens.AddCategory
 import com.example.myriyal.screens.categories.presentation.screens.CategoryScreen

@@ -28,3 +28,6 @@ val thirdDarkGreen = Color(0xFFF082B27)
 val firstDarkAdd = Color(0xC9949494)
 val secondDarkAdd= Color(0xEB757575)
 
+//Filter Buttons Colors
+val Beige = Color(0xFF90754D)
+
