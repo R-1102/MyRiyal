@@ -50,7 +50,7 @@ import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.DatePickerModal
 import com.example.myriyal.screenComponent.GradientButton
-import com.example.myriyal.screens.categories.presentation.components.CustomDropdown
+import com.example.myriyal.screenComponent.CustomDropdown
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import java.text.DateFormat
