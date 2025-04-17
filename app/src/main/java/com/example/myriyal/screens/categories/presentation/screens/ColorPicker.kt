@@ -31,8 +31,8 @@ fun ColorPicker(
         HsvColorPicker(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(250.dp)
-                .padding(10.dp),
+                .height(integerResource(R.integer.colorPickerSize).dp)
+                .padding(integerResource(R.integer.hsvColorPickerPadding).dp),
             controller = categoryColor,
 //            initialColor = initialColor
             onColorChanged = {
