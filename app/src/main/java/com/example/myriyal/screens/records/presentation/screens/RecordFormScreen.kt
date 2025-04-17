@@ -29,7 +29,7 @@ import com.example.myriyal.R
 import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.screenComponent.CategoryDropdownMenu
-import com.example.myriyal.screenComponent.CustomButton
+import com.example.myriyal.screenComponent.CancelButton
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.DatePickerModal
 import com.example.myriyal.screenComponent.GradientButton
@@ -159,7 +159,7 @@ fun RecordFormScreen(
         )
         Spacer(modifier = Modifier.height(integerResource(id = R.integer.extraSmallSpace).dp))
 
-        CustomButton(
+        CancelButton(
             onClick = {
                 resetForm()
                 onDismiss()

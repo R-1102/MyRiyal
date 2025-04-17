@@ -11,6 +11,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.res.integerResource
+import com.example.myriyal.R
 
 @Composable
 fun CustomCard(
@@ -20,9 +22,9 @@ fun CustomCard(
 ) {
     Card(
         modifier = modifier
-            .padding(10.dp)
-            .shadow(30.dp)
-            .clip(RoundedCornerShape(8.dp)),
+            .padding(integerResource(R.integer.cardPadding).dp)
+            .shadow(integerResource(R.integer.customCardShadow).dp)
+            .clip(RoundedCornerShape(integerResource(R.integer.customCardRound).dp)),
         colors = colors
     ) {
         content()
