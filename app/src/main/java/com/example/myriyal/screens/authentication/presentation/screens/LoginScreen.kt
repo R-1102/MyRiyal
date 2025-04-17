@@ -27,19 +27,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
 import com.example.myriyal.navigation.Screen
 import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.GradientButton
+import com.example.myriyal.screens.authentication.presentation.vmModels.LogInVM
 import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
 import com.example.myriyal.ui.theme.ThemedLogo
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
-    var email by remember { mutableStateOf("") } //need to be deleted
-    var password by remember { mutableStateOf("") } //need to be deleted
+
+    val viewModel: LogInVM = hiltViewModel()
+
+    val email = viewModel.email
+    val password = viewModel.password
+
     var showPassword by remember { mutableStateOf(false) }
 
     Column(
@@ -74,12 +80,12 @@ fun LoginScreen(navController: NavHostController) {
 
                 CustomTextField(
                     value = email,
-                    onValueChange = { email = it },
+                    onValueChange = viewModel::onEmailChange,
                     label = stringResource(id = R.string.email),
                 )
                 CustomTextField(
                     value = password,
-                    onValueChange = { password = it },
+                    onValueChange = viewModel::onPasswordChange,
                     label = stringResource(id = R.string.password),
                     isPassword = true,
                     showPassword = showPassword,
@@ -101,7 +107,8 @@ fun LoginScreen(navController: NavHostController) {
                     )
                 }
                 GradientButton(
-                    onClick = { navController.navigate(Screen.ViewRecord.route) },
+                    onClick = { viewModel.logInValidation()
+                        navController.navigate(Screen.ViewRecord.route) },
                     text = stringResource(id = R.string.Login)
                 )
                 Spacer(modifier = Modifier.height(integerResource(id= R.integer.extraSmallSpace).dp))

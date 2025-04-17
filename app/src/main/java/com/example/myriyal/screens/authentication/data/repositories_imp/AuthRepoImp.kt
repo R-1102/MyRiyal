@@ -13,4 +13,11 @@ class AuthRepoImp @Inject constructor (private val dataSource: AuthDataSource): 
     ): FirebaseUser ? {
         return dataSource.signUpWithEmailPassword(email,password)
     }
+
+    override suspend fun logInWithEmailPassword(
+        email: String,
+        password: String
+    ): FirebaseUser? {
+        return dataSource.logInWithEmailPassword(email,password)
+    }
 }
