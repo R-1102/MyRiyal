@@ -28,9 +28,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyRiyalTheme {
                 AppNavigation() // ← handles everything including nav and UI
-//                val categoryViewModel = provideCategoryViewModel(this)
-//                AddCategory(viewModel = categoryViewModel)
-
             }
         }
     }
