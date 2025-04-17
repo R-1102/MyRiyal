@@ -31,7 +31,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SplashScreen.route, // splash screen must be the start
+        startDestination = Screen.AddCategory.route, // splash screen must be the start
         modifier = modifier
     ) {
         // Category Management Screen

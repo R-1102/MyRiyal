@@ -8,26 +8,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.material3.Text
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.unit.dp
+import com.example.myriyal.R
 import com.github.skydoves.colorpicker.compose.*
-
 
 @Composable
 fun ColorPicker(
     title: String,
-    /*selectedColor: String,
-    onColorSelected: () -> Unit*/
     categoryColor: ColorPickerController,
-//    initialColor: Color,
 ) {
     Column(
         modifier = Modifier
             .wrapContentSize()
-            .padding(46.dp)
+            .padding(integerResource(R.integer.colorPickerColumnPadding).dp)
     ) {
 
         Text(text = title)
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(integerResource(R.integer.colorPickerColumnSpacerH).dp))
 
         // the colors wheel
         HsvColorPicker(
@@ -47,11 +45,10 @@ fun ColorPicker(
         BrightnessSlider(
             modifier = Modifier
                 .fillMaxWidth()
-//                .padding(10.dp)
-                .height(35.dp),
+                .height(integerResource(R.integer.brightnessSliderHeight).dp),
             controller = categoryColor,
         )
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
         //for current color sample
         Row(
@@ -62,8 +59,8 @@ fun ColorPicker(
             AlphaTile(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .size(60.dp)
-                    .clip(RoundedCornerShape(6.dp)),
+                    .size(integerResource(R.integer.alphaTileSize).dp)
+                    .clip(RoundedCornerShape(integerResource(R.integer.roundCornerShape).dp)),
                 controller = categoryColor
             )
         }
