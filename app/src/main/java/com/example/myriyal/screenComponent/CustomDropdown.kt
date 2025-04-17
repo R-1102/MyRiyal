@@ -1,4 +1,4 @@
-package com.example.myriyal.screens.categories.presentation.components
+package com.example.myriyal.screenComponent
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,10 +17,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
+import com.example.myriyal.screenComponent.CustomTextField
 
 @Composable
 fun <T> CustomDropdown(
