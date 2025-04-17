@@ -159,11 +159,11 @@ fun RecordScreen(
         }
     }
 }
-
-/**
+/*
+*//**
  * Filter options (Day, Week, Month, Year).
  * Clicking again on a selected filter will unselect it (showing all).
- */
+ *//*
 @Composable
 fun FilterSelector(
     selectedFilter: RecordFilterType,
@@ -197,7 +197,7 @@ fun FilterSelector(
             )
         }
     }
-}
+}*/
 
 /**
  * Category selector dropdown (used in form).

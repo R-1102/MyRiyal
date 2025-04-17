@@ -36,6 +36,7 @@ fun ViewRecordScreen() {
 
     // Form state (controlled locally in this composable)
     var selectedRecord by remember { mutableStateOf<RecordEntity?>(null) }
+    val selectedFilter by recordViewModel.filter.collectAsState()
 
     val shouldShowDialog = remember { mutableStateOf(false) } // 1
 
@@ -63,6 +64,10 @@ fun ViewRecordScreen() {
         Modifier.fillMaxWidth()
             .padding(top=100.dp,),//to be deleted
     ) {
+        FilterSelector(
+            selectedFilter = selectedFilter,
+            onFilterSelected = { recordViewModel.setFilter(it) }
+        )
         LazyColumn {
             items(records) { record ->
                 val category = categories.find { it.categoryId == record.categoryId }
@@ -79,11 +84,14 @@ fun ViewRecordScreen() {
                 }
             }
         }
-
         CustomFloatingActionButton(
             onClick = { shouldShowDialog.value = true },
-            modifier = Modifier.align(Alignment.End)
+            modifier = Modifier
+                .align(Alignment.End)
+                .padding(bottom = 60.dp) //Will be deleted
+
         )
     }
+
 }
 
