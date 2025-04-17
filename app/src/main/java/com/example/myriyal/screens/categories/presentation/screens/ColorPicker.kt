@@ -1,5 +1,6 @@
 package com.example.myriyal.screens.categories.presentation.screens
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,6 +34,11 @@ fun ColorPicker(
                 .height(integerResource(R.integer.colorPickerSize).dp)
                 .padding(integerResource(R.integer.hsvColorPickerPadding).dp),
             controller = categoryColor,
+//            initialColor = initialColor
+            onColorChanged = {
+                Log.d("Color", it.hexCode)
+            }
+
         )
 
         // to darken a color

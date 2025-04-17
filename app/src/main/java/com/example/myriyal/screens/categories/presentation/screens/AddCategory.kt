@@ -35,6 +35,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -51,6 +52,7 @@ import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.DatePickerModal
 import com.example.myriyal.screenComponent.GradientButton
 import com.example.myriyal.screenComponent.CustomDropdown
+import com.example.myriyal.screens.categories.presentation.components.iconsList
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import java.text.DateFormat
@@ -217,7 +219,10 @@ fun AddCategory() {
                         val timestamp = System.currentTimeMillis()
                         val newCategory = CategoryEntity(
                             name = viewModel.categoryName.value,
-                            color = categoryColorController.selectedColor.value.toString(),
+                            color = String.format(
+                                "#%06X",
+                                0xFFFFFF and categoryColorController.selectedColor.value.toArgb()
+                            ),
                             icon = categoryIcon,
                             type = viewModel.categoryType.value,
                             status = CategoryStatus.ACTIVE,
