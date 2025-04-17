@@ -1,4 +1,4 @@
-package com.example.myriyal.screens.categories.presentation.screens
+package com.example.myriyal.screens.categories.presentation.components
 
     val iconsList = listOf(
 //        incomeIcons

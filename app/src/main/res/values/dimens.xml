@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <integer name="extraSmallSpace">4</integer>
     <integer name="smallSpace">12</integer>
     <integer name="mediumSpace">16</integer>
@@ -52,4 +53,21 @@
     <integer name="colorSampleSize">32</integer>
     <integer name="tonalElevation">8</integer>
 
+    <!--Dropdown Lists Dimensions-->
+    <integer name="dropDownWidth">288</integer>
+    <integer name="dropDownHeight">152</integer>
+
+    <!--Custom Card Dimensions-->
+    <integer name="cardPadding">8</integer>
+    <integer name="customCardShadow">32</integer>
+    <integer name="customCardRound">8</integer>
+
+    <!--ColorPicker Dimensions-->
+    <integer name="colorPickerColumnPadding">46</integer>
+    <integer name="colorPickerColumnSpacerH">16</integer>
+    <integer name="colorPickerSize">152</integer>
+    <integer name="hsvColorPickerPadding">10</integer>
+    <integer name="brightnessSliderHeight">32</integer>
+    <integer name="alphaTileSize">56</integer>
+    <integer name="alphaTileRoundedCorner">8</integer>
 </resources>

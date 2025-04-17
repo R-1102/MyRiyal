@@ -16,9 +16,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.myriyal.R
 
 @Composable
 fun CustomTextField(
@@ -85,7 +87,7 @@ fun CustomTextField(
             focusedLabelColor = MaterialTheme.colorScheme.primary,
             unfocusedLabelColor = MaterialTheme.colorScheme.primary,
         ),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(integerResource(R.integer.roundCardCornerShape).dp),
         modifier = modifier.fillMaxWidth(),
         textStyle = LocalTextStyle.current.copy(color = Color.Black),
         keyboardOptions = keyboardOptions,

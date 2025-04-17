@@ -1,3 +1,4 @@
+/*
 package com.example.myriyal.screens.categories.presentation.components
 
 import androidx.compose.foundation.layout.Box
@@ -58,3 +59,4 @@ fun CategoryIconDropdown(
         }
     }
 }
+*/

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.example.myriyal.R
 
 @Composable
-fun CustomButton(
+fun CancelButton(
     onClick: () -> Unit,
     text: String,
 ) {
