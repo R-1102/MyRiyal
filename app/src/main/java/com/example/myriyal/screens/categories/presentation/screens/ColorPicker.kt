@@ -1,5 +1,6 @@
 package com.example.myriyal.screens.categories.presentation.screens
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -7,42 +8,50 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.material3.Text
-import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.unit.dp
-import com.example.myriyal.R
 import com.github.skydoves.colorpicker.compose.*
+
 
 @Composable
 fun ColorPicker(
     title: String,
+    /*selectedColor: String,
+    onColorSelected: () -> Unit*/
     categoryColor: ColorPickerController,
+//    initialColor: Color,
 ) {
     Column(
         modifier = Modifier
             .wrapContentSize()
-            .padding(integerResource(R.integer.colorPickerColumnPadding).dp)
+            .padding(46.dp)
     ) {
 
         Text(text = title)
-        Spacer(Modifier.height(integerResource(R.integer.colorPickerColumnSpacerH).dp))
+        Spacer(Modifier.height(16.dp))
 
         // the colors wheel
         HsvColorPicker(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(integerResource(R.integer.colorPickerSize).dp)
-                .padding(integerResource(R.integer.hsvColorPickerPadding).dp),
+                .height(250.dp)
+                .padding(10.dp),
             controller = categoryColor,
+//            initialColor = initialColor
+            onColorChanged = {
+                Log.d("Color", it.hexCode)
+            }
+
         )
 
         // to darken a color
         BrightnessSlider(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(integerResource(R.integer.brightnessSliderHeight).dp),
+//                .padding(10.dp)
+                .height(35.dp),
             controller = categoryColor,
         )
-        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+        Spacer(Modifier.height(16.dp))
 
         //for current color sample
         Row(
@@ -53,8 +62,8 @@ fun ColorPicker(
             AlphaTile(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .size(integerResource(R.integer.alphaTileSize).dp)
-                    .clip(RoundedCornerShape(integerResource(R.integer.roundCornerShape).dp)),
+                    .size(60.dp)
+                    .clip(RoundedCornerShape(6.dp)),
                 controller = categoryColor
             )
         }
