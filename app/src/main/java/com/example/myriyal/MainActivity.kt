@@ -27,10 +27,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyRiyalTheme {
-//                AppNavigation() // ← handles everything including nav and UI
-//                val categoryViewModel = provideCategoryViewModel(this)
-//                AddCategory()
-
+                AppNavigation() // ← handles everything including nav and UI
             }
         }
     }

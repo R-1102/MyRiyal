@@ -12,5 +12,11 @@ class AuthDataSource @Inject constructor (private val auth: FirebaseAuth) {
         return result.user
     }
 
-    fun getCurrentUser(): FirebaseUser? = auth.currentUser
+    suspend fun logInWithEmailPassword(
+        email: String,
+        password: String
+    ):FirebaseUser?{
+        val result = auth.signInWithEmailAndPassword(email,password).await()
+        return result.user
+    }
 }

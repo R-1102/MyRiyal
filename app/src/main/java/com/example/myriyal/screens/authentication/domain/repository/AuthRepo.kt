@@ -10,4 +10,9 @@ interface AuthRepo {
         password: String
     ): FirebaseUser?
 
+    suspend fun logInWithEmailPassword(
+        email: String,
+        password: String
+    ):FirebaseUser?
+
 }
