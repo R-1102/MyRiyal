@@ -101,8 +101,8 @@ fun AddCategory() {
 
                 //category type
                 CustomDropdown(
-                    value = categoryType.value.toString(),
-                    onValueChange = {viewModel.categoryType.value},
+                    value = categoryType.value.toString().lowercase(),
+                    onValueChange = {viewModel.categoryType.value.toString().lowercase()},
                     label = context.getString(R.string.categoryType),
 //                    selected = categoryType,
                     list = CategoryType.entries,

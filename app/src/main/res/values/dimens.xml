@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <integer name="extraSmallSpace">4</integer>
     <integer name="smallSpace">12</integer>
     <integer name="mediumSpace">16</integer>
