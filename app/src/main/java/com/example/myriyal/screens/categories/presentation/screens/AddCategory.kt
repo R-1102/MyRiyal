@@ -50,7 +50,8 @@ import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.DatePickerModal
 import com.example.myriyal.screenComponent.GradientButton
-import com.example.myriyal.screens.categories.presentation.components.CustomDropdown
+import com.example.myriyal.screenComponent.CustomDropdown
+import com.example.myriyal.screens.categories.presentation.components.iconsList
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import java.text.DateFormat
@@ -101,8 +102,8 @@ fun AddCategory() {
 
                 //category type
                 CustomDropdown(
-                    value = categoryType.value.toString(),
-                    onValueChange = {viewModel.categoryType.value},
+                    value = categoryType.value.toString().lowercase(),
+                    onValueChange = {viewModel.categoryType.value.toString().lowercase()},
                     label = context.getString(R.string.categoryType),
 //                    selected = categoryType,
                     list = CategoryType.entries,

@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
@@ -56,7 +57,7 @@ fun CategoryDropdownMenu(
             onDismissRequest = { expanded = false },
             containerColor = MaterialTheme.colorScheme.tertiary,
             modifier = Modifier
-                .size(285.dp, 150.dp)
+                .size(integerResource(R.integer.dropDownWidth).dp, integerResource(R.integer.dropDownHeight).dp)
                 .align(androidx.compose.ui.Alignment.Center)
         ) {
             categories.forEach { category ->
