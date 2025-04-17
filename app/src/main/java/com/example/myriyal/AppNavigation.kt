@@ -38,13 +38,13 @@ fun AppNavigation() {
     val currentRoute = navBackStackEntry?.destination?.route
 
     // Define routes where the bottom bar should NOT be shown
-    val bottomBarHiddenRoutes = listOf("Splash_screen", "Login_screen", "SignUp_Screen")
+    val bottomBarHiddenRoutes = listOf("Splash_screen", "Login_screen", "SignUp_Screen","Balance","ForgotPass_Screen","NewPass_Screen")
 
     // App structure wrapped in Material3 Scaffold
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         bottomBar = {
-            // Bottom navigation bar (visible on all screens except for Splash,SignUp and Log in)
+            // Bottom navigation bar (visible on all screens except for Splash,SignUp, Log in, Balance, ForgotPassword and NewPasswordScreen)
             if (currentRoute !in bottomBarHiddenRoutes) {
                 BottomNavigationBar(navController = navController)
             }
