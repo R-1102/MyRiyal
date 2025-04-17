@@ -47,6 +47,7 @@ import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.core.local.enums.CategoryType
 import com.example.myriyal.screenComponent.CustomCard
+import com.example.myriyal.screenComponent.CustomDialog
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.DatePickerModal
 import com.example.myriyal.screenComponent.GradientButton
@@ -62,18 +63,18 @@ fun AddCategory() {
     val viewModel: CategoryViewModel = hiltViewModel()
 
     var categoryName = viewModel.categoryName
-    var categoryType =viewModel.categoryType
+    var categoryType = viewModel.categoryType
 
     val categoryColorController = rememberColorPickerController()
     var categoryIcon = viewModel.categoryIcon
 
-    var startDate= viewModel.startDate
+    var startDate = viewModel.startDate
 
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
 
-    ) {
+        ) {
         CustomCard(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -92,7 +93,7 @@ fun AddCategory() {
                 //category name
                 CustomTextField(
                     value = categoryName.value,
-                    onValueChange = {viewModel.categoryName.value=it},
+                    onValueChange = { viewModel.categoryName.value = it },
 //                    onValueChange = viewModel::onCategoryNameChange,/*{ categoryName = it },*/
                     label = context.getString(R.string.EnterCategoryName),
                     singleLine = true,
@@ -103,7 +104,7 @@ fun AddCategory() {
                 //category type
                 CustomDropdown(
                     value = categoryType.value.toString().lowercase(),
-                    onValueChange = {viewModel.categoryType.value.toString().lowercase()},
+                    onValueChange = { viewModel.categoryType.value.toString().lowercase() },
                     label = context.getString(R.string.categoryType),
 //                    selected = categoryType,
                     list = CategoryType.entries,
@@ -139,7 +140,7 @@ fun AddCategory() {
                             modifier = Modifier
                                 .size(integerResource(R.integer.colorSampleSize).dp),
                             colors = CardDefaults.cardColors(
-                                containerColor =categoryColorController.selectedColor.value
+                                containerColor = categoryColorController.selectedColor.value
                             ),
                             shape = CircleShape,
                         ) {}
@@ -163,11 +164,11 @@ fun AddCategory() {
                 Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
                 CustomDropdown(
-                    value = categoryIcon ,
+                    value = categoryIcon,
                     onValueChange = viewModel::onCategoryIconChange,
                     label = context.getString(R.string.SelectIcon),
                     list = iconsList,
-                    onSelect = {categoryIcon = it},
+                    onSelect = { categoryIcon = it },
                 )
                 Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
@@ -235,4 +236,5 @@ fun AddCategory() {
             }
         }
     }
+
 }
