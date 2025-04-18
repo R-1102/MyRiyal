@@ -13,4 +13,5 @@ sealed class Screen(val route: String) {
     object Record : Screen("record_screen")
     object ViewRecord : Screen ("ViewRecord_Screen")
     //AddRecord
+    object ViewProfile : Screen ("view_profile")
 }

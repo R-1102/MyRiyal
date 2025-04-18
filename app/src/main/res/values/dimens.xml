@@ -70,4 +70,11 @@
     <integer name="brightnessSliderHeight">32</integer>
     <integer name="alphaTileSize">56</integer>
     <integer name="alphaTileRoundedCorner">8</integer>
+
+    <!--Profile Dimensions-->
+    <integer name="profileTopperSpace">64</integer>
+    <integer name="profileIconSize">200</integer>
+    <integer name="padding">16</integer>
+    <integer name="fieldWidth">180</integer>
+
 </resources>
