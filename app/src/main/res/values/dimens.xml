@@ -2,6 +2,7 @@
 <resources>
 
     <integer name="extraSmallSpace">4</integer>
+    <integer name="smallerSpace">8</integer>
     <integer name="smallSpace">12</integer>
     <integer name="mediumSpace">16</integer>
     <integer name="largeSpace">18</integer>
@@ -20,12 +21,12 @@
     <integer name="cardHeaderSize">28</integer>
     <integer name="cardWidth">332</integer>
     <integer name="cardHeightAddRecord">592</integer>
-    <integer name="cardHeightLogin">408</integer>
+    <integer name="cardHeightLogin">404</integer>
     <integer name="cardHeightSmall">268</integer>
     <integer name="cardHeightNewPassword">340</integer>
     <integer name="cardHeightSignUp">500</integer>
     <integer name="roundCardCornerShape">8</integer>
-    <integer name="cardShadow">12</integer>
+    <integer name="shadow">16</integer>
 
     <!--Card Header-->
     <integer name="cardHeaderTopPadding">12</integer>
@@ -33,6 +34,7 @@
 
     <!--Record-->
     <integer name="recordDescription">128</integer>
+    <integer name="riyalIconSize">20</integer>
 
     <!--Authentication Screens Dimensions-->
     <integer name="smallText">16</integer>
@@ -42,12 +44,12 @@
 
     <!--Button-->
     <integer name="buttonHeight">48</integer>
-    <integer name="roundCornerShape">4</integer>
+    <integer name="buttonRoundCornerShape">4</integer>
   
     <!--AddCategory Screen Dimensions-->
     <integer name="columnPadding">32</integer>
     <integer name="verticalSpacer">16</integer>
-    <integer name="RoundedCornerShape">12</integer>
+    <integer name="roundedCornerShape">12</integer>
     <integer name="colorFieldWidth">384</integer>
     <integer name="colorFieldHeight">56</integer>
     <integer name="colorSampleSize">32</integer>
@@ -70,6 +72,14 @@
     <integer name="brightnessSliderHeight">32</integer>
     <integer name="alphaTileSize">56</integer>
     <integer name="alphaTileRoundedCorner">8</integer>
+
+    <!--Filter Chip Dimensions-->
+    <integer name="filterChipCorner">48</integer>
+
+    <!--Record Item Card Dimensions-->
+    <integer name="recordItemCardElevation">8</integer>
+
+    <integer name="borderStroke">2</integer>
 
     <!--Profile Dimensions-->
     <integer name="profileTopperSpace">64</integer>
