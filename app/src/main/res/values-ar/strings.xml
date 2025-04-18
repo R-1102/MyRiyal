@@ -58,4 +58,8 @@
     <string name="ok">موافق</string>
     <string name="cancel">إلغاء</string>
 
+    //Profile Screen
+    <string name="userName">اسم المستخدم</string>
+    <string name="balance">رصيد المستخدم</string>
+
 </resources>

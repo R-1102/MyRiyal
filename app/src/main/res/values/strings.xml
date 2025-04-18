@@ -61,6 +61,9 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
 
+    //Profile Screen
+    <string name="userName">User Name</string>
+    <string name="balance">User Balance</string>
 
 </resources>
 

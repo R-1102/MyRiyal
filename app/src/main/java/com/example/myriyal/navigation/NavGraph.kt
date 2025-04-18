@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.myriyal.screens.Profile.presentattion.screens.ViewProfile
 import com.example.myriyal.screens.authentication.presentation.screens.BalanceScreen
 import com.example.myriyal.screens.authentication.presentation.screens.ForgotPassword
 import com.example.myriyal.screens.authentication.presentation.screens.LoginScreen
@@ -31,7 +32,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SplashScreen.route, // splash screen must be the start
+        startDestination = Screen.SplashScreen.route, // SplashScreen must be the start
         modifier = modifier
     ) {
         // Category Management Screen
@@ -73,6 +74,10 @@ fun NavGraph(
 
         composable(Screen.ViewRecord.route) {
             ViewRecordScreen()
+        }
+
+        composable(Screen.ViewProfile.route) {
+            ViewProfile()
         }
     }
 }
