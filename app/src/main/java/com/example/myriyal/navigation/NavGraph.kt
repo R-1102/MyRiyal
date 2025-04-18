@@ -13,7 +13,7 @@ import com.example.myriyal.screens.authentication.presentation.screens.NewPasswo
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
 import com.example.myriyal.screens.authentication.presentation.screens.SplashScreen
 import com.example.myriyal.screens.categories.presentation.screens.AddCategory
-import com.example.myriyal.screens.categories.presentation.screens.CategoryScreen
+import com.example.myriyal.screens.categories.presentation.screens.ViewCategoryScreen
 import com.example.myriyal.screens.records.presentation.screens.RecordScreen
 import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
 
@@ -37,7 +37,7 @@ fun NavGraph(
     ) {
         // Category Management Screen
         composable(Screen.Category.route) {
-            CategoryScreen()
+            ViewCategoryScreen()
         }
 
         // Record Management Screen

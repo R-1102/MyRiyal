@@ -34,7 +34,7 @@
 
     <!--Record-->
     <integer name="recordDescription">128</integer>
-    <integer name="riyalIconSize">20</integer>
+    <integer name="riyalIconSize">16</integer>
 
     <!--Authentication Screens Dimensions-->
     <integer name="smallText">16</integer>
@@ -46,7 +46,7 @@
     <integer name="buttonHeight">48</integer>
     <integer name="buttonRoundCornerShape">4</integer>
   
-    <!--AddCategory Screen Dimensions-->
+    <!--Category Screen Dimensions-->
     <integer name="columnPadding">32</integer>
     <integer name="verticalSpacer">16</integer>
     <integer name="RoundedCornerShape">12</integer> <!--Duplicated-->
