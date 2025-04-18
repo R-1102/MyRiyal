@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
 import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.entities.RecordEntity
@@ -33,7 +34,7 @@ import com.example.myriyal.screenComponent.CancelButton
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.DatePickerModal
 import com.example.myriyal.screenComponent.GradientButton
-import com.example.myriyal.utils.provideRecordViewModel
+import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 import java.text.DateFormat
 import java.util.Date
 
@@ -44,8 +45,9 @@ fun RecordFormScreen(
     onSubmit: (RecordEntity) -> Unit,
     onDismiss: () -> Unit
 ) {
-    val context = LocalContext.current
-    val recordViewModel = provideRecordViewModel(context)
+
+    val recordViewModel: RecordViewModel = hiltViewModel()
+
 
     // Form state
     var recordName by remember { mutableStateOf(initialRecord?.name ?: "") }

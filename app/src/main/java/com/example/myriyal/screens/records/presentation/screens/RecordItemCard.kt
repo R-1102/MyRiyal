@@ -53,6 +53,13 @@ fun RecordItemCard(
     val riyalExpense= R.drawable.expenes
     val riyalIncome= R.drawable.income
 
+    // Before using this variable it was causing a crash
+    val parsedCategoryColor = try {
+        Color(android.graphics.Color.parseColor(categoryColor))
+    } catch (e: IllegalArgumentException) {
+        MaterialTheme.colorScheme.primary // fallback color
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -85,7 +92,7 @@ fun RecordItemCard(
                         text = record.name,
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.SemiBold,
-                        color = Color(android.graphics.Color.parseColor(categoryColor))
+                        color = parsedCategoryColor //  It was causing a crash here
                     )
 
                     Spacer(modifier = Modifier.width(8.dp))
