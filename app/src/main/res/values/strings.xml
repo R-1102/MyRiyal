@@ -64,6 +64,7 @@
     //Profile Screen
     <string name="userName">User Name</string>
     <string name="balance">User Balance</string>
-
+    <string name="editYourName">Edit Your Name</string>
+    <string name="editYourBalance">Edit Your Balance</string>
 </resources>
 
