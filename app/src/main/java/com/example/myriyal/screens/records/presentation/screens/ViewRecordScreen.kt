@@ -71,7 +71,10 @@ fun ViewRecordScreen() {
                 start = integerResource(id = R.integer.mediumSpace).dp
             )
     ) {
-
+    Column(
+        Modifier.fillMaxWidth()
+            .padding(top=100.dp,),//to be deleted
+    ) {
         FilterSelector(
             selectedFilter = selectedFilter,
             onFilterSelected = { recordViewModel.setFilter(it) }
@@ -89,16 +92,10 @@ fun ViewRecordScreen() {
                             shouldShowDialog.value = true
                         }
                     )
-                    
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(top = 100.dp),//to be deleted - mocking Top bar
-        ) {
                 }
             }
-
         }
+            
 
         CustomFloatingActionButton(
             onClick = { shouldShowDialog.value = true },
