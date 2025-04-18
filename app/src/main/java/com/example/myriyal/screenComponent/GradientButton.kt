@@ -8,7 +8,6 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.material3.*
@@ -59,7 +58,7 @@ fun GradientButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(integerResource(id = R.integer.buttonHeight).dp)
-            .clip(RoundedCornerShape(integerResource(id = R.integer.roundCornerShape).dp))
+            .clip(RoundedCornerShape(integerResource(id = R.integer.buttonRoundCornerShape).dp))
             .background(gradient)
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
@@ -68,7 +67,7 @@ fun GradientButton(
             text = text,
             style = TextStyle(
                 color = Color.White,
-                fontSize = integerResource(id= R.integer.smallText).sp,
+                fontSize = integerResource(id = R.integer.smallText).sp,
                 fontWeight = FontWeight.Bold
             )
         )

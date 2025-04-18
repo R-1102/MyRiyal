@@ -12,10 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
+import com.example.myriyal.ui.theme.White
 import com.example.myriyal.ui.theme.firstDarkAdd
 import com.example.myriyal.ui.theme.firstGreen
 import com.example.myriyal.ui.theme.secondDarkAdd
@@ -50,13 +50,13 @@ fun CustomFloatingActionButton(
     IconButton(
         onClick = onClick,
         modifier = modifier
-            .clip(RoundedCornerShape(integerResource(id= R.integer.floatingButton).dp))
+            .clip(RoundedCornerShape(integerResource(id = R.integer.floatingButton).dp))
             .background(gradient)
     ) {
         Icon(
             Icons.Filled.Add,
             "Add floating action button.",
-            tint = Color.White,
+            tint = White,
             modifier = Modifier
         )
     }
