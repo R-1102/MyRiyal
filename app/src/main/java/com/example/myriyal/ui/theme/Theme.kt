@@ -1,6 +1,5 @@
 package com.example.myriyal.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -9,25 +8,32 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = DarkGreen,
-    secondary = GreenGrey40,
     background = DarkGreen,
     surface = DarkSurface,
     onSurface = onSurface,
-    tertiary = Gray
+    primary = DarkGreen,
+    onPrimary = lightGray,
+    onPrimaryContainer = lightGray,
+    secondary = GreenGrey40,
+    secondaryContainer = DarkSecondaryContainer,
+    onSecondaryContainer = White,
+    tertiary = lightGreen,
+    onTertiary = DarkBeige,
     )
 
 private val LightColorScheme = lightColorScheme(
+    background = LightBackground,
     primary = PrimaryGreen,
-    secondary = SecondaryGreen,
-    background = Color.White,
-    surface = LightSurface,
-    onSurface = onSurface,
-    tertiary = Gray
+    onPrimary = PrimaryGreen,
+    primaryContainer = PrimaryGreen,
+    onPrimaryContainer = White,
+    secondaryContainer = SecondaryContainer,
+    onSecondaryContainer = PrimaryGreen,
+    tertiary = lightGreen,
+    onTertiary = Beige,
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

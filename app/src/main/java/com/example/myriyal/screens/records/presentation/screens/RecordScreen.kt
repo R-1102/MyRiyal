@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.entities.RecordEntity
+import com.example.myriyal.screenComponent.FilterSelector
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.domain.model.RecordFilterType
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel

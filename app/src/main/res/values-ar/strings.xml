@@ -1,5 +1,5 @@
 <resources>
-    //Authentication Screens
+
     <string name="signUp_header" >أنشئ حساب</string>
 
     <string name="Signup">تسجيل</string>
@@ -58,8 +58,15 @@
     <string name="ok">موافق</string>
     <string name="cancel">إلغاء</string>
 
-    //Profile Screen
+    <string name="filterDay">يوميا</string>
+    <string name="filterWeek">أسبوعيا</string>
+    <string name="filterMonth">شهريا</string>
+    <string name="filterYear">سنويا</string>
+    <string name="filterAll">الكل</string>
+
     <string name="userName">اسم المستخدم</string>
     <string name="balance">رصيد المستخدم</string>
+    <string name="editYourName">حدث إسمك</string>
+    <string name="editYourBalance">حدث رصيدك</string>
 
 </resources>

@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">My Riyal</string>
 
-    //Authentication Screens
     <string name="signUp_header">Create an Account</string>
 
     <string name="Signup">Sign Up</string>
@@ -17,12 +16,10 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="dont_have_account"> Don\'t have an account?</string>
 
-    //Balance Screen
     <string name="Balance_header">Add Balance</string>
     <string name="enter_amount">Enter Your Balance</string>
     <string name="create_account">Create the account</string>
 
-    //Forgot Password
     <string name="forgotPassword">Forgot Password</string>
     <string name="submit">Submit</string>
     <string name="send">Send</string>
@@ -39,8 +36,6 @@
     <string name="icon">Icon</string>
     <string name="categoryType">Category Type</string>
 
-
-    //Record Screens
     <string name="addRecord">Add Record</string>
     <string name="recordName">Record Name</string>
     <string name="recordDescription">Record Description</string>
@@ -61,9 +56,15 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
 
-    //Profile Screen
+    <string name="filterDay">Day</string>
+    <string name="filterWeek">Week</string>
+    <string name="filterMonth">Month</string>
+    <string name="filterYear">Year</string>
+    <string name="filterAll">All</string>
+
     <string name="userName">User Name</string>
     <string name="balance">User Balance</string>
-
+    <string name="editYourName">Edit Your Name</string>
+    <string name="editYourBalance">Edit Your Balance</string>
 </resources>
 

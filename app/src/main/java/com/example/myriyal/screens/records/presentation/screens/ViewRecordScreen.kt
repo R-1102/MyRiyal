@@ -1,6 +1,8 @@
 package com.example.myriyal.screens.records.presentation.screens
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,11 +16,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.integerResource
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.myriyal.R
+import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.screenComponent.CustomDialog
 import com.example.myriyal.screenComponent.CustomFloatingActionButton
+import com.example.myriyal.screenComponent.FilterSelector
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
-
 
 //need to move the logic to viewmodel
 @Composable
@@ -55,10 +63,15 @@ fun ViewRecordScreen() {
         )
     }
 
-    Column(
-        Modifier.fillMaxWidth()
-            .padding(top=100.dp,),//to be deleted
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                end = integerResource(id = R.integer.mediumSpace).dp,
+                start = integerResource(id = R.integer.mediumSpace).dp
+            )
     ) {
+
         FilterSelector(
             selectedFilter = selectedFilter,
             onFilterSelected = { recordViewModel.setFilter(it) }
@@ -76,17 +89,22 @@ fun ViewRecordScreen() {
                             shouldShowDialog.value = true
                         }
                     )
+                    
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 100.dp),//to be deleted - mocking Top bar
+        ) {
                 }
             }
+
         }
+
         CustomFloatingActionButton(
             onClick = { shouldShowDialog.value = true },
             modifier = Modifier
-                .align(Alignment.End)
-                .padding(bottom = 60.dp) //Will be deleted
-
+                .align(Alignment.BottomEnd)
         )
     }
-
 }
 

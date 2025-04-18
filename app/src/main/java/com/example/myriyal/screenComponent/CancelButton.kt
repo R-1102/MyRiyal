@@ -29,7 +29,7 @@ fun CancelButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(integerResource(id = R.integer.buttonHeight).dp)
-            .clip(RoundedCornerShape(integerResource(id = R.integer.roundCornerShape).dp))
+            .clip(RoundedCornerShape(integerResource(id = R.integer.buttonRoundCornerShape).dp))
             .background(Transparent)
             .clickable(onClick = onClick)
             .border(3.dp, MaterialTheme.colorScheme.primary),
@@ -37,9 +37,9 @@ fun CancelButton(
     ) {
         Text(
             text = text,
-                color = MaterialTheme.colorScheme.primary,
-                fontSize = integerResource(id= R.integer.smallText).sp,
-                fontWeight = FontWeight.Bold
-            )
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = integerResource(id = R.integer.smallText).sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }

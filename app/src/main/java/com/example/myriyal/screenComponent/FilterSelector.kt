@@ -1,18 +1,23 @@
-package com.example.myriyal.screens.records.presentation.screens
+package com.example.myriyal.screenComponent
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.integerResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.myriyal.R
 import com.example.myriyal.screens.records.domain.model.RecordFilterType
-import com.example.myriyal.ui.theme.Beige
+import com.example.myriyal.ui.theme.White
 
 /**
  * Filter options (Day, Week, Month, Year).
@@ -33,7 +38,7 @@ fun FilterSelector(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(integerResource(id = R.integer.smallerSpace).dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         filterOptions.forEach { filter ->
@@ -47,18 +52,31 @@ fun FilterSelector(
                         onFilterSelected(filter)
                     }
                 },
-                label = { Text(filter.name.lowercase().replaceFirstChar { it.uppercase() }) },
+                label = {
+                    Text(
+                        text = stringResource(
+                            id = when (filter) {
+                                RecordFilterType.DAY -> R.string.filterDay
+                                RecordFilterType.WEEK -> R.string.filterWeek
+                                RecordFilterType.MONTH -> R.string.filterMonth
+                                RecordFilterType.YEAR -> R.string.filterYear
+                                RecordFilterType.ALL -> R.string.filterAll
+                            }
+                        ),
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 colors = FilterChipDefaults.filterChipColors(
-                    labelColor= Beige,
-                    selectedContainerColor = Beige,
-                    selectedLabelColor = Color.White,
+                    labelColor = MaterialTheme.colorScheme.onTertiary,
+                    selectedContainerColor = MaterialTheme.colorScheme.onTertiary,
+                    selectedLabelColor = White,
                 ),
                 border = FilterChipDefaults.filterChipBorder(
                     enabled = true,
                     selected = false,
-                    borderColor = Beige,
-                    borderWidth = 2.dp
+                    borderColor = MaterialTheme.colorScheme.onTertiary,
                 ),
+                shape = RoundedCornerShape(integerResource(id = R.integer.filterChipCorner))
             )
         }
     }

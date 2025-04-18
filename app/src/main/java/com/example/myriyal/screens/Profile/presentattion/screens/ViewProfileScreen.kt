@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.InputTransformation.Companion.keyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.BorderColor
@@ -28,12 +27,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.integerResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myriyal.R
 import com.example.myriyal.screenComponent.CustomCard
+import com.example.myriyal.screenComponent.CustomDialog
 import com.example.myriyal.screenComponent.CustomTextField
 
 @Composable
@@ -47,33 +49,36 @@ fun ViewProfile() {
         Icon(
             imageVector = Icons.Filled.AccountCircle,
             contentDescription = null,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .size(integerResource(R.integer.profileIconSize).dp),
             tint = MaterialTheme.colorScheme.secondary,
         )
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
-        CustomCard (
+        CustomCard(
             modifier = Modifier.padding(integerResource(R.integer.padding).dp),
-        ){
-            var showNameEditor by remember { mutableStateOf(false) }
-            var showBalanceEditor by remember { mutableStateOf(false) }
+        ) {
+            val showNameEditor = remember { mutableStateOf(false) }
+            val showBalanceEditor = remember { mutableStateOf(false) }
 
             //We need to use VM after implementing it instead of remember
-            var userName by remember{ mutableStateOf("") }
-            var balance by remember{ mutableDoubleStateOf(0.0) }
+            // the default name should be the user name from the DB
+            var userName by remember { mutableStateOf("") }
+            // the default balance should be the user balance from the DB
+            var balance by remember { mutableDoubleStateOf(0.0) }
 
-            val context = LocalContext.current
             //Row for the user name
-            Row (
+            Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(integerResource(R.integer.padding).dp)
 
-            ){
-                Text(context.getString(R.string.userName),
+            ) {
+                Text(
+                    text = stringResource(R.string.userName),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.secondary,
-                    )
+                )
                 Spacer(Modifier.weight(1f))
                 CustomTextField(
                     value = userName,
@@ -84,8 +89,8 @@ fun ViewProfile() {
                     //icon to edit the name
                     trailingIcon = {
                         IconButton(
-                            onClick = { showNameEditor = true }
-                        ){
+                            onClick = { showNameEditor.value = true }
+                        ) {
                             Icon(
                                 imageVector = Icons.Filled.BorderColor,
                                 contentDescription = null,
@@ -94,22 +99,29 @@ fun ViewProfile() {
                         }
                     }
                 )
-                if(showNameEditor){
-                    EditName(
-                        onNameEntered = {enteredName:String ->
-                            userName = enteredName
-                            showNameEditor = false
-                        },
-                        onDismiss = {showNameEditor = false}
+                if (showNameEditor.value) {
+                    CustomDialog(
+                        shouldShowDialog = showNameEditor,
+                        content = {
+                            EditName(
+                                currentName = userName,
+                                onNameEntered = { enteredName: String ->
+                                    userName = enteredName
+                                    showNameEditor.value = false
+                                },
+                                onDismiss = { showNameEditor.value = false }
+                            )
+                        }
                     )
                 }
             }
 
-            Row (
+            Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(integerResource(R.integer.padding).dp),
-            ){
-                Text(context.getString(R.string.balance),
+            ) {
+                Text(
+                    stringResource((R.string.balance)),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.secondary,
@@ -122,26 +134,42 @@ fun ViewProfile() {
                     readOnly = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                     modifier = Modifier.width(integerResource(R.integer.fieldWidth).dp),
-                    //icon to edit the balance
                     trailingIcon = {
-                        IconButton(
-                            onClick = { showBalanceEditor = true }
-                        ){
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            //Riyal icon
                             Icon(
-                                imageVector = Icons.Filled.BorderColor,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.secondary,
+                                painter = painterResource(R.drawable.income),
+                                contentDescription = "Saudi Riyal symbol",
+                                modifier = Modifier.size(20.dp)
                             )
+                            //icon to edit the balance
+                            IconButton(
+                                onClick = { showBalanceEditor.value = true }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Filled.BorderColor,
+                                    contentDescription = "Editing icon",
+                                    tint = MaterialTheme.colorScheme.secondary,
+                                )
+                            }
                         }
                     }
                 )
-                if(showBalanceEditor){
-                    EditBalance(
-                        onBalanceEntered = {enteredBalance:Double ->
-                            balance = enteredBalance
-                            showNameEditor = false
-                        },
-                        onDismiss = {showNameEditor = false}
+                if (showBalanceEditor.value) {
+                    CustomDialog(
+                        shouldShowDialog = showBalanceEditor,
+                        content = {
+                            EditBalance(
+                                currentBalance = balance,
+                                onBalanceEntered = { enteredBalance: Double ->
+                                    balance = enteredBalance
+                                    showBalanceEditor.value = false
+                                },
+                                onDismiss = { showBalanceEditor.value = false }
+                            )
+                        }
                     )
                 }
             }
