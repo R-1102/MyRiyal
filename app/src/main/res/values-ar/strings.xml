@@ -66,5 +66,7 @@
 
     <string name="userName">اسم المستخدم</string>
     <string name="balance">رصيد المستخدم</string>
+    <string name="editYourName">حدث إسمك</string>
+    <string name="editYourBalance">حدث رصيدك</string>
 
 </resources>

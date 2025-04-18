@@ -32,7 +32,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SplashScreen.route, // SplashScreen must be the start
+        startDestination = Screen.ViewProfile.route, // SplashScreen must be the start
         modifier = modifier
     ) {
         // Category Management Screen
