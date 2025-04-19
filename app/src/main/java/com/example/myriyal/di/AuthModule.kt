@@ -3,6 +3,7 @@ package com.example.myriyal.di
 import com.example.myriyal.screens.authentication.data.data_sources.AuthDataSource
 import com.example.myriyal.screens.authentication.data.repositories_imp.AuthRepoImp
 import com.example.myriyal.screens.authentication.domain.repository.AuthRepo
+import com.example.myriyal.screens.authentication.domain.useCases.ForgotPasswordUseCase
 import com.example.myriyal.screens.authentication.domain.useCases.LogInUseCase
 import com.example.myriyal.screens.authentication.domain.useCases.LogOutUseCase
 import com.example.myriyal.screens.authentication.domain.useCases.SignUpUseCase
@@ -49,6 +50,12 @@ object AuthModule {
     @Singleton
     fun provideLogOutUseCase(repo: AuthRepo): LogOutUseCase {
         return LogOutUseCase(repo)
+    }
+
+    @Provides
+    @Singleton
+    fun provideForgotPasswordUseCase(repo: AuthRepo):ForgotPasswordUseCase {  // <-- Add this provider
+        return ForgotPasswordUseCase(repo)
     }
 
 }
