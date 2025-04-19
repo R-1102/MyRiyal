@@ -77,7 +77,7 @@ fun RecordItemCard(
         ),
         border = BorderStroke(
             integerResource(id = R.integer.borderStroke).dp,
-            Color(android.graphics.Color.parseColor(categoryColor))
+            parsedCategoryColor
         ),
 
         ) {

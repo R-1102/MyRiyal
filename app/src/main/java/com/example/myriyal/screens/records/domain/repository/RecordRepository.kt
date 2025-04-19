@@ -59,4 +59,13 @@ interface RecordRepository {
      * Called from: [GetRecordsByCategoryUseCase] → [RecordViewModel]
      */
     fun getRecordsByCategory(categoryId: Int): Flow<List<RecordEntity>>
+
+    /**
+     * Calculates the total balance by subtracting expenses from income.
+     * This reactive Flow emits the updated total when any record changes.
+     *
+     * Called from: [GetTotalBalanceUseCase] → [ProfileViewModel] → UI
+     */
+    fun getTotalBalance(): Flow<Double>
+
 }

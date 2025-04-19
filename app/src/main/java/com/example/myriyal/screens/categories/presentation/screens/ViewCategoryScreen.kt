@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -21,7 +22,11 @@ import com.example.myriyal.screenComponent.CustomFloatingActionButton
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 
 @Composable
-fun ViewCategoryScreen() {
+fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
+
+    LaunchedEffect(Unit) {
+        categoryViewModel.seedPredefinedCategories()
+    }
 
     val viewModel: CategoryViewModel = hiltViewModel()
     val categories by viewModel.categories.collectAsState()

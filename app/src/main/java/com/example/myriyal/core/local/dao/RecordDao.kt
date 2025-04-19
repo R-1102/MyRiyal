@@ -65,4 +65,32 @@ interface RecordDao {
      */
     @Query("DELETE FROM record WHERE categoryId = :categoryId")
     suspend fun deleteRecordsByCategory(categoryId: Int)
+
+
+    /**
+     * Calculate total balance as a reactive Flow<Double>.
+     * Uses two subqueries: one for total income, one for total expenses.
+     */
+    @Query("""
+    SELECT 
+        (SELECT IFNULL(SUM(amount), 0) FROM record 
+         INNER JOIN category ON record.categoryId = category.categoryId 
+         WHERE category.type = 'INCOME')
+        -
+        (SELECT IFNULL(SUM(amount), 0) FROM record 
+         INNER JOIN category ON record.categoryId = category.categoryId 
+         WHERE category.type = 'EXPENSE')
+""")
+    fun getTotalBalance(): Flow<Double>
+
+
+    /**
+     * Calculate total balance as a one-time suspend function.
+     * Uses a conditional SUM based on the category type.
+     */
+    @Query("SELECT IFNULL(SUM(CASE WHEN category.type = 'INCOME' THEN record.amount ELSE -record.amount END), 0.0) " +
+            "FROM record INNER JOIN category ON record.categoryId = category.categoryId")
+    suspend fun calculateTotalBalance(): Double
+
+
 }

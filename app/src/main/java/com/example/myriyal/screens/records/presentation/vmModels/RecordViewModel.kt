@@ -250,4 +250,11 @@ class RecordViewModel @Inject constructor(
         amount.value = ""
         selectedCategory.value = null
     }
+
+    // --------------------------
+    // Total Balance (Live Tracker)
+    // --------------------------
+    val balance: StateFlow<Double> = useCases.getTotalBalance()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0.0)
+
 }
