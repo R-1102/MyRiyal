@@ -15,4 +15,6 @@ interface AuthRepo {
         password: String
     ):FirebaseUser?
 
+    fun logOut()
+
 }
