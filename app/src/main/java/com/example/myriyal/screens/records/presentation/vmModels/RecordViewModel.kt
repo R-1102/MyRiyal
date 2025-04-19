@@ -1,18 +1,21 @@
 package com.example.myriyal.screens.records.presentation.vmModels
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.screens.records.domain.model.RecordFilterType
 import com.example.myriyal.screens.records.domain.useCases.RecordUseCases
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * ViewModel for the Record feature.
@@ -25,7 +28,9 @@ import kotlinx.coroutines.launch
  * Layer Interaction:
  * UI → RecordViewModel → RecordUseCases → Repository → Room DAO
  */
-class RecordViewModel(
+
+@HiltViewModel
+class RecordViewModel @Inject constructor(
     private val useCases: RecordUseCases
 ) : ViewModel() {
 
@@ -164,4 +169,85 @@ class RecordViewModel(
         return cal1.get(java.util.Calendar.YEAR) == cal2.get(java.util.Calendar.YEAR)
     }
 
+// --------------------------
+// Form State (Managed inside ViewModel)
+// --------------------------
+
+    // Holds the input value for record name
+    val name = mutableStateOf("")
+
+    // Holds the input value for record description
+    val description = mutableStateOf("")
+
+    // Holds the input value for record amount
+    val amount = mutableStateOf("")
+
+    // Currently selected category from dropdown
+    val selectedCategory = mutableStateOf<CategoryEntity?>(null)
+
+    // Currently selected record (used when editing)
+    val selectedRecord = mutableStateOf<RecordEntity?>(null)
+
+// --------------------------
+// Form Validation & Submission
+// --------------------------
+
+    /**
+     * Checks if the form fields are valid.
+     * Required: name, amount, and selected category.
+     */
+    fun isFormValid(): Boolean {
+        return name.value.isNotBlank() && amount.value.isNotBlank() && selectedCategory.value != null
+    }
+
+    /**
+     * Submits the form by either inserting or updating a record.
+     * Builds a [RecordEntity] from form state and resets the form after saving.
+     */
+    fun submitRecord() {
+        val category = selectedCategory.value ?: return
+        val timestamp = System.currentTimeMillis()
+
+        val record = RecordEntity(
+            recordId = selectedRecord.value?.recordId ?: 0, // Use existing ID if editing
+            name = name.value,
+            description = description.value,
+            amount = amount.value.toDoubleOrNull() ?: 0.0,
+            categoryId = category.categoryId,
+            date = selectedRecord.value?.date ?: timestamp,
+            createdAt = selectedRecord.value?.createdAt ?: timestamp,
+            updatedAt = timestamp
+        )
+
+        viewModelScope.launch {
+            if (selectedRecord.value == null) insert(record) // Insert new record
+            else update(record)                              // Update existing one
+
+            resetForm() // Clear form after submission
+        }
+    }
+
+    /**
+     * Populates the form with values from an existing record.
+     * Used when editing a record from the list.
+     */
+    fun populateForm(record: RecordEntity, categories: List<CategoryEntity>) {
+        selectedRecord.value = record
+        name.value = record.name
+        description.value = record.description ?: ""
+        amount.value = record.amount.toString()
+        selectedCategory.value = categories.find { it.categoryId == record.categoryId }
+    }
+
+    /**
+     * Resets the form fields to initial blank values.
+     * Called after submission or canceling edit.
+     */
+    fun resetForm() {
+        selectedRecord.value = null
+        name.value = ""
+        description.value = ""
+        amount.value = ""
+        selectedCategory.value = null
+    }
 }

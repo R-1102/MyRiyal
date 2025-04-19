@@ -12,9 +12,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.unit.dp
@@ -25,21 +26,19 @@ import com.example.myriyal.screenComponent.CustomDialog
 import com.example.myriyal.screenComponent.CustomFloatingActionButton
 import com.example.myriyal.screenComponent.FilterSelector
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
-import com.example.myriyal.utils.provideRecordViewModel
+import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 
 //need to move the logic to viewmodel
 @Composable
 fun ViewRecordScreen() {
-    val context = LocalContext.current
 
-    val recordViewModel = provideRecordViewModel(context)
+    val recordViewModel : RecordViewModel = hiltViewModel()
     val categoryViewModel: CategoryViewModel = hiltViewModel()
     // Observe reactive states from ViewModels
     val records by recordViewModel.records.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
 
     // Form state (controlled locally in this composable)
-    var selectedRecord by remember { mutableStateOf<RecordEntity?>(null) }
     val selectedFilter by recordViewModel.filter.collectAsState()
 
     val shouldShowDialog = remember { mutableStateOf(false) } // 1
@@ -49,14 +48,14 @@ fun ViewRecordScreen() {
             shouldShowDialog = shouldShowDialog,
             content = {
                 RecordFormScreen(
-                    initialRecord = selectedRecord,
+                    initialRecord = recordViewModel.selectedRecord.value,
                     categories = categories,
                     onSubmit = {
-                        selectedRecord = null
+                        recordViewModel.selectedRecord.value = null
                         shouldShowDialog.value = false
                     },
                     onDismiss = {
-                        selectedRecord = null
+                        recordViewModel.selectedRecord.value = null
                         shouldShowDialog.value = false
                     },
                 )
@@ -72,33 +71,31 @@ fun ViewRecordScreen() {
                 start = integerResource(id = R.integer.mediumSpace).dp
             )
     ) {
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(top = 100.dp),//to be deleted - mocking Top bar
-        ) {
-            FilterSelector(
-                selectedFilter = selectedFilter,
-                onFilterSelected = { recordViewModel.setFilter(it) }
-            )
-            LazyColumn {
-                items(records) { record ->
-                    val category = categories.find { it.categoryId == record.categoryId }
-                    if (category != null) {
-                        RecordItemCard(
-                            record = record,
-                            category = category,
-                            onDelete = { recordViewModel.delete(record) },
-                            onEdit = {
-                                selectedRecord = record
-                                shouldShowDialog.value = true
-                            }
-                        )
-                    }
+    Column(
+        Modifier.fillMaxWidth()
+            .padding(top=100.dp,),//to be deleted
+    ) {
+        FilterSelector(
+            selectedFilter = selectedFilter,
+            onFilterSelected = { recordViewModel.setFilter(it) }
+        )
+        LazyColumn {
+            items(records) { record ->
+                val category = categories.find { it.categoryId == record.categoryId }
+                if (category != null) {
+                    RecordItemCard(
+                        record = record,
+                        category = category,
+                        onDelete = { recordViewModel.delete(record) },
+                        onEdit = {
+                            recordViewModel.selectedRecord.value = record
+                            shouldShowDialog.value = true
+                        }
+                    )
                 }
             }
-
         }
+            
 
         CustomFloatingActionButton(
             onClick = { shouldShowDialog.value = true },

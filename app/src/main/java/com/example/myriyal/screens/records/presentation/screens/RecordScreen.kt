@@ -20,7 +20,7 @@ import com.example.myriyal.screenComponent.FilterSelector
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.domain.model.RecordFilterType
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
-import com.example.myriyal.utils.provideRecordViewModel
+
 
 
 /**
@@ -37,21 +37,14 @@ import com.example.myriyal.utils.provideRecordViewModel
 fun RecordScreen(
 
 ) {
-    val context = LocalContext.current
-
-    val recordViewModel = provideRecordViewModel(context)
+    val viewModel: RecordViewModel = hiltViewModel()
     val categoryViewModel: CategoryViewModel = hiltViewModel()
     // Observe reactive states from ViewModels
-    val records by recordViewModel.records.collectAsState()
+    val records by viewModel.records.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
-    val selectedFilter by recordViewModel.filter.collectAsState()
+    val selectedFilter by viewModel.filter.collectAsState()
 
-    // Form state (controlled locally in this composable)
-    var selectedRecord by remember { mutableStateOf<RecordEntity?>(null) }
-    var selectedCategory by remember { mutableStateOf<CategoryEntity?>(null) }
-    var name by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var amount by remember { mutableStateOf("") }
+
 
     Column(
         modifier = Modifier
@@ -61,7 +54,7 @@ fun RecordScreen(
         // --- Filter Selection Chips ---
         FilterSelector(
             selectedFilter = selectedFilter,
-            onFilterSelected = { recordViewModel.setFilter(it) }
+            onFilterSelected = { viewModel.setFilter(it) }
         )
 
         Spacer(modifier = Modifier.height(6.dp))
@@ -69,8 +62,8 @@ fun RecordScreen(
         // --- RECORD FORM ---
 
         OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
+            value = viewModel.name.value,
+            onValueChange = { viewModel.name.value = it },
             label = { Text("Record Name") },
             modifier = Modifier.fillMaxWidth()
         )
@@ -78,8 +71,8 @@ fun RecordScreen(
         Spacer(modifier = Modifier.height(6.dp))
 
         OutlinedTextField(
-            value = description,
-            onValueChange = { description = it },
+            value = viewModel.description.value,
+            onValueChange = { viewModel.description.value = it },
             label = { Text("Description") },
             modifier = Modifier.fillMaxWidth()
         )
@@ -87,9 +80,9 @@ fun RecordScreen(
         Spacer(modifier = Modifier.height(6.dp))
 
         OutlinedTextField(
-            value = amount,
+            value = viewModel.amount.value,
             onValueChange = {
-                if (it.all { char -> char.isDigit() || char == '.' }) amount = it
+                if (it.all { char -> char.isDigit() || char == '.' }) viewModel.amount.value = it
             },
             label = { Text("Amount") },
             modifier = Modifier.fillMaxWidth(),
@@ -100,9 +93,9 @@ fun RecordScreen(
 
         // Category dropdown (uses categoryViewModel)
         CategoryDropdownMenu(
-            selectedCategory = selectedCategory,
+            selectedCategory = viewModel.selectedCategory.value,
             categories = categories,
-            onCategorySelected = { selectedCategory = it }
+            onCategorySelected = { viewModel.selectedCategory.value = it }
         )
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -110,50 +103,24 @@ fun RecordScreen(
         // Button to insert or update a record
         Button(
             onClick = {
-                val timestamp = System.currentTimeMillis()
-                val record = RecordEntity(
-                    recordId = selectedRecord?.recordId ?: 0,
-                    name = name,
-                    description = description,
-                    amount = amount.toDoubleOrNull() ?: 0.0,
-                    categoryId = selectedCategory?.categoryId ?: return@Button,
-                    date = selectedRecord?.date ?: timestamp,
-                    createdAt = selectedRecord?.createdAt ?: timestamp,
-                    updatedAt = timestamp
-                )
-
-                if (selectedRecord == null) recordViewModel.insert(record)
-                else recordViewModel.update(record)
-
-                // Clear form after submission
-                name = ""
-                description = ""
-                amount = ""
-                selectedCategory = null
-                selectedRecord = null
+                viewModel.submitRecord()
             },
-            enabled = selectedCategory != null && name.isNotBlank() && amount.isNotBlank(),
+            enabled = viewModel.isFormValid(),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(if (selectedRecord == null) "Add Record" else "Update Record")
+            Text(if (viewModel.selectedRecord.value == null) "Add Record" else "Update Record")
         }
-
         HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))
 
         // --- LIST OF RECORDS ---
 
         LazyColumn {
             items(records) { record ->
-
                 RecordItem(
                     record = record,
-                    onDelete = { recordViewModel.delete(record) },
+                    onDelete = { viewModel.delete(record) },
                     onEdit = {
-                        selectedRecord = record
-                        name = record.name
-                        description = record.description.orEmpty()
-                        amount = record.amount.toString()
-                        selectedCategory = categories.find { it.categoryId == record.categoryId }
+                        viewModel.populateForm(record, categories)
                     }
                 )
             }
@@ -164,41 +131,41 @@ fun RecordScreen(
 *//**
  * Filter options (Day, Week, Month, Year).
  * Clicking again on a selected filter will unselect it (showing all).
- *//*
-@Composable
-fun FilterSelector(
-    selectedFilter: RecordFilterType,
-    onFilterSelected: (RecordFilterType) -> Unit
-) {
-    val filterOptions = listOf(
-        RecordFilterType.DAY,
-        RecordFilterType.WEEK,
-        RecordFilterType.MONTH,
-        RecordFilterType.YEAR
-    )
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 6.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        filterOptions.forEach { filter ->
-            FilterChip(
-                selected = filter == selectedFilter,
-                onClick = {
-                    if (filter == selectedFilter) {
-                        // Tapping again toggles back to "All"
-                        onFilterSelected(RecordFilterType.ALL)
-                    } else {
-                        onFilterSelected(filter)
-                    }
-                },
-                label = { Text(filter.name.lowercase().replaceFirstChar { it.uppercase() }) }
-            )
-        }
-    }
-}*/
+ */
+//@Composable
+//fun FilterSelector(
+//    selectedFilter: RecordFilterType,
+//    onFilterSelected: (RecordFilterType) -> Unit
+//) {
+//    val filterOptions = listOf(
+//        RecordFilterType.DAY,
+//        RecordFilterType.WEEK,
+//        RecordFilterType.MONTH,
+//        RecordFilterType.YEAR
+//    )
+//
+//    Row(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(vertical = 6.dp),
+//        horizontalArrangement = Arrangement.spacedBy(8.dp)
+//    ) {
+//        filterOptions.forEach { filter ->
+//            FilterChip(
+//                selected = filter == selectedFilter,
+//                onClick = {
+//                    if (filter == selectedFilter) {
+//                        // Tapping again toggles back to "All"
+//                        onFilterSelected(RecordFilterType.ALL)
+//                    } else {
+//                        onFilterSelected(filter)
+//                    }
+//                },
+//                label = { Text(filter.name.lowercase().replaceFirstChar { it.uppercase() }) }
+//            )
+//        }
+//    }
+//}
 
 /**
  * Category selector dropdown (used in form).
