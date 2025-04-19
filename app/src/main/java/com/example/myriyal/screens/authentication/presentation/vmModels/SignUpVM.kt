@@ -13,8 +13,6 @@ import com.example.myriyal.screens.authentication.domain.useCases.SignUpUseCase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
@@ -31,13 +29,15 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
     var password by mutableStateOf("")
     var confirmPassword by mutableStateOf("")
 
-    //chanel for all the UI events
-    private val eventsChannel = Channel<AllEvents>()
-    val allEventsFlow = eventsChannel.receiveAsFlow()
+    // Message state to be shown in the UI
+    private val _message = mutableStateOf<String?>(null)
+    val message: State<String?> = _message
 
+    // Flag to trigger navigation
+    private val _shouldNavigate = mutableStateOf(false)
+    val shouldNavigate: State<Boolean> = _shouldNavigate
 
     // Input change functions, setting user input from UI in here to do the business logic
-
     fun onUsernameChange(value: String) {
         username = value
     }
@@ -57,36 +57,29 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
 
 
     // Validate input before sign-up
-    fun signUpValidation(
-        username: String,
-        email: String,
-        password: String,
-        confirmPassword: String
-    )= viewModelScope.launch{
-
+    fun signUpValidation(username: String, email: String, password: String, confirmPassword: String) = viewModelScope.launch {
         when {
-            username.isBlank() -> {
-                eventsChannel.send(AllEvents.Message("Username must not be empty"))
-            }
+            username.isBlank() ->
+                showMessage("Username must not be empty")
 
-            email.isBlank() -> {
-                eventsChannel.send(AllEvents.Message( "Email must not be empty"))
-            }
+            email.isBlank() ->
+                showMessage("Email must not be empty")
 
-            password.isBlank() -> {
-                eventsChannel.send(AllEvents.Message( "Password must not be empty"))
-            }
+            password.isBlank() ->
+                showMessage("Password must not be empty")
 
-            password != confirmPassword -> {
-                eventsChannel.send(AllEvents.Message( "Passwords do not match"))
-            }
+            password != confirmPassword ->
+                showMessage("Passwords do not match")
 
-            else -> {
-                actualSignUpUser(username, email, password) //if passed validation, send to actual sign-up
-            }
+            else ->
+                actualSignUpUser(username, email, password)  // If validation success, proceed with actual sign-up
         }
     }
 
+    // Show sign-up status to UI (success or error)
+    private fun showMessage(msg: String) {
+        _message.value = msg
+    }
 
 
     // Create users
@@ -108,15 +101,16 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
 
                 remotedb.collection("users").document(uid).set(userMap).await()
 
-                _firebaseUser.postValue(it)
+                Log.d("SignUpVM", "actualSignUpUser() called")
+                firebaseUser.value
 
-                eventsChannel.send(AllEvents.Message("Signed up successfully"))
+                _message.value = "Signed up successfully"
+                _shouldNavigate.value = true  // trigger navigation only when signUp successfully
             }
 
         } catch(e:Exception){
             Log.d("SignupVM","SignUp user: ${e.localizedMessage}")
-            eventsChannel.send(AllEvents.Message(e.localizedMessage?:"Unknown error"))
-
+            showMessage(e.localizedMessage ?: "Unknown error")
         }
 
 
@@ -124,12 +118,15 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
     }
 
 
-
-    // UI events
-    sealed class AllEvents {
-        data class Message(val message: String) : AllEvents()
-//        data class ErrorCode(val code: Int, val erMsg: String) : AllEvents()
-//        data class Error(val error: String) : AllEvents()
+    // Reset navigation flag after successful navigation
+    fun resetNavigation() {
+        _shouldNavigate.value = false
     }
+
+    // Clear message state after it is shown
+    fun clearMessage() {
+        _message.value = null
+    }
+
 
 }
