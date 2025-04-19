@@ -3,6 +3,8 @@ package com.example.myriyal.di
 import com.example.myriyal.screens.authentication.data.data_sources.AuthDataSource
 import com.example.myriyal.screens.authentication.data.repositories_imp.AuthRepoImp
 import com.example.myriyal.screens.authentication.domain.repository.AuthRepo
+import com.example.myriyal.screens.authentication.domain.useCases.LogInUseCase
+import com.example.myriyal.screens.authentication.domain.useCases.LogOutUseCase
 import com.example.myriyal.screens.authentication.domain.useCases.SignUpUseCase
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
@@ -13,7 +15,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object AuthModule {
 
     @Provides
     @Singleton
@@ -36,4 +38,17 @@ object AppModule {
     fun provideSignUpUseCase(repo: AuthRepo): SignUpUseCase {
         return SignUpUseCase(repo)
     }
+
+    @Provides
+    @Singleton
+    fun provideLogInUseCase(repo: AuthRepo):LogInUseCase{
+        return LogInUseCase(repo)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLogOutUseCase(repo: AuthRepo): LogOutUseCase {
+        return LogOutUseCase(repo)
+    }
+
 }
