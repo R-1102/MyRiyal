@@ -17,4 +17,8 @@ interface AuthRepo {
 
     fun logOut()
 
+    suspend fun sendPasswordResetEmail(
+        email: String
+    ) : Result<String>
+
 }

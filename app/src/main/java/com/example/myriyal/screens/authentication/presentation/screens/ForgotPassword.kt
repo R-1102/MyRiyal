@@ -20,17 +20,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
 import com.example.myriyal.navigation.Screen
 import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.GradientButton
+import com.example.myriyal.screens.authentication.presentation.vmModels.ForgotPasswordVM
 import com.example.myriyal.ui.theme.ThemedLogo
 
 @Composable
 fun ForgotPassword(navController: NavHostController) {
-    var email by remember { mutableStateOf("") } //need to be deleted
+
+    val viewModel : ForgotPasswordVM = hiltViewModel()
+    val email = viewModel.email
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -61,13 +65,14 @@ fun ForgotPassword(navController: NavHostController) {
                 )
                 CustomTextField(
                     value = email,
-                    onValueChange = { email = it },
+                    onValueChange = { viewModel.email = it },
                     label = stringResource(id = R.string.email),
                 )
                 Spacer(modifier = Modifier.height(integerResource(id= R.integer.buttonTextFieldSpace).dp))
 
                 GradientButton(
-                    onClick = { navController.navigate(Screen.NewPass.route) },
+                    onClick = { navController.navigate(Screen.NewPass.route)
+                        viewModel.sendPasswordResetEmail(email)},
                     text = stringResource(id = R.string.send)
                 )
             }
