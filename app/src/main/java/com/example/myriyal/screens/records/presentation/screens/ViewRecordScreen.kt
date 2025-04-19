@@ -74,7 +74,6 @@ fun ViewRecordScreen() {
         Column(
             Modifier
                 .fillMaxWidth()
-                .padding(top = 100.dp),//to be deleted
         ) {
             FilterSelector(
                 selectedFilter = selectedFilter,

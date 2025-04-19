@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.navigation.bottomBar.BottomNavigationBar
+import com.example.myriyal.navigation.topBar.TopNavigationBar
 
 /**
  * Root Composable function to initialize and launch the MyRiyal app.
@@ -27,7 +28,7 @@ import com.example.myriyal.navigation.bottomBar.BottomNavigationBar
  */
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(darkTheme: Boolean, toggleTheme: () -> Unit) {
 
     // Navigation controller for handling screen routing
     val navController = rememberNavController()
@@ -46,7 +47,6 @@ fun AppNavigation() {
         "NewPass_Screen"
     )
 
-    // App structure wrapped in Material3 Scaffold
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         bottomBar = {
@@ -54,8 +54,23 @@ fun AppNavigation() {
             if (currentRoute !in bottomBarHiddenRoutes) {
                 BottomNavigationBar(navController = navController, currentRoute)
             }
-        }
-    ) { innerPadding ->
+        },
+        topBar = {
+            // Top app bar (visible on all screens except for Splash,SignUp, Log in, Balance, ForgotPassword and NewPasswordScreen)
+            if (currentRoute !in bottomBarHiddenRoutes) {
+                TopNavigationBar(
+                    navController = navController,
+                    currentRoute,
+                    darkTheme,
+                    toggleTheme,
+                    onLogout = {
+                        // Handle logout logic
+                    },
+                )
+            }
+        },
+
+        ) { innerPadding ->
         // Inject NavGraph inside Scaffold with correct inner padding
         NavGraph(
             navController = navController,
