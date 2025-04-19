@@ -16,6 +16,7 @@ import com.example.myriyal.core.local.enums.CategoryType
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 
+/*
 
 // UI layer of the category feature.
 // Displays the category list and a form for adding/editing categories.
@@ -317,3 +318,4 @@ fun CategoryItem(
     }
 }
 
+*/

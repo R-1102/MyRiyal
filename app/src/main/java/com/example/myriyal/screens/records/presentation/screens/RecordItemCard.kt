@@ -61,9 +61,6 @@ fun RecordItemCard(
     } catch (e: IllegalArgumentException) {
         MaterialTheme.colorScheme.primary // fallback color
     }
-
-    Card(
-
     OutlinedCard(
 
         modifier = Modifier
