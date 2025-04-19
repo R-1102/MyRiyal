@@ -7,21 +7,24 @@ import androidx.room.PrimaryKey
 // It stores data related to the user profile such as name and current balance.
 //
 // Data flows:
-// - Written by: UserRepositoryImpl (insert, update, delete)
-// - Read by: UserRepositoryImpl → ViewModel (if implemented) → Screen (e.g., ProfileScreen)
-// - This data is used to show the user's info or profile stats
+// - Written by: UserRepositoryImpl (insert/update)
+// - Read by: UserRepositoryImpl → ViewModel (e.g., ProfileViewModel) → Screen (e.g., ProfileScreen)
+// - Used to show the user's info or profile stats
 
 @Entity(tableName = "userProfile")
 data class UserEntity(
 
-    // Auto-generated unique ID for each user (supports multi-user if needed)
-    @PrimaryKey(autoGenerate = true) val userId: Int = 0,
+    // Unique ID for the user (e.g., "guest" or Firebase UID)
+    // Not auto-generated — manually assigned by the app
+    @PrimaryKey(autoGenerate = false)
+    val userId: String,
 
-    // The display name of the user (e.g., "Mohammed")
+    // The display name of the user (e.g., "Mohammed", "Guest")
     val userName: String,
 
-    // The user's current balance shown in the dashboard or profile
-    val balance: Double,
+    // The user’s current balance displayed on the profile/dashboard
+    // Can be manually edited or auto-calculated from records
+    val balance: Double = 0.0,
 
     // Timestamp for when the user profile was created
     val createdAt: Long,

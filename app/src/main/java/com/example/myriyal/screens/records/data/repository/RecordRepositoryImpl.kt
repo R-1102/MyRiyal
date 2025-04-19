@@ -57,4 +57,10 @@ class RecordRepositoryImpl @Inject constructor(
     override fun getRecordsByCategory(categoryId: Int): Flow<List<RecordEntity>> {
         return dao.getRecordsByCategory(categoryId)
     }
+
+
+    override fun getTotalBalance(): Flow<Double> {
+        return dao.getTotalBalance()
+    }
+
 }

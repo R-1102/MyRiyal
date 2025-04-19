@@ -6,6 +6,7 @@ import com.example.myriyal.screens.records.domain.useCases.DeleteRecordUseCase
 import com.example.myriyal.screens.records.domain.useCases.GetAllRecordsUseCase
 import com.example.myriyal.screens.records.domain.useCases.GetRecordByIdUseCase
 import com.example.myriyal.screens.records.domain.useCases.GetRecordsByCategoryUseCase
+import com.example.myriyal.screens.records.domain.useCases.GetTotalBalanceUseCase
 import com.example.myriyal.screens.records.domain.useCases.InsertRecordUseCase
 import com.example.myriyal.screens.records.domain.useCases.RecordUseCases
 import com.example.myriyal.screens.records.domain.useCases.UpdateRecordUseCase
@@ -31,7 +32,8 @@ object RecordUseCaseModule {
             delete = DeleteRecordUseCase(repository),
             getAllRecords = GetAllRecordsUseCase(repository),
             getRecordById = GetRecordByIdUseCase(repository),
-            getByCategory = GetRecordsByCategoryUseCase(repository)
+            getByCategory = GetRecordsByCategoryUseCase(repository),
+            getTotalBalance = GetTotalBalanceUseCase(repository)
         )
     }
 }

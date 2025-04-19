@@ -33,10 +33,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
 import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomDialog
 import com.example.myriyal.screenComponent.CustomTextField
+import com.example.myriyal.screens.Profile.presentattion.vmModels.ProfileViewModel
 
 @Composable
 fun ViewProfile() {
@@ -58,14 +60,18 @@ fun ViewProfile() {
         CustomCard(
             modifier = Modifier.padding(integerResource(R.integer.padding).dp),
         ) {
+
+            val profileViewModel: ProfileViewModel = hiltViewModel()
+
+
             val showNameEditor = remember { mutableStateOf(false) }
             val showBalanceEditor = remember { mutableStateOf(false) }
 
             //We need to use VM after implementing it instead of remember
             // the default name should be the user name from the DB
-            var userName by remember { mutableStateOf("") }
+            var userName by profileViewModel.userName
             // the default balance should be the user balance from the DB
-            var balance by remember { mutableDoubleStateOf(0.0) }
+            var balance by profileViewModel.balance
 
             //Row for the user name
             Row(
@@ -106,7 +112,7 @@ fun ViewProfile() {
                             EditName(
                                 currentName = userName,
                                 onNameEntered = { enteredName: String ->
-                                    userName = enteredName
+                                    profileViewModel.updateUserName(enteredName)
                                     showNameEditor.value = false
                                 },
                                 onDismiss = { showNameEditor.value = false }
@@ -163,8 +169,8 @@ fun ViewProfile() {
                         content = {
                             EditBalance(
                                 currentBalance = balance,
-                                onBalanceEntered = { enteredBalance: Double ->
-                                    balance = enteredBalance
+                                onBalanceEntered = { enteredBalance ->
+                                    profileViewModel.updateUserBalance(enteredBalance)
                                     showBalanceEditor.value = false
                                 },
                                 onDismiss = { showBalanceEditor.value = false }

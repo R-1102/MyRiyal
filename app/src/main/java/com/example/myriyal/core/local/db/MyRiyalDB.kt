@@ -12,18 +12,18 @@ import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.core.local.entities.TrackerEntity
 
-// Room database class that manages all local tables in the app.
-// This class is accessed from the data layer (DatabaseProvider) and used by repositories.
-// Data flows from the repository layer → here → DAO layer → to entities (tables).
+// ----------------------------------------------------
+// Room database class that manages local persistence.
+// Serves as the central access point for all DAOs.
+// ----------------------------------------------------
 
 @Database(
-    // These are the tables managed by Room
+    // List of all entities (tables) managed by Room
     entities = [UserEntity::class, CategoryEntity::class, RecordEntity::class, TrackerEntity::class],
-    version = 1,
-    exportSchema = false  // Optionally export schema to a folder (set to false if not needed)
-
+    version = 2, // Current schema version of the database
+    exportSchema = false // Disable schema export (optional)
 )
-@TypeConverters(Converters::class) // Converts enums to strings and back for Room to store
+@TypeConverters(Converters::class) // Register type converters (e.g. enums)
 abstract class MyRiyalDatabase : RoomDatabase() {
 
     // Used by UserRepository to access the user table

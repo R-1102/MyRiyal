@@ -32,7 +32,7 @@ import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 @Composable
 fun ViewRecordScreen() {
 
-    val recordViewModel: RecordViewModel = hiltViewModel()
+    val recordViewModel : RecordViewModel = hiltViewModel()
     val categoryViewModel: CategoryViewModel = hiltViewModel()
     // Observe reactive states from ViewModels
     val records by recordViewModel.records.collectAsState()
@@ -106,4 +106,3 @@ fun ViewRecordScreen() {
 
     }
 }
-
