@@ -66,19 +66,19 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
 
         when {
             username.isBlank() -> {
-                eventsChannel.send(AllEvents.ErrorCode(1, "Username must not be empty"))
+                eventsChannel.send(AllEvents.Message("Username must not be empty"))
             }
 
             email.isBlank() -> {
-                eventsChannel.send(AllEvents.ErrorCode(2, "Email must not be empty"))
+                eventsChannel.send(AllEvents.Message( "Email must not be empty"))
             }
 
             password.isBlank() -> {
-                eventsChannel.send(AllEvents.ErrorCode(4, "Password must not be empty"))
+                eventsChannel.send(AllEvents.Message( "Password must not be empty"))
             }
 
             password != confirmPassword -> {
-                eventsChannel.send(AllEvents.ErrorCode(5, "Passwords do not match"))
+                eventsChannel.send(AllEvents.Message( "Passwords do not match"))
             }
 
             else -> {
@@ -115,7 +115,7 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
 
         } catch(e:Exception){
             Log.d("SignupVM","SignUp user: ${e.localizedMessage}")
-            eventsChannel.send(AllEvents.Error(e.localizedMessage?:"Unknown error"))
+            eventsChannel.send(AllEvents.Message(e.localizedMessage?:"Unknown error"))
 
         }
 
@@ -128,8 +128,8 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
     // UI events
     sealed class AllEvents {
         data class Message(val message: String) : AllEvents()
-        data class ErrorCode(val code: Int, val erMsg: String) : AllEvents()
-        data class Error(val error: String) : AllEvents()
+//        data class ErrorCode(val code: Int, val erMsg: String) : AllEvents()
+//        data class Error(val error: String) : AllEvents()
     }
 
 }

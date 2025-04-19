@@ -54,7 +54,7 @@ object AuthModule {
 
     @Provides
     @Singleton
-    fun provideForgotPasswordUseCase(repo: AuthRepo):ForgotPasswordUseCase {  // <-- Add this provider
+    fun provideForgotPasswordUseCase(repo: AuthRepo):ForgotPasswordUseCase {
         return ForgotPasswordUseCase(repo)
     }
 
