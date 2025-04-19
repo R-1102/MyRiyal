@@ -32,7 +32,7 @@ import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 @Composable
 fun ViewRecordScreen() {
 
-    val recordViewModel : RecordViewModel = hiltViewModel()
+    val recordViewModel: RecordViewModel = hiltViewModel()
     val categoryViewModel: CategoryViewModel = hiltViewModel()
     // Observe reactive states from ViewModels
     val records by recordViewModel.records.collectAsState()
@@ -71,37 +71,39 @@ fun ViewRecordScreen() {
                 start = integerResource(id = R.integer.mediumSpace).dp
             )
     ) {
-    Column(
-        Modifier.fillMaxWidth()
-            .padding(top=100.dp,),//to be deleted
-    ) {
-        FilterSelector(
-            selectedFilter = selectedFilter,
-            onFilterSelected = { recordViewModel.setFilter(it) }
-        )
-        LazyColumn {
-            items(records) { record ->
-                val category = categories.find { it.categoryId == record.categoryId }
-                if (category != null) {
-                    RecordItemCard(
-                        record = record,
-                        category = category,
-                        onDelete = { recordViewModel.delete(record) },
-                        onEdit = {
-                            recordViewModel.selectedRecord.value = record
-                            shouldShowDialog.value = true
-                        }
-                    )
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 100.dp),//to be deleted
+        ) {
+            FilterSelector(
+                selectedFilter = selectedFilter,
+                onFilterSelected = { recordViewModel.setFilter(it) }
+            )
+            LazyColumn {
+                items(records) { record ->
+                    val category = categories.find { it.categoryId == record.categoryId }
+                    if (category != null) {
+                        RecordItemCard(
+                            record = record,
+                            category = category,
+                            onDelete = { recordViewModel.delete(record) },
+                            onEdit = {
+                                recordViewModel.selectedRecord.value = record
+                                shouldShowDialog.value = true
+                            }
+                        )
+                    }
                 }
             }
         }
-            
 
         CustomFloatingActionButton(
             onClick = { shouldShowDialog.value = true },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
         )
+
     }
 }
 

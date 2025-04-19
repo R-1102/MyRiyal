@@ -69,4 +69,9 @@
     <string name="editYourName">حدث إسمك</string>
     <string name="editYourBalance">حدث رصيدك</string>
 
+    <string name="records">السجلات</string>
+    <string name="home">الرئيسية</string>
+    <string name="categories">التصنيفات</string>
+    <string name="statistic">الإحصائيات</string>
+
 </resources>

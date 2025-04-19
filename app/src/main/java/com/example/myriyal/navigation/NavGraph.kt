@@ -1,5 +1,10 @@
 package com.example.myriyal.navigation
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -21,9 +26,14 @@ import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
  * Defines app-level navigation for the main features:
  * - Category screen
  * - Record screen
- *
- * This is a simplified version using Jetpack Compose's built-in NavHost (no animation).
+ * - Home screen
+ * - Statistic screen
+ * - and others
  */
+
+/* if the home screen created make sure that
+if we enter the Home screen the login and signup
+screen doesn't pop out to it again*/
 
 @Composable
 fun NavGraph(
@@ -32,44 +42,86 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.ViewProfile.route, // SplashScreen must be the start
+        startDestination = Screen.SplashScreen.route,
         modifier = modifier
     ) {
-        // Category Management Screen
-        composable(Screen.Category.route) {
-            ViewCategoryScreen()
+        // Authentication Screens with animation -- maybe for the home screen too (slide in) --
+        composable(
+            route = Screen.SplashScreen.route,
+            enterTransition = {
+                slideInVertically(
+                    initialOffsetY = { it },
+                    animationSpec = tween(900)
+                )
+            },
+        ) {
+            SplashScreen(navController)
         }
 
-        // Record Management Screen
-        composable(Screen.Record.route) {
-            RecordScreen()
-        }
-
-        // Sign-Up Management Screen
-        composable(Screen.SignUp.route){
+        composable(
+            route = Screen.SignUp.route,
+            enterTransition = {
+                slideInVertically(
+                    initialOffsetY = { it },
+                    animationSpec = tween(900)
+                )
+            },
+        ) {
             SignUpScreen(navController)
         }
 
-        composable(Screen.SplashScreen.route) {
-            SplashScreen(navController)
-        }
-        composable(Screen.LogIn.route) {
-            LoginScreen(navController)
-        }
+        composable(
+            route = Screen.Balance.route,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it },
+                    animationSpec = tween(600)
+                )
+            },
 
-        composable(Screen.Balance.route){
+            ) {
             BalanceScreen(navController)
         }
 
-        composable(Screen.ForgotPass.route){
+        composable(
+            route = Screen.ForgotPass.route,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it },
+                    animationSpec = tween(600)
+                )
+            },
+        ) {
             ForgotPassword(navController)
         }
-        composable(Screen.NewPass.route) {
+
+        composable(
+            route = Screen.NewPass.route,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it },
+                    animationSpec = tween(600)
+                )
+            },
+        ) {
             NewPassword(navController)
+        }
+
+        //Screens without animation
+        composable(route = Screen.LogIn.route) {
+            LoginScreen(navController)
+        }
+
+        composable(Screen.ViewCategory.route) {
+            ViewCategoryScreen()
         }
 
         composable(Screen.AddCategory.route) {
             AddCategory()
+        }
+
+        composable(Screen.Record.route) {
+            RecordScreen()
         }
 
         composable(Screen.ViewRecord.route) {

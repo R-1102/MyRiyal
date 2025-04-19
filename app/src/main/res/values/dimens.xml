@@ -87,4 +87,8 @@
     <integer name="padding">16</integer>
     <integer name="fieldWidth">180</integer>
 
+    <!--NavBarItems Dimensions-->
+    <integer name="iconTopPadding">12</integer>
+    <integer name="labelBottomPadding">12</integer>
+
 </resources>
