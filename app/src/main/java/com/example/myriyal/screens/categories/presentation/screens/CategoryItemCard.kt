@@ -38,7 +38,8 @@ import com.example.myriyal.ui.theme.Black
 
 @Composable
 fun CategoryItemCard(
-    category: CategoryEntity, onEdit: () -> Unit, // When user clicks Edit
+    category: CategoryEntity,
+    onEdit: () -> Unit, // When user clicks Edit
     onSoftDelete: () -> Unit,     // When user clicks "Delete Button"
 ) {
     val viewModel: CategoryViewModel = hiltViewModel()

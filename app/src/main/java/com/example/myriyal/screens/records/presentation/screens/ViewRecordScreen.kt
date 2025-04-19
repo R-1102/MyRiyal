@@ -102,6 +102,5 @@ fun ViewRecordScreen() {
             modifier = Modifier
                 .align(Alignment.BottomEnd)
         )
-
     }
 }

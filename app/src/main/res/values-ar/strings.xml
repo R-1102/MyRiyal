@@ -41,12 +41,15 @@
     <string name="SelectIcon">إختر أيقونه</string>
     <string name="EnterBudgetAmount">إختر مبلغ الميزانية</string>
     <string name="StartingDate">تاريخ بدئ التتبع</string>
-    <string name="AddCategory">اضف التصنيف</string>
+    <string name="addCategory">اضف التصنيف</string>
+    <string name="updateCategory">حدث التصنيف</string>
+
     <string name="Save">حفظ</string>
     <string name="Cancel">إلغاء</string>
     <string name="icon">ايقونة</string>
     <string name="categoryType">نوع التصنيف</string>
     <string name="selectCategory">اختر الفئة</string>
+
     <string name="gift">هدايا</string>
     <string name="food">طعام</string>
     <string name="salary">راتب</string>
@@ -54,6 +57,7 @@
     <string name="health">صحة</string>
     <string name="transportation">تنقل</string>
     <string name="investment">استثمار</string>
+    <string name="noCategories">لا يوجد أي تصنيفات</string>
 
     <string name="ok">موافق</string>
     <string name="cancel">إلغاء</string>
