@@ -66,11 +66,14 @@
     <string name="balance">User Balance</string>
     <string name="editYourName">Edit Your Name</string>
     <string name="editYourBalance">Edit Your Balance</string>
+    <string name="logout">Logout</string>
+    <string name="profileInfo">Profile Info</string>
 
     <string name="records">Records</string>
     <string name="home">Home</string>
     <string name="categories">Categories</string>
     <string name="statistic">Statistic</string>
+    <string name="profile">Profile</string>
 
 </resources>
 

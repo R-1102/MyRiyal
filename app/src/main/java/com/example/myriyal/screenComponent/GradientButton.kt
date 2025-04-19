@@ -4,7 +4,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,39 +20,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myriyal.R
-import com.example.myriyal.ui.theme.firstDarkGreen
-import com.example.myriyal.ui.theme.firstGreen
-import com.example.myriyal.ui.theme.secondDarkGreen
-import com.example.myriyal.ui.theme.secondGreen
-import com.example.myriyal.ui.theme.thirdDarkGreen
-import com.example.myriyal.ui.theme.thirdGreen
 
 @Composable
 fun GradientButton(
     onClick: () -> Unit,
     text: String,
-    lightGradient: Brush = Brush.linearGradient(
+    gradient: Brush = Brush.linearGradient(
         colorStops = arrayOf(
-            0.2f to firstGreen,
-            0.9f to secondGreen,
-            1.0f to thirdGreen
+            0.2f to MaterialTheme.colorScheme.inversePrimary,
+            0.9f to MaterialTheme.colorScheme.inverseSurface,
+            1.0f to MaterialTheme.colorScheme.inverseOnSurface
         ),
         start = Offset(0f, 0f),
         end = Offset(0f, 130f)
     ),
-    darkGradient: Brush = Brush.linearGradient(
-        colorStops = arrayOf(
-            0.2f to firstDarkGreen,
-            0.9f to secondDarkGreen,
-            1.0f to thirdDarkGreen
-        ),
-        start = Offset(0f, 0f),
-        end = Offset(0f, 130f)
-    )
 ) {
-    val isDarkTheme = isSystemInDarkTheme()
-    val gradient = if (isDarkTheme) darkGradient else lightGradient
-
     Box(
         modifier = Modifier
             .fillMaxWidth()

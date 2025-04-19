@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import com.example.myriyal.navigation.AppNavigation
 import com.example.myriyal.ui.theme.MyRiyalTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,8 +28,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyRiyalTheme {
-                AppNavigation() // ← handles everything including nav and UI
+            val isDarkTheme = isSystemInDarkTheme()
+            val darkTheme = remember { mutableStateOf(isDarkTheme) }
+
+            MyRiyalTheme(darkTheme = darkTheme.value) {
+                AppNavigation(
+                    darkTheme = darkTheme.value,
+                    toggleTheme = { darkTheme.value = !darkTheme.value },
+                ) // ← handles everything including nav and UI
             }
         }
     }

@@ -42,7 +42,6 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
         Column(
             Modifier
                 .fillMaxWidth()
-                .padding(top = 100.dp),//to be deleted - mocking Top bar
         ) {
             // Category list section
             if (categories.isEmpty()) {
