@@ -1,5 +1,6 @@
 package com.example.myriyal.screens.authentication.presentation.screens
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,13 +42,37 @@ import com.example.myriyal.ui.theme.ThemedLogo
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
-
+    //VM Object
     val viewModel: LogInVM = hiltViewModel()
-
+    // Pass user input to VM
     val email = viewModel.email
     val password = viewModel.password
 
     var showPassword by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        viewModel.allEventsFlow.collect { event ->
+            when (event) {
+                is LogInVM.AllEvents.Message -> {
+                    // Show toast missing
+                    Log.d("LoginScreen", event.message)
+                }
+                is LogInVM.AllEvents.ErrorCode -> {
+                    // Show toast missing
+                    Log.e("LoginScreen", "Error ${event.code}: ${event.erMsg}")
+                }
+                is LogInVM.AllEvents.Error -> {
+                    Log.e("LoginScreen", "Error: ${event.error}")
+                }
+                is LogInVM.AllEvents.ShouldNavigate -> {
+                    navController.navigate(Screen.ViewRecord.route) {
+                        popUpTo(Screen.ViewRecord.route) { inclusive = true }
+                    }
+                }
+            }
+        }
+    }
+
 
     Column(
         modifier = Modifier
@@ -107,8 +133,7 @@ fun LoginScreen(navController: NavHostController) {
                     )
                 }
                 GradientButton(
-                    onClick = { viewModel.logInValidation()
-                        navController.navigate(Screen.ViewRecord.route) },
+                    onClick = { viewModel.logInValidation() },
                     text = stringResource(id = R.string.Login)
                 )
                 Spacer(modifier = Modifier.height(integerResource(id= R.integer.extraSmallSpace).dp))
