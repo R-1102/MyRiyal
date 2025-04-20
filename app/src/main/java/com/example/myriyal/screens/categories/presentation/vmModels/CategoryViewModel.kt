@@ -57,7 +57,6 @@ class CategoryViewModel @Inject constructor(
     val selectedCategory = mutableStateOf<CategoryEntity?>(null)
 
     // Input change functions, setting user input from UI in here to do the business logic
-
      fun onCategoryIconChange(value: String) {
          categoryIcon = value
      }

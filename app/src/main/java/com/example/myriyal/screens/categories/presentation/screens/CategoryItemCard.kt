@@ -45,6 +45,15 @@ fun CategoryItemCard(
     val viewModel: CategoryViewModel = hiltViewModel()
     val categoryBudgetAmount = viewModel.categoryBudgetAmount
 
+    val categoryColor = category.color
+
+    // Before using this variable it was causing a crash
+    val parsedCategoryColor = try {
+        Color(android.graphics.Color.parseColor(categoryColor))
+    } catch (e: IllegalArgumentException) {
+        MaterialTheme.colorScheme.primary // fallback color
+    }
+
     OutlinedCard(
         modifier = Modifier
             .fillMaxWidth()
@@ -60,7 +69,8 @@ fun CategoryItemCard(
         ),
         border = BorderStroke(
             integerResource(id = R.integer.borderStroke).dp,
-            Color(android.graphics.Color.parseColor(category.color))
+            parsedCategoryColor,
+            /*Color(android.graphics.Color.parseColor(category.color))*/
         ),
 
         ) {
@@ -154,12 +164,8 @@ fun CategoryItemCard(
                             tint = Black
                         )
                     }
-
                 }
             }
         }
     }
 }
-
-
-

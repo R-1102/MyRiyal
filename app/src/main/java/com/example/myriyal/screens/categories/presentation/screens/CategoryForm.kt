@@ -71,23 +71,23 @@ fun CategoryForm(
 
     val viewModel: CategoryViewModel = hiltViewModel()
 
-    var categoryName = initialCategory?.name
-    var categoryType = initialCategory?.type
-
-    var categoryColor = initialCategory?.color
+//    var categoryName = initialCategory?.name ?: ""
+//    var categoryType = initialCategory?.type ?: CategoryType.EXPENSE
+//
+//    var categoryColor = initialCategory?.color ?: ""
     val categoryColorController = rememberColorPickerController()
-    var categoryIcon = initialCategory?.icon
+//    var categoryIcon = initialCategory?.icon ?: ""
 
 //    val categoryBudget = initialCategory?.budget
-    var startDate = viewModel.startDate
-
+//    var startDate = viewModel.startDate?: System.currentTimeMillis()
+//
     fun resetForm() {
-        categoryName = ""
-        categoryType = CategoryType.EXPENSE
-        categoryColor = "0xFFFFFF"
-        categoryIcon = null
+        viewModel.categoryName.value = ""
+        viewModel.categoryType.value = CategoryType.EXPENSE
+//        categoryColor = "0xFFFFFF"
+        viewModel.categoryIcon = ""
 //        categoryBudget = 0.0
-        startDate = null
+        viewModel.startDate = System.currentTimeMillis()
     }
 
 //    Box(
@@ -122,8 +122,8 @@ fun CategoryForm(
 
             //category name
             CustomTextField(
-                value = categoryName.toString(),
-                onValueChange = { viewModel.categoryName.value = it },
+                value = viewModel.categoryName.value,
+                onValueChange = {/* categoryName = it*/viewModel.categoryName.value = it },
 //                    onValueChange = viewModel::onCategoryNameChange,/*{ categoryName = it },*/
                 label = stringResource(R.string.EnterCategoryName),
                 singleLine = true,
@@ -133,7 +133,7 @@ fun CategoryForm(
 
             //category type
             CustomDropdown(
-                value = categoryType.toString().lowercase(),
+                value = viewModel.categoryType.value.toString().lowercase(), /*categoryType.toString().lowercase(),*/
                 onValueChange = { viewModel.categoryType.value.toString().lowercase() },
                 label = stringResource(R.string.categoryType),
 //                    selected = categoryType,
@@ -192,12 +192,13 @@ fun CategoryForm(
             }
             Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
+            //Category icon
             CustomDropdown(
-                value = categoryIcon.toString(),
-                onValueChange = viewModel::onCategoryIconChange,
+                value = viewModel.categoryIcon,/*categoryIcon.toString(),*/
+                onValueChange = {viewModel.categoryIcon = it},/*viewModel::onCategoryIconChange,*/
                 label = stringResource(R.string.SelectIcon),
                 list = iconsList,
-                onSelect = { categoryIcon = it },
+                onSelect = { viewModel.categoryIcon/*categoryIcon*/ = it },
             )
             Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
@@ -213,7 +214,7 @@ fun CategoryForm(
 
             //tracker start date
             var showDatePicker by remember { mutableStateOf(false) }
-            val formattedDate = startDate?.let {
+            val formattedDate = viewModel.startDate?.let {
                 DateFormat.getDateInstance().format(Date(it))
             } ?: ""
             CustomTextField(
@@ -234,7 +235,9 @@ fun CategoryForm(
             if (showDatePicker) {
                 DatePickerModal(
                     onDateSelected = { millis ->
-                        startDate = millis
+                        if (millis != null) {
+                            viewModel.startDate = millis
+                        }
                         showDatePicker = false
                     },
                     onDismiss = { showDatePicker = false }
@@ -248,12 +251,12 @@ fun CategoryForm(
                     val timestamp = System.currentTimeMillis()
                     val category = CategoryEntity(
                         categoryId = initialCategory?.categoryId ?: 0,
-                        name = categoryName.toString(),
+                        name = viewModel.categoryName.toString(),
                         color = String.format(
                             "#%06X",
                             0xFFFFFF and categoryColorController.selectedColor.value.toArgb()
                         ),
-                        icon = categoryIcon,
+                        icon = viewModel.categoryIcon,
                         type = /*categoryType,*/viewModel.categoryType.value,
                         status = CategoryStatus.ACTIVE,
                         isPredefined = false,
