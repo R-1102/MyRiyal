@@ -59,8 +59,19 @@ class RecordRepositoryImpl @Inject constructor(
     }
 
 
+    /**
+     * Returns the user's total balance (income - expenses).
+     */
     override fun getTotalBalance(): Flow<Double> {
         return dao.getTotalBalance()
     }
 
+
+    /**
+     * Searches records by name using a LIKE query.
+     * Used by: Search bar in ViewRecordScreen.
+     */
+    override fun searchRecordsByName(query: String): Flow<List<RecordEntity>> {
+        return dao.searchRecordsByName(query) // ✅ New use case added
+    }
 }

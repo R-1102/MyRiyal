@@ -83,7 +83,7 @@
     <integer name="borderStroke">2</integer>
 
     <!--Profile Dimensions-->
-    <integer name="profileTopperSpace">64</integer>
+    <integer name="profileTopperSpace">36</integer> <!--I change this it was 64 -->
     <integer name="profileIconSize">200</integer>
     <integer name="padding">16</integer>
     <integer name="fieldWidth">180</integer>
@@ -93,7 +93,11 @@
     <integer name="labelBottomPadding">12</integer>
 
     <!--Top Bar Dimensions-->
-    <integer name="topBarMenuHeight">112</integer>
+    <integer name="menuHeight">112</integer>
     <integer name="topBarMenuWidth">192</integer>
+
+    <!--Filter Menu-->
+    <integer name="menuWidth">160</integer>
+
 
 </resources>

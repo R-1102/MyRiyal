@@ -16,19 +16,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.integerResource
-import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
-import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.screenComponent.CustomDialog
 import com.example.myriyal.screenComponent.CustomFloatingActionButton
+import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.FilterSelector
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 
-//need to move the logic to viewmodel
+
 @Composable
 fun ViewRecordScreen() {
 
@@ -42,6 +39,10 @@ fun ViewRecordScreen() {
     val selectedFilter by recordViewModel.filter.collectAsState()
 
     val shouldShowDialog = remember { mutableStateOf(false) } // 1
+
+    //Added: collects live search input from ViewModel
+    val searchQuery by recordViewModel.searchQuery.collectAsState()
+
 
     if (shouldShowDialog.value) {
         CustomDialog(
@@ -75,6 +76,12 @@ fun ViewRecordScreen() {
             Modifier
                 .fillMaxWidth()
         ) {
+            CustomTextField(
+                value = searchQuery, //Uses reactive state from ViewModel
+                onValueChange = { recordViewModel.setSearchQuery(it) }, //Updates query in ViewModel
+                label = "Search by name"
+            )
+
             FilterSelector(
                 selectedFilter = selectedFilter,
                 onFilterSelected = { recordViewModel.setFilter(it) }

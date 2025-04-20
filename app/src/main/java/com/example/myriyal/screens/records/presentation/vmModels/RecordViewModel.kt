@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -45,15 +46,43 @@ class RecordViewModel @Inject constructor(
     // --------------------------
     // Record State (Filtered)
     // --------------------------
+    // --------------------------
+    // Search State (NEWLY ADDED)
+    // --------------------------
+
+        private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery
 
     /**
-     * Emits a filtered list of records based on the selected filter type (day/week/month/year/all).
-     * The flow automatically recomputes when either the list of records OR the filter value changes.
-     *
-     * Used by: RecordScreen UI
+     * Called when the user types into the search bar.
+     * Updates the internal search query state which triggers filtering.
      */
+    fun setSearchQuery(query: String) {
+        _searchQuery.value = query
+    }
+
+    /**
+     * Combined logic for search and filter.
+     *
+     * First:
+     * - If the search query is blank → return all records
+     * - Otherwise → run a search query on names using LIKE
+     *
+     * Second:
+     * - Applies the selected time filter (DAY, WEEK, etc.)
+     *
+     * Result:
+     * - Emits a final list of records that match both search and time filters
+     */
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     val records: StateFlow<List<RecordEntity>> = combine(
-        useCases.getAllRecords(), // Fetches all records from database
+        _searchQuery.flatMapLatest { query ->
+            if (query.isBlank()) {
+                useCases.getAllRecords() // Get all if nothing typed
+            } else {
+                useCases.searchRecordsByName(query) // Otherwise filter by name
+            }
+        },     // Fetches all records from database
         _filter // Current selected filter (day, week, etc.)
     ) { records, filterType ->
         val now = System.currentTimeMillis()
@@ -256,5 +285,4 @@ class RecordViewModel @Inject constructor(
     // --------------------------
     val balance: StateFlow<Double> = useCases.getTotalBalance()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0.0)
-
 }
