@@ -93,4 +93,9 @@ interface RecordDao {
     suspend fun calculateTotalBalance(): Double
 
 
+
+    // Search records by name using a LIKE query. Returns results ordered by date (newest first).
+    @Query("SELECT * FROM record WHERE name LIKE '%' || :query || '%' ORDER BY date DESC")
+    fun searchRecordsByName(query: String): Flow<List<RecordEntity>>
+
 }

@@ -82,7 +82,7 @@
     <integer name="borderStroke">2</integer>
 
     <!--Profile Dimensions-->
-    <integer name="profileTopperSpace">64</integer>
+    <integer name="profileTopperSpace">36</integer> <!--I change this it was 64 -->
     <integer name="profileIconSize">200</integer>
     <integer name="padding">16</integer>
     <integer name="fieldWidth">180</integer>

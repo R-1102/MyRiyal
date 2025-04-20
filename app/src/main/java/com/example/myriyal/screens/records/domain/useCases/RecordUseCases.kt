@@ -18,6 +18,7 @@ package com.example.myriyal.screens.records.domain.useCases
  * - getByCategory: Retrieves records filtered by category.
  * - getRecordById: Gets a single record (e.g., for editing).
  * - getTotalBalance: Calculates the overall balance (income - expenses).
+ * - searchRecordsByName: Searches records by name (for search bar functionality).
  */
 data class RecordUseCases(
     val insert: InsertRecordUseCase,
@@ -26,6 +27,6 @@ data class RecordUseCases(
     val getAllRecords: GetAllRecordsUseCase,
     val getByCategory: GetRecordsByCategoryUseCase,
     val getRecordById: GetRecordByIdUseCase,
-    val getTotalBalance: GetTotalBalanceUseCase
-
+    val getTotalBalance: GetTotalBalanceUseCase,
+    val searchRecordsByName: SearchRecordsByNameUseCase
 )
