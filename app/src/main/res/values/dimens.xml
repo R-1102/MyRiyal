@@ -92,7 +92,11 @@
     <integer name="labelBottomPadding">12</integer>
 
     <!--Top Bar Dimensions-->
-    <integer name="topBarMenuHeight">112</integer>
+    <integer name="menuHeight">112</integer>
     <integer name="topBarMenuWidth">192</integer>
+
+    <!--Filter Menu-->
+    <integer name="menuWidth">160</integer>
+
 
 </resources>

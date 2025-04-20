@@ -75,5 +75,8 @@
     <string name="statistic">Statistic</string>
     <string name="profile">Profile</string>
 
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+
 </resources>
 
