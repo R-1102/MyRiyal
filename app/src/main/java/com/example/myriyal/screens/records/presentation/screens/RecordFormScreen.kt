@@ -12,13 +12,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -48,14 +48,20 @@ fun RecordFormScreen(
 
     val recordViewModel: RecordViewModel = hiltViewModel()
 
+    LaunchedEffect(Unit) {
+        initialRecord?.let {
+            recordViewModel.populateForm(it, categories)
+        }
+    }
+
 
     // Form state
-    var recordName by remember { mutableStateOf(initialRecord?.name ?: "") }
-    var description by remember { mutableStateOf(initialRecord?.description ?: "") }
-    var amount by remember { mutableStateOf(initialRecord?.amount?.toString() ?: "") }
-    var selectedCategory by remember {
-        mutableStateOf(categories.find { it.categoryId == initialRecord?.categoryId })
-    }
+    var recordName by recordViewModel.name
+    var description by recordViewModel.description
+    var amount by recordViewModel.amount
+    var selectedCategory by recordViewModel.selectedCategory
+
+
     var recordDate by remember {
         mutableStateOf<Long?>(
             initialRecord?.date ?: System.currentTimeMillis()
