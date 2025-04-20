@@ -28,6 +28,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -70,31 +71,38 @@ fun CategoryForm(
 ) {
 
     val viewModel: CategoryViewModel = hiltViewModel()
-
-//    var categoryName = initialCategory?.name ?: ""
-//    var categoryType = initialCategory?.type ?: CategoryType.EXPENSE
-//
-//    var categoryColor = initialCategory?.color ?: ""
     val categoryColorController = rememberColorPickerController()
-//    var categoryIcon = initialCategory?.icon ?: ""
 
-//    val categoryBudget = initialCategory?.budget
-//    var startDate = viewModel.startDate?: System.currentTimeMillis()
-//
+    LaunchedEffect(initialCategory) {
+        if (initialCategory != null) {
+            viewModel.categoryName.value = initialCategory.name
+            viewModel.categoryType.value = initialCategory.type
+            viewModel.categoryIcon = initialCategory.icon.toString()
+//            viewModel.categoryBudgetAmount = initialCategory.categoryBudgetAmount
+            viewModel.startDate = initialCategory.createdAt
+//            viewModel.categoryColor.value =
+//                Color(android.graphics.Color.parseColor(initialCategory.color))
+
+        } else {
+            viewModel.categoryName.value = ""
+            viewModel.categoryType.value = CategoryType.EXPENSE
+            viewModel.categoryIcon = "🔥"
+//            viewModel.categoryBudgetAmount = 0.0
+            viewModel.startDate = System.currentTimeMillis()
+            // Default color
+//            viewModel.categoryColor.value = Color.White
+        }
+    }
+
     fun resetForm() {
         viewModel.categoryName.value = ""
         viewModel.categoryType.value = CategoryType.EXPENSE
-//        categoryColor = "0xFFFFFF"
+//        viewModel.categoryColor = "0xFFFFFF"
         viewModel.categoryIcon = ""
 //        categoryBudget = 0.0
         viewModel.startDate = System.currentTimeMillis()
     }
 
-//    Box(
-//        modifier = Modifier.fillMaxSize(),
-//        contentAlignment = Alignment.Center,
-//
-//        ) {
     CustomCard(
         modifier = Modifier
             .fillMaxWidth(),
@@ -111,8 +119,8 @@ fun CategoryForm(
             Text(
                 text = if (initialCategory == null) stringResource(id = R.string.addCategory)
                 else stringResource(id = R.string.updateCategory),
-                fontSize = integerResource(id = R.integer.cardHeaderSize).sp,
-                fontWeight = FontWeight.Bold,
+                fontSize = integerResource(id = R.integer.categoryCardHeaderSize).sp,
+                fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(
                     top = integerResource(id = R.integer.cardHeaderTopPadding).dp,
@@ -186,6 +194,13 @@ fun CategoryForm(
                         ColorPicker(
                             title = stringResource(R.string.ChooseColor),
                             categoryColor = categoryColorController,
+//                            onColorSelected = {
+//                                    enteredColor: Color ->
+//                                categoryColorController.selectedColor.value = enteredColor
+//                                showDialog.value = false
+//                            },
+//                            onDismiss = {
+//                                showDialog.value = false},
                         )
                     }
                 }
@@ -251,7 +266,7 @@ fun CategoryForm(
                     val timestamp = System.currentTimeMillis()
                     val category = CategoryEntity(
                         categoryId = initialCategory?.categoryId ?: 0,
-                        name = viewModel.categoryName.toString(),
+                        name = viewModel.categoryName.value,
                         color = String.format(
                             "#%06X",
                             0xFFFFFF and categoryColorController.selectedColor.value.toArgb()
@@ -268,9 +283,6 @@ fun CategoryForm(
                     else viewModel.update(category)
                     onSubmit(category)
 
-                    // Reset after save
-//                        viewModel.categoryName.value = ""
-//                        viewModel.categoryIcon = ""
                 },
                 text = if (initialCategory == null) stringResource(id = R.string.addCategory) else stringResource(
                     id = R.string.updateCategory
@@ -287,5 +299,4 @@ fun CategoryForm(
             )
         }
     }
-//    }
 }

@@ -69,9 +69,9 @@ fun ViewProfile() {
 
             //We need to use VM after implementing it instead of remember
             // the default name should be the user name from the DB
-            var userName by profileViewModel.userName
+            val userName by profileViewModel.userName
             // the default balance should be the user balance from the DB
-            var balance by profileViewModel.balance
+            val balance by profileViewModel.balance
 
             //Row for the user name
             Row(

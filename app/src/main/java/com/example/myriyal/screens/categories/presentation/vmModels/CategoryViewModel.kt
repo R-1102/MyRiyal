@@ -78,6 +78,7 @@ class CategoryViewModel @Inject constructor(
             initialValue = emptyList()
         )
 
+
     // -------------------- Category Actions --------------------
 
     /** Triggered when a user adds a new category in the UI */
