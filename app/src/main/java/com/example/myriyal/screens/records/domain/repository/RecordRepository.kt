@@ -68,4 +68,15 @@ interface RecordRepository {
      */
     fun getTotalBalance(): Flow<Double>
 
+
+    /**
+     * Searches records by name using a partial match query (LIKE %query%).
+     * Returns a reactive list of matching records ordered by latest date first.
+     * Used in the search feature to dynamically filter records based on input.
+     *
+     * Called from: [SearchRecordsByNameUseCase] → [RecordViewModel] → UI
+     */
+    fun searchRecordsByName(query: String): Flow<List<RecordEntity>>
+
+
 }

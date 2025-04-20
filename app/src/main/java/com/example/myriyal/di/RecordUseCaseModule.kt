@@ -9,6 +9,7 @@ import com.example.myriyal.screens.records.domain.useCases.GetRecordsByCategoryU
 import com.example.myriyal.screens.records.domain.useCases.GetTotalBalanceUseCase
 import com.example.myriyal.screens.records.domain.useCases.InsertRecordUseCase
 import com.example.myriyal.screens.records.domain.useCases.RecordUseCases
+import com.example.myriyal.screens.records.domain.useCases.SearchRecordsByNameUseCase
 import com.example.myriyal.screens.records.domain.useCases.UpdateRecordUseCase
 import dagger.Module
 import dagger.Provides
@@ -33,7 +34,8 @@ object RecordUseCaseModule {
             getAllRecords = GetAllRecordsUseCase(repository),
             getRecordById = GetRecordByIdUseCase(repository),
             getByCategory = GetRecordsByCategoryUseCase(repository),
-            getTotalBalance = GetTotalBalanceUseCase(repository)
+            getTotalBalance = GetTotalBalanceUseCase(repository),
+            searchRecordsByName = SearchRecordsByNameUseCase(repository)
         )
     }
 }
