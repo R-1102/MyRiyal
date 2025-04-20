@@ -77,4 +77,7 @@
     <string name="statistic">الإحصائيات</string>
     <string name="profile">الملف الشخصي</string>
 
+    <string name="income">الايرادات</string>
+    <string name="expense">المصروفات</string>
+
 </resources>
