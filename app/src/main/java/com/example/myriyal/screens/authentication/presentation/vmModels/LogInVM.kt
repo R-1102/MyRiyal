@@ -55,12 +55,16 @@ class LogInVM @Inject constructor(
     }
 
     // Actual login logic
-    private fun performLogIn(email: String, password: String) = viewModelScope.launch {
+    private fun performLogIn(
+        email: String,
+        password: String
+    ) = viewModelScope.launch {
         try {
             val user = logInUseCase.logInWithEmailPassword(email, password)
             user?.let {
                 _firebaseUser.value = it
                 eventsChannel.send(AllEvents.Message("Logged in successfully"))
+                eventsChannel.send(AllEvents.ShouldNavigate)
             } ?: run {
                 eventsChannel.send(AllEvents.Error("User is null"))
             }
@@ -75,5 +79,6 @@ class LogInVM @Inject constructor(
         data class Message(val message: String) : AllEvents()
         data class ErrorCode(val code: Int, val erMsg: String) : AllEvents()
         data class Error(val error: String) : AllEvents()
+        object ShouldNavigate : AllEvents()
     }
 }
