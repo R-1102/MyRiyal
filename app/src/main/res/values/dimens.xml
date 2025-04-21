@@ -99,5 +99,9 @@
     <!--Filter Menu-->
     <integer name="menuWidth">160</integer>
 
+    <!--Search Field-->
+    <integer name="searchFieldHeight">52</integer>
+    <integer name="roundedCornerSearchField">84</integer>
+
 
 </resources>
