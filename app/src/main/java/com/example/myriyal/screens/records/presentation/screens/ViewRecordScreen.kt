@@ -22,6 +22,7 @@ import com.example.myriyal.screenComponent.CustomDialog
 import com.example.myriyal.screenComponent.CustomFloatingActionButton
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.FilterSelector
+import com.example.myriyal.screenComponent.SearchField
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 
@@ -76,10 +77,9 @@ fun ViewRecordScreen() {
             Modifier
                 .fillMaxWidth()
         ) {
-            CustomTextField(
+            SearchField(
                 value = searchQuery, //Uses reactive state from ViewModel
                 onValueChange = { recordViewModel.setSearchQuery(it) }, //Updates query in ViewModel
-                label = "Search by name"
             )
 
             FilterSelector(
