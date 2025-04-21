@@ -80,6 +80,7 @@
 
     <string name="income">Income</string>
     <string name="expense">Expense</string>
+    <string name="showAll">Show All</string>
 
     <string name="viewMore">View More</string>
     <string name="balance">Balance</string>

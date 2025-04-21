@@ -12,6 +12,7 @@ import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.core.local.enums.CategoryType
 import com.example.myriyal.screens.categories.domian.useCases.CategoryUseCases
+import com.example.myriyal.screens.categories.presentation.model.CategoryFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +20,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
+
 
 // ViewModel for the Category feature.
 // This class belongs to the presentation layer and acts as the middle layer between the UI and the domain layer (use cases).
@@ -77,6 +81,26 @@ class CategoryViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
+
+    val selectedFilter = MutableStateFlow<CategoryFilter>(CategoryFilter.All)
+
+    val filteredCategories: StateFlow<List<CategoryEntity>> = combine(categories, selectedFilter) { categories, filter ->
+        when (filter) {
+            CategoryFilter.All -> categories
+            is CategoryFilter.ByType -> categories.filter { it.type == filter.type }
+//            CategoryFilter.HasBudget -> categories.filter { it.budgetAmount > 0.0 }
+//            CategoryFilter.NoBudget -> categories.filter { it.budgetAmount == 0.0 }
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
+
+    fun setFilter(filter: CategoryFilter) {
+        selectedFilter.value = filter
+    }
+
 
 
     // -------------------- Category Actions --------------------

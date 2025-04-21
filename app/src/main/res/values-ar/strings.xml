@@ -83,6 +83,7 @@
 
     <string name="income">الايرادات</string>
     <string name="expense">المصروفات</string>
+    <string name="showAll">عرض الكل</string>
 
     <string name="viewMore">عرض المزيد</string>
     <string name="balance">الرصيد</string>

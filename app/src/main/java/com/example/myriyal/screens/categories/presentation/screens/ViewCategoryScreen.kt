@@ -40,7 +40,7 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
         categoryViewModel.seedPredefinedCategories()
     }
 
-    val categories by categoryViewModel.categories.collectAsState()
+    val categories by categoryViewModel.filteredCategories.collectAsState()
     var isDropdownExpanded by remember { mutableStateOf(false) }
 
     val showCategoryFormDialog = remember { mutableStateOf(false) }
