@@ -69,7 +69,7 @@
     <string name="filterAll">الكل</string>
 
     <string name="userName">اسم المستخدم</string>
-    <string name="balance">رصيد المستخدم</string>
+    <string name="userBalance">رصيد المستخدم</string>
     <string name="editYourName">حدث إسمك</string>
     <string name="editYourBalance">حدث رصيدك</string>
     <string name="logout">تسجيل الخروج</string>
@@ -83,5 +83,11 @@
 
     <string name="income">الايرادات</string>
     <string name="expense">المصروفات</string>
+
+    <string name="viewMore">عرض المزيد</string>
+    <string name="balance">الرصيد</string>
+    <string name="categoryChart">الرسم بياني للفئات </string>
+    <string name="latestRecords">احدث السجلات</string>
+
 
 </resources>
