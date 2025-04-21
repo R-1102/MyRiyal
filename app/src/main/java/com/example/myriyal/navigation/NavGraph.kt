@@ -41,7 +41,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.ViewCategory.route,
+        startDestination = Screen.Home.route,
         modifier = modifier
     ) {
         // Authentication Screens with animation -- maybe for the home screen too (slide in) --
