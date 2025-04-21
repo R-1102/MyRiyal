@@ -7,10 +7,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.navigation.bottomBar.BottomNavigationBar
 import com.example.myriyal.navigation.topBar.TopNavigationBar
+import com.example.myriyal.screens.authentication.domain.useCases.LogOutUseCase
+import com.example.myriyal.screens.authentication.presentation.vmModels.LogOutVM
 
 /**
  * Root Composable function to initialize and launch the MyRiyal app.
@@ -36,6 +39,8 @@ fun AppNavigation(darkTheme: Boolean, toggleTheme: () -> Unit) {
     // Observe current back stack entry to determine current screen
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+
+    val ViewModel: AppNavigationVM = hiltViewModel()
 
     // Define routes where the bottom bar should NOT be shown
     val bottomBarHiddenRoutes = listOf(
@@ -64,14 +69,19 @@ fun AppNavigation(darkTheme: Boolean, toggleTheme: () -> Unit) {
                     darkTheme,
                     toggleTheme,
                     onLogout = {
-                        // Handle logout logic
+                    ViewModel.performLogout { success ->
+                        if (success) {
+                            // Navigate back to login screen
+                            navController.navigate("Login_screen") {
+                                popUpTo("Home_screen") { inclusive = true }
+                            }
+                        }
+                    }
                     },
                 )
             }
-        },
-
-        ) { innerPadding ->
-        // Inject NavGraph inside Scaffold with correct inner padding
+        }
+    ) { innerPadding ->
         NavGraph(
             navController = navController,
             modifier = Modifier.padding(innerPadding)
