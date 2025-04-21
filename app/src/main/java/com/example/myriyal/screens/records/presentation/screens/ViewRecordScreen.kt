@@ -108,6 +108,7 @@ fun ViewRecordScreen() {
             onClick = { shouldShowDialog.value = true },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
+                .padding(integerResource(R.integer.padding).dp)
         )
     }
 }

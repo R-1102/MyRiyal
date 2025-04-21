@@ -30,6 +30,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
 import com.example.myriyal.screenComponent.CustomDialog
 import com.example.myriyal.screenComponent.CustomFloatingActionButton
+import com.example.myriyal.screenComponent.SearchField
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 
 @Composable
@@ -43,7 +44,7 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
     var isDropdownExpanded by remember { mutableStateOf(false) }
 
     val showCategoryFormDialog = remember { mutableStateOf(false) }
-    if(showCategoryFormDialog.value){
+    if (showCategoryFormDialog.value) {
         CustomDialog(
             shouldShowDialog = showCategoryFormDialog,
             content = {
@@ -78,17 +79,27 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
                     .fillMaxWidth()
                     .padding(vertical = integerResource(id = R.integer.extraSmallSpace).dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.End
+                horizontalArrangement = Arrangement.Center
             ) {
-                Box {
+                SearchField(
+                    value = "" /*categoryViewModel.searchQuery.value*/,
+                    onValueChange = {/* categoryViewModel.searchQuery.value = it */ },
+                    modifier = Modifier
+                        .weight(1f)
+                )
+                Box{
                     IconButton(
                         onClick = { isDropdownExpanded = true },
+                        modifier = Modifier
+                            .padding(start = integerResource(id = R.integer.smallerSpace).dp)
+
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.filter),
                             contentDescription = "Filter",
                             tint = MaterialTheme.colorScheme.onPrimary,
-                        )
+
+                            )
                     }
 
                     CategoryFilterDropdown(

@@ -54,7 +54,6 @@
     <integer name="colorFieldHeight">56</integer>
     <integer name="colorSampleSize">32</integer>
     <integer name="tonalElevation">8</integer>
-    <integer name="categoryCardHeaderSize">20</integer>
 
     <!--Dropdown Lists Dimensions-->
     <integer name="dropDownWidth">288</integer>

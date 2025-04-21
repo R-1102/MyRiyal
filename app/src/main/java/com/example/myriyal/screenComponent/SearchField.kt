@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.integerResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
 
@@ -21,11 +22,12 @@ import com.example.myriyal.R
 fun SearchField(
     value: String,
     onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        placeholder = { Text(text = "Search") },
+        placeholder = { Text(text = stringResource(id = R.string.search)) },
         trailingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
@@ -42,7 +44,7 @@ fun SearchField(
             focusedTextColor = MaterialTheme.colorScheme.onPrimary,
         ),
 
-        modifier = Modifier
+        modifier = modifier
             .padding(horizontal = integerResource(id = R.integer.extraSmallSpace).dp)
             .height(integerResource(id = R.integer.searchFieldHeight).dp)
             .fillMaxWidth(),

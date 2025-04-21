@@ -2,11 +2,9 @@ package com.example.myriyal.screens.categories.presentation.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -37,7 +35,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -52,7 +49,6 @@ import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.core.local.enums.CategoryType
 import com.example.myriyal.screenComponent.CancelButton
-import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.DatePickerModal
 import com.example.myriyal.screenComponent.GradientButton
@@ -103,97 +99,93 @@ fun CategoryForm(
         viewModel.startDate = System.currentTimeMillis()
     }
 
-    CustomCard(
+    Column(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
     ) {
-        Column(
-            modifier = Modifier
-                .padding(integerResource(id = R.integer.columnPadding).dp)
-                .fillMaxWidth()
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        ) {
 
-            Text(
-                text = if (initialCategory == null) stringResource(id = R.string.addCategory)
-                else stringResource(id = R.string.updateCategory),
-                fontSize = integerResource(id = R.integer.categoryCardHeaderSize).sp,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(
-                    top = integerResource(id = R.integer.cardHeaderTopPadding).dp,
-                    bottom = integerResource(id = R.integer.cardHeaderBottomPadding).dp
-                )
+        Text(
+            text = if (initialCategory == null) stringResource(id = R.string.addCategory)
+            else stringResource(id = R.string.updateCategory),
+            fontSize = integerResource(id = R.integer.cardHeaderSize).sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(
+                top = integerResource(id = R.integer.cardHeaderTopPadding).dp,
+                bottom = integerResource(id = R.integer.cardHeaderBottomPadding).dp
             )
+        )
 
-            //category name
-            CustomTextField(
-                value = viewModel.categoryName.value,
-                onValueChange = {/* categoryName = it*/viewModel.categoryName.value = it },
+        //category name
+        CustomTextField(
+            value = viewModel.categoryName.value,
+            onValueChange = {/* categoryName = it*/viewModel.categoryName.value = it },
 //                    onValueChange = viewModel::onCategoryNameChange,/*{ categoryName = it },*/
-                label = stringResource(R.string.EnterCategoryName),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            )
-            Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+            label = stringResource(R.string.EnterCategoryName),
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+        )
+        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-            //category type
-            CustomDropdown(
-                value = viewModel.categoryType.value.toString().lowercase(), /*categoryType.toString().lowercase(),*/
-                onValueChange = { viewModel.categoryType.value.toString().lowercase() },
-                label = stringResource(R.string.categoryType),
+        //category type
+        CustomDropdown(
+            value = viewModel.categoryType.value.toString()
+                .lowercase(), /*categoryType.toString().lowercase(),*/
+            onValueChange = { viewModel.categoryType.value.toString().lowercase() },
+            label = stringResource(R.string.categoryType),
 //                    selected = categoryType,
-                list = CategoryType.entries,
-                onSelect = { viewModel.categoryType.value = it }
-            )
-            Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+            list = CategoryType.entries,
+            onSelect = { viewModel.categoryType.value = it }
+        )
+        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-            //category color selection
-            val showDialog = remember { mutableStateOf(false) }
-            OutlinedButton(
-                onClick = { showDialog.value = true },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Transparent
-                ),
-                shape = RoundedCornerShape(integerResource(R.integer.RoundedCornerShape).dp),
-                modifier = Modifier
-                    .width(integerResource(R.integer.colorFieldWidth).dp)
-                    .height(integerResource(R.integer.colorFieldHeight).dp)
+        //category color selection
+        val showDialog = remember { mutableStateOf(false) }
+        OutlinedButton(
+            onClick = { showDialog.value = true },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Transparent
+            ),
+            shape = RoundedCornerShape(integerResource(R.integer.RoundedCornerShape).dp),
+            modifier = Modifier
+                .width(integerResource(R.integer.colorFieldWidth).dp)
+                .height(integerResource(R.integer.colorFieldHeight).dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        stringResource(R.string.ChooseColor),
-                        color = Color.DarkGray,
-                        textAlign = TextAlign.Start,
-                    )
-                    //a Circle to show the selected color
-                    Card(
-                        modifier = Modifier
-                            .size(integerResource(R.integer.colorSampleSize).dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = categoryColorController.selectedColor.value
-                        ),
-                        shape = CircleShape,
-                    ) {}
-                }
+                Text(
+                    stringResource(R.string.ChooseColor),
+                    color = Color.DarkGray,
+                    textAlign = TextAlign.Start,
+                )
+                //a Circle to show the selected color
+                Card(
+                    modifier = Modifier
+                        .size(integerResource(R.integer.colorSampleSize).dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = categoryColorController.selectedColor.value
+                    ),
+                    shape = CircleShape,
+                ) {}
             }
-            // Show the dialog when showDialog is true
-            if (showDialog.value) {
-                Dialog(onDismissRequest = { showDialog.value = false }) {
-                    Surface(
-                        shape = RoundedCornerShape(integerResource(R.integer.RoundedCornerShape).dp),
-                        color = MaterialTheme.colorScheme.surface,
-                        tonalElevation = integerResource(R.integer.tonalElevation).dp
-                    ) {
-                        ColorPicker(
-                            title = stringResource(R.string.ChooseColor),
-                            categoryColor = categoryColorController,
+        }
+        // Show the dialog when showDialog is true
+        if (showDialog.value) {
+            Dialog(onDismissRequest = { showDialog.value = false }) {
+                Surface(
+                    shape = RoundedCornerShape(integerResource(R.integer.RoundedCornerShape).dp),
+                    color = MaterialTheme.colorScheme.surface,
+                    tonalElevation = integerResource(R.integer.tonalElevation).dp
+                ) {
+                    ColorPicker(
+                        title = stringResource(R.string.ChooseColor),
+                        categoryColor = categoryColorController,
 //                            onColorSelected = {
 //                                    enteredColor: Color ->
 //                                categoryColorController.selectedColor.value = enteredColor
@@ -201,21 +193,21 @@ fun CategoryForm(
 //                            },
 //                            onDismiss = {
 //                                showDialog.value = false},
-                        )
-                    }
+                    )
                 }
             }
-            Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+        }
+        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-            //Category icon
-            CustomDropdown(
-                value = viewModel.categoryIcon,/*categoryIcon.toString(),*/
-                onValueChange = {viewModel.categoryIcon = it},/*viewModel::onCategoryIconChange,*/
-                label = stringResource(R.string.SelectIcon),
-                list = iconsList,
-                onSelect = { viewModel.categoryIcon/*categoryIcon*/ = it },
-            )
-            Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+        //Category icon
+        CustomDropdown(
+            value = viewModel.categoryIcon,/*categoryIcon.toString(),*/
+            onValueChange = { viewModel.categoryIcon = it },/*viewModel::onCategoryIconChange,*/
+            label = stringResource(R.string.SelectIcon),
+            list = iconsList,
+            onSelect = { viewModel.categoryIcon/*categoryIcon*/ = it },
+        )
+        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
 //                //budget amount (commented until we implement the tracker table)
 //                CustomTextField(
@@ -227,76 +219,75 @@ fun CategoryForm(
 //                )
 //                Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-            //tracker start date
-            var showDatePicker by remember { mutableStateOf(false) }
-            val formattedDate = viewModel.startDate?.let {
-                DateFormat.getDateInstance().format(Date(it))
-            } ?: ""
-            CustomTextField(
-                value = formattedDate,
-                onValueChange = {},
-                label = stringResource(R.string.StartingDate),
-                readOnly = true,
-                modifier = Modifier,
-                trailingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.DateRange,
-                        contentDescription = "Pick date",
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.clickable { showDatePicker = true },
-                    )
-                }
-            )
-            if (showDatePicker) {
-                DatePickerModal(
-                    onDateSelected = { millis ->
-                        if (millis != null) {
-                            viewModel.startDate = millis
-                        }
-                        showDatePicker = false
-                    },
-                    onDismiss = { showDatePicker = false }
+        //tracker start date
+        var showDatePicker by remember { mutableStateOf(false) }
+        val formattedDate = viewModel.startDate?.let {
+            DateFormat.getDateInstance().format(Date(it))
+        } ?: ""
+        CustomTextField(
+            value = formattedDate,
+            onValueChange = {},
+            label = stringResource(R.string.StartingDate),
+            readOnly = true,
+            modifier = Modifier,
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Default.DateRange,
+                    contentDescription = "Pick date",
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.clickable { showDatePicker = true },
                 )
             }
-            Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
-
-            //save button
-            GradientButton(
-                onClick = {
-                    val timestamp = System.currentTimeMillis()
-                    val category = CategoryEntity(
-                        categoryId = initialCategory?.categoryId ?: 0,
-                        name = viewModel.categoryName.value,
-                        color = String.format(
-                            "#%06X",
-                            0xFFFFFF and categoryColorController.selectedColor.value.toArgb()
-                        ),
-                        icon = viewModel.categoryIcon,
-                        type = /*categoryType,*/viewModel.categoryType.value,
-                        status = CategoryStatus.ACTIVE,
-                        isPredefined = false,
-                        createdAt = initialCategory?.createdAt ?: timestamp,
-                        updatedAt = timestamp
-                    )
-
-                    if (initialCategory == null) viewModel.insert(category)
-                    else viewModel.update(category)
-                    onSubmit(category)
-
+        )
+        if (showDatePicker) {
+            DatePickerModal(
+                onDateSelected = { millis ->
+                    if (millis != null) {
+                        viewModel.startDate = millis
+                    }
+                    showDatePicker = false
                 },
-                text = if (initialCategory == null) stringResource(id = R.string.addCategory) else stringResource(
-                    id = R.string.updateCategory
-                ),
-            )
-            Spacer(modifier = Modifier.height(integerResource(id = R.integer.extraSmallSpace).dp))
-
-            CancelButton(
-                onClick = {
-                    resetForm()
-                    onDismiss()
-                },
-                text = stringResource(id = R.string.cancel)
+                onDismiss = { showDatePicker = false }
             )
         }
+        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+
+        //save button
+        GradientButton(
+            onClick = {
+                val timestamp = System.currentTimeMillis()
+                val category = CategoryEntity(
+                    categoryId = initialCategory?.categoryId ?: 0,
+                    name = viewModel.categoryName.value,
+                    color = String.format(
+                        "#%06X",
+                        0xFFFFFF and categoryColorController.selectedColor.value.toArgb()
+                    ),
+                    icon = viewModel.categoryIcon,
+                    type = /*categoryType,*/viewModel.categoryType.value,
+                    status = CategoryStatus.ACTIVE,
+                    isPredefined = false,
+                    createdAt = initialCategory?.createdAt ?: timestamp,
+                    updatedAt = timestamp
+                )
+
+                if (initialCategory == null) viewModel.insert(category)
+                else viewModel.update(category)
+                onSubmit(category)
+
+            },
+            text = if (initialCategory == null) stringResource(id = R.string.addCategory) else stringResource(
+                id = R.string.updateCategory
+            ),
+        )
+        Spacer(modifier = Modifier.height(integerResource(id = R.integer.extraSmallSpace).dp))
+
+        CancelButton(
+            onClick = {
+                resetForm()
+                onDismiss()
+            },
+            text = stringResource(id = R.string.cancel)
+        )
     }
 }
