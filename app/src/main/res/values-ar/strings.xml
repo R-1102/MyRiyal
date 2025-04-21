@@ -89,5 +89,6 @@
     <string name="categoryChart">الرسم بياني للفئات </string>
     <string name="latestRecords">احدث السجلات</string>
 
+    <string name="search">بحث</string>
 
 </resources>
