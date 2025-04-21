@@ -30,11 +30,13 @@
     <string name="SelectIcon">Select Icon</string>
     <string name="EnterBudgetAmount">Enter Budget Amount</string>
     <string name="StartingDate">Tracker Starting Date</string>
-    <string name="AddCategory">AddCategory</string>
+    <string name="addCategory">Add Category</string>
+    <string name="updateCategory">Update Category</string>
     <string name="Save">Save</string>
     <string name="Cancel">Cancel</string>
     <string name="icon">Icon</string>
     <string name="categoryType">Category Type</string>
+
 
     <string name="addRecord">Add Record</string>
     <string name="recordName">Record Name</string>
@@ -52,6 +54,7 @@
     <string name="health">Health</string>
     <string name="transportation">Transportation</string>
     <string name="investment">Investment</string>
+    <string name="noCategories">No categories found.</string>
 
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>

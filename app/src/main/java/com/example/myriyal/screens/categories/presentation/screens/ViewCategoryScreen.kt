@@ -24,9 +24,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
+import com.example.myriyal.screenComponent.CustomDialog
 import com.example.myriyal.screenComponent.CustomFloatingActionButton
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 
@@ -40,6 +42,25 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
     val categories by categoryViewModel.categories.collectAsState()
     var isDropdownExpanded by remember { mutableStateOf(false) }
 
+    val showCategoryFormDialog = remember { mutableStateOf(false) }
+    if(showCategoryFormDialog.value){
+        CustomDialog(
+            shouldShowDialog = showCategoryFormDialog,
+            content = {
+                CategoryForm(
+                    initialCategory = categoryViewModel.selectedCategory.value,
+                    onSubmit = {
+                        categoryViewModel.selectedCategory.value = null
+                        showCategoryFormDialog.value = false
+                    },
+                    onDismiss = {
+                        categoryViewModel.selectedCategory.value = null
+                        showCategoryFormDialog.value = false
+                    },
+                )
+            }
+        )
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -78,7 +99,7 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
             }
             // Category list section
             if (categories.isEmpty()) {
-                Text("No categories found.")
+                Text(stringResource(R.string.noCategories))
             } else {
                 LazyColumn {
                     items(
@@ -88,7 +109,10 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
                     { category ->
                         CategoryItemCard(
                             category = category,
-                            onEdit = { TODO() },
+                            onEdit = {
+                                categoryViewModel.selectedCategory.value = category
+                                showCategoryFormDialog.value = true
+                            },
                             onSoftDelete = { categoryViewModel.softDelete(category.categoryId) },
                         )
                     }
@@ -97,8 +121,10 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
         }
 
         CustomFloatingActionButton(
-            onClick = { /*shouldShowDialog.value = true*/ },
-            modifier = Modifier.align(Alignment.BottomEnd)
+            onClick = { showCategoryFormDialog.value = true },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(integerResource(R.integer.padding).dp)
         )
     }
 }

@@ -15,7 +15,7 @@ import com.example.myriyal.screens.authentication.presentation.screens.LoginScre
 import com.example.myriyal.screens.authentication.presentation.screens.NewPassword
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
 import com.example.myriyal.screens.authentication.presentation.screens.SplashScreen
-import com.example.myriyal.screens.categories.presentation.screens.AddCategory
+import com.example.myriyal.screens.categories.presentation.screens.CategoryForm
 import com.example.myriyal.screens.categories.presentation.screens.ViewCategoryScreen
 import com.example.myriyal.screens.records.presentation.screens.RecordScreen
 import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
@@ -45,7 +45,7 @@ fun NavGraph(
     ) {
         // Authentication Screens with animation -- maybe for the home screen too (slide in) --
         composable(
-            route = Screen.SplashScreen.route,
+            route = Screen.SplashScreen.route, /*SplashScreen*/
             enterTransition = {
                 slideInVertically(
                     initialOffsetY = { it },
@@ -114,9 +114,16 @@ fun NavGraph(
             ViewCategoryScreen()
         }
 
-        composable(Screen.AddCategory.route) {
-            AddCategory()
-        }
+//        composable(Screen.AddCategory.route) {
+//            CategoryForm(
+//                viewModel.selectedCategory.value, {
+//                viewModel.selectedCategory.value = null
+//                shouldShowDialog.value = false
+//            }) {
+//                viewModel.selectedCategory.value = null
+//                shouldShowDialog.value = false
+//            }
+//        }
 
         composable(Screen.Record.route) {
             RecordScreen()
