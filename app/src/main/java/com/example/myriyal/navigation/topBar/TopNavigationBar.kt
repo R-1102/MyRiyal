@@ -48,6 +48,7 @@ fun TopNavigationBar(
                     "ViewRecord_Screen" -> stringResource(R.string.records)
                     "view_category" -> stringResource(R.string.categories)
                     "view_profile" -> stringResource(R.string.profile)
+                    "Home" -> stringResource(R.string.home)
                     else -> ""
                 },
                 color = MaterialTheme.colorScheme.onPrimary,

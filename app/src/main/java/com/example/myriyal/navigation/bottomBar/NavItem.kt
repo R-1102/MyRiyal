@@ -13,7 +13,7 @@ data class NavItem(
 
 val navItems = listOf(
     NavItem(
-        route = "ViewRecord_Screen",
+        route = "Home",
         iconRes = R.drawable.home,
         labelRes = R.string.home
     ),

@@ -66,7 +66,7 @@
     <string name="filterAll">All</string>
 
     <string name="userName">User Name</string>
-    <string name="balance">User Balance</string>
+    <string name="userBalance">User Balance</string>
     <string name="editYourName">Edit Your Name</string>
     <string name="editYourBalance">Edit Your Balance</string>
     <string name="logout">Logout</string>
@@ -80,6 +80,12 @@
 
     <string name="income">Income</string>
     <string name="expense">Expense</string>
+
+    <string name="viewMore">View More</string>
+    <string name="balance">Balance</string>
+    <string name="categoryChart">Category Chart</string>
+    <string name="latestRecords">Latest Records</string>
+
 
 </resources>
 

@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.myriyal.home.HomeScreen
 import com.example.myriyal.screens.Profile.presentattion.screens.ViewProfile
 import com.example.myriyal.screens.authentication.presentation.screens.BalanceScreen
 import com.example.myriyal.screens.authentication.presentation.screens.ForgotPassword
@@ -41,6 +42,7 @@ fun NavGraph(
     NavHost(
         navController = navController,
         startDestination = Screen.SplashScreen.route,
+
         modifier = modifier
     ) {
         // Authentication Screens with animation -- maybe for the home screen too (slide in) --
@@ -108,6 +110,10 @@ fun NavGraph(
         //Screens without animation
         composable(route = Screen.LogIn.route) {
             LoginScreen(navController)
+        }
+
+        composable(route = Screen.Home.route){
+            HomeScreen(navController)
         }
 
         composable(Screen.ViewCategory.route) {
