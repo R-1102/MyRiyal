@@ -17,7 +17,7 @@ interface CategoryRepository {
 
     // Inserts a new category into the database.
     // Called by: ViewModel.insert()
-    suspend fun insertCategory(category: CategoryEntity)
+    suspend fun insertCategory(category: CategoryEntity): Long
 
     // Updates an existing category.
     // Called by: ViewModel.update()

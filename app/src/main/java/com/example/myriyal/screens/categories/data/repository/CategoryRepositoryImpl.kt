@@ -23,8 +23,8 @@ class CategoryRepositoryImpl @Inject constructor(
 
     // Inserts a new category into the database
     // Called by: InsertCategoryUseCase
-    override suspend fun insertCategory(category: CategoryEntity) {
-        dao.insertCategory(category)
+    override suspend fun insertCategory(category: CategoryEntity): Long {
+        return dao.insertCategory(category)
     }
 
     // Updates an existing category

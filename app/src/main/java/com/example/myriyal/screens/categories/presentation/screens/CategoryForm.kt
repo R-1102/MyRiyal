@@ -27,10 +27,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -49,10 +47,12 @@ import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.core.local.enums.CategoryType
 import com.example.myriyal.screenComponent.CancelButton
+import com.example.myriyal.screenComponent.CustomCard
+import com.example.myriyal.screenComponent.CustomDropdown
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.DatePickerModal
 import com.example.myriyal.screenComponent.GradientButton
-import com.example.myriyal.screenComponent.CustomDropdown
+import com.example.myriyal.screens.categories.domian.useCases.CategoryUseCases
 import com.example.myriyal.screens.categories.presentation.components.iconsList
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
@@ -71,24 +71,38 @@ fun CategoryForm(
 
     LaunchedEffect(initialCategory) {
         if (initialCategory != null) {
+            // Populate form with existing category data when editing
             viewModel.categoryName.value = initialCategory.name
             viewModel.categoryType.value = initialCategory.type
             viewModel.categoryIcon = initialCategory.icon.toString()
-//            viewModel.categoryBudgetAmount = initialCategory.categoryBudgetAmount
             viewModel.startDate = initialCategory.createdAt
-//            viewModel.categoryColor.value =
-//                Color(android.graphics.Color.parseColor(initialCategory.color))
+
+            // Retrieve and populate tracker data if the category has an associated tracker
+            val tracker = viewModel.getTracker(initialCategory.categoryId)
+            tracker?.let {
+                viewModel.enableTracker.value = true
+                viewModel.trackerBudget.value = it.budgetAmount.toString()
+                viewModel.trackerStartDate.value = it.startDate
+            } ?: run {
+                // If no tracker exists for the category, reset tracker-related fields
+                viewModel.enableTracker.value = false
+                viewModel.trackerBudget.value = ""
+                viewModel.trackerStartDate.value = null
+            }
 
         } else {
+            // Initialize form fields for creating a new category
             viewModel.categoryName.value = ""
             viewModel.categoryType.value = CategoryType.EXPENSE
             viewModel.categoryIcon = "🔥"
-//            viewModel.categoryBudgetAmount = 0.0
             viewModel.startDate = System.currentTimeMillis()
-            // Default color
-//            viewModel.categoryColor.value = Color.White
+            viewModel.enableTracker.value = false
+            viewModel.trackerBudget.value = ""
+            viewModel.trackerStartDate.value = null
         }
     }
+
+
 
     fun resetForm() {
         viewModel.categoryName.value = ""
@@ -199,81 +213,80 @@ fun CategoryForm(
         }
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-        //Category icon
-        CustomDropdown(
-            value = viewModel.categoryIcon,/*categoryIcon.toString(),*/
-            onValueChange = { viewModel.categoryIcon = it },/*viewModel::onCategoryIconChange,*/
-            label = stringResource(R.string.SelectIcon),
-            list = iconsList,
-            onSelect = { viewModel.categoryIcon/*categoryIcon*/ = it },
-        )
-        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+            //Category icon
+            // Category icon dropdown
+            CustomDropdown(
+                value = viewModel.categoryIcon,
+                onValueChange = { viewModel.categoryIcon = it },
+                label = stringResource(R.string.SelectIcon),
+                list = iconsList,
+                onSelect = { viewModel.categoryIcon = it },
+            )
+            Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-//                //budget amount (commented until we implement the tracker table)
-//                CustomTextField(
-//                    value = categoryBudgetAmount.toString(),
-//                    onValueChange = {viewModel.categoryBudgetAmount.value=it},
-//                    label = stringResource(R.string.EnterBudgetAmount),
-////                    singleLine = true,
-//                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-//                )
-//                Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+// Always-visible budget amount input
+            CustomTextField(
+                value = viewModel.trackerBudget.value,
+                onValueChange = { viewModel.trackerBudget.value = it },
+                label = stringResource(R.string.EnterBudgetAmount),
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+            )
+            Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-        //tracker start date
-        var showDatePicker by remember { mutableStateOf(false) }
-        val formattedDate = viewModel.startDate?.let {
-            DateFormat.getDateInstance().format(Date(it))
-        } ?: ""
-        CustomTextField(
-            value = formattedDate,
-            onValueChange = {},
-            label = stringResource(R.string.StartingDate),
-            readOnly = true,
-            modifier = Modifier,
-            trailingIcon = {
-                Icon(
-                    imageVector = Icons.Default.DateRange,
-                    contentDescription = "Pick date",
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.clickable { showDatePicker = true },
+// Start date picker for the tracker
+            val formattedTrackerDate = viewModel.trackerStartDate.value?.let {
+                DateFormat.getDateInstance().format(Date(it))
+            } ?: ""
+            CustomTextField(
+                value = formattedTrackerDate,
+                onValueChange = {},
+                label = stringResource(R.string.StartingDate),
+                readOnly = true,
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.DateRange,
+                        contentDescription = "Pick date",
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.clickable { viewModel.showDatePicker.value = true }
+                    )
+                }
+            )
+            if (viewModel.showDatePicker.value) {
+                DatePickerModal(
+                    onDateSelected = {
+                        viewModel.trackerStartDate.value = it
+                        viewModel.showDatePicker.value = false
+                    },
+                    onDismiss = { viewModel.showDatePicker.value = false }
                 )
             }
-        )
-        if (showDatePicker) {
-            DatePickerModal(
-                onDateSelected = { millis ->
-                    if (millis != null) {
-                        viewModel.startDate = millis
-                    }
-                    showDatePicker = false
-                },
-                onDismiss = { showDatePicker = false }
-            )
-        }
-        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+            Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-        //save button
-        GradientButton(
-            onClick = {
-                val timestamp = System.currentTimeMillis()
-                val category = CategoryEntity(
-                    categoryId = initialCategory?.categoryId ?: 0,
-                    name = viewModel.categoryName.value,
-                    color = String.format(
-                        "#%06X",
-                        0xFFFFFF and categoryColorController.selectedColor.value.toArgb()
-                    ),
-                    icon = viewModel.categoryIcon,
-                    type = /*categoryType,*/viewModel.categoryType.value,
-                    status = CategoryStatus.ACTIVE,
-                    isPredefined = false,
-                    createdAt = initialCategory?.createdAt ?: timestamp,
-                    updatedAt = timestamp
-                )
 
-                if (initialCategory == null) viewModel.insert(category)
-                else viewModel.update(category)
-                onSubmit(category)
+            //save button
+            GradientButton(
+                onClick = {
+                    val timestamp = System.currentTimeMillis()
+                    val category = CategoryEntity(
+                        categoryId = initialCategory?.categoryId ?: 0,
+                        name = viewModel.categoryName.value,
+                        color = String.format(
+                            "#%06X",
+                            0xFFFFFF and categoryColorController.selectedColor.value.toArgb()
+                        ),
+                        icon = viewModel.categoryIcon,
+                        type = /*categoryType,*/viewModel.categoryType.value,
+                        status = CategoryStatus.ACTIVE,
+                        isPredefined = false,
+                        createdAt = initialCategory?.createdAt ?: timestamp,
+                        updatedAt = timestamp
+                    )
+
+                    if (initialCategory == null) viewModel.createCategoryWithOptionalTracker(category)
+                    else viewModel.updateCategoryWithOptionalTracker(category)
+
+                    onSubmit(category)
 
             },
             text = if (initialCategory == null) stringResource(id = R.string.addCategory) else stringResource(

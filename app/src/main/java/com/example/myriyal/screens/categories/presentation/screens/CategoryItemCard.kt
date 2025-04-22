@@ -22,6 +22,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,55 +41,53 @@ import com.example.myriyal.ui.theme.Black
 @Composable
 fun CategoryItemCard(
     category: CategoryEntity,
-    onEdit: () -> Unit, // When user clicks Edit
-    onSoftDelete: () -> Unit,     // When user clicks "Delete Button"
+    onEdit: () -> Unit, // Callback when edit icon is clicked
+    onSoftDelete: () -> Unit, // Callback when delete icon is clicked
 ) {
     val viewModel: CategoryViewModel = hiltViewModel()
-    val categoryBudgetAmount = viewModel.categoryBudgetAmount
 
-    val categoryColor = category.color
+    // Retrieve the total amount spent for this category
+    val spentAmount by viewModel.getSpentForCategory(category.categoryId).collectAsState()
 
-    // Before using this variable it was causing a crash
+    // Retrieve the tracker information for this category (if exists)
+    val tracker by viewModel.getTrackerForCategory(category.categoryId).collectAsState()
+
+    // Attempt to parse the category's color; fallback to theme color on failure
     val parsedCategoryColor = try {
-        Color(android.graphics.Color.parseColor(categoryColor))
+        Color(android.graphics.Color.parseColor(category.color))
     } catch (e: IllegalArgumentException) {
-        MaterialTheme.colorScheme.primary // fallback color
+        MaterialTheme.colorScheme.primary
     }
 
+    // Define the card container that displays the category details
     OutlinedCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = integerResource(id = R.integer.extraSmallSpace).dp),
-
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
         ),
         shape = RoundedCornerShape(integerResource(id = R.integer.customCardRound).dp),
-
         elevation = CardDefaults.cardElevation(
             defaultElevation = integerResource(id = R.integer.recordItemCardElevation).dp
         ),
         border = BorderStroke(
             integerResource(id = R.integer.borderStroke).dp,
             parsedCategoryColor,
-            /*Color(android.graphics.Color.parseColor(category.color))*/
         ),
-
-        ) {
+    ) {
         Column(
-            Modifier
+            modifier = Modifier
                 .fillMaxSize()
-                .padding(integerResource(id = R.integer.smallSpace).dp),
+                .padding(integerResource(id = R.integer.smallSpace).dp)
         ) {
             Row(
-                Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
-
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    // Display the category icon (emoji or symbol)
                     Text(
                         text = category.icon ?: "",
                         style = MaterialTheme.typography.headlineMedium,
@@ -95,20 +95,15 @@ fun CategoryItemCard(
 
                     Spacer(modifier = Modifier.width(integerResource(id = R.integer.smallerSpace).dp))
 
-                    Column(
-                        modifier = Modifier.padding(start = integerResource(id = R.integer.extraSmallSpace).dp)
-
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-
-                        ) {
+                    Column(modifier = Modifier.padding(start = integerResource(id = R.integer.extraSmallSpace).dp)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            // Display the category name
                             Text(
                                 text = category.name,
                                 fontWeight = FontWeight.SemiBold,
                                 color = Black
                             )
-                            // Shows a visual tag if this is a predefined category
+                            // Show a badge if this category is predefined
                             if (category.isPredefined) {
                                 Text(
                                     "  ⭐",
@@ -118,16 +113,8 @@ fun CategoryItemCard(
                             }
                         }
 
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-
-                        ) {
-                            Text(
-                                //if Category have a budget show it -- need if condition --
-                                text = "${categoryBudgetAmount.toInt()}/${categoryBudgetAmount.toInt()} ",
-                                color = Black,
-                                fontWeight = FontWeight.SemiBold,
-                            )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            // Display currency icon next to budget info
                             Image(
                                 painter = painterResource(id = R.drawable.expenes),
                                 contentDescription = "Riyal Icon",
@@ -137,18 +124,26 @@ fun CategoryItemCard(
                                 ),
                                 colorFilter = ColorFilter.tint(Black)
                             )
+
+                            // If tracker exists, display its budget and current usage
+                            tracker?.let {
+                                Text(
+                                    text = " ${it.budgetAmount.toInt()} / ${spentAmount.toInt()} used",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
                         }
-
                     }
-
                 }
+
                 Spacer(modifier = Modifier.width(integerResource(id = R.integer.smallerSpace).dp))
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.End
                 ) {
-
+                    // Edit icon button
                     IconButton(onClick = onEdit) {
                         Icon(
                             imageVector = Icons.Filled.Edit,
@@ -157,6 +152,7 @@ fun CategoryItemCard(
                         )
                     }
 
+                    // Delete icon button
                     IconButton(onClick = onSoftDelete) {
                         Icon(
                             imageVector = Icons.Outlined.Delete,

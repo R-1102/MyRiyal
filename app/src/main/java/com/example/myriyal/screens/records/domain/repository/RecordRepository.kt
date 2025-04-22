@@ -78,5 +78,14 @@ interface RecordRepository {
      */
     fun searchRecordsByName(query: String): Flow<List<RecordEntity>>
 
+    /**
+     * Calculates the total amount spent for a specific category.
+     * Used for progress tracking in budget or analytics screens.
+     *
+     * Called from: [GetSpentAmountForCategoryUseCase] → [CategoryViewModel]
+     */
+    fun getTotalSpentForCategory(categoryId: Int): Flow<Double>
+
+
 
 }
