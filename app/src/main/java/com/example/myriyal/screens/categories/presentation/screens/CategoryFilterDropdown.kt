@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.automirrored.filled.ListAlt
 import androidx.compose.material.icons.automirrored.filled.TrendingDown
 import androidx.compose.material.icons.automirrored.filled.TrendingUp
 import androidx.compose.material3.DropdownMenu
@@ -19,13 +21,17 @@ import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
+import com.example.myriyal.screens.categories.presentation.model.CategoryFilter
+import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.ui.theme.White
 
 @Composable
 fun CategoryFilterDropdown(
     expanded: Boolean,
     onDismiss: () -> Unit,
+    categoryViewModel: CategoryViewModel = hiltViewModel()
 ) {
     DropdownMenu(
         expanded = expanded,
@@ -37,6 +43,7 @@ fun CategoryFilterDropdown(
         )
     ) {
 
+        // Income filter
         DropdownMenuItem(
             text = {
                 Row(
@@ -57,10 +64,13 @@ fun CategoryFilterDropdown(
 
             },
             onClick = {
+                categoryViewModel.setFilter(CategoryFilter.ByType(com.example.myriyal.core.local.enums.CategoryType.INCOME))
                 onDismiss()
             }
         )
         HorizontalDivider(color = Gray, thickness = 0.5.dp)
+
+        // Expense filter
         DropdownMenuItem(
             text = {
                 Row(
@@ -81,8 +91,39 @@ fun CategoryFilterDropdown(
 
             },
             onClick = {
+                categoryViewModel.setFilter(CategoryFilter.ByType(com.example.myriyal.core.local.enums.CategoryType.EXPENSE))
                 onDismiss()
             }
         )
+
+        HorizontalDivider(color = Gray, thickness = 0.5.dp)
+
+        // Show All Categories
+        DropdownMenuItem(
+            text = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.List,
+                        contentDescription = "Arrow Down",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+
+                    Text(
+                        stringResource(R.string.showAll),
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(start = integerResource(id = R.integer.smallerSpace).dp)
+                    )
+                }
+
+            },
+            onClick = {
+                categoryViewModel.setFilter(CategoryFilter.All)
+                onDismiss()
+            }
+        )
+
+
     }
 }
