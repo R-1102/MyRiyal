@@ -72,6 +72,19 @@ class RecordRepositoryImpl @Inject constructor(
      * Used by: Search bar in ViewRecordScreen.
      */
     override fun searchRecordsByName(query: String): Flow<List<RecordEntity>> {
-        return dao.searchRecordsByName(query) // ✅ New use case added
+        return dao.searchRecordsByName(query)
+
+
     }
+    /**
+     * Delegates the request to the DAO to calculate the total spent amount for a specific category.
+     *
+     * Data flow:
+     * - Fetches from: RecordDao.getTotalSpentForCategory
+     * - Sends to: Domain layer (use cases like GetSpentAmountForCategoryUseCase)
+     */
+    override fun getTotalSpentForCategory(categoryId: Int): Flow<Double> {
+        return dao.getTotalSpentForCategory(categoryId)
+    }
+
 }

@@ -66,7 +66,6 @@ interface RecordDao {
     @Query("DELETE FROM record WHERE categoryId = :categoryId")
     suspend fun deleteRecordsByCategory(categoryId: Int)
 
-
     /**
      * Calculate total balance as a reactive Flow<Double>.
      * Uses two subqueries: one for total income, one for total expenses.
@@ -83,7 +82,6 @@ interface RecordDao {
 """)
     fun getTotalBalance(): Flow<Double>
 
-
     /**
      * Calculate total balance as a one-time suspend function.
      * Uses a conditional SUM based on the category type.
@@ -92,10 +90,16 @@ interface RecordDao {
             "FROM record INNER JOIN category ON record.categoryId = category.categoryId")
     suspend fun calculateTotalBalance(): Double
 
-
-
-    // Search records by name using a LIKE query. Returns results ordered by date (newest first).
+    /**
+     * Search records by name using a LIKE query. Returns results ordered by date (newest first).
+     */
     @Query("SELECT * FROM record WHERE name LIKE '%' || :query || '%' ORDER BY date DESC")
     fun searchRecordsByName(query: String): Flow<List<RecordEntity>>
 
+    /**
+     * Calculate total amount spent for a specific category.
+     * Used for showing tracker progress (e.g., "300 / 500 used").
+     */
+    @Query("SELECT IFNULL(SUM(amount), 0.0) FROM record WHERE categoryId = :categoryId")
+    fun getTotalSpentForCategory(categoryId: Int): Flow<Double>
 }

@@ -1,6 +1,7 @@
 package com.example.myriyal.di
 
 
+import com.example.myriyal.screens.categories.domian.useCases.GetSpentAmountForCategoryUseCase
 import com.example.myriyal.screens.records.domain.repository.RecordRepository
 import com.example.myriyal.screens.records.domain.useCases.DeleteRecordUseCase
 import com.example.myriyal.screens.records.domain.useCases.GetAllRecordsUseCase
@@ -35,7 +36,8 @@ object RecordUseCaseModule {
             getRecordById = GetRecordByIdUseCase(repository),
             getByCategory = GetRecordsByCategoryUseCase(repository),
             getTotalBalance = GetTotalBalanceUseCase(repository),
-            searchRecordsByName = SearchRecordsByNameUseCase(repository)
+            searchRecordsByName = SearchRecordsByNameUseCase(repository),
+            getSpentAmount = GetSpentAmountForCategoryUseCase(repository)
         )
     }
 }
