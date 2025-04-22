@@ -1,10 +1,6 @@
 package com.example.myriyal.core.local.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.myriyal.core.local.entities.TrackerEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -33,4 +29,14 @@ interface TrackerDao {
     // Called by: TrackerRepositoryImpl.deleteTracker
     @Delete
     suspend fun deleteTracker(tracker: TrackerEntity)
+
+    // Retrieves a tracker associated with a specific category.
+    // Called by: GetTrackerByCategoryIdUseCase → CategoryViewModel → UI Form
+    @Query("SELECT * FROM trackers WHERE categoryId = :categoryId LIMIT 1")
+    fun getTrackerByCategoryId(categoryId: Int): Flow<TrackerEntity?>
+
+    // Updates an existing tracker record.
+    // Called by: UpdateTrackerUseCase → CategoryViewModel → UI Form
+    @Update
+    suspend fun updateTracker(tracker: TrackerEntity)
 }

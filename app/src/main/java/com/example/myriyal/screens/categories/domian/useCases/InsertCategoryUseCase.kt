@@ -14,7 +14,7 @@ class InsertCategoryUseCase(
     private val repository: CategoryRepository
 ) {
     // Enables calling this use case like a function
-    suspend operator fun invoke(category: CategoryEntity) {
-        repository.insertCategory(category)
+    suspend operator fun invoke(category: CategoryEntity): Long {
+        return repository.insertCategory(category)
     }
 }
