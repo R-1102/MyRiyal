@@ -39,8 +39,6 @@ firebaseFirestoreKtx = "25.1.3" # For androidx.navigation.compose
 
 androidxNavigation = "2.8.9" # For androidx.navigation.compose
 securityCrypto = "1.1.0-alpha07"
-firebaseMessagingKtx = "24.1.1"
-securityCryptoVersion = "1.1.0-alpha06"
 
 
 
@@ -92,7 +90,6 @@ play-services = { module = "com.google.android.gms:play-services", version.ref =
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 
 
 
