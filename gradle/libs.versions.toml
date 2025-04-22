@@ -2,6 +2,7 @@
 accompanistNavigationAnimation = "0.34.0"
 agp = "8.8.2"
 androidxMaterial3 = "1.1.2"
+cmpcharts = "1.0.0"
 composeBomVersion = "2025.02.00"
 
 firebaseBom = "33.12.0"
@@ -54,6 +55,7 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 
+cmpcharts = { module = "network.chaintech:cmpcharts", version.ref = "cmpcharts" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }

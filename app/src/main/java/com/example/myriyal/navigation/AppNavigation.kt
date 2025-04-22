@@ -12,8 +12,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.navigation.bottomBar.BottomNavigationBar
 import com.example.myriyal.navigation.topBar.TopNavigationBar
-import com.example.myriyal.screens.authentication.domain.useCases.LogOutUseCase
-import com.example.myriyal.screens.authentication.presentation.vmModels.LogOutVM
 
 /**
  * Root Composable function to initialize and launch the MyRiyal app.
@@ -40,7 +38,7 @@ fun AppNavigation(darkTheme: Boolean, toggleTheme: () -> Unit) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    val ViewModel: AppNavigationVM = hiltViewModel()
+    val viewModel: AppNavigationVM = hiltViewModel()
 
     // Define routes where the bottom bar should NOT be shown
     val bottomBarHiddenRoutes = listOf(
@@ -49,7 +47,8 @@ fun AppNavigation(darkTheme: Boolean, toggleTheme: () -> Unit) {
         "SignUp_Screen",
         "Balance",
         "ForgotPass_Screen",
-        "NewPass_Screen"
+        "NewPass_Screen",
+        "Statistic_Screen"
     )
 
     Scaffold(
@@ -69,7 +68,7 @@ fun AppNavigation(darkTheme: Boolean, toggleTheme: () -> Unit) {
                     darkTheme,
                     toggleTheme,
                     onLogout = {
-                    ViewModel.performLogout { success ->
+                    viewModel.performLogout { success ->
                         if (success) {
                             // Navigate back to login screen
                             navController.navigate("Login_screen") {

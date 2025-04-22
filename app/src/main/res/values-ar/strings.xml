@@ -92,4 +92,8 @@
 
     <string name="search">بحث</string>
 
+    <!--Graph Screen Strings-->
+    <string name="expenseIncomeGraph">مخطط المصاريف والدخل</string>
+    <string name="recordDistributionGraph">مخطط توزيع المصاريف</string>
+    <string name="monthlySpendingGraph">مخطط الصرف الشهري</string>
 </resources>

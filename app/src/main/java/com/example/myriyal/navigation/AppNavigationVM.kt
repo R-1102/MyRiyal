@@ -11,7 +11,6 @@ import javax.inject.Inject
 class AppNavigationVM @Inject constructor(
     private val logOutUseCase: LogOutUseCase
 ) : ViewModel() {
-
     fun performLogout(onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
             try {

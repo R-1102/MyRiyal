@@ -89,5 +89,11 @@
 
     <string name="search">Search</string>
 
+    <!--Graph Screen Strings-->
+    <string name="expenseIncomeGraph">Expense v.s Income Graph</string>
+    <string name="recordDistributionGraph">Record Distribution Graph</string>
+    <string name="monthlySpendingGraph">Monthly Spending Graph</string>
+
+
 </resources>
 

@@ -18,6 +18,7 @@ import com.example.myriyal.screens.authentication.presentation.screens.SignUpScr
 import com.example.myriyal.screens.authentication.presentation.screens.SplashScreen
 import com.example.myriyal.screens.categories.presentation.screens.CategoryForm
 import com.example.myriyal.screens.categories.presentation.screens.ViewCategoryScreen
+import com.example.myriyal.screens.graphsRepresentation.presentation.screens.StatisticScreen
 import com.example.myriyal.screens.records.presentation.screens.RecordScreen
 import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
 
@@ -141,6 +142,10 @@ fun NavGraph(
 
         composable(Screen.ViewProfile.route) {
             ViewProfile()
+        }
+
+        composable(Screen.Statistic.route) {
+            StatisticScreen()
         }
     }
 }
