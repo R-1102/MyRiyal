@@ -17,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -27,13 +28,19 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
+import com.example.myriyal.screens.authentication.presentation.vmModels.NotificationViewModel
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val layoutDirection = LocalLayoutDirection.current
+    val viewModel: NotificationViewModel = hiltViewModel()
 
+    LaunchedEffect(Unit) {
+        viewModel.fetchFcmToken()
+    }
     LazyColumn(
         horizontalAlignment = Alignment.End,
 

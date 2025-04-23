@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.messaging.ktx)
 
     // Testing dependencies
     testImplementation(libs.junit)
