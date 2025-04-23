@@ -61,7 +61,6 @@ class CategoryViewModel @Inject constructor(
     var categoryIcon by mutableStateOf("🔥")
 
     var categoryBudgetAmount = mutableStateOf("0.0")
-
     var startDate by mutableStateOf<Long?>(null)
 
     // Currently selected category from dropdown
@@ -76,67 +75,38 @@ class CategoryViewModel @Inject constructor(
     // Tracker start date (used if tracker is enabled)
     var trackerStartDate = mutableStateOf<Long?>(null)
 
-
     val showDatePicker = mutableStateOf(false)
 
-
-    // Input change functions, setting user input from UI in here to do the business logic
-     fun onCategoryIconChange(value: String) {
-         categoryIcon = value
-
+    fun onCategoryIconChange(value: String) {
+        categoryIcon = value
         val getTrackerForCategory: suspend (Int) -> TrackerEntity?
         val getSpentForCategory: (Int) -> StateFlow<Double>
-
     }
 
     // -------------------- State Flow for Categories --------------------
 
     // Exposes a filtered list of ACTIVE categories using StateFlow.
-    // This list is observed in the UI and updates automatically when the database changes.
-    //
-    // Flow:
-    // Repository.getAllCategories() → UseCase → ViewModel
-    // Applies filter to exclude soft-deleted categories (status != ACTIVE)
     val categories: StateFlow<List<CategoryEntity>> = useCases
         .getAll()
         .map { list -> list.filter { it.status == CategoryStatus.ACTIVE } }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptyList()
-        )
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
+    // -------------------- Filtering Support --------------------
 
-    fun insertWithTracker(category: CategoryEntity) {
-        viewModelScope.launch {
-            useCases.insertWithTracker(
-                category = category,
-                trackerBudget = trackerBudget.value,
-                trackerStartDate = trackerStartDate.value
-            )
-        }
-
+    /** Selected filter type (e.g., All, ByType) */
     val selectedFilter = MutableStateFlow<CategoryFilter>(CategoryFilter.All)
 
+    /** Returns categories filtered based on the current selectedFilter */
     val filteredCategories: StateFlow<List<CategoryEntity>> = combine(categories, selectedFilter) { categories, filter ->
         when (filter) {
             CategoryFilter.All -> categories
             is CategoryFilter.ByType -> categories.filter { it.type == filter.type }
-//            CategoryFilter.HasBudget -> categories.filter { it.budgetAmount > 0.0 }
-//            CategoryFilter.NoBudget -> categories.filter { it.budgetAmount == 0.0 }
         }
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = emptyList()
-    )
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     fun setFilter(filter: CategoryFilter) {
         selectedFilter.value = filter
-
     }
-
-
 
     // -------------------- Category Actions --------------------
 
@@ -168,12 +138,22 @@ class CategoryViewModel @Inject constructor(
     @Inject
     lateinit var insertTrackerUseCase: InsertTrackerUseCase
 
+    fun insertWithTracker(category: CategoryEntity) {
+        viewModelScope.launch {
+            useCases.insertWithTracker(
+                category = category,
+                trackerBudget = trackerBudget.value,
+                trackerStartDate = trackerStartDate.value
+            )
+        }
+    }
+
     fun createCategoryWithOptionalTracker(category: CategoryEntity) {
         // Inserts a new category and creates a tracker if budget > 0
         viewModelScope.launch {
             val categoryId = useCases.insert(category)
             val budgetAmount = trackerBudget.value.toDoubleOrNull() ?: 0.0
-            if (budgetAmount > 0.0){
+            if (budgetAmount > 0.0) {
                 Log.d("CategoryViewModel", "Tracker → categoryId: $categoryId, budget: $budgetAmount, start: ${trackerStartDate.value}")
                 val tracker = TrackerEntity(
                     categoryId = categoryId.toInt(),
@@ -191,11 +171,9 @@ class CategoryViewModel @Inject constructor(
         // Updates a category and updates or creates its tracker depending on existence
         viewModelScope.launch {
             useCases.update(category)
-
             val budgetAmount = trackerBudget.value.toDoubleOrNull() ?: 0.0
             if (budgetAmount > 0.0) {
                 val existingTracker = useCases.getTrackerByCategoryId(category.categoryId)
-
                 if (existingTracker != null) {
                     val updatedTracker = existingTracker.copy(
                         budgetAmount = budgetAmount,
@@ -217,15 +195,11 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
-
-
-
     fun getSpentForCategory(categoryId: Int): StateFlow<Double> {
         // Returns a reactive stream of total amount spent for the given category
         return useCases.getSpentAmount(categoryId)
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0.0)
     }
-
 
     fun getTrackerForCategory(categoryId: Int): StateFlow<TrackerEntity?> {
         // Returns a reactive stream of tracker data for the given category ID
@@ -238,10 +212,4 @@ class CategoryViewModel @Inject constructor(
         // Returns tracker data once (non-reactive), used during form population
         return useCases.getTrackerByCategoryId(categoryId)
     }
-
-
-
-
-
-
 }
