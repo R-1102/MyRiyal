@@ -40,6 +40,7 @@ firebaseFirestoreKtx = "25.1.3" # For androidx.navigation.compose
 androidxNavigation = "2.8.9" # For androidx.navigation.compose
 securityCrypto = "1.1.0-alpha07"
 firebaseMessagingKtx = "24.1.1"
+securityCryptoVersion = "1.1.0-alpha06"
 
 
 
@@ -57,6 +58,7 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 
 cmpcharts = { module = "network.chaintech:cmpcharts", version.ref = "cmpcharts" }
+androidx-security-crypto-v110alpha06 = { module = "androidx.security:security-crypto", version.ref = "securityCryptoVersion" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
