@@ -43,7 +43,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
-import com.example.myriyal.core.local.entities.CategoryEntity
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.core.local.enums.CategoryType
 import com.example.myriyal.screenComponent.CancelButton

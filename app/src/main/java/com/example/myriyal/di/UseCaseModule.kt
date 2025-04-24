@@ -1,26 +1,18 @@
 package com.example.myriyal.di
 
 import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
-import com.example.myriyal.screens.categories.domian.repository.TrackerRepository
 import com.example.myriyal.screens.categories.domian.useCases.CategoryUseCases
 import com.example.myriyal.screens.categories.domian.useCases.DeleteCategoryUseCase
 import com.example.myriyal.screens.categories.domian.useCases.GetAllCategoriesUseCase
-import com.example.myriyal.screens.categories.domian.useCases.GetSpentAmountForCategoryUseCase
-import com.example.myriyal.screens.categories.domian.useCases.GetTrackerByCategoryIdUseCase
 import com.example.myriyal.screens.categories.domian.useCases.InsertCategoryUseCase
-import com.example.myriyal.screens.categories.domian.useCases.InsertTrackerUseCase
-import com.example.myriyal.screens.categories.domian.useCases.InsertWithTrackerUseCase
 import com.example.myriyal.screens.categories.domian.useCases.SeedPredefinedCategoriesUseCase
 import com.example.myriyal.screens.categories.domian.useCases.SoftDeleteCategoryUseCase
 import com.example.myriyal.screens.categories.domian.useCases.UpdateCategoryUseCase
-import com.example.myriyal.screens.records.domain.repository.RecordRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import kotlinx.coroutines.flow.firstOrNull
-
 
 /**
  * Provides all use cases as a single object for Hilt to inject into ViewModel.
@@ -32,9 +24,7 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideCategoryUseCases(
-        categoryRepository: CategoryRepository,
-        trackerRepository: TrackerRepository,
-        recordRepository: RecordRepository
+        categoryRepository: CategoryRepository
     ): CategoryUseCases {
         return CategoryUseCases(
             insert = InsertCategoryUseCase(categoryRepository),

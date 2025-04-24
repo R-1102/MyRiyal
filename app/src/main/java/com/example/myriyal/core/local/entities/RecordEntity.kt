@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
 
 // This entity represents the "records" table in the Room database.
 // Each record stores a financial entry (expense or income) tied to a specific category.

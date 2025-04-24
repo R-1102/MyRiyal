@@ -30,7 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
-import com.example.myriyal.core.local.entities.CategoryEntity
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.core.local.enums.CategoryType
 import com.example.myriyal.ui.theme.Black

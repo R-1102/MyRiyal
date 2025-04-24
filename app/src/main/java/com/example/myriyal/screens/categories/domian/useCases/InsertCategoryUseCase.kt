@@ -1,6 +1,6 @@
 package com.example.myriyal.screens.categories.domian.useCases
 
-import com.example.myriyal.core.local.entities.CategoryEntity
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
 
 // Use case for inserting a new category into the database.
@@ -17,4 +17,5 @@ class InsertCategoryUseCase(
     suspend operator fun invoke(category: CategoryEntity): Long {
         return repository.insertCategory(category)
     }
+
 }

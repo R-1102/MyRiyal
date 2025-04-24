@@ -21,7 +21,7 @@ import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
-import com.example.myriyal.core.local.entities.CategoryEntity
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
 
 /**
  * Dropdown menu for selecting a record category.

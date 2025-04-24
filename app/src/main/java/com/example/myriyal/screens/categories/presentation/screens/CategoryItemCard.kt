@@ -34,7 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
-import com.example.myriyal.core.local.entities.CategoryEntity
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.ui.theme.Black
 

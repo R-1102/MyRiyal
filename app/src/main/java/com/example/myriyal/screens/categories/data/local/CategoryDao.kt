@@ -1,4 +1,4 @@
-package com.example.myriyal.core.local.dao
+package com.example.myriyal.screens.categories.data.local
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import kotlinx.coroutines.flow.Flow
 
@@ -20,7 +19,7 @@ import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-interface CategoryDao {
+interface CategoryDao{
 
     // Inserts a new category into the database or replaces it if it already exists (based on primary key).
     // Called by: CategoryRepositoryImpl.insertCategory

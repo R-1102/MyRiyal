@@ -8,11 +8,11 @@ import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.entities.TrackerEntity
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.core.local.enums.CategoryType
 import com.example.myriyal.screens.categories.domian.repository.CategoryRepository

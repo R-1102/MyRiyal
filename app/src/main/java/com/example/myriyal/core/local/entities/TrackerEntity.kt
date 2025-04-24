@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
 
 // This entity represents the "trackers" table in the Room database.
 // It is used to store budget tracking goals linked to specific categories.

@@ -78,10 +78,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // Icons and Material
-    implementation(platform(libs.androidx.compose.bom.v20250200))
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.compose.material3.material3)
-    implementation (libs.androidx.material3.v112)
 
     // Room dependencies
     implementation(libs.androidx.room.runtime)

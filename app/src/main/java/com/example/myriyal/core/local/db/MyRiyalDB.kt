@@ -3,12 +3,12 @@ package com.example.myriyal.core.local.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.myriyal.core.local.dao.CategoryDao
+import com.example.myriyal.screens.categories.data.local.CategoryDao
 import com.example.myriyal.core.local.dao.RecordDao
 import com.example.myriyal.core.local.dao.TrackerDao
 import com.example.myriyal.core.local.dao.UserDao
 import com.example.myriyal.core.local.entities.UserEntity
-import com.example.myriyal.core.local.entities.CategoryEntity
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.core.local.entities.TrackerEntity
 
