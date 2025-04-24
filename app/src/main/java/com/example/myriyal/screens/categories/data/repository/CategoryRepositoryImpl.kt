@@ -27,30 +27,19 @@ class CategoryRepositoryImpl @Inject constructor(
     // Inserts a new category into the database
     // Called by: InsertCategoryUseCase
 
-    override suspend fun insertCategory(category: CategoryEntity) {
-        // Insert locally first!
-        val localCategory = category.copy(isSynced = false)
-        localCategoryDataSource.insertCategory(category)
-
+    override suspend fun insertCategory(category: CategoryEntity): Long {
+        var isUploadedRemotely = false
 
         // Check for connection
         if (connectivityStatus.isConnected()) {//There is an Internet
-            try {
-                println("it's online")
-                remoteCategoryDataSource.postCategory(category.toDto())
-
-                // start syncing
-                val syncedCategory = localCategory.copy(isSynced = true)
-                localCategoryDataSource.updateCategory(syncedCategory)
-
-            } catch (e: Exception) {
-                println("Remote insert failed: ${e.message}")
-                e.printStackTrace()
-                // Keep isSynced = false
-            }
-        } else {
-            println("it's offline")
+            isUploadedRemotely = remoteCategoryDataSource.postCategory(category.toDto())
         }
+
+        // Insert locally first!
+        val localCategory = category.copy(isSync = isUploadedRemotely)
+        val localCategoryId = localCategoryDataSource.insertCategory(localCategory)
+
+        return localCategoryId
     }
 
 //    override suspend fun insertCategory(category: CategoryEntity) {
@@ -76,43 +65,43 @@ class CategoryRepositoryImpl @Inject constructor(
 //
 //    }
 
-        // Updates an existing category
-        // Called by: UpdateCategoryUseCase
-        override suspend fun updateCategory(category: CategoryEntity) {
-            if (connectivityStatus.isConnected()) {
-                //remote (remoteCategoryDataSource.insertRemote)
-            } else {
-                localCategoryDataSource.insertCategory(category)
-            }
+    // Updates an existing category
+    // Called by: UpdateCategoryUseCase
+    override suspend fun updateCategory(category: CategoryEntity) {
+        if (connectivityStatus.isConnected()) {
+            //remote (remoteCategoryDataSource.insertRemote)
+        } else {
+            localCategoryDataSource.insertCategory(category)
         }
-
-        override suspend fun softDeleteCategory(categoryId: Int) {
-            if (connectivityStatus.isConnected()) {
-            } else {
-            }
-        }
-
-        override fun getAllCategories(): Flow<List<CategoryEntity>> {
-            if (connectivityStatus.isConnected()) {
-            } else {
-            }
-
-            return flow { }
-        }
-
-        override suspend fun deleteCategory(category: CategoryEntity) {
-            if (connectivityStatus.isConnected()) {
-            } else {
-            }
-        }
-
-        override suspend fun seedPredefinedCategories() {
-            if (connectivityStatus.isConnected()) {
-            } else {
-            }
-        }
-
     }
+
+    override suspend fun softDeleteCategory(categoryId: Int) {
+        if (connectivityStatus.isConnected()) {
+        } else {
+        }
+    }
+
+    override fun getAllCategories(): Flow<List<CategoryEntity>> {
+        if (connectivityStatus.isConnected()) {
+        } else {
+        }
+
+        return flow { }
+    }
+
+    override suspend fun deleteCategory(category: CategoryEntity) {
+        if (connectivityStatus.isConnected()) {
+        } else {
+        }
+    }
+
+    override suspend fun seedPredefinedCategories() {
+        if (connectivityStatus.isConnected()) {
+        } else {
+        }
+    }
+
+}
 
 
 

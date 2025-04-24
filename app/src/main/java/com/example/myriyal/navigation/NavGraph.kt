@@ -41,7 +41,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SplashScreen.route,
+        startDestination = Screen.Home.route,
 
         modifier = modifier
     ) {

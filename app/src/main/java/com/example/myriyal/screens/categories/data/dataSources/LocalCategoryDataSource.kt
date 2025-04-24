@@ -1,8 +1,8 @@
 package com.example.myriyal.screens.categories.data.dataSources
 
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.screens.categories.data.local.CategoryDao
 import com.example.myriyal.screens.categories.data.local.PredefinedCategoryProvider
-import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.screens.categories.data.model.CategoryDto
 import kotlinx.coroutines.flow.Flow
@@ -15,14 +15,12 @@ class LocalCategoryDataSource @Inject constructor(
 
     // Inserts a new category into the database
     // Called by: InsertCategoryUseCase
-    override suspend fun insertCategory(category: CategoryEntity) {
-        print("inside LocalCategoryDataSource")
-        dao.insertCategory(category)
+    override suspend fun insertCategory(category: CategoryEntity): Long {
+        return dao.insertCategory(category)
     }
 
-    override suspend fun postCategory(category: CategoryDto) {
-       throw UnsupportedOperationException("Not supported in local")
-
+    override suspend fun postCategory(category: CategoryDto): Boolean {
+        throw UnsupportedOperationException("Not supported in local")
     }
 
     // Updates an existing category

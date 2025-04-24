@@ -113,9 +113,6 @@ dependencies {
     //for color picker
     implementation("com.github.skydoves:colorpicker-compose:1.1.2")
 
-    implementation (libs.androidx.security.crypto.v110alpha06)
-
-
 
 }
 // Allow references to generated code

@@ -7,8 +7,8 @@ import com.example.myriyal.screens.categories.data.local.CategoryDao
 import com.example.myriyal.core.local.dao.RecordDao
 import com.example.myriyal.core.local.dao.TrackerDao
 import com.example.myriyal.core.local.dao.UserDao
-import com.example.myriyal.core.local.entities.UserEntity
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
+import com.example.myriyal.core.local.entities.UserEntity
 import com.example.myriyal.core.local.entities.RecordEntity
 import com.example.myriyal.core.local.entities.TrackerEntity
 

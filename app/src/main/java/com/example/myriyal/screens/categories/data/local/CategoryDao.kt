@@ -19,12 +19,12 @@ import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-interface CategoryDao{
+interface CategoryDao {
 
     // Inserts a new category into the database or replaces it if it already exists (based on primary key).
     // Called by: CategoryRepositoryImpl.insertCategory
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCategory(category: CategoryEntity):Long
+    suspend fun insertCategory(category: CategoryEntity): Long
 
     // Updates an existing category in the database.
     // Called by: CategoryRepositoryImpl.updateCategory

@@ -17,7 +17,7 @@ fun CategoryDto.toEntity(existingEntity: CategoryEntity?): CategoryEntity {
         isPredefined =  existingEntity?.isPredefined ?:true,
         createdAt = existingEntity?.createdAt?:System.currentTimeMillis(),
         updatedAt = existingEntity?.updatedAt?:System.currentTimeMillis(),
-        isSynced = false
+        isSync = false
     )
 }
 

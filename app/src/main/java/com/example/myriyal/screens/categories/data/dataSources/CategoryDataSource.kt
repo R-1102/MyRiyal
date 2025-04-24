@@ -8,10 +8,10 @@ interface CategoryDataSource {
 
     // Inserts a new category into the database.
     // Called by: ViewModel.insert()
-    suspend fun insertCategory(category: CategoryEntity)
+    suspend fun insertCategory(category: CategoryEntity) : Long
 
     //DO WE NEED TO ADD NEW INSERTION FOR API SINCE THE PARA IS DIFFERENT?
-    suspend fun postCategory(category: CategoryDto)
+    suspend fun postCategory(category: CategoryDto) : Boolean
 
     // Updates an existing category.
     // Called by: ViewModel.update()

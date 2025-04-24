@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow
 // - Decouples business logic from storage logic (Room, DAO)
 
 
-
 interface CategoryRepository {
 
     // Inserts a new category into the database.
