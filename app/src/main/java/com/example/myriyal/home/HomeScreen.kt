@@ -1,5 +1,6 @@
 package com.example.myriyal.home
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -27,12 +29,26 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
+import com.example.myriyal.screens.authentication.presentation.vmModels.NotificationViewModel
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val layoutDirection = LocalLayoutDirection.current
+// Retrieves an instance of NotificationViewModel using Hilt for dependency injection
+    val viewModel: NotificationViewModel = hiltViewModel()
+
+// Executes once when the composable is first composed
+    LaunchedEffect(Unit) {
+        // Fetches the FCM token and saves it securely in EncryptedSharedPreferences
+        viewModel.fetchFcmToken()
+
+        // Logs the stored token to confirm it was saved and retrieved successfully
+        Log.d("FCM", "Saved token: ${viewModel.getStoredFcmToken()}")
+    }
+
 
     LazyColumn(
         horizontalAlignment = Alignment.End,
