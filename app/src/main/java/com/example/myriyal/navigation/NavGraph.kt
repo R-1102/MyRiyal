@@ -42,7 +42,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route,
+        startDestination = Screen.SplashScreen.route,
 
         modifier = modifier
     ) {
@@ -121,17 +121,6 @@ fun NavGraph(
             ViewCategoryScreen()
         }
 
-//        composable(Screen.AddCategory.route) {
-//            CategoryForm(
-//                viewModel.selectedCategory.value, {
-//                viewModel.selectedCategory.value = null
-//                shouldShowDialog.value = false
-//            }) {
-//                viewModel.selectedCategory.value = null
-//                shouldShowDialog.value = false
-//            }
-//        }
-
         composable(Screen.Record.route) {
             RecordScreen()
         }
@@ -147,5 +136,7 @@ fun NavGraph(
         composable(Screen.Statistic.route) {
             StatisticScreen()
         }
+
+
     }
 }

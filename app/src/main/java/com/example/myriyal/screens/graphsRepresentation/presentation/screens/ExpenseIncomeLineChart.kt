@@ -1,5 +1,6 @@
 package com.example.myriyal.screens.graphsRepresentation.presentation.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -33,9 +34,10 @@ import network.chaintech.cmpcharts.ui.linechart.model.LineChartData
 import network.chaintech.cmpcharts.ui.linechart.model.LinePlotData
 import network.chaintech.cmpcharts.ui.linechart.model.LineStyle
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun ExpenseIncomeLineChart(
-    title: String,
+//    title: String,
 //    expense: List<Point>,
 //    income: List<Point>,
 ) {
@@ -92,7 +94,7 @@ fun ExpenseIncomeLineChart(
         )
     )
     val xAxis = AxisData.Builder()
-        .steps(9)//should be the number of the days (30) "list size"
+        .steps(9)//should be the number of the days which is the list size
         .labelData { i -> i.toString() }
         .build()
     val yAxis = AxisData.Builder()
@@ -105,24 +107,25 @@ fun ExpenseIncomeLineChart(
         xAxisData = xAxis,
         yAxisData = yAxis
     )
-    Card(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 40.dp),
-        shape = RoundedCornerShape(12.dp)
-    ) {
+//    Card(
+//        modifier = Modifier
+//            .padding(16.dp)
+//            .fillMaxWidth(),
+//        elevation = CardDefaults.cardElevation(defaultElevation = 40.dp),
+//        shape = RoundedCornerShape(12.dp),
+//        colors = CardDefaults.cardColors(Color.White),
+//    ) {
         Column(
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.Start
         ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-            )
+//            Text(
+//                text = title,
+//                style = MaterialTheme.typography.titleLarge,
+//                fontWeight = FontWeight.Bold,
+//            )
             if (expense.isEmpty() && income.isEmpty()) {
                 Text("No data available yet", style = MaterialTheme.typography.bodyMedium)
             } else {
@@ -145,5 +148,5 @@ fun ExpenseIncomeLineChart(
                 )
             )
         }
-    }
+//    }
 }
