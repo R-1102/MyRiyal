@@ -93,9 +93,10 @@ class CategoryViewModel @Inject constructor(
     val selectedFilter = MutableStateFlow<CategoryFilter>(CategoryFilter.All)
 
     /** Returns categories filtered based on the current selectedFilter */
-    val filteredCategories: StateFlow<List<CategoryEntity>> = combine(categories, selectedFilter) { categories, filter ->
-        when (filter) {
-            CategoryFilter.All -> categories
+    val filteredCategories: StateFlow<List<CategoryEntity>> =
+        combine(categories, selectedFilter) { categories, filter ->
+            when (filter) {
+                CategoryFilter.All -> categories
             is CategoryFilter.ByType -> categories.filter { it.type == filter.type }
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())

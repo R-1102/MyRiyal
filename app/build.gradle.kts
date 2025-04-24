@@ -78,10 +78,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // Icons and Material
-    implementation(platform(libs.androidx.compose.bom.v20250200))
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.compose.material3.material3)
-    implementation (libs.androidx.material3.v112)
 
     // Room dependencies
     implementation(libs.androidx.room.runtime)
@@ -97,7 +95,7 @@ dependencies {
     // Accompanist Animation (Consider replacing with androidx.navigation)
     implementation(libs.accompanist.navigation.animation)
 
-// Hilt Navigation for Jetpack Compose
+    // Hilt Navigation for Jetpack Compose
     implementation(libs.androidx.hilt.navigation.compose)
 
     // For encrypted SharedPreferences
@@ -118,13 +116,8 @@ dependencies {
     //for Compose Multiplatform Charts
     implementation(libs.cmpcharts)
 
-    implementation (libs.androidx.security.crypto.v110alpha06)
-
-
-    //for Compose Multiplatform Charts
-    implementation(libs.cmpcharts)
-
 }
+
 // Allow references to generated code
 kapt {
     correctErrorTypes = true
