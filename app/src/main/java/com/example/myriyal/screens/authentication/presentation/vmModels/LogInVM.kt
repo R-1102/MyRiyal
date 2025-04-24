@@ -17,7 +17,6 @@ class LogInVM @Inject constructor(
     private val logInUseCase: LogInUseCase
 ) : ViewModel() {
 
-
     // State holders for user input
     var email by mutableStateOf("")
     var password by mutableStateOf("")

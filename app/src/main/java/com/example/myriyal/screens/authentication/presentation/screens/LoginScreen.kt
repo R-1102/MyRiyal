@@ -37,6 +37,7 @@ import com.example.myriyal.screenComponent.CustomCard
 import com.example.myriyal.screenComponent.CustomTextField
 import com.example.myriyal.screenComponent.GradientButton
 import com.example.myriyal.screens.authentication.presentation.vmModels.LogInVM
+import com.example.myriyal.screens.authentication.presentation.vmModels.NotificationViewModel
 import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
 import com.example.myriyal.ui.theme.ThemedLogo
 
@@ -44,6 +45,8 @@ import com.example.myriyal.ui.theme.ThemedLogo
 fun LoginScreen(navController: NavHostController) {
     //VM Object
     val viewModel: LogInVM = hiltViewModel()
+    val notificationViewModel: NotificationViewModel = hiltViewModel()
+
     // Pass user input to VM
     val email = viewModel.email
     val password = viewModel.password
@@ -65,6 +68,8 @@ fun LoginScreen(navController: NavHostController) {
                     Log.e("LoginScreen", "Error: ${event.error}")
                 }
                 is LogInVM.AllEvents.ShouldNavigate -> {
+                    notificationViewModel.fetchFcmToken()
+
                     navController.navigate(Screen.ViewRecord.route) {
                         popUpTo(Screen.ViewRecord.route) { inclusive = true }
                     }
