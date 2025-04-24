@@ -1,5 +1,6 @@
 package com.example.myriyal.core.local.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -30,5 +31,8 @@ data class UserEntity(
     val createdAt: Long,
 
     // Timestamp for when the profile was last updated
-    val updatedAt: Long
+    val updatedAt: Long,
+
+    @ColumnInfo(defaultValue = "0")
+    val isSync: Boolean = false
 )

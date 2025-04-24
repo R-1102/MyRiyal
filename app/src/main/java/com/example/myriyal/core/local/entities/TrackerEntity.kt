@@ -1,5 +1,6 @@
 package com.example.myriyal.core.local.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
@@ -46,5 +47,8 @@ data class TrackerEntity(
     val createdAt: Long,
 
     // Timestamp when the tracker was last updated
-    val updatedAt: Long
+    val updatedAt: Long,
+
+    @ColumnInfo(defaultValue = "0")
+    val isSync: Boolean = false
 )

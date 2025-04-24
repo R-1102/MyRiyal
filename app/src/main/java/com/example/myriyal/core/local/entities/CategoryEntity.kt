@@ -1,5 +1,6 @@
 package com.example.myriyal.core.local.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -45,5 +46,10 @@ data class CategoryEntity(
     val createdAt: Long,
 
     // Last update timestamp (used in update operations)
-    val updatedAt: Long
+    val updatedAt: Long,
+
+
+    @ColumnInfo(defaultValue = "0")
+    val isSync: Boolean = false
+
 )

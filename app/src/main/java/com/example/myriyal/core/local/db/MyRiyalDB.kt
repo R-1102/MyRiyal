@@ -20,7 +20,7 @@ import com.example.myriyal.core.local.entities.TrackerEntity
 @Database(
     // List of all entities (tables) managed by Room
     entities = [UserEntity::class, CategoryEntity::class, RecordEntity::class, TrackerEntity::class],
-    version = 2, // Current schema version of the database
+    version = 3, // Current schema version of the database
     exportSchema = false // Disable schema export (optional)
 )
 @TypeConverters(Converters::class) // Register type converters (e.g. enums)

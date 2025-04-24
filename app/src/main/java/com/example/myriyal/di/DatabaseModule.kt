@@ -51,6 +51,20 @@ object DatabaseModule {
         }
     }
 
+
+
+    val MIGRATION_2_3 = object : Migration(2, 3) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE category ADD COLUMN isSync INTEGER NOT NULL DEFAULT 0")
+            database.execSQL("ALTER TABLE record ADD COLUMN isSync INTEGER NOT NULL DEFAULT 0")
+            database.execSQL("ALTER TABLE trackers ADD COLUMN isSync INTEGER NOT NULL DEFAULT 0")
+            database.execSQL("ALTER TABLE userProfile ADD COLUMN isSync INTEGER NOT NULL DEFAULT 0")
+        }
+    }
+
+
+
+
     /**
      * Provides the Room database instance with the migration applied.
      */
@@ -61,9 +75,12 @@ object DatabaseModule {
             app,
             MyRiyalDatabase::class.java,
             "myRiyalDB"
-        ).addMigrations(MIGRATION_1_2)
+        ).addMigrations(MIGRATION_1_2, MIGRATION_2_3)
             .build()
     }
+
+
+
 
     /**
      * Provides DAO for Category operations.
