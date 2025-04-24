@@ -1,21 +1,5 @@
 package com.example.myriyal.screens.categories.presentation.screens
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.example.myriyal.core.local.entities.CategoryEntity
-import com.example.myriyal.core.local.enums.CategoryStatus
-import com.example.myriyal.core.local.enums.CategoryType
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
-
 /*
 
 // UI layer of the category feature.

@@ -18,9 +18,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import kotlinx.coroutines.flow.firstOrNull
-
+import javax.inject.Singleton
 
 /**
  * Provides all use cases as a single object for Hilt to inject into ViewModel.
@@ -34,7 +33,7 @@ object UseCaseModule {
     fun provideCategoryUseCases(
         categoryRepository: CategoryRepository,
         trackerRepository: TrackerRepository,
-        recordRepository: RecordRepository
+        recordRepository : RecordRepository
     ): CategoryUseCases {
         return CategoryUseCases(
             insert = InsertCategoryUseCase(categoryRepository),

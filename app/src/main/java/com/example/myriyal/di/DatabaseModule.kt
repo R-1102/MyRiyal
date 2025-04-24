@@ -6,6 +6,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.myriyal.core.local.dao.*
 import com.example.myriyal.core.local.db.MyRiyalDatabase
+import com.example.myriyal.screens.categories.data.local.CategoryDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,11 +1,12 @@
 package com.example.myriyal.screens.categories.data.repository
 
-import com.example.myriyal.core.local.dao.CategoryDao
-import com.example.myriyal.core.local.entities.CategoryEntity
-import com.example.myriyal.core.local.enums.CategoryStatus
-import com.example.myriyal.core.local.data.PredefinedCategoryProvider
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
+import com.example.myriyal.core.utils.ConnectivityStatus
+import com.example.myriyal.screens.categories.data.dataSources.CategoryDataSource
+import com.example.myriyal.screens.categories.data.model.toDto
 import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 // Implementation of the CategoryRepository interface.
@@ -18,49 +19,89 @@ import javax.inject.Inject
 // - Provided via Hilt and injected using constructor injection.
 
 class CategoryRepositoryImpl @Inject constructor(
-    private val dao: CategoryDao // Injected DAO for accessing Room database
+    private val localCategoryDataSource: CategoryDataSource,
+    private val remoteCategoryDataSource: CategoryDataSource,
+    private val connectivityStatus: ConnectivityStatus
 ) : CategoryRepository {
 
     // Inserts a new category into the database
     // Called by: InsertCategoryUseCase
+
     override suspend fun insertCategory(category: CategoryEntity): Long {
-        return dao.insertCategory(category)
+        var isUploadedRemotely = false
+
+        // Check for connection
+        if (connectivityStatus.isConnected()) {//There is an Internet
+            isUploadedRemotely = remoteCategoryDataSource.postCategory(category.toDto())
+        }
+
+        // Insert locally first!
+        val localCategory = category.copy(isSync = isUploadedRemotely)
+        val localCategoryId = localCategoryDataSource.insertCategory(localCategory)
+
+        return localCategoryId
     }
+
+//    override suspend fun insertCategory(category: CategoryEntity) {
+//        if (network.isConnected()) {
+//            remote.insertCategory(category)
+//        } else {
+//            local.insertCategory(category)
+//        }
+//    }
+//    override suspend fun insertCategory2(){
+//        if (connectivityStatus.isConnected()) {
+//
+//            val category : CategoryDto
+//            remoteCategoryDataSource.
+//
+//        } else {
+//            print("it's offline")
+//            localCategoryDataSource.insertCategory(category)
+//
+//
+//        }
+//
+//
+//    }
 
     // Updates an existing category
     // Called by: UpdateCategoryUseCase
     override suspend fun updateCategory(category: CategoryEntity) {
-        dao.updateCategory(category)
+        if (connectivityStatus.isConnected()) {
+            //remote (remoteCategoryDataSource.insertRemote)
+        } else {
+            localCategoryDataSource.insertCategory(category)
+        }
     }
 
-    // Retrieves all categories as a reactive Flow
-    // Called by: GetAllCategoriesUseCase
-    override fun getAllCategories(): Flow<List<CategoryEntity>> {
-        return dao.getAllCategories()
-    }
-
-    // Soft-deletes a category by setting its status to INACTIVE
-    // Called by: SoftDeleteCategoryUseCase
     override suspend fun softDeleteCategory(categoryId: Int) {
-        dao.updateCategoryStatus(categoryId, CategoryStatus.INACTIVE)
+        if (connectivityStatus.isConnected()) {
+        } else {
+        }
     }
 
-    // Permanently deletes a category from the database
-    // Called by: DeleteCategoryUseCase
+    override fun getAllCategories(): Flow<List<CategoryEntity>> {
+        if (connectivityStatus.isConnected()) {
+        } else {
+        }
+
+        return flow { }
+    }
+
     override suspend fun deleteCategory(category: CategoryEntity) {
-        dao.deleteCategory(category)
+        if (connectivityStatus.isConnected()) {
+        } else {
+        }
     }
 
-    // Seeds predefined categories (e.g., Food, Salary) into the database
-    // Only inserts those that don’t already exist (checked by name)
-    // Called by: SeedPredefinedCategoriesUseCase (usually on app launch)
     override suspend fun seedPredefinedCategories() {
-        val existing = dao.getAllCategoriesOnce()
-        val existingNames = existing.map { it.name }
-
-        val predefined = PredefinedCategoryProvider.getCategories()
-        val newOnes = predefined.filter { it.name !in existingNames }
-
-        newOnes.forEach { dao.insertCategory(it) }
+        if (connectivityStatus.isConnected()) {
+        } else {
+        }
     }
+
 }
+
+
+

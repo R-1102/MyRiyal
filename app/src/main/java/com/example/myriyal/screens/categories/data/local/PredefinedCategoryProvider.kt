@@ -1,7 +1,5 @@
-package com.example.myriyal.core.local.data
+package com.example.myriyal.screens.categories.data.local
 
-
-import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.core.local.enums.CategoryType
 

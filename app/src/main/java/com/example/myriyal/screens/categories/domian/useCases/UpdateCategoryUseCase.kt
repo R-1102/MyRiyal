@@ -1,6 +1,6 @@
 package com.example.myriyal.screens.categories.domian.useCases
 
-import com.example.myriyal.core.local.entities.CategoryEntity
+import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
 
 // Use Case: UpdateCategoryUseCase

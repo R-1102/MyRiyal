@@ -1,22 +1,17 @@
-package com.example.myriyal.screens.categories.domian.repository
+package com.example.myriyal.screens.categories.data.dataSources
 
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
+import com.example.myriyal.screens.categories.data.model.CategoryDto
 import kotlinx.coroutines.flow.Flow
 
-// Domain-level repository interface for category operations.
-// Defines what operations the ViewModel can perform without knowing how they’re implemented.
-//
-// Data flows:
-// - Called by: CategoryViewModel (presentation layer)
-// - Implemented by: CategoryRepositoryImpl (data layer)
-// - Decouples business logic from storage logic (Room, DAO)
-
-
-interface CategoryRepository {
+interface CategoryDataSource {
 
     // Inserts a new category into the database.
     // Called by: ViewModel.insert()
-    suspend fun insertCategory(category: CategoryEntity): Long
+    suspend fun insertCategory(category: CategoryEntity) : Long
+
+    //DO WE NEED TO ADD NEW INSERTION FOR API SINCE THE PARA IS DIFFERENT?
+    suspend fun postCategory(category: CategoryDto) : Boolean
 
     // Updates an existing category.
     // Called by: ViewModel.update()
@@ -28,7 +23,7 @@ interface CategoryRepository {
 
     // Returns a reactive list of all categories.
     // Used by: ViewModel.categories (StateFlow)
-    fun getAllCategories(): Flow<List<CategoryEntity>>
+    suspend fun getAllCategories(): Flow<List<CategoryEntity>>
 
     // Permanently deletes a category from the database.
     // Called by: ViewModel.delete()
@@ -37,4 +32,6 @@ interface CategoryRepository {
     // Seeds predefined categories into the database (called once during app setup).
     // Called by: ViewModel.seedPredefinedCategories()
     suspend fun seedPredefinedCategories()
+
+
 }
