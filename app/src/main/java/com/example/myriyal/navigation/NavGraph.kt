@@ -5,6 +5,7 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,6 +17,7 @@ import com.example.myriyal.screens.authentication.presentation.screens.LoginScre
 import com.example.myriyal.screens.authentication.presentation.screens.NewPassword
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
 import com.example.myriyal.screens.authentication.presentation.screens.SplashScreen
+import com.example.myriyal.screens.authentication.presentation.vmModels.NotificationViewModel
 import com.example.myriyal.screens.categories.presentation.screens.CategoryForm
 import com.example.myriyal.screens.categories.presentation.screens.ViewCategoryScreen
 import com.example.myriyal.screens.records.presentation.screens.RecordScreen
@@ -39,10 +41,15 @@ fun NavGraph(
     navController: NavHostController,
     modifier: Modifier
 ) {
+    val notificationViewModel: NotificationViewModel = hiltViewModel()
+
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route,
-
+        startDestination = if (notificationViewModel.getStoredFcmToken().isNullOrEmpty()) {
+            Screen.SplashScreen.route
+        } else {
+            Screen.Home.route
+        },
         modifier = modifier
     ) {
         // Authentication Screens with animation -- maybe for the home screen too (slide in) --
@@ -112,7 +119,7 @@ fun NavGraph(
             LoginScreen(navController)
         }
 
-        composable(route = Screen.Home.route){
+        composable(route = Screen.Home.route) {
             HomeScreen(navController)
         }
 

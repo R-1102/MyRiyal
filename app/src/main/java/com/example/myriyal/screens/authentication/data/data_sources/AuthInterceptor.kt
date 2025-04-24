@@ -12,11 +12,12 @@ class AuthInterceptor(
         val requestBuilder = chain.request().newBuilder()
 
         // Securely fetch token from EncryptedSharedPreferences
-        val token = encryptedPrefs.getString("auth_token", null)
+        val token = encryptedPrefs.getString("fcm_token", null)
 
         // Add token to Authorization header if it exists
         if (!token.isNullOrEmpty()) {
-            requestBuilder.addHeader("Authorization", "Bearer $token")
+            println("Token12: $token")
+            requestBuilder.addHeader("authorization", "Bearer $token")
         }
 
         return chain.proceed(requestBuilder.build())
