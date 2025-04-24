@@ -97,7 +97,7 @@ dependencies {
     // Accompanist Animation (Consider replacing with androidx.navigation)
     implementation(libs.accompanist.navigation.animation)
 
-// Hilt Navigation for Jetpack Compose
+    // Hilt Navigation for Jetpack Compose
     implementation(libs.androidx.hilt.navigation.compose)
 
     // For encrypted SharedPreferences
@@ -114,6 +114,9 @@ dependencies {
 
     //for color picker
     implementation("com.github.skydoves:colorpicker-compose:1.1.2")
+
+    implementation (libs.androidx.security.crypto.v110alpha06)
+
 
 
 }
