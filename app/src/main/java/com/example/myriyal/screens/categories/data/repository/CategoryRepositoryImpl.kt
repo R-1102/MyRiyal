@@ -3,6 +3,8 @@ package com.example.myriyal.screens.categories.data.repository
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.core.utils.ConnectivityStatus
 import com.example.myriyal.screens.categories.data.dataSources.CategoryDataSource
+import com.example.myriyal.screens.categories.data.dataSources.LocalCategoryDataSource
+import com.example.myriyal.screens.categories.data.local.PredefinedCategoryProvider
 import com.example.myriyal.screens.categories.data.model.toDto
 import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +17,7 @@ import javax.inject.Inject
 //
 // Responsibilities:
 // - Called by: UseCases (insert, update, delete, etc.)
-// - Sends data to: CategoryDao
+// - Handle both cases of syncing categories data, when the app is online or not
 // - Provided via Hilt and injected using constructor injection.
 
 class CategoryRepositoryImpl @Inject constructor(
@@ -77,16 +79,13 @@ class CategoryRepositoryImpl @Inject constructor(
 
     override suspend fun softDeleteCategory(categoryId: Int) {
         if (connectivityStatus.isConnected()) {
-        } else {
+            //remote
         }
+        // Local all the time
     }
 
     override fun getAllCategories(): Flow<List<CategoryEntity>> {
-        if (connectivityStatus.isConnected()) {
-        } else {
-        }
-
-        return flow { }
+        return localCategoryDataSource.getAllCategories()
     }
 
     override suspend fun deleteCategory(category: CategoryEntity) {
@@ -95,10 +94,16 @@ class CategoryRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun seedPredefinedCategories() {
-        if (connectivityStatus.isConnected()) {
-        } else {
-        }
+    override suspend fun seedPredefinedCategories( ) {
+
+        val existing = (localCategoryDataSource as LocalCategoryDataSource).dao.getAllCategoriesOnce()
+        val existingNames = existing.map { it.name }
+
+        val predefined = PredefinedCategoryProvider.getCategories()
+        val newOnes = predefined.filter { it.name !in existingNames }
+
+        newOnes.forEach { insertCategory(it) }
+
     }
 
 }
