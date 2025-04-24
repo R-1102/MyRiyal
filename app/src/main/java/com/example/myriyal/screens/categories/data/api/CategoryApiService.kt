@@ -4,6 +4,7 @@ import com.example.myriyal.screens.categories.data.model.CategoryDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface CategoryApiService {
@@ -16,6 +17,9 @@ interface CategoryApiService {
     // insert a new category
     // From local --> Remote
     @POST ("/categories")
-    suspend fun postCategory(@Body category: CategoryDto) : Response<List<CategoryDto>>
+    suspend fun postCategory(
+        @Header("authorization") token : String,
+        @Body category: CategoryDto
+    ) : Response<List<CategoryDto>>
 
 }

@@ -10,7 +10,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myriyal.core.local.entities.CategoryEntity
 import com.example.myriyal.core.local.entities.TrackerEntity
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.core.local.enums.CategoryStatus

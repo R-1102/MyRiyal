@@ -22,5 +22,4 @@ object NetworkModule {
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
 }
