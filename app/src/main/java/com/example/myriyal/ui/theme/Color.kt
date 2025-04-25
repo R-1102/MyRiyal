@@ -12,8 +12,10 @@ val lightGray = Color(0xFFECECEC)
 
 //Dark Theme Colors
 val DarkGreen = Color(0xFF082B27)
+val DarkBackground = Color(0xFF001D19)
 val GreenGrey40 = Color(0xFF335446)
 val DarkSurface = Color(0xFFC5C5C5)
+//val DarkSurface = Color(0xFF082B27)
 val DarkSecondaryContainer = Color(0xFF596C5D)
 val lightGreen = Color(0xFF8FA292)
 
