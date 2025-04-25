@@ -21,4 +21,5 @@ interface AuthRepo {
         email: String
     ) : Result<String>
 
+    fun getCurrentUser(): FirebaseUser?
 }

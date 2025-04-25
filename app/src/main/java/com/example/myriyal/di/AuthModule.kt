@@ -1,5 +1,6 @@
 package com.example.myriyal.di
 
+import androidx.security.crypto.EncryptedSharedPreferences
 import com.example.myriyal.screens.authentication.data.data_sources.AuthDataSource
 import com.example.myriyal.screens.authentication.data.repositories_imp.AuthRepoImp
 import com.example.myriyal.screens.authentication.domain.repository.AuthRepo
@@ -24,8 +25,8 @@ object AuthModule {
 
     @Provides
     @Singleton
-    fun provideAuthDataSource(auth: FirebaseAuth): AuthDataSource {
-        return AuthDataSource(auth)
+    fun provideAuthDataSource(auth: FirebaseAuth,encryptedSharedPreferences: EncryptedSharedPreferences): AuthDataSource {
+        return AuthDataSource(auth,encryptedSharedPreferences)
     }
 
     @Provides

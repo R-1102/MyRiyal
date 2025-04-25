@@ -8,7 +8,6 @@ class LogOutUseCase @Inject constructor(private val authRepo: AuthRepo){
 
     fun logOut(){
         authRepo.logOut()
-     //   FirebaseAuth.getInstance().signOut()
     }
 
 }
