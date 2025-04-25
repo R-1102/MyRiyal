@@ -49,7 +49,6 @@
     <!--Category Screen Dimensions-->
     <integer name="columnPadding">32</integer>
     <integer name="verticalSpacer">16</integer>
-    <integer name="RoundedCornerShape">12</integer> <!--Duplicated-->
     <integer name="colorFieldWidth">384</integer>
     <integer name="colorFieldHeight">56</integer>
     <integer name="colorSampleSize">32</integer>
@@ -82,10 +81,11 @@
     <integer name="borderStroke">2</integer>
 
     <!--Profile Dimensions-->
-    <integer name="profileTopperSpace">36</integer> <!--I change this it was 64 -->
-    <integer name="profileIconSize">200</integer>
-    <integer name="padding">16</integer>
-    <integer name="fieldWidth">180</integer>
+    <integer name="profileIconSize">150</integer>
+    <integer name="profileRoundedBox">36</integer>
+    <integer name="profileBoxHeight">300</integer>
+    <integer name="profileTopPadding">36</integer>
+    <integer name="profileCustomCardHeight">220</integer>
 
     <!--NavBarItems Dimensions-->
     <integer name="iconTopPadding">12</integer>
@@ -105,12 +105,9 @@
     <!--Home Search-->
     <integer name="balanceCardHeight">88</integer>
     <integer name="homeCardElevation">4</integer>
-    <integer name="homeRiyalIconSize">20</integer>
+    <integer name="largeRiyalIconSize">20</integer>
     <integer name="homeRecordCardHeight">312</integer>
     <integer name="chartCardHeight">360</integer>
     <integer name="homeLastRecordCardHeight">60</integer>
-
-
-
 
 </resources>

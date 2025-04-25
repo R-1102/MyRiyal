@@ -24,9 +24,10 @@ import com.example.myriyal.R
 fun CancelButton(
     onClick: () -> Unit,
     text: String,
+    modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(integerResource(id = R.integer.buttonHeight).dp)
             .clip(RoundedCornerShape(integerResource(id = R.integer.buttonRoundCornerShape).dp))

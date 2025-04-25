@@ -25,6 +25,7 @@ import com.example.myriyal.R
 fun GradientButton(
     onClick: () -> Unit,
     text: String,
+    modifier: Modifier = Modifier,
     gradient: Brush = Brush.linearGradient(
         colorStops = arrayOf(
             0.2f to MaterialTheme.colorScheme.inversePrimary,
@@ -36,7 +37,7 @@ fun GradientButton(
     ),
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(integerResource(id = R.integer.buttonHeight).dp)
             .clip(RoundedCornerShape(integerResource(id = R.integer.buttonRoundCornerShape).dp))

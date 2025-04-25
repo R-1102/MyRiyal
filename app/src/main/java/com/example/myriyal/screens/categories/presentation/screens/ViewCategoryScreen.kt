@@ -135,7 +135,7 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
             onClick = { showCategoryFormDialog.value = true },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(integerResource(R.integer.padding).dp)
+                .padding(integerResource(R.integer.mediumSpace).dp)
         )
     }
 }

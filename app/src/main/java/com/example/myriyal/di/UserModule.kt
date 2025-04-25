@@ -1,7 +1,7 @@
 package com.example.myriyal.di
 
-import com.example.myriyal.screens.Profile.domain.repository.UserRepository
-import com.example.myriyal.screens.Profile.data.repository.UserRepositoryImpl
+import com.example.myriyal.screens.profile.domain.repository.UserRepository
+import com.example.myriyal.screens.profile.data.repository.UserRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

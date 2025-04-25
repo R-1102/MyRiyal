@@ -1,10 +1,13 @@
-package com.example.myriyal.screens.Profile.presentattion.screens
+package com.example.myriyal.screens.profile.presentattion.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -13,14 +16,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
+import com.example.myriyal.screenComponent.CancelButton
 
 import com.example.myriyal.screenComponent.CustomTextField
+import com.example.myriyal.screenComponent.GradientButton
 
 @Composable
 fun EditName(
@@ -44,32 +50,28 @@ fun EditName(
 
         // Spacer to add vertical space between the text field and buttons
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
-
-        // Row to hold the "OK" and "Cancel" buttons
-        Row(modifier = Modifier.fillMaxWidth()) {
-            // OK button: confirms the name and sends it to the parent
-            TextButton(
-                onClick = { onNameEntered(userName) }
-            ) {
-                Text(
-                    text = stringResource(R.string.ok),
-                    color = MaterialTheme.colorScheme.onSurface,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
-            Spacer(Modifier.weight(1f)) // Pushes Cancel button to the right end
-
-            // Cancel button: closes the dialog without saving
-            TextButton(
-                onClick = onDismiss
-            ) {
-                Text(
-                    text = stringResource(R.string.cancel),
-                    color = MaterialTheme.colorScheme.onSurface,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+        // Row that holds the action buttons
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = integerResource(R.integer.smallSpace).dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            // "OK" button to confirm and submit the new balance
+            GradientButton(
+                onClick = { onNameEntered(userName) }, // Passes the entered balance to the parent
+                text = stringResource(R.string.ok),
+                modifier = Modifier
+                    .size(80.dp, 40.dp)
+            )
+            // "Cancel" button to dismiss the dialog without saving
+            CancelButton(
+                onClick = { onDismiss() },
+                text = stringResource(R.string.cancel),
+                modifier = Modifier
+                    .size(80.dp, 40.dp)
+            )
         }
     }
 }

@@ -10,7 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.myriyal.home.HomeScreen
-import com.example.myriyal.screens.Profile.presentattion.screens.ViewProfile
+import com.example.myriyal.screens.profile.presentattion.screens.ViewProfile
 import com.example.myriyal.screens.authentication.presentation.screens.BalanceScreen
 import com.example.myriyal.screens.authentication.presentation.screens.ForgotPassword
 import com.example.myriyal.screens.authentication.presentation.screens.LoginScreen
@@ -18,7 +18,6 @@ import com.example.myriyal.screens.authentication.presentation.screens.NewPasswo
 import com.example.myriyal.screens.authentication.presentation.screens.SignUpScreen
 import com.example.myriyal.screens.authentication.presentation.screens.SplashScreen
 import com.example.myriyal.screens.authentication.presentation.vmModels.NotificationViewModel
-import com.example.myriyal.screens.categories.presentation.screens.CategoryForm
 import com.example.myriyal.screens.categories.presentation.screens.ViewCategoryScreen
 import com.example.myriyal.screens.graphsRepresentation.presentation.screens.ViewStatisticScreen
 import com.example.myriyal.screens.records.presentation.screens.RecordScreen
@@ -49,7 +48,7 @@ fun NavGraph(
     NavHost(
         navController = navController,
         startDestination = if (notificationViewModel.getStoredFcmToken().isNullOrEmpty()) {
-            Screen.SplashScreen.route
+            Screen.Home.route
         } else {
             Screen.Home.route
         },
