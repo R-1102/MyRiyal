@@ -10,7 +10,7 @@ data class NavItem(
 
 val navItems = listOf(
     NavItem(
-        route = "Home",
+        route = "Home_Screen",
         iconRes = R.drawable.home,
         labelRes = R.string.home
     ),
