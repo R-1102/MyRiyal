@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">ريالي</string>
 
     <string name="signUp_header" >أنشئ حساب</string>
 
@@ -87,8 +88,10 @@
 
     <string name="viewMore">عرض المزيد</string>
     <string name="balance">الرصيد</string>
-    <string name="categoryChart">الرسم بياني للفئات </string>
-    <string name="latestRecords">احدث السجلات</string>
+    <string name="categoryChart">الرسم البياني للفئات </string>
+    <string name="latestRecords">السجلات الحديثة</string>
+    <string name="incomeVsExpenses">الدخل مقابل النفقات</string>
+    <string name="monthlySpending">الإنفاق الشهري</string>
 
     <string name="search">بحث</string>
 

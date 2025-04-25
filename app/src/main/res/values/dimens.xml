@@ -106,9 +106,9 @@
     <integer name="balanceCardHeight">88</integer>
     <integer name="homeCardElevation">4</integer>
     <integer name="homeRiyalIconSize">20</integer>
-    <integer name="homeRecordCardHeight">308</integer>
-    <integer name="homeChartCardHeight">360</integer>
-    <integer name="homeLastRecordCardHeight">64</integer>
+    <integer name="homeRecordCardHeight">312</integer>
+    <integer name="chartCardHeight">360</integer>
+    <integer name="homeLastRecordCardHeight">60</integer>
 
 
 

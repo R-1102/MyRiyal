@@ -49,6 +49,7 @@ fun TopNavigationBar(
                     "view_category" -> stringResource(R.string.categories)
                     "view_profile" -> stringResource(R.string.profile)
                     "Home" -> stringResource(R.string.home)
+                    "Statistic" -> stringResource(R.string.statistic)
                     else -> ""
                 },
                 color = MaterialTheme.colorScheme.onPrimary,

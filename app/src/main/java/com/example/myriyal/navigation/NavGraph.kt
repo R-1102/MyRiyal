@@ -20,6 +20,7 @@ import com.example.myriyal.screens.authentication.presentation.screens.SplashScr
 import com.example.myriyal.screens.authentication.presentation.vmModels.NotificationViewModel
 import com.example.myriyal.screens.categories.presentation.screens.CategoryForm
 import com.example.myriyal.screens.categories.presentation.screens.ViewCategoryScreen
+import com.example.myriyal.screens.graphsRepresentation.presentation.screens.ViewStatisticScreen
 import com.example.myriyal.screens.records.presentation.screens.RecordScreen
 import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
 
@@ -52,7 +53,7 @@ fun NavGraph(
         },
         modifier = modifier
     ) {
-        // Authentication Screens with animation -- maybe for the home screen too (slide in) --
+        // Authentication Screens with animation
         composable(
             route = Screen.SplashScreen.route, /*SplashScreen*/
             enterTransition = {
@@ -86,7 +87,7 @@ fun NavGraph(
                 )
             },
 
-            ) {
+        ) {
             BalanceScreen(navController)
         }
 
@@ -127,17 +128,6 @@ fun NavGraph(
             ViewCategoryScreen()
         }
 
-//        composable(Screen.AddCategory.route) {
-//            CategoryForm(
-//                viewModel.selectedCategory.value, {
-//                viewModel.selectedCategory.value = null
-//                shouldShowDialog.value = false
-//            }) {
-//                viewModel.selectedCategory.value = null
-//                shouldShowDialog.value = false
-//            }
-//        }
-
         composable(Screen.Record.route) {
             RecordScreen()
         }
@@ -148,6 +138,10 @@ fun NavGraph(
 
         composable(Screen.ViewProfile.route) {
             ViewProfile()
+        }
+
+        composable(Screen.Statistic.route) {
+            ViewStatisticScreen()
         }
     }
 }
