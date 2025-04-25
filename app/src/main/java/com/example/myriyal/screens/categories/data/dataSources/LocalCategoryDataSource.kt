@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalCategoryDataSource @Inject constructor(
-    private val dao: CategoryDao
+     val dao: CategoryDao
 // Injected DAO for accessing Room database
 ) : CategoryDataSource {
 
@@ -31,7 +31,7 @@ class LocalCategoryDataSource @Inject constructor(
 
     // Retrieves all categories as a reactive Flow
     // Called by: GetAllCategoriesUseCase
-    override suspend fun getAllCategories(): Flow<List<CategoryEntity>> {
+    override fun getAllCategories(): Flow<List<CategoryEntity>> {
         return dao.getAllCategories()
     }
 

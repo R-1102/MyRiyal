@@ -32,7 +32,7 @@ class RemoteCategoryDataSource @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getAllCategories(): Flow<List<CategoryEntity>> {
+    override fun getAllCategories(): Flow<List<CategoryEntity>> {
         val response = api.getCategories()
         return if (response.isSuccessful) {
 

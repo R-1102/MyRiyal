@@ -5,6 +5,7 @@ import com.example.myriyal.screens.categories.data.model.CategoryResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface CategoryApiService {
@@ -12,7 +13,7 @@ interface CategoryApiService {
     // Fetch all Categories
     // From Remote  --> local
     @GET("/categories")
-    suspend fun getCategories(): Response<List<CategoryDto>>
+    fun getCategories(): Response<List<CategoryDto>>
 
     // insert a new category
     // From local --> Remote
