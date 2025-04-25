@@ -84,7 +84,7 @@
     <integer name="profileIconSize">150</integer>
     <integer name="profileRoundedBox">36</integer>
     <integer name="profileBoxHeight">300</integer>
-    <integer name="profileTopPadding">40</integer>
+    <integer name="profileTopPadding">36</integer>
     <integer name="profileCustomCardHeight">220</integer>
 
     <!--NavBarItems Dimensions-->
