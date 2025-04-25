@@ -191,7 +191,7 @@ fun CategoryForm(
         if (showDialog.value) {
             Dialog(onDismissRequest = { showDialog.value = false }) {
                 Surface(
-                    shape = RoundedCornerShape(integerResource(R.integer.roundedCornerShape).dp),
+                    shape = RoundedCornerShape(integerResource(R.integer.RoundedCornerShape).dp),
                     color = MaterialTheme.colorScheme.surface,
                     tonalElevation = integerResource(R.integer.tonalElevation).dp
                 ) {
