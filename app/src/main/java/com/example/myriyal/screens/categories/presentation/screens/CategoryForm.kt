@@ -161,7 +161,7 @@ fun CategoryForm(
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Transparent
             ),
-            shape = RoundedCornerShape(integerResource(R.integer.roundCardCornerShape).dp),
+            shape = RoundedCornerShape(integerResource(R.integer.roundedCornerShape).dp),
             modifier = Modifier
                 .width(integerResource(R.integer.colorFieldWidth).dp)
                 .height(integerResource(R.integer.colorFieldHeight).dp)
@@ -191,7 +191,7 @@ fun CategoryForm(
         if (showDialog.value) {
             Dialog(onDismissRequest = { showDialog.value = false }) {
                 Surface(
-                    shape = RoundedCornerShape(integerResource(R.integer.roundCardCornerShape).dp),
+                    shape = RoundedCornerShape(integerResource(R.integer.roundedCornerShape).dp),
                     color = MaterialTheme.colorScheme.surface,
                     tonalElevation = integerResource(R.integer.tonalElevation).dp
                 ) {
