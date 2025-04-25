@@ -10,6 +10,7 @@ import com.example.myriyal.screens.categories.domian.useCases.GetTrackerByCatego
 import com.example.myriyal.screens.categories.domian.useCases.InsertCategoryUseCase
 import com.example.myriyal.screens.categories.domian.useCases.InsertTrackerUseCase
 import com.example.myriyal.screens.categories.domian.useCases.InsertWithTrackerUseCase
+import com.example.myriyal.screens.categories.domian.useCases.SearchCategoryByNameUseCase
 import com.example.myriyal.screens.categories.domian.useCases.SeedPredefinedCategoriesUseCase
 import com.example.myriyal.screens.categories.domian.useCases.SoftDeleteCategoryUseCase
 import com.example.myriyal.screens.categories.domian.useCases.UpdateCategoryUseCase
@@ -48,9 +49,8 @@ object UseCaseModule {
             updateTracker = { tracker -> trackerRepository.updateTracker(tracker) },
             getTrackerByCategoryId = { categoryId ->
                 trackerRepository.getTrackerByCategoryId(categoryId).firstOrNull()
-            }
-
-
+            },
+            searchCategoryByName = SearchCategoryByNameUseCase(categoryRepository)
         )
     }
 

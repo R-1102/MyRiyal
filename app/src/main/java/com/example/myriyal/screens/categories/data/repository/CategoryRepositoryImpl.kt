@@ -3,6 +3,7 @@ package com.example.myriyal.screens.categories.data.repository
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.core.utils.ConnectivityStatus
 import com.example.myriyal.screens.categories.data.dataSources.CategoryDataSource
+import com.example.myriyal.screens.categories.data.local.CategoryDao
 import com.example.myriyal.screens.categories.data.model.toDto
 import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
@@ -11,7 +12,8 @@ import javax.inject.Inject
 class CategoryRepositoryImpl @Inject constructor(
     private val localCategoryDataSource: CategoryDataSource,
     private val remoteCategoryDataSource: CategoryDataSource,
-    private val connectivityStatus: ConnectivityStatus
+    private val connectivityStatus: ConnectivityStatus,
+    private val dao : CategoryDao
 ) : CategoryRepository {
 
     // Inserts a new category into the database
@@ -64,6 +66,10 @@ class CategoryRepositoryImpl @Inject constructor(
             remoteCategoryDataSource.seedPredefinedCategories()
         }
         localCategoryDataSource.seedPredefinedCategories()
+    }
+
+    override fun searchCategoryByName(query: String): Flow<List<CategoryEntity>> {
+        return dao.searchCategoryByName(query)
     }
 }
 

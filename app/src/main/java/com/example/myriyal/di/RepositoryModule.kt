@@ -52,12 +52,14 @@ object RepositoryModule {
     fun provideCategoryRepository(
         @Named("local") localCategoryDataSource: CategoryDataSource,
         @Named("remote") remoteCategoryDataSource: CategoryDataSource,
-        connectivityStatus: ConnectivityStatus
+        connectivityStatus: ConnectivityStatus,
+        dao : CategoryDao
     ): CategoryRepository {
         return CategoryRepositoryImpl(
             localCategoryDataSource,
             remoteCategoryDataSource,
-            connectivityStatus
+            connectivityStatus,
+            dao
         )
     }
 }

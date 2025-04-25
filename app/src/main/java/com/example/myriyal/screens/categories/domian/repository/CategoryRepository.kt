@@ -37,4 +37,6 @@ interface CategoryRepository {
     // Seeds predefined categories into the database (called once during app setup).
     // Called by: ViewModel.seedPredefinedCategories()
     suspend fun seedPredefinedCategories()
+
+    fun searchCategoryByName(query:String): Flow<List<CategoryEntity>>
 }
