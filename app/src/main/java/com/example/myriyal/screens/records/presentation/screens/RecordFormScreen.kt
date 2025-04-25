@@ -73,13 +73,6 @@ fun RecordFormScreen(
         DateFormat.getDateInstance().format(Date(it))
     } ?: ""
 
-    fun resetForm() {
-        recordName = ""
-        description = ""
-        amount = ""
-        selectedCategory = null
-        recordDate = null
-    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -169,7 +162,7 @@ fun RecordFormScreen(
 
         CancelButton(
             onClick = {
-                resetForm()
+                recordViewModel.resetForm()
                 onDismiss()
             },
             text = stringResource(id = R.string.cancel)
