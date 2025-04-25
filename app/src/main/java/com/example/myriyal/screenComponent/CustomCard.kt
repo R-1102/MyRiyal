@@ -17,7 +17,6 @@ import com.example.myriyal.R
 @Composable
 fun CustomCard(
     modifier: Modifier = Modifier,
-    colors: CardColors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
     content: @Composable () -> Unit
 ) {
     Card(
@@ -25,7 +24,7 @@ fun CustomCard(
             .padding(integerResource(R.integer.cardPadding).dp)
             .shadow(integerResource(R.integer.customCardShadow).dp)
             .clip(RoundedCornerShape(integerResource(R.integer.customCardRound).dp)),
-        colors = colors
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
     ) {
         content()
     }

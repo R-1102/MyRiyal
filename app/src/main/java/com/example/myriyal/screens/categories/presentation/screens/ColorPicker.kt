@@ -67,7 +67,7 @@ fun ColorPicker(
                 modifier = Modifier
                     .fillMaxWidth()
                     .size(integerResource(R.integer.alphaTileSize).dp)
-                    .clip(RoundedCornerShape(integerResource(R.integer.RoundedCornerShape).dp)),
+                    .clip(RoundedCornerShape(integerResource(R.integer.roundCardCornerShape).dp)),
                 controller = categoryColor
             )
         }

@@ -1,11 +1,11 @@
-package com.example.myriyal.screens.Profile.presentattion.vmModels
+package com.example.myriyal.screens.profile.presentattion.vmModels
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myriyal.core.local.dao.UserDao
-import com.example.myriyal.screens.Profile.domain.useCases.CalculateBalanceUseCase
-import com.example.myriyal.screens.Profile.domain.useCases.CreateGuestUserUseCase
+import com.example.myriyal.screens.profile.domain.useCases.CalculateBalanceUseCase
+import com.example.myriyal.screens.profile.domain.useCases.CreateGuestUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
