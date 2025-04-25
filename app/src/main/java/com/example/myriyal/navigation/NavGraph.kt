@@ -23,6 +23,7 @@ import com.example.myriyal.screens.categories.presentation.screens.ViewCategoryS
 import com.example.myriyal.screens.graphsRepresentation.presentation.screens.ViewStatisticScreen
 import com.example.myriyal.screens.records.presentation.screens.RecordScreen
 import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
+import com.google.firebase.auth.FirebaseAuth
 
 /**
  * Defines app-level navigation for the main features:
@@ -40,7 +41,8 @@ screen doesn't pop out to it again*/
 @Composable
 fun NavGraph(
     navController: NavHostController,
-    modifier: Modifier
+    modifier: Modifier,
+    firebaseAuth: FirebaseAuth
 ) {
     val notificationViewModel: NotificationViewModel = hiltViewModel()
 
@@ -63,7 +65,7 @@ fun NavGraph(
                 )
             },
         ) {
-            SplashScreen(navController)
+            SplashScreen(navController,firebaseAuth)
         }
 
         composable(

@@ -14,14 +14,26 @@ import androidx.navigation.NavHostController
 import com.example.myriyal.R
 import com.example.myriyal.navigation.Screen
 import com.example.myriyal.ui.theme.ThemedLogo
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavHostController) {
+fun SplashScreen(
+    navController: NavHostController,
+    firebaseAuth: FirebaseAuth
+) {
     LaunchedEffect(Unit) {
         delay(2000)
-        navController.navigate(Screen.SignUp.route) {
-            popUpTo(Screen.SplashScreen.route) { inclusive = true } // prevent going back to splash
+
+        val user = firebaseAuth.currentUser
+        if (user == null){
+            navController.navigate(Screen.SignUp.route) {
+                popUpTo(Screen.SplashScreen.route) { inclusive = true }
+            }
+        }else{
+            navController.navigate(Screen.Home.route) {
+                popUpTo(Screen.SplashScreen.route) { inclusive = true }
+            }
         }
     }
     Box(

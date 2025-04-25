@@ -12,7 +12,7 @@ sealed class Screen(val route: String) {
     object Record : Screen("record_screen")
     object ViewRecord : Screen ("ViewRecord_Screen")
     object ViewProfile : Screen ("view_profile")
-    object Home : Screen ("Home")
+    object Home : Screen ("Home_Screen")
     object Statistic : Screen ("Statistic")
 
 }

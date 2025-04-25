@@ -14,6 +14,7 @@ import com.example.myriyal.navigation.bottomBar.BottomNavigationBar
 import com.example.myriyal.navigation.topBar.TopNavigationBar
 import com.example.myriyal.screens.authentication.domain.useCases.LogOutUseCase
 import com.example.myriyal.screens.authentication.presentation.vmModels.LogOutVM
+import com.google.firebase.auth.FirebaseAuth
 
 /**
  * Root Composable function to initialize and launch the MyRiyal app.
@@ -35,6 +36,7 @@ fun AppNavigation(darkTheme: Boolean, toggleTheme: () -> Unit) {
 
     // Navigation controller for handling screen routing
     val navController = rememberNavController()
+    val firebaseAuth = FirebaseAuth.getInstance()
 
     // Observe current back stack entry to determine current screen
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -84,7 +86,8 @@ fun AppNavigation(darkTheme: Boolean, toggleTheme: () -> Unit) {
     ) { innerPadding ->
         NavGraph(
             navController = navController,
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
+            firebaseAuth = firebaseAuth
         )
     }
 }
