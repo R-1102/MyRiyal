@@ -50,7 +50,7 @@ class RecordViewModel @Inject constructor(
     // Search State (NEWLY ADDED)
     // --------------------------
 
-        private val _searchQuery = MutableStateFlow("")
+    private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery
 
     /**

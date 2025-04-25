@@ -56,5 +56,10 @@ interface CategoryDao {
     @Query("SELECT * FROM category")
     suspend fun getAllCategoriesOnce(): List<CategoryEntity>
 
+    /**
+     * Search category by name using a LIKE query. Returns results ordered by date (newest first).
+     */
+    @Query("SELECT * FROM category WHERE name LIKE '%' || :query || '%' ORDER BY createdAt DESC")
+    fun searchCategoryByName(query:String):Flow<List<CategoryEntity>>
 
 }

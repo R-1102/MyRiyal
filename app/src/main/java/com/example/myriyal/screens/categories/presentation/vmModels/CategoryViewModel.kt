@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -79,11 +80,25 @@ class CategoryViewModel @Inject constructor(
 
     // -------------------- State Flow for Categories --------------------
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery : StateFlow<String> = _searchQuery
+
+    fun setSearchQuery(query: String){
+        _searchQuery.value = query
+    }
+
     // Exposes a filtered list of ACTIVE categories using StateFlow.
-    val categories: StateFlow<List<CategoryEntity>> = useCases
-        .getAll()
+    val categories: StateFlow<List<CategoryEntity>> = searchQuery
+        .flatMapLatest { query ->
+            if (query.isBlank()) {
+                useCases.getAll()
+            } else {
+                useCases.searchCategoryByName(query)
+            }
+        }
         .map { list -> list.filter { it.status == CategoryStatus.ACTIVE } }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
 
     // -------------------- Filtering Support --------------------
 
@@ -101,6 +116,11 @@ class CategoryViewModel @Inject constructor(
     fun setFilter(filter: CategoryFilter) {
         selectedFilter.value = filter
     }
+
+    // -------------------- Search Categories By Name --------------------
+
+
+
 
     // -------------------- Category Actions --------------------
 

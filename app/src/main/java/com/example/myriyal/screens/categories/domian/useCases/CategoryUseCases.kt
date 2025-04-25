@@ -22,5 +22,6 @@ data class CategoryUseCases(
     val getSpentAmount: GetSpentAmountForCategoryUseCase,  // Calculates total spent amount for a category
     val insertTracker: suspend (TrackerEntity) -> Unit,    // Inserts a new tracker entity (inline function)
     val updateTracker: suspend (TrackerEntity) -> Unit,    // Updates an existing tracker entity (inline function)
-    val getTrackerByCategoryId: suspend (Int) -> TrackerEntity? // Retrieves tracker info by category ID
+    val getTrackerByCategoryId: suspend (Int) -> TrackerEntity?, // Retrieves tracker info by category ID
+    val searchCategoryByName: SearchCategoryByNameUseCase
 )

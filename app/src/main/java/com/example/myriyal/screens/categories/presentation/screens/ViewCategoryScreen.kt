@@ -41,6 +41,7 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
     }
 
     val categories by categoryViewModel.filteredCategories.collectAsState()
+    val searchQuery by categoryViewModel.searchQuery.collectAsState()
     var isDropdownExpanded by remember { mutableStateOf(false) }
 
     val showCategoryFormDialog = remember { mutableStateOf(false) }
@@ -82,10 +83,9 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
                 horizontalArrangement = Arrangement.Center
             ) {
                 SearchField(
-                    value = "" /*categoryViewModel.searchQuery.value*/,
-                    onValueChange = {/* categoryViewModel.searchQuery.value = it */ },
-                    modifier = Modifier
-                        .weight(1f)
+                    value = searchQuery,
+                    onValueChange = { categoryViewModel.setSearchQuery(it) },
+                    modifier = Modifier.weight(1f)
                 )
                 Box{
                     IconButton(
