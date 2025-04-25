@@ -62,7 +62,7 @@ fun RecordItemCardSimple(
             containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
 
             ),
-        shape = RoundedCornerShape(integerResource(id = R.integer.roundCardCornerShape).dp),
+        shape = RoundedCornerShape(integerResource(id = R.integer.roundedCornerShape).dp),
         elevation = CardDefaults.cardElevation(
             defaultElevation = (integerResource(id = R.integer.recordItemCardElevation)).dp
         ),

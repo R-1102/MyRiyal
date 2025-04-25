@@ -21,7 +21,7 @@ fun CustomCardHomeStatistic(
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = integerResource(id = R.integer.smallerSpace).dp),
-        shape = RoundedCornerShape(integerResource(id = R.integer.roundCardCornerShape).dp),
+        shape = RoundedCornerShape(integerResource(id = R.integer.roundedCornerShape).dp),
         elevation = CardDefaults.cardElevation(integerResource(id = R.integer.homeCardElevation).dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
