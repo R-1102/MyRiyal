@@ -8,10 +8,11 @@ sealed class Screen(val route: String) {
     object NewPass : Screen ("NewPass_Screen")
     object SignUp : Screen("SignUp_Screen")
     object Balance : Screen("Balance")
-    object AddCategory : Screen("addCategory_screen")
     object ViewCategory : Screen ("view_category")
     object Record : Screen("record_screen")
     object ViewRecord : Screen ("ViewRecord_Screen")
     object ViewProfile : Screen ("view_profile")
     object Home : Screen ("Home")
+    object Statistic : Screen ("Statistic")
+
 }

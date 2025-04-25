@@ -1,4 +1,4 @@
-package com.example.myriyal.home
+package com.example.myriyal.screenComponent
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

@@ -1,8 +1,5 @@
 package com.example.myriyal.navigation.bottomBar
 
-import androidx.compose.ui.res.integerResource
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
 
 data class NavItem(
@@ -28,7 +25,7 @@ val navItems = listOf(
         labelRes = R.string.categories
     ),
     NavItem(
-        route = "ViewRecord_Screen",
+        route = "Statistic",
         iconRes = R.drawable.statistic,
         labelRes = R.string.statistic,
     )

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">My Riyal</string>
+    <string name="app_name">My Riyal</string>
 
     <string name="signUp_header">Create an Account</string>
 
@@ -86,6 +86,9 @@
     <string name="balance">Balance</string>
     <string name="categoryChart">Category Chart</string>
     <string name="latestRecords">Latest Records</string>
+
+    <string name="incomeVsExpenses">Income vs. Expenses Overview</string>
+    <string name="monthlySpending">Monthly Spending</string>
 
     <string name="search">Search</string>
 

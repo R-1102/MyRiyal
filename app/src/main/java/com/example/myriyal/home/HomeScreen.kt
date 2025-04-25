@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
+import com.example.myriyal.screenComponent.CustomCardHomeStatistic
 import com.example.myriyal.screens.Profile.presentattion.vmModels.ProfileViewModel
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
@@ -44,7 +46,7 @@ fun HomeScreen(navController: NavHostController) {
 
     LazyColumn(
         horizontalAlignment = Alignment.End,
-        modifier = Modifier.padding(integerResource(id = R.integer.mediumSpace).dp)
+        modifier = Modifier.padding(horizontal = integerResource(id = R.integer.mediumSpace).dp)
     ) {
         item {
             //Balance Card
@@ -119,6 +121,7 @@ fun HomeScreen(navController: NavHostController) {
                                     record = record,
                                     category = category
                                 )
+                                Spacer(modifier = Modifier.height(integerResource(id = R.integer.extraSmallSpace).dp))
                             }
                         }
                     }
@@ -137,7 +140,7 @@ fun HomeScreen(navController: NavHostController) {
             // Chart Card
             CustomCardHomeStatistic(
                 modifier = Modifier
-                    .height(integerResource(id = R.integer.homeChartCardHeight).dp)
+                    .height(integerResource(id = R.integer.chartCardHeight).dp)
                     .padding(top = integerResource(id = R.integer.smallSpace).dp),
                 ) {
                 Text(

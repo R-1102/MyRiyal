@@ -3,7 +3,6 @@ package com.example.myriyal.home
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -72,56 +71,49 @@ fun RecordItemCardSimple(
             parsedCategoryColor,
         ),
 
-        ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier =
-            Modifier
+    ) {
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
                 .fillMaxSize()
-                .padding(integerResource(id = R.integer.smallSpace).dp),
+                .padding(horizontal =  integerResource(id = R.integer.mediumSpace).dp)
         ) {
-            Row(
-                Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = categoryIcon,
-                        style = MaterialTheme.typography.titleLarge,
-                    )
+            Row{
+                Text(
+                    text = categoryIcon,
+                    style = MaterialTheme.typography.titleLarge,
+                )
 
-                    Spacer(modifier = Modifier.width(integerResource(id = R.integer.smallerSpace).dp))
+                Spacer(modifier = Modifier.width(integerResource(id = R.integer.smallerSpace).dp))
 
-                    Text(
-                        text = record.name,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onPrimary,
-                    )
+                Text(
+                    text = record.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onPrimary,
+                )
+            }
+            Row {
+                Text(
+                    text = if (isExpense) "-$recordAmount" else "+$recordAmount",
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = if (isExpense) Expense else Income
+                )
 
-                    Spacer(modifier = Modifier.width(integerResource(id = R.integer.smallerSpace).dp))
-
-                    Text(
-                        text = if (isExpense) "-$recordAmount" else "+$recordAmount",
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = if (isExpense) Expense else Income
-                    )
-
-                    Image(
-                        painter = riyalIcon,
-                        contentDescription = "Riyal Icon",
-                        modifier = Modifier.size(
-                            integerResource(id = R.integer.riyalIconSize).dp,
-                            integerResource(id = R.integer.riyalIconSize).dp
-                        ),
-                    )
-                }
+                Image(
+                    painter = riyalIcon,
+                    contentDescription = "Riyal Icon",
+                    modifier = Modifier.size(
+                        integerResource(id = R.integer.riyalIconSize).dp,
+                        integerResource(id = R.integer.riyalIconSize).dp
+                    ),
+                )
             }
         }
     }
 }
+
+
