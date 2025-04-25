@@ -12,8 +12,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.navigation.bottomBar.BottomNavigationBar
 import com.example.myriyal.navigation.topBar.TopNavigationBar
-import com.example.myriyal.screens.authentication.domain.useCases.LogOutUseCase
-import com.example.myriyal.screens.authentication.presentation.vmModels.LogOutVM
 import com.google.firebase.auth.FirebaseAuth
 
 /**
