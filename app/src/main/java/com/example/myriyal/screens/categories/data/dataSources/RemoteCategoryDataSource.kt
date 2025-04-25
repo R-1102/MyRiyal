@@ -2,7 +2,9 @@ package com.example.myriyal.screens.categories.data.dataSources
 
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.screens.categories.data.api.CategoryApiService
+import com.example.myriyal.screens.categories.data.local.PredefinedCategoryProvider
 import com.example.myriyal.screens.categories.data.model.CategoryDto
+import com.example.myriyal.screens.categories.data.model.toDto
 import com.example.myriyal.screens.categories.data.model.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -49,6 +51,7 @@ class RemoteCategoryDataSource @Inject constructor(
     }
 
     override suspend fun seedPredefinedCategories() {
-        TODO("Not yet implemented")
+        val predefined = PredefinedCategoryProvider.getCategories()
+        predefined.forEach { api.postCategory(it.toDto()) }
     }
 }
