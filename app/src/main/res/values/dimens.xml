@@ -108,7 +108,7 @@
     <integer name="homeRiyalIconSize">20</integer>
     <integer name="homeRecordCardHeight">308</integer>
     <integer name="homeChartCardHeight">360</integer>
-    <integer name="homeLastRecordCardHeight">16</integer>
+    <integer name="homeLastRecordCardHeight">64</integer>
 
 
 
