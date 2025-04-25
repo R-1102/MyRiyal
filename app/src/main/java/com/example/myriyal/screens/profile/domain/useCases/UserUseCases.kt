@@ -1,4 +1,4 @@
-package com.example.myriyal.screens.Profile.domain.useCases
+package com.example.myriyal.screens.profile.domain.useCases
 
 import com.example.myriyal.core.local.enums.CategoryType
 import com.example.myriyal.screens.categories.domian.repository.CategoryRepository

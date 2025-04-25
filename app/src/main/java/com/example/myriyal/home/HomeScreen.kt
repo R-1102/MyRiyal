@@ -27,7 +27,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
 import com.example.myriyal.screenComponent.CustomCardHomeStatistic
-import com.example.myriyal.screens.Profile.presentattion.vmModels.ProfileViewModel
+import com.example.myriyal.screens.profile.presentattion.vmModels.ProfileViewModel
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 
@@ -84,8 +84,8 @@ fun HomeScreen(navController: NavHostController) {
                             painter = painterResource(id = R.drawable.expenes),
                             contentDescription = "Riyal Icon",
                             modifier = Modifier.size(
-                                integerResource(id = R.integer.homeRiyalIconSize).dp,
-                                integerResource(id = R.integer.homeRiyalIconSize).dp
+                                integerResource(id = R.integer.largeRiyalIconSize).dp,
+                                integerResource(id = R.integer.largeRiyalIconSize).dp
                             ),
                             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onTertiary)
                         )
