@@ -13,7 +13,7 @@ class CategoryRepositoryImpl @Inject constructor(
     private val localCategoryDataSource: CategoryDataSource,
     private val remoteCategoryDataSource: CategoryDataSource,
     private val connectivityStatus: ConnectivityStatus,
-    private val dao : CategoryDao
+    private val dao: CategoryDao
 ) : CategoryRepository {
 
     // Inserts a new category into the database
@@ -46,9 +46,10 @@ class CategoryRepositoryImpl @Inject constructor(
 
     override suspend fun softDeleteCategory(categoryId: Int) {
         if (connectivityStatus.isConnected()) {
-            //remote
+            remoteCategoryDataSource.softDeleteCategory(categoryId)
         }
-        // Local all the time
+        localCategoryDataSource.softDeleteCategory(categoryId)
+
     }
 
     override fun getAllCategories(): Flow<List<CategoryEntity>> {
@@ -57,8 +58,10 @@ class CategoryRepositoryImpl @Inject constructor(
 
     override suspend fun deleteCategory(category: CategoryEntity) {
         if (connectivityStatus.isConnected()) {
-        } else {
+            remoteCategoryDataSource.deleteCategory(category)
         }
+        localCategoryDataSource.deleteCategory(category)
+
     }
 
     override suspend fun seedPredefinedCategories() {
@@ -72,6 +75,3 @@ class CategoryRepositoryImpl @Inject constructor(
         return dao.searchCategoryByName(query)
     }
 }
-
-
-

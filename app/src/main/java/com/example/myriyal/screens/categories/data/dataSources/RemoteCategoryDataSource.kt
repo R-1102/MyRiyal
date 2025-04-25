@@ -31,7 +31,7 @@ class RemoteCategoryDataSource @Inject constructor(
     }
 
     override suspend fun softDeleteCategory(categoryId: Int) {
-        TODO("Not yet implemented")
+
     }
 
     override fun getAllCategories(): Flow<List<CategoryEntity>> {
