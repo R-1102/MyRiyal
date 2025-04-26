@@ -20,7 +20,7 @@ This project is about creating a mobile app that helps users track, manage, and 
 
 ### Detailed Screen Requirements
 - **Expenses List Screen**:
-   View all expenses, filter by day, week, month, or year, search expenses, edit or delete entries
+View all expenses, filter by day, week, month, or year, search expenses, edit or delete entries
 - **Add Expense Screen**:
   Add new expenses with amount, date, category, and description fields (with input validation)
 - **Categories Screen**:
