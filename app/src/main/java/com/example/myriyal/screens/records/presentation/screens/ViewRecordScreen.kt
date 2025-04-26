@@ -23,6 +23,7 @@ import com.example.myriyal.ui.screenComponent.CustomFloatingActionButton
 import com.example.myriyal.ui.screenComponent.FilterSelector
 import com.example.myriyal.ui.screenComponent.SearchField
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
+import com.example.myriyal.screens.records.presentation.screens.components.RecordItemCard
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 
 @Composable
@@ -30,6 +31,7 @@ fun ViewRecordScreen() {
 
     val recordViewModel: RecordViewModel = hiltViewModel()
     val categoryViewModel: CategoryViewModel = hiltViewModel()
+
     // Observe reactive states from ViewModels
     val records by recordViewModel.records.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()

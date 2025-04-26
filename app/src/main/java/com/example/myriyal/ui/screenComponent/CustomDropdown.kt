@@ -28,6 +28,7 @@ fun <T> CustomDropdown(
     label: String,
     list: List<T>,
     onSelect: (T) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
     Box {
@@ -41,13 +42,13 @@ fun <T> CustomDropdown(
                     Icon(Icons.Default.ArrowDropDown, contentDescription = null)
                 }
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = modifier.fillMaxWidth()
         )
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            containerColor = MaterialTheme.colorScheme.tertiary,
-            modifier = Modifier
+            containerColor = MaterialTheme.colorScheme.surface,
+            modifier = modifier
                 .size(
                     integerResource(R.integer.dropDownWidth).dp,
                     integerResource(R.integer.dropDownHeight).dp

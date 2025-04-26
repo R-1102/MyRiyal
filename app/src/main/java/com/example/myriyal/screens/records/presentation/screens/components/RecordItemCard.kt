@@ -1,4 +1,4 @@
-package com.example.myriyal.screens.records.presentation.screens
+package com.example.myriyal.screens.records.presentation.screens.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -33,7 +33,6 @@ import com.example.myriyal.R
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.screens.records.data.local.RecordEntity
 import com.example.myriyal.screens.categories.domian.model.CategoryType
-import com.example.myriyal.ui.theme.Black
 import com.example.myriyal.ui.theme.Expense
 import com.example.myriyal.ui.theme.Income
 
@@ -66,7 +65,7 @@ fun RecordItemCard(
             .fillMaxWidth()
             .padding(vertical = integerResource(id = R.integer.extraSmallSpace).dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
             ),
         shape = RoundedCornerShape(integerResource(id = R.integer.roundedCornerShape).dp),
         elevation = CardDefaults.cardElevation(
@@ -101,7 +100,7 @@ fun RecordItemCard(
                         text = record.name,
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
-                        color = parsedCategoryColor
+                        color = MaterialTheme.colorScheme.onPrimary,
                     )
 
                     Spacer(modifier = Modifier.width(integerResource(id = R.integer.smallerSpace).dp))
@@ -144,7 +143,7 @@ fun RecordItemCard(
                 Text(
                     text = " $it",
                     style = MaterialTheme.typography.bodySmall,
-                    color = Black,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier.padding(integerResource(id = R.integer.extraSmallSpace).dp)
                 )
             }

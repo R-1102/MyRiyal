@@ -1,4 +1,4 @@
-package com.example.myriyal.screens.categories.presentation.screens
+package com.example.myriyal.screens.categories.presentation.screens.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding

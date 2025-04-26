@@ -1,4 +1,4 @@
-package com.example.myriyal.screens.profile.presentattion.screens
+package com.example.myriyal.screens.profile.presentattion.screens.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -62,18 +62,19 @@ fun EditBalance(
                 text = stringResource(R.string.ok),
                 modifier = Modifier
                     .size(
-                        integerResource(id = R.integer.smallButtonHeight).dp,
-                        integerResource(id = R.integer.smallButtonWidth).dp
+                        integerResource(id = R.integer.smallButtonWidth).dp,
+                        integerResource(id = R.integer.smallButtonHeight).dp
                     )
             )
+
             // "Cancel" button to dismiss the dialog without saving
             CancelButton(
                 onClick = { onDismiss() },
                 text = stringResource(R.string.cancel),
                 modifier = Modifier
                     .size(
-                        integerResource(id = R.integer.smallButtonHeight).dp,
-                        integerResource(id = R.integer.smallButtonWidth).dp
+                        integerResource(id = R.integer.smallButtonWidth).dp,
+                        integerResource(id = R.integer.smallButtonHeight).dp
                     )
             )
         }

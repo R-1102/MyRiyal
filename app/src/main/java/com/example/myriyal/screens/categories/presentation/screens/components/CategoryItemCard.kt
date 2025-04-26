@@ -1,4 +1,4 @@
-package com.example.myriyal.screens.categories.presentation.screens
+package com.example.myriyal.screens.categories.presentation.screens.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -13,8 +13,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,7 +36,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
-import com.example.myriyal.ui.theme.Black
 
 @Composable
 fun CategoryItemCard(
@@ -65,7 +64,7 @@ fun CategoryItemCard(
             .fillMaxWidth()
             .padding(vertical = integerResource(id = R.integer.extraSmallSpace).dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
         ),
         shape = RoundedCornerShape(integerResource(id = R.integer.roundedCornerShape).dp),
         elevation = CardDefaults.cardElevation(
@@ -79,10 +78,12 @@ fun CategoryItemCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(integerResource(id = R.integer.smallSpace).dp)
+                .padding(integerResource(id = R.integer.smallerSpace).dp)
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = integerResource(id = R.integer.smallerSpace).dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -95,42 +96,48 @@ fun CategoryItemCard(
 
                     Spacer(modifier = Modifier.width(integerResource(id = R.integer.smallerSpace).dp))
 
-                    Column(modifier = Modifier.padding(start = integerResource(id = R.integer.extraSmallSpace).dp)) {
+                    Column(modifier = Modifier
+                        .padding(start = integerResource(id = R.integer.extraSmallSpace).dp)
+                    ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             // Display the category name
                             Text(
                                 text = category.name,
                                 fontWeight = FontWeight.SemiBold,
-                                color = Black
+                                color = MaterialTheme.colorScheme.onTertiaryContainer,
                             )
                             // Show a badge if this category is predefined
                             if (category.isPredefined) {
                                 Text(
                                     "  ⭐",
                                     style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.primary
                                 )
                             }
                         }
 
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            // Display currency icon next to budget info
-                            Image(
-                                painter = painterResource(id = R.drawable.expenes),
-                                contentDescription = "Riyal Icon",
-                                modifier = Modifier.size(
-                                    integerResource(id = R.integer.riyalIconSize).dp,
-                                    integerResource(id = R.integer.riyalIconSize).dp
-                                ),
-                                colorFilter = ColorFilter.tint(Black)
-                            )
-
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .padding(top = integerResource(id = R.integer.extraSmallSpace).dp)
+                        ) {
                             // If tracker exists, display its budget and current usage
                             tracker?.let {
                                 Text(
-                                    text = " ${it.budgetAmount.toInt()} / ${spentAmount.toInt()} used",
+                                    text = " ${it.budgetAmount.toInt()} / ${spentAmount.toInt()} ",
                                     style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.primary
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                                )
+
+                                // Display currency icon next to budget info
+                                Image(
+                                    painter = painterResource(id = R.drawable.expenes),
+                                    contentDescription = "Riyal Icon",
+                                    modifier = Modifier.size(
+                                        integerResource(id = R.integer.riyalIconSize).dp,
+                                        integerResource(id = R.integer.riyalIconSize).dp
+                                    ),
+                                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onTertiaryContainer)
                                 )
                             }
                         }
@@ -147,15 +154,15 @@ fun CategoryItemCard(
                         Icon(
                             imageVector = Icons.Filled.Edit,
                             contentDescription = "Edit",
-                            tint = Black
+                            tint = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                     // Delete icon button
                     IconButton(onClick = onSoftDelete) {
                         Icon(
-                            imageVector = Icons.Outlined.Delete,
+                            imageVector = Icons.Filled.Delete,
                             contentDescription = "Delete",
-                            tint = Black
+                            tint = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 }

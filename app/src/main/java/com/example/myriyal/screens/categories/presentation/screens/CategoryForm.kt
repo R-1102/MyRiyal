@@ -52,6 +52,8 @@ import com.example.myriyal.ui.screenComponent.CustomTextField
 import com.example.myriyal.ui.screenComponent.DatePickerModal
 import com.example.myriyal.ui.screenComponent.GradientButton
 import com.example.myriyal.screens.categories.presentation.components.iconsList
+import com.example.myriyal.screens.categories.presentation.screens.components.CategoryDropdown
+import com.example.myriyal.screens.categories.presentation.screens.components.ColorPicker
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import java.text.DateFormat
@@ -145,12 +147,11 @@ fun CategoryForm(
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
         //category type
-        CustomDropdown(
-            value = viewModel.categoryType.value.toString().lowercase(),
-            onValueChange = { viewModel.categoryType.value.toString().lowercase() },
+        CategoryDropdown(
+            value = viewModel.categoryType.value.toString(),
+            onValueChange = { viewModel.categoryType.value = it },
             label = stringResource(R.string.categoryType),
-            list = CategoryType.entries,
-            onSelect = { viewModel.categoryType.value = it })
+        )
 
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
