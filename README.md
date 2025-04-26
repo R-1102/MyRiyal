@@ -1,40 +1,79 @@
-# My Riyal
-## Expense Tracker Android Mobile App
+# My Riyal - Expense Tracker Android Mobile App
 
-### Project Overview
-This project is about creating a mobile app that helps users track, manage, and understand their expenses. Users can easily record what they spend on things like food, transport, and entertainment. The app will show simple charts to help users see where their money goes and warn them if they spend too much in one area. It will also let users set a monthly budget to stay on track.
+## Project Overview
+My Riyal is a mobile application designed to help users easily track, manage, and analyze their expenses.
+Users can quickly log daily spending, categorize their financial activities, and gain insights into their financial habits.
+The app features simple visualizations and budget alerts to promote smarter personal finance management.
 
-### Objective
+## Objective
 **Develop a mobile application that:**
-● Easily record and track daily expenses
 
-● Categorize financial transactions
+- Record and track daily expenses effortlessly
 
-● Visualize spending through interactive graphs
+- Categorize financial transactions with custom or predefined categories
 
-● Gain insights into personal financial management
+- Visualize spending through interactive graphs and charts
 
-### App Features
-- Secure user registration and login with Firebase Authentication
-- Secure data storage
-- Offline functionality
-- Real-time expense tracking
-- Budget setting and alerts
+- Gain insights into personal financial management
 
-### Detailed Screen Requirements
-- **Expenses List Screen**:
-View all expenses, filter by day, week, month, or year, search expenses, edit or delete entries
-- **Add Expense Screen**:
-  Add new expenses with amount, date, category, and description fields (with input validation)
-- **Categories Screen**:
-  View predefined and custom categories, edit or delete categories, color coding, and search/filter options
-- **Add Category Screen**:
-  Create new categories, choose an icon and color, and set budget limits for each category
-- **Multi-language support**
-- **Dark and Light mode options**
+## App Features
+- Secure Authentication: User registration and login via Firebase Authentication
 
-### Technical Stack and Requirements
-- **Mobile App Development Framework:** Android: Kotlin with Jetpack Compose.
-- **State Management:** Android: MVVM pattern.
-- **Authentication:** Firebase Authentication.
-- **Graphing Library:** Compose Charts.
+- Secure Data Storage: Encrypted storage for sensitive user data
+
+- Offline Functionality: Access and manage expenses without an internet connection
+
+- Dark/Light Mode: Seamless switching between light and dark themes
+
+- Multi-language Support: Support for multiple languages (English and Arabic)
+
+- User-Friendly UI: Clean, modern, and intuitive interface built with Jetpack Compose
+
+## Detailed Screen Requirements
+
+### Expenses List Screen
+- View all recorded expenses
+- Filter expenses by **day**, **week**, **month**, or **year**
+- Search for specific expenses
+- Edit or delete expense entries
+
+### Add Expense Screen
+- Add a new expense with:
+  - Amount
+  - Date
+  - Category
+  - Description
+- Input validation for fields to ensure data consistency
+
+### Categories Screen
+- View predefined and user-created categories
+- Edit or delete categories
+- Color-coded categories for better visualization
+- Search and filter categories
+
+### Add Category Screen
+- Create custom categories
+- Choose an **icon** and **color** for each category
+- Set an optional **budget limit** per category
+
+##  Technical Stack
+
+| Technology | Usage |
+|:--|:--|
+| **Language** | Kotlin |
+| **UI Toolkit** | Jetpack Compose |
+| **Architecture** | MVVM (Model-View-ViewModel) |
+| **Authentication** | Firebase Authentication |
+| **Database** | Firebase Firestore and Room Database for offline mode |
+| **Secure Storage** | EncryptedSharedPreferences |
+| **Graphing Library** | Compose Charts |
+| **Dependency Injection** | Hilt |
+| **Coroutines** | Asynchronous programming |
+
+## 📸 Screenshots
+
+## 👨‍💻 Authors
+- **Ahad**
+- **Mohamed**
+- **Renad**
+- **Shahid**
