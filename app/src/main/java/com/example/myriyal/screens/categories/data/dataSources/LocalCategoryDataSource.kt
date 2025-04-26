@@ -1,7 +1,6 @@
 package com.example.myriyal.screens.categories.data.dataSources
 
 import android.util.Log
-import com.example.myriyal.core.local.enums.CategoryStatus
 import com.example.myriyal.screens.categories.data.local.CategoryDao
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.screens.categories.data.local.PredefinedCategoryProvider

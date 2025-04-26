@@ -7,22 +7,17 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
-import com.example.myriyal.core.local.entities.TrackerEntity
-import com.example.myriyal.core.local.enums.CategoryStatus
-import com.example.myriyal.core.local.enums.CategoryType
-import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
-import com.example.myriyal.screens.categories.domian.repository.TrackerRepository
 import com.example.myriyal.screens.categories.data.local.TrackerEntity
+import com.example.myriyal.screens.categories.domian.model.CategoryFilter
 import com.example.myriyal.screens.categories.domian.model.CategoryStatus
 import com.example.myriyal.screens.categories.domian.model.CategoryType
 import com.example.myriyal.screens.categories.domian.useCases.CategoryUseCases
 import com.example.myriyal.screens.categories.domian.useCases.InsertTrackerUseCase
-import com.example.myriyal.screens.categories.domian.model.CategoryFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
@@ -94,6 +89,7 @@ class CategoryViewModel @Inject constructor(
     }
 
     // Exposes a filtered list of ACTIVE categories using StateFlow.
+    @OptIn(ExperimentalCoroutinesApi::class)
     val categories: StateFlow<List<CategoryEntity>> = searchQuery
         .flatMapLatest { query ->
             if (query.isBlank()) {
