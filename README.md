@@ -7,8 +7,11 @@ This project is about creating a mobile app that helps users track, manage, and 
 ### Objective
 **Develop a mobile application that:**
 ● Easily record and track daily expenses
+
 ● Categorize financial transactions
+
 ● Visualize spending through interactive graphs
+
 ● Gain insights into personal financial management
 
 ### App Features
