@@ -26,7 +26,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 // ViewModel for the Category feature.
 // This class belongs to the presentation layer and acts as the middle layer between the UI and the domain layer (use cases).
 //
@@ -45,7 +44,6 @@ class CategoryViewModel @Inject constructor(
     private val useCases: CategoryUseCases
 ) : ViewModel() {
 
-
     // -------------------- UI Form State --------------------
     /** Bound to the category name text field in the AddCategory screen */
     val categoryName = mutableStateOf("")
@@ -56,7 +54,6 @@ class CategoryViewModel @Inject constructor(
     /** Bound to the icon selection dropdown (emoji or icon string) */
     var categoryIcon by mutableStateOf("🔥")
 
-    var categoryBudgetAmount = mutableStateOf("0.0")
     var startDate by mutableStateOf<Long?>(null)
 
     // Currently selected category from dropdown
@@ -73,13 +70,7 @@ class CategoryViewModel @Inject constructor(
 
     val showDatePicker = mutableStateOf(false)
 
-    fun onCategoryIconChange(value: String) {
-        categoryIcon = value
-        val getTrackerForCategory: suspend (Int) -> TrackerEntity?
-        val getSpentForCategory: (Int) -> StateFlow<Double>
-    }
-
-    // -------------------- State Flow for Categories --------------------
+    // -------------------- Search Categories By Name --------------------
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery : StateFlow<String> = _searchQuery
@@ -101,7 +92,6 @@ class CategoryViewModel @Inject constructor(
         .map { list -> list.filter { it.status == CategoryStatus.ACTIVE } }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-
     // -------------------- Filtering Support --------------------
 
     /** Selected filter type (e.g., All, ByType) */
@@ -118,11 +108,6 @@ class CategoryViewModel @Inject constructor(
     fun setFilter(filter: CategoryFilter) {
         selectedFilter.value = filter
     }
-
-    // -------------------- Search Categories By Name --------------------
-
-
-
 
     // -------------------- Category Actions --------------------
 
@@ -153,16 +138,6 @@ class CategoryViewModel @Inject constructor(
 
     @Inject
     lateinit var insertTrackerUseCase: InsertTrackerUseCase
-
-    fun insertWithTracker(category: CategoryEntity) {
-        viewModelScope.launch {
-            useCases.insertWithTracker(
-                category = category,
-                trackerBudget = trackerBudget.value,
-                trackerStartDate = trackerStartDate.value
-            )
-        }
-    }
 
     fun createCategoryWithOptionalTracker(category: CategoryEntity) {
         // Inserts a new category and creates a tracker if budget > 0

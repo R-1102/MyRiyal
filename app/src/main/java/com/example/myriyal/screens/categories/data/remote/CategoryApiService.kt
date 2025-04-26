@@ -15,7 +15,6 @@ interface CategoryApiService {
     @GET("/categories")
     suspend fun getCategories(): Response<CategoriesResponse>
 
-
     // insert a new category
     // From local --> Remote
     @POST ("/categories")

@@ -26,11 +26,11 @@ fun SplashScreen(
         delay(2000)
 
         val user = firebaseAuth.currentUser
-        if (user == null){
+        if (user == null) {
             navController.navigate(Screen.LogIn.route) {
                 popUpTo(Screen.SplashScreen.route) { inclusive = true }
             }
-        }else{
+        } else {
             navController.navigate(Screen.Home.route) {
                 popUpTo(Screen.SplashScreen.route) { inclusive = true }
             }
@@ -43,9 +43,12 @@ fun SplashScreen(
     ) {
         ThemedLogo(
             modifier = Modifier
-                .padding(top = integerResource(id= R.integer.logoLargeSpace).dp)
+                .padding(top = integerResource(id = R.integer.logoLargeSpace).dp)
                 .align(Alignment.Center)
-                .size(94.dp, 114.dp),
+                .size(
+                    integerResource(id = R.integer.splashScreenLogoSizeWidth).dp,
+                    integerResource(id = R.integer.splashScreenLogoSizeHeight).dp
+                ),
         )
     }
 }

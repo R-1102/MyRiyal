@@ -58,7 +58,6 @@ class RecordRepositoryImpl @Inject constructor(
         return dao.getRecordsByCategory(categoryId)
     }
 
-
     /**
      * Returns the user's total balance (income - expenses).
      */
@@ -66,15 +65,12 @@ class RecordRepositoryImpl @Inject constructor(
         return dao.getTotalBalance()
     }
 
-
     /**
      * Searches records by name using a LIKE query.
      * Used by: Search bar in ViewRecordScreen.
      */
     override fun searchRecordsByName(query: String): Flow<List<RecordEntity>> {
         return dao.searchRecordsByName(query)
-
-
     }
     /**
      * Delegates the request to the DAO to calculate the total spent amount for a specific category.
@@ -86,5 +82,4 @@ class RecordRepositoryImpl @Inject constructor(
     override fun getTotalSpentForCategory(categoryId: Int): Flow<Double> {
         return dao.getTotalSpentForCategory(categoryId)
     }
-
 }

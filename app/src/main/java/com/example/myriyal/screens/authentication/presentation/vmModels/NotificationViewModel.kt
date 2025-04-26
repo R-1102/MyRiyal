@@ -18,17 +18,6 @@ class NotificationViewModel @Inject constructor(
 
     // Fetches the FCM token and stores it securely
     fun fetchAuthToken() {
-//        runBlocking {
-//            Log.d("Token auth", "Before executing use case")
-//            val token = getFcmTokenUseCase.execute()
-//            Log.d("Token auth", "Fetched token: $token" )
-//            encryptedPrefs.edit().putString("auth_token", token).apply()
-//            val storedToken = encryptedPrefs.getString("auth_token", null)
-//            println("Token auth Decrypted token: $storedToken")
-//
-//        }
-//
-//    }
         viewModelScope.launch {
             Log.d("Token auth", "Before executing use case")
             val token = getAuthTokenUseCase.execute()
@@ -42,7 +31,6 @@ class NotificationViewModel @Inject constructor(
             }
         }
     }
-
 
     // Returns the stored FCM token if available
     fun getStoredAuthToken(): String? {

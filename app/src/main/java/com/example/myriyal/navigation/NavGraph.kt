@@ -20,7 +20,6 @@ import com.example.myriyal.screens.authentication.presentation.screens.SplashScr
 import com.example.myriyal.screens.authentication.presentation.vmModels.NotificationViewModel
 import com.example.myriyal.screens.categories.presentation.screens.ViewCategoryScreen
 import com.example.myriyal.screens.graphsRepresentation.presentation.screens.ViewStatisticScreen
-import com.example.myriyal.screens.records.presentation.screens.RecordScreen
 import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
 import com.google.firebase.auth.FirebaseAuth
 
@@ -123,10 +122,6 @@ fun NavGraph(
 
         composable(Screen.ViewCategory.route) {
             ViewCategoryScreen()
-        }
-
-        composable(Screen.Record.route) {
-            RecordScreen()
         }
 
         composable(Screen.ViewRecord.route) {

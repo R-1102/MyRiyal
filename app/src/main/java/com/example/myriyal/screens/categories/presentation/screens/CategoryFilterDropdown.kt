@@ -42,7 +42,6 @@ fun CategoryFilterDropdown(
             integerResource(R.integer.menuHeight).dp
         )
     ) {
-
         // Income filter
         DropdownMenuItem(
             text = {
@@ -61,7 +60,6 @@ fun CategoryFilterDropdown(
                         modifier = Modifier.padding(start = integerResource(id = R.integer.smallerSpace).dp)
                     )
                 }
-
             },
             onClick = {
                 categoryViewModel.setFilter(CategoryFilter.ByType(CategoryType.INCOME))
@@ -88,7 +86,6 @@ fun CategoryFilterDropdown(
                         modifier = Modifier.padding(start = integerResource(id = R.integer.smallerSpace).dp)
                     )
                 }
-
             },
             onClick = {
                 categoryViewModel.setFilter(CategoryFilter.ByType(CategoryType.EXPENSE))
@@ -116,14 +113,11 @@ fun CategoryFilterDropdown(
                         modifier = Modifier.padding(start = integerResource(id = R.integer.smallerSpace).dp)
                     )
                 }
-
             },
             onClick = {
                 categoryViewModel.setFilter(CategoryFilter.All)
                 onDismiss()
             }
         )
-
-
     }
 }

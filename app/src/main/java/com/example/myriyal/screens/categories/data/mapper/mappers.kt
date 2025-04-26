@@ -5,7 +5,6 @@ import com.example.myriyal.screens.categories.data.model.CategoryDto
 import com.example.myriyal.screens.categories.domian.model.CategoryStatus
 import com.example.myriyal.screens.categories.domian.model.CategoryType
 
-
 // From API ---> Local Database (DAO)
 fun CategoryDto.toEntity(existingEntity: CategoryEntity?): CategoryEntity {
     return CategoryEntity(
@@ -22,8 +21,6 @@ fun CategoryDto.toEntity(existingEntity: CategoryEntity?): CategoryEntity {
         isSync = false
     )
 }
-
-
 
 // From Local Database (DAO) ---> API
 fun CategoryEntity.toDto(): CategoryDto {

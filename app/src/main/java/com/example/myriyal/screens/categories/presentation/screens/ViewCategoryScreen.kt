@@ -98,8 +98,7 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
                             painter = painterResource(id = R.drawable.filter),
                             contentDescription = "Filter",
                             tint = MaterialTheme.colorScheme.onPrimary,
-
-                            )
+                        )
                     }
 
                     CategoryFilterDropdown(

@@ -72,7 +72,6 @@ fun RecordItemCardSimple(
         ),
 
     ) {
-
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -95,6 +94,7 @@ fun RecordItemCardSimple(
                     color = MaterialTheme.colorScheme.onPrimary,
                 )
             }
+
             Row {
                 Text(
                     text = if (isExpense) "-$recordAmount" else "+$recordAmount",

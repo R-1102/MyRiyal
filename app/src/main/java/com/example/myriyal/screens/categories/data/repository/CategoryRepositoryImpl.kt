@@ -1,13 +1,11 @@
 package com.example.myriyal.screens.categories.data.repository
 
-
 import android.util.Log
 import com.example.myriyal.utils.ConnectivityStatus
 import com.example.myriyal.screens.categories.data.dataSources.CategoryDataSource
 import com.example.myriyal.screens.categories.data.local.CategoryDao
 import com.example.myriyal.screens.categories.data.mapper.toDto
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
-
 import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -49,7 +47,7 @@ class CategoryRepositoryImpl @Inject constructor(
     }
 
     // Updates an existing category.
-    // TODO: Implement remote update later if needed.
+    // TODO: Implement remote update .
     override suspend fun updateCategory(category: CategoryEntity) {
         if (connectivityStatus.isConnected()) {
             // TODO: Implement remote update
@@ -59,7 +57,7 @@ class CategoryRepositoryImpl @Inject constructor(
     }
 
     // Marks a category as INACTIVE (soft delete).
-    // TODO: Implement remote soft delete if needed.
+    // TODO: Implement remote soft delete .
     override suspend fun softDeleteCategory(categoryId: Int) {
         if (connectivityStatus.isConnected()) {
             // TODO: Implement remote soft delete
@@ -94,7 +92,10 @@ class CategoryRepositoryImpl @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                Log.e("RepositoryError", "Failed to fetch or insert remote categories: ${e.message}")
+                Log.e(
+                    "RepositoryError",
+                    "Failed to fetch or insert remote categories: ${e.message}"
+                )
             }
         }
 

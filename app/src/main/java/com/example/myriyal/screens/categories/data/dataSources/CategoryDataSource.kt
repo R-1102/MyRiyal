@@ -25,7 +25,6 @@ interface CategoryDataSource {
     // Used by: ViewModel.categories (StateFlow)
     //suspend fun getAllCategories(): Flow<CategoriesResponse>
 
-
     // Permanently deletes a category from the database.
     // Called by: ViewModel.delete()
     suspend fun deleteCategory(category: CategoryEntity)
@@ -37,8 +36,5 @@ interface CategoryDataSource {
     suspend fun getCategoryByServerId(serverId: String): CategoryEntity?
 
     fun getAllCategories(): Flow<List<CategoryEntity>>
-
-
-
 
 }
