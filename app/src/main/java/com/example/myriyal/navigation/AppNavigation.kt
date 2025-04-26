@@ -48,7 +48,6 @@ fun AppNavigation(darkTheme: Boolean, toggleTheme: () -> Unit) {
         "Splash_screen",
         "Login_screen",
         "SignUp_Screen",
-        "Balance",
         "ForgotPass_Screen",
         "NewPass_Screen"
     )
@@ -56,13 +55,13 @@ fun AppNavigation(darkTheme: Boolean, toggleTheme: () -> Unit) {
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         bottomBar = {
-            // Bottom navigation bar (visible on all screens except for Splash,SignUp, Log in, Balance, ForgotPassword and NewPasswordScreen)
+            // Bottom navigation bar (visible on all screens except for Splash,SignUp, Log in, ForgotPassword and NewPasswordScreen)
             if (currentRoute !in bottomBarHiddenRoutes) {
                 BottomNavigationBar(navController = navController, currentRoute)
             }
         },
         topBar = {
-            // Top app bar (visible on all screens except for Splash,SignUp, Log in, Balance, ForgotPassword and NewPasswordScreen)
+            // Top app bar (visible on all screens except for Splash,SignUp, Log in, ForgotPassword and NewPasswordScreen)
             if (currentRoute !in bottomBarHiddenRoutes) {
                 TopNavigationBar(
                     navController = navController,
