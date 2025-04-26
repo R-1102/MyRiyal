@@ -64,7 +64,7 @@ fun SignUpScreen(
     }
 
     if (shouldNavigate) {
-        navController.navigate(Screen.Balance.route)
+        navController.navigate(Screen.LogIn.route)
         viewModel.resetNavigation()
     }
 

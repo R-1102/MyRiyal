@@ -11,7 +11,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.myriyal.screens.home.HomeScreen
 import com.example.myriyal.screens.profile.presentattion.screens.ViewProfile
-import com.example.myriyal.screens.authentication.presentation.screens.BalanceScreen
 import com.example.myriyal.screens.authentication.presentation.screens.ForgotPassword
 import com.example.myriyal.screens.authentication.presentation.screens.LoginScreen
 import com.example.myriyal.screens.authentication.presentation.screens.NewPassword
@@ -72,19 +71,6 @@ fun NavGraph(
             },
         ) {
             SignUpScreen(navController)
-        }
-
-        composable(
-            route = Screen.Balance.route,
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { it },
-                    animationSpec = tween(600)
-                )
-            },
-
-        ) {
-            BalanceScreen(navController)
         }
 
         composable(
