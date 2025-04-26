@@ -53,12 +53,6 @@ fun ExpenseIncomeLineChart() {
             dataPoints = expense,
             lineStyle = LineStyle(color = Expense),
             selectionHighlightPoint = SelectionHighlightPoint(color = Expense),
-//            selectionHighlightPopUp = SelectionHighlightPopUp(
-//                backgroundColor = Expense,
-//                labelColor = Color.White,
-//                labelTypeface = FontWeight.Bold,
-//                textMeasurer = textMeasurer,
-//            ),
             shadowUnderLine = ShadowUnderLine(
                 brush = Brush.verticalGradient(
                     colors = listOf(Expense.copy(alpha = 0.4f), Color.Transparent)
@@ -70,12 +64,6 @@ fun ExpenseIncomeLineChart() {
             dataPoints = income,
             lineStyle = LineStyle(color = Income),
             selectionHighlightPoint = SelectionHighlightPoint(color = Income),
-//            selectionHighlightPopUp = SelectionHighlightPopUp(
-//                backgroundColor = Income,
-//                labelColor = Color.White,
-//                labelTypeface = FontWeight.Bold,
-//                textMeasurer = textMeasurer,
-//            ),
             shadowUnderLine = ShadowUnderLine(
                 brush = Brush.verticalGradient(
                     colors = listOf(Income.copy(alpha = 0.4f), Color.Transparent)
