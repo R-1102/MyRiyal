@@ -1,7 +1,10 @@
 package com.example.myriyal.ui.screenComponent
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -55,16 +58,28 @@ fun CategoryDropdownMenu(
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            containerColor = MaterialTheme.colorScheme.tertiary,
+            containerColor = MaterialTheme.colorScheme.surface,
             modifier = Modifier
-                .size(integerResource(R.integer.dropDownWidth).dp, integerResource(R.integer.dropDownHeight).dp)
+                .size(
+                    integerResource(R.integer.dropDownWidth).dp,
+                    integerResource(R.integer.dropDownHeight).dp
+                )
                 .align(androidx.compose.ui.Alignment.Center)
         ) {
             categories.forEach { category ->
                 DropdownMenuItem(text = {
-                    Text(
-                        category.name, color = MaterialTheme.colorScheme.onSurface
-                    )
+                    Row(
+                        horizontalArrangement = Arrangement.End,
+                    ) {
+                        category.icon?.let {
+                            Text(it)
+                        }
+                        Text(
+                            category.name,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.padding(start = integerResource(id = R.integer.extraSmallSpace).dp)
+                        )
+                    }
                 }, onClick = {
                     onCategorySelected(category)
                     expanded = false

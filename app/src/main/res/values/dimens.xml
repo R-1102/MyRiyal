@@ -57,8 +57,10 @@
     <integer name="tonalElevation">8</integer>
 
     <!--Dropdown Lists Dimensions-->
-    <integer name="dropDownWidth">288</integer>
-    <integer name="dropDownHeight">152</integer>
+    <integer name="dropDownWidth">272</integer>
+    <integer name="dropDownHeight">142</integer>
+    <integer name="categoryDropDownHeight">110</integer>
+
 
     <!--Custom Card Dimensions-->
     <integer name="cardPadding">8</integer>

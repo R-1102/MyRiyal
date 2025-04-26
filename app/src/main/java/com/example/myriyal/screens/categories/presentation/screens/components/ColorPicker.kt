@@ -1,4 +1,4 @@
-package com.example.myriyal.screens.categories.presentation.screens
+package com.example.myriyal.screens.categories.presentation.screens.components
 
 import android.util.Log
 import androidx.compose.runtime.Composable
