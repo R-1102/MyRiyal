@@ -21,6 +21,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CategoryDao {
 
+
+    @Query("SELECT * FROM category WHERE serverId = :serverId LIMIT 1")
+    suspend fun getCategoryByServerId(serverId: String): CategoryEntity?
     // Inserts a new category into the database or replaces it if it already exists (based on primary key).
     // Called by: CategoryRepositoryImpl.insertCategory
     @Insert(onConflict = OnConflictStrategy.REPLACE)

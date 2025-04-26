@@ -47,10 +47,10 @@ fun CategoryItemCard(
     val viewModel: CategoryViewModel = hiltViewModel()
 
     // Retrieve the total amount spent for this category
-    val spentAmount by viewModel.getSpentForCategory(category.categoryId).collectAsState()
+    val spentAmount by viewModel.getSpentForCategory(category.categoryId ?: 0).collectAsState()
 
     // Retrieve the tracker information for this category (if exists)
-    val tracker by viewModel.getTrackerForCategory(category.categoryId).collectAsState()
+    val tracker by viewModel.getTrackerForCategory(category.categoryId ?: 0).collectAsState()
 
     // Attempt to parse the category's color; fallback to theme color on failure
     val parsedCategoryColor = try {

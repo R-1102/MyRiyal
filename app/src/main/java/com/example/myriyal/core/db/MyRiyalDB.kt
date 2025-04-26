@@ -21,7 +21,7 @@ import com.example.myriyal.screens.categories.data.local.TrackerEntity
 @Database(
     // List of all entities (tables) managed by Room
     entities = [UserEntity::class, CategoryEntity::class, RecordEntity::class, TrackerEntity::class],
-    version = 3, // Current schema version of the database
+    version = 5, // Current schema version of the database
     exportSchema = false // Disable schema export (optional)
 )
 @TypeConverters(Converters::class) // Register type converters (e.g. enums)

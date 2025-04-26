@@ -43,7 +43,7 @@ fun NavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = if (notificationViewModel.getStoredFcmToken().isNullOrEmpty()) {
+        startDestination = if (notificationViewModel.getStoredAuthToken().isNullOrEmpty()) {
             Screen.SplashScreen.route
         } else {
             Screen.Home.route

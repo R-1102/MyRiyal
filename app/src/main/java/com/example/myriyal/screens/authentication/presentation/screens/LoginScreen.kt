@@ -41,7 +41,6 @@ import com.example.myriyal.ui.screenComponent.CustomTextField
 import com.example.myriyal.ui.screenComponent.GradientButton
 import com.example.myriyal.screens.authentication.presentation.vmModels.LogInVM
 import com.example.myriyal.screens.authentication.presentation.vmModels.NotificationViewModel
-import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
 import com.example.myriyal.ui.theme.ThemedLogo
 
 
@@ -63,102 +62,133 @@ fun LoginScreen(
     val message by viewModel.message.collectAsState()
     val shouldNavigate by viewModel.shouldNavigate.collectAsState() // only when log in is successfully
     val context = LocalContext.current
-    message?.let {msg ->
+    message?.let { msg ->
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
         viewModel.clearMessage()
     }
 
     if (shouldNavigate) {
-        notificationViewModel.fetchFcmToken()
+        notificationViewModel.fetchAuthToken()
         navController.navigate(Screen.Home.route)
         viewModel.resetNavigation()
-    }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
-        ThemedLogo(
-            modifier = Modifier
-                .padding(top = integerResource(id= R.integer.logoExtraLargeSpace).dp)
-                .align(CenterHorizontally),
-        )
-        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.logoSmallSpace).dp))
+//    LaunchedEffect(Unit) {
+//        viewModel.allEventsFlow.collect { event ->
+//            when (event) {
+//                is LogInVM.AllEvents.Message -> {
+//                    // Show toast missing
+//                    Log.d("LoginScreen", event.message)
+//                }
+//                is LogInVM.AllEvents.ErrorCode -> {
+//                    // Show toast missing
+//                    Log.e("LoginScreen", "Error ${event.code}: ${event.erMsg}")
+//                }
+//                is LogInVM.AllEvents.Error -> {
+//                    Log.e("LoginScreen", "Error: ${event.error}")
+//                }
+//                is LogInVM.AllEvents.ShouldNavigate -> {
+//                    notificationViewModel.fetchAuthToken()
+//
+//                    navController.navigate(Screen.ViewRecord.route) {
+//                        popUpTo(Screen.ViewRecord.route) { inclusive = true }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
-        CustomCard(
+        Column(
             modifier = Modifier
-                .size(width = integerResource(id= R.integer.cardWidth).dp, height = integerResource(id= R.integer.cardHeightLogin).dp)
-                .align(CenterHorizontally)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
-            Column(
+            ThemedLogo(
                 modifier = Modifier
-                    .padding(integerResource(id= R.integer.smallSpace).dp),
-                horizontalAlignment = CenterHorizontally
+                    .padding(top = integerResource(id = R.integer.logoExtraLargeSpace).dp)
+                    .align(CenterHorizontally),
+            )
+            Spacer(modifier = Modifier.padding(integerResource(id = R.integer.logoSmallSpace).dp))
+
+            CustomCard(
+                modifier = Modifier
+                    .size(
+                        width = integerResource(id = R.integer.cardWidth).dp,
+                        height = integerResource(id = R.integer.cardHeightLogin).dp
+                    )
+                    .align(CenterHorizontally)
             ) {
-                Text(
-                    text = stringResource(id = R.string.Login),
-                    color = MaterialTheme.colorScheme.onSurface,
-                    fontSize = integerResource(id= R.integer.cardHeaderSize).sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = integerResource(id= R.integer.cardHeaderTopPadding).dp, bottom = integerResource(id= R.integer.cardHeaderBottomPadding).dp)
-                )
-
-                CustomTextField(
-                    value = email,
-                    onValueChange = viewModel::onEmailChange,
-                    label = stringResource(id = R.string.email),
-                )
-                CustomTextField(
-                    value = password,
-                    onValueChange = viewModel::onPasswordChange,
-                    label = stringResource(id = R.string.password),
-                    isPassword = true,
-                    showPassword = showPassword,
-                    onTogglePasswordVisibility = { showPassword = !showPassword },
-                )
-                Row(
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(integerResource(id= R.integer.smallSpace).dp),
-                    horizontalArrangement = Arrangement.End
+                        .padding(integerResource(id = R.integer.smallSpace).dp),
+                    horizontalAlignment = CenterHorizontally
                 ) {
                     Text(
-                        text = stringResource(id = R.string.forgot_password),
-                        fontSize = integerResource(id= R.integer.smallText).sp,
-                        color = Color(0xFFBE4A4A),
-                        fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier
-                            .clickable { navController.navigate(Screen.ForgotPass.route) }
-                    )
-                }
-                GradientButton(
-                    onClick = { viewModel.logInValidation() },
-                    text = stringResource(id = R.string.Login)
-                )
-                Spacer(modifier = Modifier.height(integerResource(id= R.integer.extraSmallSpace).dp))
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(integerResource(id= R.integer.smallSpace).dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.dont_have_account),
-                        fontSize = integerResource(id= R.integer.smallText).sp,
+                        text = stringResource(id = R.string.Login),
                         color = MaterialTheme.colorScheme.onSurface,
-                        fontWeight = FontWeight.SemiBold,
+                        fontSize = integerResource(id = R.integer.cardHeaderSize).sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(
+                            top = integerResource(id = R.integer.cardHeaderTopPadding).dp,
+                            bottom = integerResource(id = R.integer.cardHeaderBottomPadding).dp
+                        )
                     )
-                    Text(
-                        text = stringResource(id = R.string.Signup),
-                        fontSize = integerResource(id= R.integer.smallText).sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.clickable {
-                            navController.navigate(Screen.SignUp.route)
-                        }
+
+                    CustomTextField(
+                        value = email,
+                        onValueChange = viewModel::onEmailChange,
+                        label = stringResource(id = R.string.email),
                     )
+                    CustomTextField(
+                        value = password,
+                        onValueChange = viewModel::onPasswordChange,
+                        label = stringResource(id = R.string.password),
+                        isPassword = true,
+                        showPassword = showPassword,
+                        onTogglePasswordVisibility = { showPassword = !showPassword },
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(integerResource(id = R.integer.smallSpace).dp),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.forgot_password),
+                            fontSize = integerResource(id = R.integer.smallText).sp,
+                            color = Color(0xFFBE4A4A),
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier
+                                .clickable { navController.navigate(Screen.ForgotPass.route) }
+                        )
+                    }
+                    GradientButton(
+                        onClick = { viewModel.logInValidation() },
+                        text = stringResource(id = R.string.Login)
+                    )
+                    Spacer(modifier = Modifier.height(integerResource(id = R.integer.extraSmallSpace).dp))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(integerResource(id = R.integer.smallSpace).dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.dont_have_account),
+                            fontSize = integerResource(id = R.integer.smallText).sp,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontWeight = FontWeight.SemiBold,
+                        )
+                        Text(
+                            text = stringResource(id = R.string.Signup),
+                            fontSize = integerResource(id = R.integer.smallText).sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.clickable {
+                                navController.navigate(Screen.SignUp.route)
+                            }
+                        )
+                    }
                 }
             }
         }
