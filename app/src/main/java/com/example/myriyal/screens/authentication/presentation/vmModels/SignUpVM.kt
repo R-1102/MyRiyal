@@ -1,6 +1,5 @@
 package com.example.myriyal.screens.authentication.presentation.vmModels
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,14 +12,18 @@ import com.example.myriyal.screens.authentication.domain.useCases.SignUpUseCase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 @HiltViewModel
-class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : ViewModel(){
+class SignUpVM @Inject constructor(
+    private val signUpUseCase: SignUpUseCase
+) : ViewModel(){
 
-    private val _firebaseUser = MutableLiveData<FirebaseUser?>()
-    val firebaseUser: LiveData<FirebaseUser?> = _firebaseUser
+    private val _firebaseUser = MutableStateFlow<FirebaseUser?>(null)
+    val firebaseUser: StateFlow<FirebaseUser?> = _firebaseUser
 
     // User input
     var username by mutableStateOf("")
@@ -29,12 +32,12 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
     var confirmPassword by mutableStateOf("")
 
     // Message state to be shown in the UI
-    private val _message = mutableStateOf<String?>(null)
-    val message: State<String?> = _message
+    private val _message = MutableStateFlow<String?>(null)
+    val message: StateFlow<String?> = _message
 
     // Flag to trigger navigation
-    private val _shouldNavigate = mutableStateOf(false)
-    val shouldNavigate: State<Boolean> = _shouldNavigate
+    private val _shouldNavigate = MutableStateFlow(false)
+    val shouldNavigate: StateFlow<Boolean> = _shouldNavigate
 
     // Input change functions, setting user input from UI in here to do the business logic
     fun onUsernameChange(value: String) {
@@ -98,8 +101,8 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
                 remotedb.collection("users").document(uid).set(userMap).await()
 
                 Log.d("SignUpVM", "actualSignUpUser() called")
-                firebaseUser.value
 
+                _firebaseUser.value = user
                 _message.value = "Signed up successfully"
                 _shouldNavigate.value = true  // trigger navigation only when signUp successfully
             }
@@ -121,3 +124,4 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
         _message.value = null
     }
 }
+

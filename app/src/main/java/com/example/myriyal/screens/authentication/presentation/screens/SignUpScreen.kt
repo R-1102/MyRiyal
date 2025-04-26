@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,7 +41,9 @@ import com.example.myriyal.ui.screenComponent.GradientButton
 import com.example.myriyal.ui.theme.Black
 
 @Composable
-fun SignUpScreen(navController: NavHostController) {
+fun SignUpScreen(
+    navController: NavHostController
+) {
     //VM Object
     val viewModel: SignUpVM = hiltViewModel()
     // Pass user input to VM
@@ -52,11 +55,11 @@ fun SignUpScreen(navController: NavHostController) {
     var showConfirmPassword by remember { mutableStateOf(false) }
 
     // Show the Sign-up status (success/error)
-    val message = viewModel.message.value
-    val shouldNavigate = viewModel.shouldNavigate.value // only when sign-up is successfully
-
-    message?.let {
-        Toast.makeText(LocalContext.current, it, Toast.LENGTH_LONG).show()
+    val message by viewModel.message.collectAsState()
+    val shouldNavigate by viewModel.shouldNavigate.collectAsState()// only when sign-up is successfully
+    val context = LocalContext.current
+    message?.let { msg ->
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
         viewModel.clearMessage()
     }
 
@@ -135,7 +138,7 @@ fun SignUpScreen(navController: NavHostController) {
                 )
             }
 
-          Row(
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(integerResource(id= R.integer.smallSpace).dp),
@@ -158,5 +161,4 @@ fun SignUpScreen(navController: NavHostController) {
         }
     }
 }
-
 
