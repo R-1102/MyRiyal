@@ -188,9 +188,9 @@ class RecordViewModel @Inject constructor(
         return cal1.get(java.util.Calendar.YEAR) == cal2.get(java.util.Calendar.YEAR)
     }
 
-// --------------------------
-// Form State (Managed inside ViewModel)
-// --------------------------
+    // --------------------------
+    // Form State (Managed inside ViewModel)
+    // --------------------------
 
     // Holds the input value for record name
     val name = mutableStateOf("")
@@ -207,9 +207,9 @@ class RecordViewModel @Inject constructor(
     // Currently selected record (used when editing)
     val selectedRecord = mutableStateOf<RecordEntity?>(null)
 
-// --------------------------
-// Form Validation & Submission
-// --------------------------
+    // --------------------------
+    // Form Validation & Submission
+    // --------------------------
 
     /**
      * Checks if the form fields are valid.

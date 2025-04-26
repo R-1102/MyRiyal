@@ -54,14 +54,14 @@ fun <T> CustomDropdown(
                 )
                 .align(androidx.compose.ui.Alignment.Center)
         ) {
-            list.forEach { Item ->
+            list.forEach { item ->
                 DropdownMenuItem(text = {
                     Text(
-                        Item.toString(), color = MaterialTheme.colorScheme.onSurface
+                        item.toString(), color = MaterialTheme.colorScheme.onSurface
                     )
                 },
                     onClick = {
-                        onSelect(Item)
+                        onSelect(item)
                         expanded = false
                     }
                 )
