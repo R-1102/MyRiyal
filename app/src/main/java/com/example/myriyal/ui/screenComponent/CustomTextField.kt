@@ -30,49 +30,11 @@ fun CustomTextField(
     modifier: Modifier = Modifier,
     isPassword: Boolean = false,
     showPassword: Boolean = false,
-    singleLine: Boolean = true,
     onTogglePasswordVisibility: (() -> Unit)? = null,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    ) {
-    OutlinedTextField(value = value,
-        onValueChange = onValueChange,
-        label = { Text(label) },
-        singleLine = singleLine,
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = MaterialTheme.colorScheme.primary,
-            unfocusedBorderColor = MaterialTheme.colorScheme.primary,
-            cursorColor = MaterialTheme.colorScheme.primary,
-            focusedLabelColor = MaterialTheme.colorScheme.primary,
-            unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-        ),
-        shape = RoundedCornerShape(12.dp),
-        modifier = modifier.fillMaxWidth(),
-        textStyle = LocalTextStyle.current.copy(color = Color.Black),
-        keyboardOptions = keyboardOptions,
-        visualTransformation = if (isPassword && !showPassword) PasswordVisualTransformation() else VisualTransformation.None,
-        trailingIcon = if (isPassword && onTogglePasswordVisibility != null) {
-            {
-                IconButton(onClick = onTogglePasswordVisibility) {
-                    Icon(
-                        imageVector = if (showPassword) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
-                        contentDescription = null
-                    )
-                }
-            }
-        } else null
-    )
-}
-
-@Composable
-fun CustomTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: String,
-    modifier: Modifier = Modifier,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     readOnly: Boolean = false,
     singleLine: Boolean = true,
-    trailingIcon: @Composable () -> Unit,
+    trailingIcon: (@Composable (() -> Unit))? = null,
 ) {
     OutlinedTextField(
         value = value,
@@ -87,10 +49,23 @@ fun CustomTextField(
             focusedLabelColor = MaterialTheme.colorScheme.primary,
             unfocusedLabelColor = MaterialTheme.colorScheme.primary,
         ),
-        shape = RoundedCornerShape(integerResource(R.integer.roundCardCornerShape).dp),
+        shape = RoundedCornerShape(integerResource(id = R.integer.roundedCornerShape).dp),
         modifier = modifier.fillMaxWidth(),
         textStyle = LocalTextStyle.current.copy(color = Color.Black),
         keyboardOptions = keyboardOptions,
-        trailingIcon = trailingIcon,
+        visualTransformation = if (isPassword && !showPassword) PasswordVisualTransformation() else VisualTransformation.None,
+        trailingIcon = {
+            when {
+                isPassword && onTogglePasswordVisibility != null -> {
+                    IconButton(onClick = onTogglePasswordVisibility) {
+                        Icon(
+                            imageVector = if (showPassword) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
+                            contentDescription = null
+                        )
+                    }
+                }
+                trailingIcon != null -> trailingIcon()
+            }
+        }
     )
 }
