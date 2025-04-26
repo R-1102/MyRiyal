@@ -62,7 +62,7 @@ fun LoginScreen(
     val message by viewModel.message.collectAsState()
     val shouldNavigate by viewModel.shouldNavigate.collectAsState() // only when log in is successfully
     val context = LocalContext.current
-    message?.let { msg ->
+    message?.let {msg ->
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
         viewModel.clearMessage()
     }
@@ -71,32 +71,7 @@ fun LoginScreen(
         notificationViewModel.fetchAuthToken()
         navController.navigate(Screen.Home.route)
         viewModel.resetNavigation()
-
-//    LaunchedEffect(Unit) {
-//        viewModel.allEventsFlow.collect { event ->
-//            when (event) {
-//                is LogInVM.AllEvents.Message -> {
-//                    // Show toast missing
-//                    Log.d("LoginScreen", event.message)
-//                }
-//                is LogInVM.AllEvents.ErrorCode -> {
-//                    // Show toast missing
-//                    Log.e("LoginScreen", "Error ${event.code}: ${event.erMsg}")
-//                }
-//                is LogInVM.AllEvents.Error -> {
-//                    Log.e("LoginScreen", "Error: ${event.error}")
-//                }
-//                is LogInVM.AllEvents.ShouldNavigate -> {
-//                    notificationViewModel.fetchAuthToken()
-//
-//                    navController.navigate(Screen.ViewRecord.route) {
-//                        popUpTo(Screen.ViewRecord.route) { inclusive = true }
-//                    }
-//                }
-//            }
-//        }
-//    }
-
+    }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -193,4 +168,3 @@ fun LoginScreen(
             }
         }
     }
-}
