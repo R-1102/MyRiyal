@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
@@ -25,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
+import com.example.myriyal.ui.screenComponent.GradientButton
 import com.github.skydoves.colorpicker.compose.AlphaTile
 import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.ColorPickerController
@@ -37,14 +37,21 @@ fun ColorPicker(
     categoryColor: ColorPickerController,
     tempSelectedColor: MutableState<Color>,
     onColorSelected: (Color) -> Unit, // Callback when user confirms the new color
-    onDismiss: () -> Unit,           // Callback when user cancels the edit
 ) {
     Column(
         modifier = Modifier
             .wrapContentSize()
             .padding(integerResource(R.integer.colorPickerColumnPadding).dp)
     ) {
-        Text(text = title)
+        Text(
+            text = title,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(bottom = integerResource(R.integer.extraLargeSpace).dp),
+            style = MaterialTheme.typography.headlineMedium,
+        )
         Spacer(Modifier.height(integerResource(R.integer.colorPickerColumnSpacerH).dp))
 
         // the colors wheel
@@ -55,7 +62,6 @@ fun ColorPicker(
                 .height(integerResource(R.integer.colorPickerSize).dp)
                 .padding(integerResource(R.integer.hsvColorPickerPadding).dp),
             controller = categoryColor,
-            // initialColor = initialColor
             onColorChanged = {
                 tempSelectedColor.value = it.color
                 Log.d("Color", it.hexCode)
@@ -88,33 +94,19 @@ fun ColorPicker(
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
         // Row to hold the "OK" and "Cancel" buttons
-        Row (modifier = Modifier.fillMaxWidth()){
-            TextButton(
-                onClick = {
-                    onColorSelected(
-                        categoryColor.selectedColor.value
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            GradientButton(
+                onClick = { onColorSelected(categoryColor.selectedColor.value) }, // Passes the entered balance to the parent
+                text = stringResource(R.string.ok),
+                modifier = Modifier
+                    .size(
+                        integerResource(id = R.integer.smallButtonWidth).dp,
+                        integerResource(id = R.integer.smallButtonHeight).dp
                     )
-                }
-            ) {
-                Text(
-                    text = stringResource(R.string.ok),
-                    color = MaterialTheme.colorScheme.onSurface,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
-            Spacer(Modifier.weight(1f)) // Pushes Cancel button to the right end
-
-//            // Cancel button: closes the dialog without saving
-//            TextButton(
-//                onClick = onDismiss
-//            ) {
-//                Text(
-//                    text = stringResource(R.string.cancel),
-//                    color = MaterialTheme.colorScheme.onSurface,
-//                    fontWeight = FontWeight.Bold
-//                )
-//            }
+            )
         }
     }
 }

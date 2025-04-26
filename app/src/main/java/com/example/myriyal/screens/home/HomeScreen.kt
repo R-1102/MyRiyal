@@ -29,6 +29,7 @@ import com.example.myriyal.R
 import com.example.myriyal.ui.screenComponent.CustomCardHomeStatistic
 import com.example.myriyal.screens.profile.presentattion.vmModels.ProfileViewModel
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
+import com.example.myriyal.screens.graphsRepresentation.presentation.screens.ExpenseIncomeLineChart
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
 
 @Composable
@@ -145,12 +146,13 @@ fun HomeScreen(navController: NavHostController) {
                     .padding(top = integerResource(id = R.integer.smallSpace).dp),
                 ) {
                 Text(
-                    text = stringResource(id = R.string.categoryChart),
+                    text = stringResource(id = R.string.incomeVsExpenses),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(integerResource(id = R.integer.mediumSpace).dp)
                 )
+                ExpenseIncomeLineChart()
             }
         }
 
