@@ -13,7 +13,7 @@ interface CategoryDataSource {
     //DO WE NEED TO ADD NEW INSERTION FOR API SINCE THE PARA IS DIFFERENT?
     suspend fun postCategory(category: CategoryDto) : Boolean
 
-    // Updates an existing category.
+    // Updates an existing category/Locally.
     // Called by: ViewModel.update()
     suspend fun updateCategory(category: CategoryEntity)
 

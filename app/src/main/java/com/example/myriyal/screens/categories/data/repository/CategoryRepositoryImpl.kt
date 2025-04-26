@@ -47,25 +47,18 @@ class CategoryRepositoryImpl @Inject constructor(
     }
 
     // Updates an existing category.
-    // TODO: Implement remote update .
     override suspend fun updateCategory(category: CategoryEntity) {
-        if (connectivityStatus.isConnected()) {
-            // TODO: Implement remote update
-        } else {
-            localCategoryDataSource.insertCategory(category)
-        }
+        var isUploadedRemotely = false
+
+        // update locally in either case
+        val updatedCategory = category.copy(isSync = isUploadedRemotely)
+        localCategoryDataSource.updateCategory(updatedCategory)
+
     }
 
     // Marks a category as INACTIVE (soft delete).
-    // TODO: Implement remote soft delete .
     override suspend fun softDeleteCategory(categoryId: Int) {
-        if (connectivityStatus.isConnected()) {
-            // TODO: Implement remote soft delete
-            remoteCategoryDataSource.softDeleteCategory(categoryId)
-        }
-        // Always update local
         localCategoryDataSource.softDeleteCategory(categoryId)
-
     }
 
     // Returns a reactive flow of all categories.

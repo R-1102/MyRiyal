@@ -42,7 +42,7 @@ class RemoteCategoryDataSource @Inject constructor(
     }
 
     override suspend fun updateCategory(category: CategoryEntity) {
-        TODO("Not yet implemented")
+        throw UnsupportedOperationException("Not supported in remote")
     }
 
     override suspend fun softDeleteCategory(categoryId: Int) {
