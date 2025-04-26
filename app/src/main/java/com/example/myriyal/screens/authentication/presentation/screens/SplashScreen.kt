@@ -45,6 +45,7 @@ fun SplashScreen(
             modifier = Modifier
                 .padding(top = integerResource(id= R.integer.logoLargeSpace).dp)
                 .align(Alignment.Center)
+                .size(94.dp, 114.dp),
         )
     }
 }

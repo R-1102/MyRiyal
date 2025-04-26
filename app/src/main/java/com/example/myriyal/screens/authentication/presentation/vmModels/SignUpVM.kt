@@ -16,7 +16,6 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-
 @HiltViewModel
 class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : ViewModel(){
 
@@ -42,7 +41,6 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
         username = value
     }
 
-
     fun onEmailChange(value:String){
         email = value
     }
@@ -54,7 +52,6 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
     fun onConfirmPassword(value:String){
         confirmPassword = value
     }
-
 
     // Validate input before sign-up
     fun signUpValidation(username: String, email: String, password: String, confirmPassword: String) = viewModelScope.launch {
@@ -80,7 +77,6 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
     private fun showMessage(msg: String) {
         _message.value = msg
     }
-
 
     // Create users
     private fun actualSignUpUser(
@@ -113,10 +109,7 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
             showMessage(e.localizedMessage ?: "Unknown error")
         }
 
-
-
     }
-
 
     // Reset navigation flag after successful navigation
     fun resetNavigation() {
@@ -127,6 +120,4 @@ class SignUpVM @Inject constructor(private val signUpUseCase: SignUpUseCase) : V
     fun clearMessage() {
         _message.value = null
     }
-
-
 }

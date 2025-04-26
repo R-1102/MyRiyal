@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.myriyal.core.local.enums.CategoryStatus
+import com.example.myriyal.screens.categories.domian.model.CategoryStatus
 import kotlinx.coroutines.flow.Flow
 
 // DAO (Data Access Object) for the "category" table.

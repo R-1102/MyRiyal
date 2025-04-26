@@ -1,7 +1,7 @@
 package com.example.myriyal.screens.categories.domian.useCases
 
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
-import com.example.myriyal.core.local.entities.TrackerEntity
+import com.example.myriyal.screens.categories.data.local.TrackerEntity
 import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
 import com.example.myriyal.screens.categories.domian.repository.TrackerRepository
 import javax.inject.Inject

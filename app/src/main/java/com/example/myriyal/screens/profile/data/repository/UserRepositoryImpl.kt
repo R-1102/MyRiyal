@@ -1,7 +1,7 @@
 package com.example.myriyal.screens.profile.data.repository
 
-import com.example.myriyal.core.local.dao.UserDao
-import com.example.myriyal.core.local.entities.UserEntity
+import com.example.myriyal.screens.profile.data.local.UserDao
+import com.example.myriyal.screens.profile.data.local.UserEntity
 import com.example.myriyal.screens.profile.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

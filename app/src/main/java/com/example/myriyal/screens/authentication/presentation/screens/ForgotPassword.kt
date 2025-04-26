@@ -24,15 +24,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
 import com.example.myriyal.navigation.Screen
-import com.example.myriyal.screenComponent.CustomCard
-import com.example.myriyal.screenComponent.CustomTextField
-import com.example.myriyal.screenComponent.GradientButton
+import com.example.myriyal.ui.screenComponent.CustomCard
+import com.example.myriyal.ui.screenComponent.CustomTextField
+import com.example.myriyal.ui.screenComponent.GradientButton
 import com.example.myriyal.screens.authentication.presentation.vmModels.ForgotPasswordVM
 import com.example.myriyal.ui.theme.ThemedLogo
 
 @Composable
 fun ForgotPassword(navController: NavHostController) {
-
     val viewModel : ForgotPasswordVM = hiltViewModel()
     val email = viewModel.email
 

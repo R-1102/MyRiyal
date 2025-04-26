@@ -38,9 +38,9 @@ fun TopNavigationBar(
 
     TopAppBar(
         modifier = Modifier.padding(
-                horizontal = integerResource(id = R.integer.extraSmallSpace).dp,
-                vertical = integerResource(id = R.integer.mediumSpace).dp
-            ),
+            horizontal = integerResource(id = R.integer.extraSmallSpace).dp,
+            vertical = integerResource(id = R.integer.mediumSpace).dp
+        ),
 
         title = {
             Text(
@@ -95,5 +95,4 @@ fun TopNavigationBar(
             containerColor = MaterialTheme.colorScheme.background
         )
     )
-
 }

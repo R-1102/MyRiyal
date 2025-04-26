@@ -1,6 +1,6 @@
 package com.example.myriyal.screens.profile.domain.useCases
 
-import com.example.myriyal.core.local.entities.UserEntity
+import com.example.myriyal.screens.profile.data.local.UserEntity
 import com.example.myriyal.screens.profile.domain.repository.UserRepository
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
