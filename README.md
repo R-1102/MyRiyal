@@ -69,9 +69,6 @@ The app features simple visualizations and budget alerts to promote smarter pers
 | **Graphing Library** | Compose Charts |
 | **Dependency Injection** | Hilt |
 | **Coroutines** | Asynchronous programming |
-
-## 📸 Screenshots
-
 ## 👨‍💻 Authors
 - **Ahad**
 - **Mohamed**
