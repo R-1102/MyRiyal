@@ -6,8 +6,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import android.util.Log
 import androidx.compose.runtime.*
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.myriyal.screens.authentication.domain.useCases.SignUpUseCase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore

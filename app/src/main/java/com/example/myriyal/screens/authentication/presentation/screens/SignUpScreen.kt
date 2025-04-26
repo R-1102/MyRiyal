@@ -76,27 +76,33 @@ fun SignUpScreen(
     ) {
         ThemedLogo(
             modifier = Modifier
-                .padding(top = integerResource(id= R.integer.logoLargeSpace).dp)
+                .padding(top = integerResource(id = R.integer.logoLargeSpace).dp)
                 .align(CenterHorizontally),
         )
-        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.logoSmallSpace).dp))
+        Spacer(modifier = Modifier.padding(integerResource(id = R.integer.logoSmallSpace).dp))
 
         CustomCard(
             modifier = Modifier
-                .size(width = integerResource(id= R.integer.cardWidth).dp, height = integerResource(id= R.integer.cardHeightSignUp).dp)
+                .size(
+                    width = integerResource(id = R.integer.cardWidth).dp,
+                    height = integerResource(id = R.integer.cardHeightSignUp).dp
+                )
                 .align(CenterHorizontally),
         ) {
             Column(
                 modifier = Modifier
-                    .padding((integerResource(id= R.integer.smallSpace).dp)),
+                    .padding((integerResource(id = R.integer.smallSpace).dp)),
                 horizontalAlignment = CenterHorizontally
             ) {
                 Text(
                     text = stringResource(id = R.string.signUp_header),
                     color = Color.Black,
-                    fontSize = integerResource(id= R.integer.cardHeaderSize).sp,
+                    fontSize = integerResource(id = R.integer.cardHeaderSize).sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = integerResource(id= R.integer.cardHeaderTopPadding).dp, bottom = integerResource(id= R.integer.cardHeaderBottomPadding).dp)
+                    modifier = Modifier.padding(
+                        top = integerResource(id = R.integer.cardHeaderTopPadding).dp,
+                        bottom = integerResource(id = R.integer.cardHeaderBottomPadding).dp
+                    )
                 )
                 CustomTextField(
                     value = username,
@@ -124,7 +130,7 @@ fun SignUpScreen(
                     showPassword = showConfirmPassword,
                     onTogglePasswordVisibility = { showConfirmPassword = !showConfirmPassword },
                 )
-                Spacer(modifier = Modifier.padding(integerResource(id= R.integer.smallSpace).dp))
+                Spacer(modifier = Modifier.padding(integerResource(id = R.integer.smallSpace).dp))
                 GradientButton(
                     onClick = {
                         viewModel.signUpValidation(
@@ -141,18 +147,18 @@ fun SignUpScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(integerResource(id= R.integer.smallSpace).dp),
+                    .padding(integerResource(id = R.integer.smallSpace).dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = stringResource(id = R.string.already_have_account),
-                    fontSize = integerResource(id= R.integer.smallText).sp,
+                    fontSize = integerResource(id = R.integer.smallText).sp,
                     color = Black,
                     fontWeight = FontWeight.SemiBold,
                 )
                 Text(
                     text = stringResource(id = R.string.Login),
-                    fontSize = integerResource(id= R.integer.smallText).sp,
+                    fontSize = integerResource(id = R.integer.smallText).sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.clickable { navController.navigate(Screen.LogIn.route) }

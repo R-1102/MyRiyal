@@ -54,22 +54,19 @@ fun RecordItemCard(
     val riyalIcon =
         painterResource(id = if (isExpense) riyalExpense else riyalIncome)
 
-
     // Before using this variable it was causing a crash
     val parsedCategoryColor = try {
         Color(android.graphics.Color.parseColor(categoryColor))
     } catch (e: IllegalArgumentException) {
         MaterialTheme.colorScheme.primary // fallback color
     }
-    OutlinedCard(
 
+    OutlinedCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = integerResource(id = R.integer.extraSmallSpace).dp),
-
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
-
             ),
         shape = RoundedCornerShape(integerResource(id = R.integer.roundedCornerShape).dp),
         elevation = CardDefaults.cardElevation(
@@ -79,8 +76,7 @@ fun RecordItemCard(
             integerResource(id = R.integer.borderStroke).dp,
             parsedCategoryColor
         ),
-
-        ) {
+    ) {
         Column(
             Modifier
                 .fillMaxSize()
@@ -105,9 +101,7 @@ fun RecordItemCard(
                         text = record.name,
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
-
-                        color = parsedCategoryColor //  It was causing a crash here
-
+                        color = parsedCategoryColor
                     )
 
                     Spacer(modifier = Modifier.width(integerResource(id = R.integer.smallerSpace).dp))

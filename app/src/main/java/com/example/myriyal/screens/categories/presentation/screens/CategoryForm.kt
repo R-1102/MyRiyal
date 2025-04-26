@@ -63,9 +63,15 @@ fun CategoryForm(
     onSubmit: (CategoryEntity) -> Unit,
     onDismiss: () -> Unit,
 ) {
-
     val viewModel: CategoryViewModel = hiltViewModel()
     val categoryColorController = rememberColorPickerController()
+
+    //category color selection
+    val showDialog = remember { mutableStateOf(false) }
+    // Start date picker for the tracker
+    val formattedTrackerDate = viewModel.trackerStartDate.value?.let {
+        DateFormat.getDateInstance().format(Date(it))
+    } ?: ""
 
     LaunchedEffect(initialCategory) {
         if (initialCategory != null) {
@@ -100,14 +106,10 @@ fun CategoryForm(
         }
     }
 
-
-
     fun resetForm() {
         viewModel.categoryName.value = ""
         viewModel.categoryType.value = CategoryType.EXPENSE
-//        viewModel.categoryColor = "0xFFFFFF"
         viewModel.categoryIcon = ""
-//        categoryBudget = 0.0
         viewModel.startDate = System.currentTimeMillis()
     }
 
@@ -134,28 +136,24 @@ fun CategoryForm(
         //category name
         CustomTextField(
             value = viewModel.categoryName.value,
-            onValueChange = {/* categoryName = it*/viewModel.categoryName.value = it },
-//                    onValueChange = viewModel::onCategoryNameChange,/*{ categoryName = it },*/
+            onValueChange = { viewModel.categoryName.value = it },
             label = stringResource(R.string.EnterCategoryName),
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
         )
+
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
         //category type
         CustomDropdown(
-            value = viewModel.categoryType.value.toString()
-                .lowercase(), /*categoryType.toString().lowercase(),*/
+            value = viewModel.categoryType.value.toString().lowercase(),
             onValueChange = { viewModel.categoryType.value.toString().lowercase() },
             label = stringResource(R.string.categoryType),
-//                    selected = categoryType,
             list = CategoryType.entries,
-            onSelect = { viewModel.categoryType.value = it }
-        )
+            onSelect = { viewModel.categoryType.value = it })
+
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-        //category color selection
-        val showDialog = remember { mutableStateOf(false) }
         OutlinedButton(
             onClick = { showDialog.value = true },
             colors = ButtonDefaults.buttonColors(
@@ -178,8 +176,7 @@ fun CategoryForm(
                 )
                 //a Circle to show the selected color
                 Card(
-                    modifier = Modifier
-                        .size(integerResource(R.integer.colorSampleSize).dp),
+                    modifier = Modifier.size(integerResource(R.integer.colorSampleSize).dp),
                     colors = CardDefaults.cardColors(
                         containerColor = categoryColorController.selectedColor.value
                     ),
@@ -198,93 +195,78 @@ fun CategoryForm(
                     ColorPicker(
                         title = stringResource(R.string.ChooseColor),
                         categoryColor = categoryColorController,
-//                            onColorSelected = {
-//                                    enteredColor: Color ->
-//                                categoryColorController.selectedColor.value = enteredColor
-//                                showDialog.value = false
-//                            },
-//                            onDismiss = {
-//                                showDialog.value = false},
                     )
                 }
             }
         }
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-            //Category icon
-            // Category icon dropdown
-            CustomDropdown(
-                value = viewModel.categoryIcon,
-                onValueChange = { viewModel.categoryIcon = it },
-                label = stringResource(R.string.SelectIcon),
-                list = iconsList,
-                onSelect = { viewModel.categoryIcon = it },
-            )
-            Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-// Always-visible budget amount input
-            CustomTextField(
-                value = viewModel.trackerBudget.value,
-                onValueChange = { viewModel.trackerBudget.value = it },
-                label = stringResource(R.string.EnterBudgetAmount),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-            )
-            Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+        // Category icon dropdown
+        CustomDropdown(
+            value = viewModel.categoryIcon,
+            onValueChange = { viewModel.categoryIcon = it },
+            label = stringResource(R.string.SelectIcon),
+            list = iconsList,
+            onSelect = { viewModel.categoryIcon = it },
+        )
 
-// Start date picker for the tracker
-            val formattedTrackerDate = viewModel.trackerStartDate.value?.let {
-                DateFormat.getDateInstance().format(Date(it))
-            } ?: ""
-            CustomTextField(
-                value = formattedTrackerDate,
-                onValueChange = {},
-                label = stringResource(R.string.StartingDate),
-                readOnly = true,
-                trailingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.DateRange,
-                        contentDescription = "Pick date",
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.clickable { viewModel.showDatePicker.value = true }
-                    )
-                }
-            )
-            if (viewModel.showDatePicker.value) {
-                DatePickerModal(
-                    onDateSelected = {
-                        viewModel.trackerStartDate.value = it
-                        viewModel.showDatePicker.value = false
-                    },
-                    onDismiss = { viewModel.showDatePicker.value = false }
-                )
+        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+
+        // Always-visible budget amount input
+        CustomTextField(
+            value = viewModel.trackerBudget.value,
+            onValueChange = { viewModel.trackerBudget.value = it },
+            label = stringResource(R.string.EnterBudgetAmount),
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+        )
+
+        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+
+        CustomTextField(
+            value = formattedTrackerDate,
+            onValueChange = {},
+            label = stringResource(R.string.StartingDate),
+            readOnly = true,
+            trailingIcon = {
+                Icon(imageVector = Icons.Default.DateRange,
+                    contentDescription = "Pick date",
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.clickable { viewModel.showDatePicker.value = true })
             }
-            Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+        )
+        if (viewModel.showDatePicker.value) {
+            DatePickerModal(onDateSelected = {
+                viewModel.trackerStartDate.value = it
+                viewModel.showDatePicker.value = false
+            }, onDismiss = { viewModel.showDatePicker.value = false })
+        }
 
+        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-            //save button
-            GradientButton(
-                onClick = {
-                    val timestamp = System.currentTimeMillis()
-                    val category = CategoryEntity(
-                        categoryId = initialCategory?.categoryId ?: 0,
-                        name = viewModel.categoryName.value,
-                        color = String.format(
-                            "#%06X",
-                            0xFFFFFF and categoryColorController.selectedColor.value.toArgb()
-                        ),
-                        icon = viewModel.categoryIcon,
-                        type = /*categoryType,*/viewModel.categoryType.value,
-                        status = CategoryStatus.ACTIVE,
-                        isPredefined = false,
-                        createdAt = initialCategory?.createdAt ?: timestamp,
-                        updatedAt = timestamp
-                    )
+        //save button
+        GradientButton(
+            onClick = {
+                val timestamp = System.currentTimeMillis()
+                val category = CategoryEntity(
+                    categoryId = initialCategory?.categoryId ?: 0,
+                    name = viewModel.categoryName.value,
+                    color = String.format(
+                        "#%06X", 0xFFFFFF and categoryColorController.selectedColor.value.toArgb()
+                    ),
+                    icon = viewModel.categoryIcon,
+                    type = viewModel.categoryType.value,
+                    status = CategoryStatus.ACTIVE,
+                    isPredefined = false,
+                    createdAt = initialCategory?.createdAt ?: timestamp,
+                    updatedAt = timestamp
+                )
 
-                    if (initialCategory == null) viewModel.createCategoryWithOptionalTracker(category)
-                    else viewModel.updateCategoryWithOptionalTracker(category)
+                if (initialCategory == null) viewModel.createCategoryWithOptionalTracker(category)
+                else viewModel.updateCategoryWithOptionalTracker(category)
 
-                    onSubmit(category)
+                onSubmit(category)
 
             },
             text = if (initialCategory == null) stringResource(id = R.string.addCategory) else stringResource(
@@ -297,8 +279,7 @@ fun CategoryForm(
             onClick = {
                 resetForm()
                 onDismiss()
-            },
-            text = stringResource(id = R.string.cancel)
+            }, text = stringResource(id = R.string.cancel)
         )
     }
 }

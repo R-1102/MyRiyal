@@ -25,7 +25,6 @@ data class CategoryEntity(
     @PrimaryKey(autoGenerate = true)
     val categoryId: Int = 0,
 
-
     // Category name (e.g., "Food", "Salary")
     val name: String,
 
@@ -58,6 +57,5 @@ data class CategoryEntity(
     val serverId: String? = null,
 // Stores the server-side ID of the category if it exists in the remote database.
 // Helps match local and remote records for synchronization.
-
 
 )

@@ -1,5 +1,6 @@
 package com.example.myriyal.screens.records.presentation.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -42,7 +43,6 @@ import java.util.Date
 fun RecordFormScreen(
     initialRecord: RecordEntity? = null,
     categories: List<CategoryEntity>,
-    onSubmit: (RecordEntity) -> Unit,
     onDismiss: () -> Unit
 ) {
 
@@ -54,13 +54,11 @@ fun RecordFormScreen(
         }
     }
 
-
     // Form state
     var recordName by recordViewModel.name
     var description by recordViewModel.description
     var amount by recordViewModel.amount
     var selectedCategory by recordViewModel.selectedCategory
-
 
     var recordDate by remember {
         mutableStateOf<Long?>(
@@ -72,7 +70,6 @@ fun RecordFormScreen(
     val formattedDate = recordDate?.let {
         DateFormat.getDateInstance().format(Date(it))
     } ?: ""
-
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -88,17 +85,20 @@ fun RecordFormScreen(
                 bottom = integerResource(id = R.integer.cardHeaderBottomPadding).dp
             )
         )
+
         CustomTextField(
             value = recordName,
             onValueChange = { recordName = it },
             label = stringResource(id = R.string.recordName)
         )
+
         CustomTextField(
             value = amount,
             onValueChange = { amount = it },
             label = stringResource(id = R.string.recordAmount),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
+
         CustomTextField(
             value = description,
             onValueChange = { description = it },
@@ -140,23 +140,16 @@ fun RecordFormScreen(
 
         GradientButton(
             onClick = {
-                val timestamp = System.currentTimeMillis()
-                val record = RecordEntity(
-                    recordId = initialRecord?.recordId ?: 0,
-                    name = recordName,
-                    description = description,
-                    amount = amount.toDoubleOrNull() ?: 0.0,
-                    categoryId = selectedCategory?.categoryId ?: return@GradientButton,
-                    date = recordDate ?: System.currentTimeMillis(),
-                    createdAt = initialRecord?.createdAt ?: timestamp,
-                    updatedAt = timestamp
-                )
+                recordViewModel.isFormValid()
+                recordViewModel.submitRecord()
+                onDismiss() // Close the form after successful submission
 
-                if (initialRecord == null) recordViewModel.insert(record)
-                else recordViewModel.update(record)
-                onSubmit(record)
+                /*if (initialRecord == null) recordViewModel.insert(record)
+                else recordViewModel.update(record) */
             },
-            text = if (initialRecord == null) stringResource(id = R.string.addRecord) else  stringResource(id = R.string.updateRecord)
+            text = if (initialRecord == null) stringResource(id = R.string.addRecord) else stringResource(
+                id = R.string.updateRecord
+            )
         )
         Spacer(modifier = Modifier.height(integerResource(id = R.integer.extraSmallSpace).dp))
 

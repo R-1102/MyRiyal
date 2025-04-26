@@ -16,6 +16,8 @@
     <integer name="logoMediumSpace">28</integer>
     <integer name="logoLargeSpace">68</integer>
     <integer name="logoExtraLargeSpace">80</integer>
+    <integer name="logoSizeHeight">92</integer>
+    <integer name="logoSizeWidth">72</integer>
 
     <!--card Size-->
     <integer name="cardHeaderSize">28</integer>
@@ -110,5 +112,13 @@
     <integer name="homeRecordCardHeight">312</integer>
     <integer name="chartCardHeight">360</integer>
     <integer name="homeLastRecordCardHeight">60</integer>
+
+    <!--Splash Screen-->
+    <integer name="splashScreenLogoSizeHeight">114</integer>
+    <integer name="splashScreenLogoSizeWidth">94</integer>
+
+    <!--Small Buttons Dimensions-->
+    <integer name="smallButtonHeight">40</integer>
+    <integer name="smallButtonWidth">80</integer>
 
 </resources>

@@ -82,7 +82,7 @@ class RecordViewModel @Inject constructor(
             } else {
                 useCases.searchRecordsByName(query) // Otherwise filter by name
             }
-        },     // Fetches all records from database
+        },      // Fetches all records from database
         _filter // Current selected filter (day, week, etc.)
     ) { records, filterType ->
         val now = System.currentTimeMillis()
@@ -135,14 +135,6 @@ class RecordViewModel @Inject constructor(
         useCases.delete(record)
     }
 
-    /**
-     * Retrieves a record by ID.
-     * Useful for editing a record or showing details.
-     */
-    suspend fun getById(id: Int): RecordEntity? {
-        return useCases.getRecordById(id)
-    }
-
     // --------------------------
     // Date Filter Utilities
     // --------------------------
@@ -156,7 +148,6 @@ class RecordViewModel @Inject constructor(
         val oneWeekMillis = 1000 * 60 * 60 * 24 * 7
         return (time1 / oneWeekMillis) == (time2 / oneWeekMillis)
     }
-
 
     /**
      * Checks if two timestamps fall in the same calendar month and year.
@@ -177,7 +168,6 @@ class RecordViewModel @Inject constructor(
         return cal1.get(java.util.Calendar.YEAR) == cal2.get(java.util.Calendar.YEAR) &&
                 cal1.get(java.util.Calendar.MONTH) == cal2.get(java.util.Calendar.MONTH)
     }
-
 
     /**
      * Checks if two timestamps fall in the same calendar year.

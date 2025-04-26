@@ -17,10 +17,8 @@ import kotlinx.coroutines.flow.Flow
 // - Receives requests from: CategoryViewModel → Repository → DAO
 // - Returns data to: ViewModel → UI (CategoryScreen)
 
-
 @Dao
 interface CategoryDao {
-
 
     @Query("SELECT * FROM category WHERE serverId = :serverId LIMIT 1")
     suspend fun getCategoryByServerId(serverId: String): CategoryEntity?
@@ -40,7 +38,6 @@ interface CategoryDao {
     @Query("SELECT * FROM category ORDER BY categoryId ASC")
     fun getAllCategories(): Flow<List<CategoryEntity>>
 
-
     // Soft deletes a category by updating its status to INACTIVE.
     // Used when user chooses "Deactivate" in the UI.
     // Called by: CategoryRepositoryImpl.softDeleteCategory
@@ -52,7 +49,6 @@ interface CategoryDao {
     // Called by: CategoryRepositoryImpl.deleteCategory
     @Delete
     suspend fun deleteCategory(category: CategoryEntity)
-
 
     // Returns all categories once (non-reactive).
     // Used by: Repository during app startup to check if predefined categories exist

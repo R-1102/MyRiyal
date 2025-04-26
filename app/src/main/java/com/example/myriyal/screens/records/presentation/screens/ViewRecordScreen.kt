@@ -20,12 +20,10 @@ import androidx.compose.ui.res.integerResource
 import com.example.myriyal.R
 import com.example.myriyal.ui.screenComponent.CustomDialog
 import com.example.myriyal.ui.screenComponent.CustomFloatingActionButton
-import com.example.myriyal.ui.screenComponent.CustomTextField
 import com.example.myriyal.ui.screenComponent.FilterSelector
 import com.example.myriyal.ui.screenComponent.SearchField
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
-
 
 @Composable
 fun ViewRecordScreen() {
@@ -52,10 +50,6 @@ fun ViewRecordScreen() {
                 RecordFormScreen(
                     initialRecord = recordViewModel.selectedRecord.value,
                     categories = categories,
-                    onSubmit = {
-                        recordViewModel.selectedRecord.value = null
-                        shouldShowDialog.value = false
-                    },
                     onDismiss = {
                         recordViewModel.selectedRecord.value = null
                         shouldShowDialog.value = false

@@ -4,13 +4,11 @@ import android.util.Log
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.screens.categories.data.remote.CategoryApiService
 import com.example.myriyal.screens.categories.data.local.PredefinedCategoryProvider
-import com.example.myriyal.screens.categories.data.model.CategoriesResponse
 import com.example.myriyal.screens.categories.data.model.CategoryDto
 import com.example.myriyal.screens.categories.data.mapper.toDto
 import com.example.myriyal.screens.categories.data.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 /**
@@ -33,8 +31,6 @@ class RemoteCategoryDataSource @Inject constructor(
         }
     }
 
-
-
     override suspend fun insertCategory(category: CategoryEntity): Long {
         throw UnsupportedOperationException("Not supported in remote")
     }
@@ -50,24 +46,7 @@ class RemoteCategoryDataSource @Inject constructor(
     }
 
     override suspend fun softDeleteCategory(categoryId: Int) {
-
     }
-
-//    override fun getAllCategories(): Flow<List<CategoryEntity>> = kotlinx.coroutines.flow.flow {
-//        val response = api.getCategories()
-//        if (response.isSuccessful) {
-//            val categories = response.body() ?: emptyList()
-//            emit(categories.map { it.toEntity(null) })
-//        } else {
-//            emit(emptyList())
-//        }
-//    }
-
-
-
-
-
-
 
     override suspend fun deleteCategory(category: CategoryEntity) {
         TODO("Not yet implemented")
@@ -107,9 +86,7 @@ class RemoteCategoryDataSource @Inject constructor(
         }
     }
 
-
     override suspend fun getCategoryByServerId(serverId: String): CategoryEntity? {
         throw UnsupportedOperationException("Remote doesn't support getCategoryByServerId")
     }
-
 }

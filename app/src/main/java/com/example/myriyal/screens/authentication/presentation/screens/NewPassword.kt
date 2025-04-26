@@ -38,29 +38,35 @@ fun NewPassword(navController: NavHostController) {
     ) {
         ThemedLogo(
             modifier = Modifier
-                .padding(top = integerResource(id= R.integer.logoExtraLargeSpace).dp)
+                .padding(top = integerResource(id = R.integer.logoExtraLargeSpace).dp)
                 .align(CenterHorizontally),
         )
-        Spacer(modifier = Modifier.padding(integerResource(id= R.integer.largeSpace).dp))
+        Spacer(modifier = Modifier.padding(integerResource(id = R.integer.largeSpace).dp))
 
         CustomCard(
             modifier = Modifier
-                .size(width = integerResource(id= R.integer.cardWidth).dp, height = integerResource(id= R.integer.cardHeightNewPassword).dp)
+                .size(
+                    width = integerResource(id = R.integer.cardWidth).dp,
+                    height = integerResource(id = R.integer.cardHeightNewPassword).dp
+                )
                 .align(CenterHorizontally),
         ) {
             Column(
                 modifier = Modifier
-                    .padding((integerResource(id= R.integer.smallSpace).dp)),
+                    .padding((integerResource(id = R.integer.smallSpace).dp)),
                 horizontalAlignment = CenterHorizontally
             ) {
                 Text(
                     text = stringResource(id = R.string.newPassword),
                     color = Color.Black,
-                    fontSize = integerResource(id= R.integer.cardHeaderSize).sp,
+                    fontSize = integerResource(id = R.integer.cardHeaderSize).sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = integerResource(id= R.integer.cardHeaderTopPadding).dp, bottom = integerResource(id= R.integer.cardHeaderBottomPadding).dp)
+                    modifier = Modifier.padding(
+                        top = integerResource(id = R.integer.cardHeaderTopPadding).dp,
+                        bottom = integerResource(id = R.integer.cardHeaderBottomPadding).dp
+                    )
                 )
-                Spacer(modifier = Modifier.height(integerResource(id= R.integer.largeSpace).dp))
+                Spacer(modifier = Modifier.height(integerResource(id = R.integer.largeSpace).dp))
 
                 CustomTextField(
                     value = password,
@@ -72,7 +78,7 @@ fun NewPassword(navController: NavHostController) {
                     onValueChange = { confirmPassword = it },
                     label = stringResource(id = R.string.confirmPassword),
                 )
-                Spacer(modifier = Modifier.height(integerResource(id= R.integer.buttonTextFieldSpace).dp))
+                Spacer(modifier = Modifier.height(integerResource(id = R.integer.buttonTextFieldSpace).dp))
 
                 GradientButton(
                     onClick = { navController.navigate(Screen.LogIn.route) },

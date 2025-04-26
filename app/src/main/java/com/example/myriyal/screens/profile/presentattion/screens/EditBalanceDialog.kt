@@ -29,7 +29,6 @@ fun EditBalance(
     onBalanceEntered: (Double) -> Unit,
     onDismiss: () -> Unit,
 ) {
-
     // Holds the local state for the editable balance value
     val userBalance = remember { mutableDoubleStateOf(currentBalance) }
 
@@ -47,28 +46,35 @@ fun EditBalance(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal) // Brings up decimal keyboard
         )
 
-        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp)) // Adds vertical spacing
+        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
         // Row that holds the action buttons
         Row(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = integerResource(R.integer.smallSpace).dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             // "OK" button to confirm and submit the new balance
             GradientButton(
-                onClick = { onBalanceEntered(userBalance.doubleValue) }, // Passes the entered balance to the parent
+                onClick = { onBalanceEntered(userBalance.doubleValue) },
                 text = stringResource(R.string.ok),
                 modifier = Modifier
-                    .size(80.dp, 40.dp)
+                    .size(
+                        integerResource(id = R.integer.smallButtonHeight).dp,
+                        integerResource(id = R.integer.smallButtonWidth).dp
+                    )
             )
             // "Cancel" button to dismiss the dialog without saving
             CancelButton(
                 onClick = { onDismiss() },
                 text = stringResource(R.string.cancel),
                 modifier = Modifier
-                    .size(80.dp, 40.dp)
+                    .size(
+                        integerResource(id = R.integer.smallButtonHeight).dp,
+                        integerResource(id = R.integer.smallButtonWidth).dp
+                    )
             )
         }
     }

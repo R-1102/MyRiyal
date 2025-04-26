@@ -87,7 +87,6 @@ class LocalCategoryDataSource @Inject constructor(
     override suspend fun seedPredefinedCategories() {
         val existing = dao.getAllCategoriesOnce()
         val existingNames = existing.map { it.name }
-
         val predefined = PredefinedCategoryProvider.getCategories()
         val newOnes = predefined.filter { it.name !in existingNames }
 

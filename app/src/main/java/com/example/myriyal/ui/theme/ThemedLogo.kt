@@ -5,6 +5,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
@@ -20,6 +21,9 @@ fun ThemedLogo(
     Image(
         painter = logoPainter,
         contentDescription = "App Logo",
-        modifier = modifier.size(74.dp, 94.dp),
+        modifier = modifier.size(
+            integerResource(id = R.integer.logoSizeWidth).dp,
+            integerResource(id = R.integer.logoSizeHeight).dp
+        ),
     )
 }

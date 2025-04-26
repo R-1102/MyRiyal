@@ -136,7 +136,6 @@ fun CategoryItemCard(
                         }
                     }
                 }
-
                 Spacer(modifier = Modifier.width(integerResource(id = R.integer.smallerSpace).dp))
 
                 Row(
@@ -151,7 +150,6 @@ fun CategoryItemCard(
                             tint = Black
                         )
                     }
-
                     // Delete icon button
                     IconButton(onClick = onSoftDelete) {
                         Icon(
