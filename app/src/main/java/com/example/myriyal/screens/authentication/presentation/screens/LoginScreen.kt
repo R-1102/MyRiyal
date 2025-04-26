@@ -1,6 +1,7 @@
 package com.example.myriyal.screens.authentication.presentation.screens
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -41,8 +44,11 @@ import com.example.myriyal.screens.authentication.presentation.vmModels.Notifica
 import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
 import com.example.myriyal.ui.theme.ThemedLogo
 
+
 @Composable
-fun LoginScreen(navController: NavHostController) {
+fun LoginScreen(
+    navController: NavHostController
+) {
     //VM Object
     val viewModel: LogInVM = hiltViewModel()
     val notificationViewModel: NotificationViewModel = hiltViewModel()
@@ -53,31 +59,20 @@ fun LoginScreen(navController: NavHostController) {
 
     var showPassword by remember { mutableStateOf(false) }
 
-    LaunchedEffect(Unit) {
-        viewModel.allEventsFlow.collect { event ->
-            when (event) {
-                is LogInVM.AllEvents.Message -> {
-                    // Show toast missing
-                    Log.d("LoginScreen", event.message)
-                }
-                is LogInVM.AllEvents.ErrorCode -> {
-                    // Show toast missing
-                    Log.e("LoginScreen", "Error ${event.code}: ${event.erMsg}")
-                }
-                is LogInVM.AllEvents.Error -> {
-                    Log.e("LoginScreen", "Error: ${event.error}")
-                }
-                is LogInVM.AllEvents.ShouldNavigate -> {
-                    notificationViewModel.fetchFcmToken()
-
-                    navController.navigate(Screen.ViewRecord.route) {
-                        popUpTo(Screen.ViewRecord.route) { inclusive = true }
-                    }
-                }
-            }
-        }
+    // Show the Log-in status (success/error)
+    val message by viewModel.message.collectAsState()
+    val shouldNavigate by viewModel.shouldNavigate.collectAsState() // only when log in is successfully
+    val context = LocalContext.current
+    message?.let {msg ->
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+        viewModel.clearMessage()
     }
 
+    if (shouldNavigate) {
+        notificationViewModel.fetchFcmToken()
+        navController.navigate(Screen.Home.route)
+        viewModel.resetNavigation()
+    }
 
     Column(
         modifier = Modifier
@@ -169,4 +164,3 @@ fun LoginScreen(navController: NavHostController) {
         }
     }
 }
-
