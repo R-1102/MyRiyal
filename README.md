@@ -30,3 +30,4 @@ This project is about creating a mobile app that helps users track, manage, and 
 - **Mobile App Development Framework:** Android: Kotlin with Jetpack Compose.
 - **State Management:** Android: MVVM pattern.
 - **Authentication:** Firebase Authentication.
+- **Graphing Library:** Compose Charts.
