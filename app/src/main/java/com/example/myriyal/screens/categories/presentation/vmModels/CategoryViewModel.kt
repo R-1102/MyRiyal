@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
@@ -13,6 +15,7 @@ import com.example.myriyal.core.local.enums.CategoryType
 import com.example.myriyal.screens.categories.domian.useCases.CategoryUseCases
 import com.example.myriyal.screens.categories.domian.useCases.InsertTrackerUseCase
 import com.example.myriyal.screens.categories.presentation.model.CategoryFilter
+import com.example.myriyal.ui.theme.PrimaryGreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -51,6 +54,8 @@ class CategoryViewModel @Inject constructor(
 
     /** Bound to the category type dropdown (EXPENSE or INCOME) */
     val categoryType = mutableStateOf(CategoryType.EXPENSE)
+
+    val categoryColor = mutableStateOf(PrimaryGreen)
 
     /** Bound to the icon selection dropdown (emoji or icon string) */
     var categoryIcon by mutableStateOf("🔥")
