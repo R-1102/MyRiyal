@@ -19,10 +19,14 @@ This project is about creating a mobile app that helps users track, manage, and 
 - Budget setting and alerts
 
 ### Detailed Screen Requirements
-- **Expenses List Screen**: View all expenses, filter by day, week, month, or year, search expenses, edit or delete entries
-- **Add Expense Screen**: Add new expenses with amount, date, category, and description fields (with input validation)
-- **Categories Screen**: View predefined and custom categories, edit or delete categories, color coding, and search/filter options
-- **Add Category Screen**: Create new categories, choose an icon and color, and set budget limits for each category
+- **Expenses List Screen**:
+   View all expenses, filter by day, week, month, or year, search expenses, edit or delete entries
+- **Add Expense Screen**:
+  Add new expenses with amount, date, category, and description fields (with input validation)
+- **Categories Screen**:
+  View predefined and custom categories, edit or delete categories, color coding, and search/filter options
+- **Add Category Screen**:
+  Create new categories, choose an icon and color, and set budget limits for each category
 - **Multi-language support**
 - **Dark and Light mode options**
 
