@@ -24,12 +24,11 @@ import javax.inject.Singleton
 object DatabaseModule {
 
     /**
-     * Room migration from version 1 to version 2.
+     * Migration from version 1 to 2:
      * Changes the primary key type of `userProfile` table from Int to String.
      */
     val MIGRATION_1_2 = object : Migration(1, 2) {
         override fun migrate(database: SupportSQLiteDatabase) {
-            // 1. Create a new table with the desired schema (userId as TEXT)
             database.execSQL("""
                 CREATE TABLE userProfile_new (
                     userId TEXT NOT NULL PRIMARY KEY,
@@ -39,21 +38,19 @@ object DatabaseModule {
                     updatedAt INTEGER NOT NULL
                 )
             """)
-
-            // 2. Copy data from old table to the new table, casting userId to TEXT
             database.execSQL("""
                 INSERT INTO userProfile_new (userId, userName, balance, createdAt, updatedAt)
                 SELECT CAST(userId AS TEXT), userName, balance, createdAt, updatedAt FROM userProfile
             """)
-
-            // 3. Remove the old table
             database.execSQL("DROP TABLE userProfile")
-
-            // 4. Rename the new table to the original table name
             database.execSQL("ALTER TABLE userProfile_new RENAME TO userProfile")
         }
     }
 
+    /**
+     * Migration from version 2 to 3:
+     * Adds `isSync` column to category, record, trackers, and userProfile tables.
+     */
     val MIGRATION_2_3 = object : Migration(2, 3) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL("ALTER TABLE category ADD COLUMN isSync INTEGER NOT NULL DEFAULT 0")
@@ -64,7 +61,47 @@ object DatabaseModule {
     }
 
     /**
-     * Provides the Room database instance with the migration applied.
+     * Migration from version 3 to 4:
+     * Rebuilds the `category` table with correct defaults for `status` and `type` columns.
+     */
+    val MIGRATION_3_4 = object : Migration(3, 4) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("""
+                CREATE TABLE category_new (
+                    categoryId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    color TEXT NOT NULL,
+                    icon TEXT,
+                    type TEXT NOT NULL DEFAULT 'EXPENSE',
+                    status TEXT NOT NULL DEFAULT 'ACTIVE',
+                    isPredefined INTEGER NOT NULL DEFAULT 1,
+                    createdAt INTEGER NOT NULL,
+                    updatedAt INTEGER NOT NULL,
+                    isSync INTEGER NOT NULL DEFAULT 0
+                )
+            """)
+            database.execSQL("""
+                INSERT INTO category_new (categoryId, name, color, icon, type, status, isPredefined, createdAt, updatedAt, isSync)
+                SELECT categoryId, name, color, icon, type, status, isPredefined, createdAt, updatedAt, isSync FROM category
+            """)
+            database.execSQL("DROP TABLE category")
+            database.execSQL("ALTER TABLE category_new RENAME TO category")
+        }
+    }
+
+    /**
+     * Migration from version 4 to 5:
+     * Adds a `serverId` column to the `category` table.
+     * This is used for synchronization with remote database.
+     */
+    val MIGRATION_4_5 = object : Migration(4, 5) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE category ADD COLUMN serverId TEXT")
+        }
+    }
+
+    /**
+     * Provides the Room database instance with all migrations applied.
      */
     @Provides
     @Singleton
@@ -73,9 +110,16 @@ object DatabaseModule {
             app,
             MyRiyalDatabase::class.java,
             "myRiyalDB"
-        ).addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+        ).addMigrations(
+            MIGRATION_1_2,
+            MIGRATION_2_3,
+            MIGRATION_3_4,
+            MIGRATION_4_5
+        )
             .build()
     }
+
+    // Provide DAOs
 
     /**
      * Provides DAO for Category operations.

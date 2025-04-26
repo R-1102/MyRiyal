@@ -19,6 +19,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,6 +40,37 @@ import com.example.myriyal.screens.profile.presentattion.vmModels.ProfileViewMod
 
 @Composable
 fun ViewProfile() {
+
+// Obtain NotificationViewModel instance using Hilt DI
+    val viewModel: NotificationViewModel = hiltViewModel()
+
+// Automatically fetch the auth token when the Composable enters the Composition
+    LaunchedEffect(Unit) {
+        viewModel.fetchAuthToken()
+    }
+
+
+    // UI content
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Spacer(Modifier.height(integerResource(R.integer.profileTopperSpace).dp))
+
+        // a static profile icon
+        Icon(
+            imageVector = Icons.Filled.AccountCircle,
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxWidth()
+                .size(integerResource(R.integer.profileIconSize).dp),
+            tint = MaterialTheme.colorScheme.secondary,
+        )
+        Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+        CustomCard(
+            modifier = Modifier.padding(integerResource(R.integer.padding).dp),
+        ) {
+
+
     val profileViewModel: ProfileViewModel = hiltViewModel()
 
     val showNameEditor = remember { mutableStateOf(false) }

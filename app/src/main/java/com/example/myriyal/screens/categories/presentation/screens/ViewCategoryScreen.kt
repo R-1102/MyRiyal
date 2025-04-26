@@ -115,7 +115,7 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
                 LazyColumn {
                     items(
                         items = categories,
-                        key = { it.categoryId }
+                        key = { it.categoryId ?: 0 }
                     )
                     { category ->
                         CategoryItemCard(
@@ -124,7 +124,7 @@ fun ViewCategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
                                 categoryViewModel.selectedCategory.value = category
                                 showCategoryFormDialog.value = true
                             },
-                            onSoftDelete = { categoryViewModel.softDelete(category.categoryId) },
+                            onSoftDelete = { categoryViewModel.softDelete(category.categoryId ?: 0) },
                         )
                     }
                 }

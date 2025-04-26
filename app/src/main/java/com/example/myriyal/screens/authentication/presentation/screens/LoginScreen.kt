@@ -41,7 +41,6 @@ import com.example.myriyal.ui.screenComponent.CustomTextField
 import com.example.myriyal.ui.screenComponent.GradientButton
 import com.example.myriyal.screens.authentication.presentation.vmModels.LogInVM
 import com.example.myriyal.screens.authentication.presentation.vmModels.NotificationViewModel
-import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
 import com.example.myriyal.ui.theme.ThemedLogo
 
 
@@ -69,10 +68,34 @@ fun LoginScreen(
     }
 
     if (shouldNavigate) {
-        notificationViewModel.fetchFcmToken()
+        notificationViewModel.fetchAuthToken()
         navController.navigate(Screen.Home.route)
         viewModel.resetNavigation()
-    }
+
+//    LaunchedEffect(Unit) {
+//        viewModel.allEventsFlow.collect { event ->
+//            when (event) {
+//                is LogInVM.AllEvents.Message -> {
+//                    // Show toast missing
+//                    Log.d("LoginScreen", event.message)
+//                }
+//                is LogInVM.AllEvents.ErrorCode -> {
+//                    // Show toast missing
+//                    Log.e("LoginScreen", "Error ${event.code}: ${event.erMsg}")
+//                }
+//                is LogInVM.AllEvents.Error -> {
+//                    Log.e("LoginScreen", "Error: ${event.error}")
+//                }
+//                is LogInVM.AllEvents.ShouldNavigate -> {
+//                    notificationViewModel.fetchAuthToken()
+//
+//                    navController.navigate(Screen.ViewRecord.route) {
+//                        popUpTo(Screen.ViewRecord.route) { inclusive = true }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     Column(
         modifier = Modifier

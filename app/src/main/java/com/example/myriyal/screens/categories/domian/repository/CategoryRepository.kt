@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 // - Implemented by: CategoryRepositoryImpl (data layer)
 // - Decouples business logic from storage logic (Room, DAO)
 
-
 interface CategoryRepository {
 
     // Inserts a new category into the database.
@@ -39,4 +38,8 @@ interface CategoryRepository {
     suspend fun seedPredefinedCategories()
 
     fun searchCategoryByName(query:String): Flow<List<CategoryEntity>>
+
+    // Retrieves a category from the local database by its server ID.
+    // Used internally to check if a remote category already exists locally.
+    suspend fun getCategoryByServerId(serverId: String): CategoryEntity?
 }

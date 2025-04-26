@@ -17,12 +17,14 @@ import com.example.myriyal.screens.categories.domian.model.CategoryType
 @Entity(
     tableName = "category",
     // Creates a unique index on the "name" column to prevent duplicate category names
-    indices = [Index(value = ["name"], unique = true)]
+    indices = [Index(value = ["serverId"], unique = true)]
 )
 data class CategoryEntity(
 
     // Auto-generated unique ID for each category
-    @PrimaryKey(autoGenerate = true) val categoryId: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val categoryId: Int = 0,
+
 
     // Category name (e.g., "Food", "Salary")
     val name: String,
@@ -49,6 +51,13 @@ data class CategoryEntity(
     val updatedAt: Long,
 
     @ColumnInfo(defaultValue = "0")
-    val isSync: Boolean = false
+    val isSync: Boolean = false,
+// Indicates whether the category is synchronized with the remote server.
+// false = local-only or pending sync, true = already uploaded.
+
+    val serverId: String? = null,
+// Stores the server-side ID of the category if it exists in the remote database.
+// Helps match local and remote records for synchronization.
+
 
 )

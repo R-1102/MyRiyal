@@ -23,7 +23,8 @@ interface CategoryDataSource {
 
     // Returns a reactive list of all categories.
     // Used by: ViewModel.categories (StateFlow)
-     fun getAllCategories(): Flow<List<CategoryEntity>>
+    //suspend fun getAllCategories(): Flow<CategoriesResponse>
+
 
     // Permanently deletes a category from the database.
     // Called by: ViewModel.delete()
@@ -32,6 +33,12 @@ interface CategoryDataSource {
     // Seeds predefined categories into the database (called once during app setup).
     // Called by: ViewModel.seedPredefinedCategories()
     suspend fun seedPredefinedCategories()
+
+    suspend fun getCategoryByServerId(serverId: String): CategoryEntity?
+
+    fun getAllCategories(): Flow<List<CategoryEntity>>
+
+
 
 
 }

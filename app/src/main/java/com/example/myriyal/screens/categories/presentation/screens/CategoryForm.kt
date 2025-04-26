@@ -76,7 +76,7 @@ fun CategoryForm(
             viewModel.startDate = initialCategory.createdAt
 
             // Retrieve and populate tracker data if the category has an associated tracker
-            val tracker = viewModel.getTracker(initialCategory.categoryId)
+            val tracker = viewModel.getTracker(initialCategory.categoryId ?: 0)
             tracker?.let {
                 viewModel.enableTracker.value = true
                 viewModel.trackerBudget.value = it.budgetAmount.toString()

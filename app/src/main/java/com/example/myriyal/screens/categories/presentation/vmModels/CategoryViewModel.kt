@@ -7,6 +7,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
+import com.example.myriyal.core.local.entities.TrackerEntity
+import com.example.myriyal.core.local.enums.CategoryStatus
+import com.example.myriyal.core.local.enums.CategoryType
+import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
+import com.example.myriyal.screens.categories.domian.repository.TrackerRepository
 import com.example.myriyal.screens.categories.data.local.TrackerEntity
 import com.example.myriyal.screens.categories.domian.model.CategoryStatus
 import com.example.myriyal.screens.categories.domian.model.CategoryType
@@ -17,6 +22,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
@@ -44,8 +50,8 @@ class CategoryViewModel @Inject constructor(
     private val useCases: CategoryUseCases
 ) : ViewModel() {
 
-    // -------------------- UI Form State --------------------
 
+    // -------------------- UI Form State --------------------
     /** Bound to the category name text field in the AddCategory screen */
     val categoryName = mutableStateOf("")
 
@@ -187,7 +193,7 @@ class CategoryViewModel @Inject constructor(
             useCases.update(category)
             val budgetAmount = trackerBudget.value.toDoubleOrNull() ?: 0.0
             if (budgetAmount > 0.0) {
-                val existingTracker = useCases.getTrackerByCategoryId(category.categoryId)
+                val existingTracker = useCases.getTrackerByCategoryId(category.categoryId ?: 0)
                 if (existingTracker != null) {
                     val updatedTracker = existingTracker.copy(
                         budgetAmount = budgetAmount,
@@ -197,7 +203,7 @@ class CategoryViewModel @Inject constructor(
                     useCases.updateTracker(updatedTracker)
                 } else {
                     val newTracker = TrackerEntity(
-                        categoryId = category.categoryId,
+                        categoryId = category.categoryId ?: 0,
                         budgetAmount = budgetAmount,
                         startDate = trackerStartDate.value ?: System.currentTimeMillis(),
                         createdAt = System.currentTimeMillis(),

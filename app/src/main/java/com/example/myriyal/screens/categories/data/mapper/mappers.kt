@@ -9,15 +9,16 @@ import com.example.myriyal.screens.categories.domian.model.CategoryType
 // From API ---> Local Database (DAO)
 fun CategoryDto.toEntity(existingEntity: CategoryEntity?): CategoryEntity {
     return CategoryEntity(
+        serverId = id,
         name = name,
         color = color,
         icon = icon,
         categoryId = existingEntity?.categoryId ?: 0,
         status = existingEntity?.status ?: CategoryStatus.ACTIVE,
         type = existingEntity?.type ?: CategoryType.EXPENSE,
-        isPredefined =  existingEntity?.isPredefined ?:true,
-        createdAt = existingEntity?.createdAt?:System.currentTimeMillis(),
-        updatedAt = existingEntity?.updatedAt?:System.currentTimeMillis(),
+        isPredefined = existingEntity?.isPredefined ?: true,
+        createdAt = existingEntity?.createdAt ?: System.currentTimeMillis(),
+        updatedAt = existingEntity?.updatedAt ?: System.currentTimeMillis(),
         isSync = false
     )
 }
@@ -27,6 +28,7 @@ fun CategoryDto.toEntity(existingEntity: CategoryEntity?): CategoryEntity {
 // From Local Database (DAO) ---> API
 fun CategoryEntity.toDto(): CategoryDto {
     return CategoryDto(
+        id = serverId,
         name = name,
         color = color,
         icon = icon,
