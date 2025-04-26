@@ -1,6 +1,5 @@
 package com.example.myriyal.screens.records.presentation.screens
 
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -45,7 +44,6 @@ fun RecordFormScreen(
     categories: List<CategoryEntity>,
     onDismiss: () -> Unit
 ) {
-
     val recordViewModel: RecordViewModel = hiltViewModel()
 
     LaunchedEffect(Unit) {
@@ -143,9 +141,6 @@ fun RecordFormScreen(
                 recordViewModel.isFormValid()
                 recordViewModel.submitRecord()
                 onDismiss() // Close the form after successful submission
-
-                /*if (initialRecord == null) recordViewModel.insert(record)
-                else recordViewModel.update(record) */
             },
             text = if (initialRecord == null) stringResource(id = R.string.addRecord) else stringResource(
                 id = R.string.updateRecord

@@ -42,7 +42,6 @@ fun ViewRecordScreen() {
     //Added: collects live search input from ViewModel
     val searchQuery by recordViewModel.searchQuery.collectAsState()
 
-
     if (shouldShowDialog.value) {
         CustomDialog(
             shouldShowDialog = shouldShowDialog,
