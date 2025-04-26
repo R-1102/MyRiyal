@@ -1,4 +1,4 @@
-package com.example.myriyal.home
+package com.example.myriyal.screens.home
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image

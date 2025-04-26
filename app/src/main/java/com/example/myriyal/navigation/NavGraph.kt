@@ -9,7 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.myriyal.home.HomeScreen
+import com.example.myriyal.screens.home.HomeScreen
 import com.example.myriyal.screens.profile.presentattion.screens.ViewProfile
 import com.example.myriyal.screens.authentication.presentation.screens.BalanceScreen
 import com.example.myriyal.screens.authentication.presentation.screens.ForgotPassword
