@@ -41,11 +41,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.core.graphics.toColorInt
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.screens.categories.domian.model.CategoryStatus
 import com.example.myriyal.screens.categories.domian.model.CategoryType
+import com.example.myriyal.screens.categories.presentation.components.iconsList
+import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.ui.screenComponent.CancelButton
 import com.example.myriyal.ui.screenComponent.CustomDropdown
 import com.example.myriyal.ui.screenComponent.CustomTextField
@@ -54,7 +57,7 @@ import com.example.myriyal.ui.screenComponent.GradientButton
 import com.example.myriyal.screens.categories.presentation.components.iconsList
 import com.example.myriyal.screens.categories.presentation.screens.components.CategoryDropdown
 import com.example.myriyal.screens.categories.presentation.screens.components.ColorPicker
-import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
+import com.example.myriyal.ui.theme.PrimaryGreen
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import java.text.DateFormat
 import java.util.Date
@@ -80,6 +83,7 @@ fun CategoryForm(
             // Populate form with existing category data when editing
             viewModel.categoryName.value = initialCategory.name
             viewModel.categoryType.value = initialCategory.type
+            viewModel.categoryColor.value = Color(initialCategory.color.toColorInt())
             viewModel.categoryIcon = initialCategory.icon.toString()
             viewModel.startDate = initialCategory.createdAt
 
@@ -100,6 +104,7 @@ fun CategoryForm(
             // Initialize form fields for creating a new category
             viewModel.categoryName.value = ""
             viewModel.categoryType.value = CategoryType.EXPENSE
+            viewModel.categoryColor.value = PrimaryGreen
             viewModel.categoryIcon = "🔥"
             viewModel.startDate = System.currentTimeMillis()
             viewModel.enableTracker.value = false
@@ -111,7 +116,9 @@ fun CategoryForm(
     fun resetForm() {
         viewModel.categoryName.value = ""
         viewModel.categoryType.value = CategoryType.EXPENSE
+        viewModel.categoryColor.value = PrimaryGreen
         viewModel.categoryIcon = ""
+        viewModel.trackerBudget.value = ""
         viewModel.startDate = System.currentTimeMillis()
     }
 
@@ -138,7 +145,7 @@ fun CategoryForm(
         //category name
         CustomTextField(
             value = viewModel.categoryName.value,
-            onValueChange = { viewModel.categoryName.value = it },
+            onValueChange = {viewModel.categoryName.value = it },
             label = stringResource(R.string.EnterCategoryName),
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
@@ -147,16 +154,27 @@ fun CategoryForm(
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
         //category type
-        CategoryDropdown(
-            value = viewModel.categoryType.value.toString(),
-            onValueChange = { viewModel.categoryType.value = it },
+        CustomDropdown(
+            value = viewModel.categoryType.value.toString()
+                .lowercase(),
+            onValueChange = { viewModel.categoryType.value.toString().lowercase() },
             label = stringResource(R.string.categoryType),
+//                    selected = categoryType,
+            list = CategoryType.entries,
+            onSelect = { viewModel.categoryType.value = it }
+
         )
 
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
+        //category color selection
+        val showDialog = remember { mutableStateOf(false) }
+        val tempSelectedColor = remember { mutableStateOf(viewModel.categoryColor.value) }
         OutlinedButton(
-            onClick = { showDialog.value = true },
+            onClick = {
+                tempSelectedColor.value = viewModel.categoryColor.value
+                showDialog.value = true
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Transparent
             ),
@@ -179,7 +197,7 @@ fun CategoryForm(
                 Card(
                     modifier = Modifier.size(integerResource(R.integer.colorSampleSize).dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = categoryColorController.selectedColor.value
+                        containerColor = viewModel.categoryColor.value
                     ),
                     shape = CircleShape,
                 ) {}
@@ -196,13 +214,35 @@ fun CategoryForm(
                     ColorPicker(
                         title = stringResource(R.string.ChooseColor),
                         categoryColor = categoryColorController,
+                        initialColor = tempSelectedColor.value,
+                        tempSelectedColor = tempSelectedColor,
+                        onColorSelected = {
+//                            categoryColorController.selectedColor.value = tempSelectedColor.value
+//                            categoryColorController.selectedColor.value = selectedColor
+                            viewModel.categoryColor.value = tempSelectedColor.value/*tempSelectedColor.value*/
+                            showDialog.value = false // Close after selecting
+                        },
+                        onDismiss = {
+                            showDialog.value = false // Just close without saving
+                        }
                     )
+//                    ColorPicker(
+//                        title = stringResource(R.string.ChooseColor),
+//                        categoryColor = categoryColorController,
+//                            onColorSelected = {
+//                                    enteredColor: Color ->
+//                                categoryColorController.selectedColor.value = enteredColor
+//                                showDialog.value = false
+//                            },
+//                            onDismiss = {
+//                                showDialog.value = false},
+//                    )
                 }
             }
         }
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-
+        //Category icon
         // Category icon dropdown
         CustomDropdown(
             value = viewModel.categoryIcon,
@@ -211,10 +251,9 @@ fun CategoryForm(
             list = iconsList,
             onSelect = { viewModel.categoryIcon = it },
         )
-
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
-        // Always-visible budget amount input
+// Always-visible budget amount input
         CustomTextField(
             value = viewModel.trackerBudget.value,
             onValueChange = { viewModel.trackerBudget.value = it },
@@ -222,29 +261,37 @@ fun CategoryForm(
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
         )
-
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
 
+// Start date picker for the tracker
+        val formattedTrackerDate = viewModel.trackerStartDate.value?.let {
+            DateFormat.getDateInstance().format(Date(it))
+        } ?: ""
         CustomTextField(
             value = formattedTrackerDate,
             onValueChange = {},
             label = stringResource(R.string.StartingDate),
             readOnly = true,
             trailingIcon = {
-                Icon(imageVector = Icons.Default.DateRange,
+                Icon(
+                    imageVector = Icons.Default.DateRange,
                     contentDescription = "Pick date",
                     tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.clickable { viewModel.showDatePicker.value = true })
+                    modifier = Modifier.clickable { viewModel.showDatePicker.value = true }
+                )
             }
         )
         if (viewModel.showDatePicker.value) {
-            DatePickerModal(onDateSelected = {
-                viewModel.trackerStartDate.value = it
-                viewModel.showDatePicker.value = false
-            }, onDismiss = { viewModel.showDatePicker.value = false })
+            DatePickerModal(
+                onDateSelected = {
+                    viewModel.trackerStartDate.value = it
+                    viewModel.showDatePicker.value = false
+                },
+                onDismiss = { viewModel.showDatePicker.value = false }
+            )
         }
-
         Spacer(Modifier.height(integerResource(R.integer.verticalSpacer).dp))
+
 
         //save button
         GradientButton(
@@ -254,10 +301,11 @@ fun CategoryForm(
                     categoryId = initialCategory?.categoryId ?: 0,
                     name = viewModel.categoryName.value,
                     color = String.format(
-                        "#%06X", 0xFFFFFF and categoryColorController.selectedColor.value.toArgb()
+                        "#%06X",
+                        0xFFFFFF and categoryColorController.selectedColor.value.toArgb()
                     ),
                     icon = viewModel.categoryIcon,
-                    type = viewModel.categoryType.value,
+                    type = /*categoryType,*/viewModel.categoryType.value,
                     status = CategoryStatus.ACTIVE,
                     isPredefined = false,
                     createdAt = initialCategory?.createdAt ?: timestamp,

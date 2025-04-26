@@ -13,6 +13,7 @@ import com.example.myriyal.screens.categories.domian.model.CategoryStatus
 import com.example.myriyal.screens.categories.domian.model.CategoryType
 import com.example.myriyal.screens.categories.domian.useCases.CategoryUseCases
 import com.example.myriyal.screens.categories.domian.useCases.InsertTrackerUseCase
+import com.example.myriyal.ui.theme.PrimaryGreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -50,6 +51,8 @@ class CategoryViewModel @Inject constructor(
 
     /** Bound to the category type dropdown (EXPENSE or INCOME) */
     val categoryType = mutableStateOf(CategoryType.EXPENSE)
+
+    val categoryColor = mutableStateOf(PrimaryGreen)
 
     /** Bound to the icon selection dropdown (emoji or icon string) */
     var categoryIcon by mutableStateOf("🔥")

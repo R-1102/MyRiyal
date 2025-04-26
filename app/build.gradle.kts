@@ -113,6 +113,9 @@ dependencies {
     //for color picker
     implementation("com.github.skydoves:colorpicker-compose:1.1.2")
 
+    //Charts
+    implementation(libs.cmpcharts)
+
 
 }
 // Allow references to generated code

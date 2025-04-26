@@ -18,23 +18,44 @@ import com.example.myriyal.ui.screenComponent.CustomCardHomeStatistic
 
 @Composable
 fun ViewStatisticScreen() {
-
-    val chartItems = listOf(
-        R.string.incomeVsExpenses,
-        R.string.monthlySpending,
-        R.string.categoryChart,
-    )
-
     LazyColumn(
         horizontalAlignment = Alignment.End,
         modifier = Modifier.padding(horizontal = integerResource(id = R.integer.mediumSpace).dp)
     ) {
-        items(chartItems) { item ->
+        item {
             CustomCardHomeStatistic(
                 modifier = Modifier.height(integerResource(id = R.integer.chartCardHeight).dp)
             ) {
                 Text(
-                    text = stringResource(id = item),
+                    text = stringResource(R.string.incomeVsExpenses),
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(integerResource(id = R.integer.mediumSpace).dp)
+                )
+                ExpenseIncomeLineChart()
+            }
+        }
+            item {
+                CustomCardHomeStatistic(
+                    modifier = Modifier.height(integerResource(id = R.integer.chartCardHeight).dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.monthlySpending),
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(integerResource(id = R.integer.mediumSpace).dp)
+                    )
+                }
+            }
+
+        item {
+            CustomCardHomeStatistic(
+                modifier = Modifier.height(integerResource(id = R.integer.chartCardHeight).dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.categoryChart),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontWeight = FontWeight.Bold,
@@ -42,6 +63,5 @@ fun ViewStatisticScreen() {
                 )
             }
         }
-
     }
 }

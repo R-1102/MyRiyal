@@ -123,4 +123,8 @@
     <integer name="smallButtonHeight">40</integer>
     <integer name="smallButtonWidth">80</integer>
 
+    <!--Charts-->
+    <integer name="chartHeight">280</integer>
+    chartHeight
+
 </resources>
