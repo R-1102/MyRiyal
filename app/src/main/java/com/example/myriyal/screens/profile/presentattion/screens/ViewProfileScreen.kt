@@ -32,9 +32,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
-import com.example.myriyal.screenComponent.CustomCard
-import com.example.myriyal.screenComponent.CustomDialog
-import com.example.myriyal.screenComponent.CustomTextField
+import com.example.myriyal.ui.screenComponent.CustomCard
+import com.example.myriyal.ui.screenComponent.CustomDialog
+import com.example.myriyal.ui.screenComponent.CustomTextField
 import com.example.myriyal.screens.profile.presentattion.vmModels.ProfileViewModel
 
 @Composable

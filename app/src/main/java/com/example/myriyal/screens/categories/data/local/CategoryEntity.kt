@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.example.myriyal.core.local.enums.CategoryStatus
-import com.example.myriyal.core.local.enums.CategoryType
+import com.example.myriyal.screens.categories.domian.model.CategoryStatus
+import com.example.myriyal.screens.categories.domian.model.CategoryType
 
 // This entity represents the "category" table in the Room database.
 // It stores all expense/income categories (both predefined and user-created).

@@ -1,6 +1,6 @@
 package com.example.myriyal.screens.records.domain.useCases
 
-import com.example.myriyal.core.local.entities.RecordEntity
+import com.example.myriyal.screens.records.data.local.RecordEntity
 import com.example.myriyal.screens.records.domain.repository.RecordRepository
 import kotlinx.coroutines.flow.Flow
 

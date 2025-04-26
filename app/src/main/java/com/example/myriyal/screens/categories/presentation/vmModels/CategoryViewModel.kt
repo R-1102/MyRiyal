@@ -7,12 +7,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
-import com.example.myriyal.core.local.entities.TrackerEntity
-import com.example.myriyal.core.local.enums.CategoryStatus
-import com.example.myriyal.core.local.enums.CategoryType
+import com.example.myriyal.screens.categories.data.local.TrackerEntity
+import com.example.myriyal.screens.categories.domian.model.CategoryStatus
+import com.example.myriyal.screens.categories.domian.model.CategoryType
 import com.example.myriyal.screens.categories.domian.useCases.CategoryUseCases
 import com.example.myriyal.screens.categories.domian.useCases.InsertTrackerUseCase
-import com.example.myriyal.screens.categories.presentation.model.CategoryFilter
+import com.example.myriyal.screens.categories.domian.model.CategoryFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

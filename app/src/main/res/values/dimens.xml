@@ -104,7 +104,7 @@
     <integer name="roundedCornerSearchField">84</integer>
 
     <!--Home Search-->
-    <integer name="balanceCardHeight">88</integer>
+    <integer name="balanceCardHeight">104</integer>
     <integer name="homeCardElevation">4</integer>
     <integer name="largeRiyalIconSize">20</integer>
     <integer name="homeRecordCardHeight">312</integer>

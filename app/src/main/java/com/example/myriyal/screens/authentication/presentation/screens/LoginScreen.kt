@@ -33,9 +33,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
 import com.example.myriyal.navigation.Screen
-import com.example.myriyal.screenComponent.CustomCard
-import com.example.myriyal.screenComponent.CustomTextField
-import com.example.myriyal.screenComponent.GradientButton
+import com.example.myriyal.ui.screenComponent.CustomCard
+import com.example.myriyal.ui.screenComponent.CustomTextField
+import com.example.myriyal.ui.screenComponent.GradientButton
 import com.example.myriyal.screens.authentication.presentation.vmModels.LogInVM
 import com.example.myriyal.screens.authentication.presentation.vmModels.NotificationViewModel
 import com.example.myriyal.screens.records.presentation.screens.ViewRecordScreen
@@ -159,7 +159,7 @@ fun LoginScreen(navController: NavHostController) {
                         text = stringResource(id = R.string.Signup),
                         fontSize = integerResource(id= R.integer.smallText).sp,
                         fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.clickable {
                             navController.navigate(Screen.SignUp.route)
                         }

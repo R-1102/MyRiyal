@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
-import com.example.myriyal.screenComponent.CustomCardHomeStatistic
+import com.example.myriyal.ui.screenComponent.CustomCardHomeStatistic
 
 @Composable
 fun ViewStatisticScreen() {

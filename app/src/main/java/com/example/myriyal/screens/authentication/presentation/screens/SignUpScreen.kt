@@ -34,9 +34,10 @@ import com.example.myriyal.screens.authentication.presentation.vmModels.SignUpVM
 import com.example.myriyal.ui.theme.ThemedLogo
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.navigation.Screen
-import com.example.myriyal.screenComponent.CustomCard
-import com.example.myriyal.screenComponent.CustomTextField
-import com.example.myriyal.screenComponent.GradientButton
+import com.example.myriyal.ui.screenComponent.CustomCard
+import com.example.myriyal.ui.screenComponent.CustomTextField
+import com.example.myriyal.ui.screenComponent.GradientButton
+import com.example.myriyal.ui.theme.Black
 
 @Composable
 fun SignUpScreen(navController: NavHostController) {
@@ -133,7 +134,6 @@ fun SignUpScreen(navController: NavHostController) {
                     text = stringResource(id = R.string.Signup)
                 )
             }
-            //Spacer(modifier = Modifier.padding(integerResource(id= R.integer.smallSpace).dp))
 
           Row(
                 modifier = Modifier
@@ -144,7 +144,7 @@ fun SignUpScreen(navController: NavHostController) {
                 Text(
                     text = stringResource(id = R.string.already_have_account),
                     fontSize = integerResource(id= R.integer.smallText).sp,
-                    color = Color.Black,
+                    color = Black,
                     fontWeight = FontWeight.SemiBold,
                 )
                 Text(

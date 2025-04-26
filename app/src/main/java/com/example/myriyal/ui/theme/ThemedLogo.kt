@@ -14,14 +14,12 @@ fun ThemedLogo(
     modifier: Modifier = Modifier,
     lightLogoRes: Int = R.drawable.light_logo_png,
     darkLogoRes: Int = R.drawable.dark_logo_png,
-    contentDescription: String = "App Logo"
 ) {
-    val isDark = isSystemInDarkTheme()
-    val logoPainter = painterResource(id = if (isDark) darkLogoRes else lightLogoRes)
+    val logoPainter = painterResource(id = if (isSystemInDarkTheme()) darkLogoRes else lightLogoRes)
 
     Image(
         painter = logoPainter,
-        contentDescription = contentDescription,
+        contentDescription = "App Logo",
         modifier = modifier.size(74.dp, 94.dp),
     )
 }

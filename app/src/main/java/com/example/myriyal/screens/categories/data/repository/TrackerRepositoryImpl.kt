@@ -1,7 +1,7 @@
 package com.example.myriyal.screens.categories.data.repository
 
-import com.example.myriyal.core.local.dao.TrackerDao
-import com.example.myriyal.core.local.entities.TrackerEntity
+import com.example.myriyal.screens.categories.data.local.TrackerDao
+import com.example.myriyal.screens.categories.data.local.TrackerEntity
 import com.example.myriyal.screens.categories.domian.repository.TrackerRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

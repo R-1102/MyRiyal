@@ -12,6 +12,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.myriyal.navigation.bottomBar.BottomNavigationBar
 import com.example.myriyal.navigation.topBar.TopNavigationBar
+import com.example.myriyal.screens.authentication.presentation.vmModels.LogOutVM
 import com.google.firebase.auth.FirebaseAuth
 
 /**
@@ -19,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
  *
  * Responsibilities:
  * - Initializes required dependencies (ViewModels for Category and Record).
- * - Sets up a Scaffold with a bottom navigation bar.
+ * - Sets up a Scaffold with a top and bottom navigation bar.
  * - Passes initialized ViewModels and navigation controller to NavGraph.
  *
  * Layers:
@@ -40,7 +41,7 @@ fun AppNavigation(darkTheme: Boolean, toggleTheme: () -> Unit) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    val ViewModel: AppNavigationVM = hiltViewModel()
+    val ViewModel: LogOutVM = hiltViewModel()
 
     // Define routes where the bottom bar should NOT be shown
     val bottomBarHiddenRoutes = listOf(

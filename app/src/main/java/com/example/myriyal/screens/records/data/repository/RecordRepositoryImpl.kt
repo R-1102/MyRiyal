@@ -1,7 +1,7 @@
 package com.example.myriyal.screens.records.data.repository
 
-import com.example.myriyal.core.local.dao.RecordDao
-import com.example.myriyal.core.local.entities.RecordEntity
+import com.example.myriyal.screens.records.data.local.RecordDao
+import com.example.myriyal.screens.records.data.local.RecordEntity
 import com.example.myriyal.screens.records.domain.repository.RecordRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

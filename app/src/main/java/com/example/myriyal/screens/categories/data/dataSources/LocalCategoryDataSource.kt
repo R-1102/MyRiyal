@@ -3,7 +3,7 @@ package com.example.myriyal.screens.categories.data.dataSources
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
 import com.example.myriyal.screens.categories.data.local.CategoryDao
 import com.example.myriyal.screens.categories.data.local.PredefinedCategoryProvider
-import com.example.myriyal.core.local.enums.CategoryStatus
+import com.example.myriyal.screens.categories.domian.model.CategoryStatus
 import com.example.myriyal.screens.categories.data.model.CategoryDto
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

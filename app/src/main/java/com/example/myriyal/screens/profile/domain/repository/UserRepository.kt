@@ -1,6 +1,6 @@
 package com.example.myriyal.screens.profile.domain.repository
 
-import com.example.myriyal.core.local.entities.UserEntity
+import com.example.myriyal.screens.profile.data.local.UserEntity
 import kotlinx.coroutines.flow.Flow
 
 /**

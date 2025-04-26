@@ -1,11 +1,11 @@
 package com.example.myriyal.screens.categories.data.dataSources
 
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
-import com.example.myriyal.screens.categories.data.api.CategoryApiService
+import com.example.myriyal.screens.categories.data.remote.CategoryApiService
 import com.example.myriyal.screens.categories.data.local.PredefinedCategoryProvider
 import com.example.myriyal.screens.categories.data.model.CategoryDto
-import com.example.myriyal.screens.categories.data.model.toDto
-import com.example.myriyal.screens.categories.data.model.toEntity
+import com.example.myriyal.screens.categories.data.mapper.toDto
+import com.example.myriyal.screens.categories.data.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject

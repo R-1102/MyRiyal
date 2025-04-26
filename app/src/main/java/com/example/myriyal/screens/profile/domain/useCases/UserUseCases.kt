@@ -1,6 +1,6 @@
 package com.example.myriyal.screens.profile.domain.useCases
 
-import com.example.myriyal.core.local.enums.CategoryType
+import com.example.myriyal.screens.categories.domian.model.CategoryType
 import com.example.myriyal.screens.categories.domian.repository.CategoryRepository
 import com.example.myriyal.screens.records.domain.repository.RecordRepository
 import kotlinx.coroutines.flow.first

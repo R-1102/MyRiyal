@@ -1,7 +1,7 @@
 package com.example.myriyal.screens.categories.data.local
 
-import com.example.myriyal.core.local.enums.CategoryStatus
-import com.example.myriyal.core.local.enums.CategoryType
+import com.example.myriyal.screens.categories.domian.model.CategoryStatus
+import com.example.myriyal.screens.categories.domian.model.CategoryType
 
 object PredefinedCategoryProvider {
     fun getCategories(): List<CategoryEntity> {

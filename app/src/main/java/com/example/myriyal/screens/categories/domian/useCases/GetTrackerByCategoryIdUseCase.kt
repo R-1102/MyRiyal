@@ -1,6 +1,6 @@
 package com.example.myriyal.screens.categories.domian.useCases
 
-import com.example.myriyal.core.local.entities.TrackerEntity
+import com.example.myriyal.screens.categories.data.local.TrackerEntity
 import com.example.myriyal.screens.categories.domian.repository.TrackerRepository
 import kotlinx.coroutines.flow.firstOrNull
 

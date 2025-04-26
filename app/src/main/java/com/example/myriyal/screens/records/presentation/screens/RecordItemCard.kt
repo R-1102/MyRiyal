@@ -31,8 +31,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.myriyal.R
 import com.example.myriyal.screens.categories.data.local.CategoryEntity
-import com.example.myriyal.core.local.entities.RecordEntity
-import com.example.myriyal.core.local.enums.CategoryType
+import com.example.myriyal.screens.records.data.local.RecordEntity
+import com.example.myriyal.screens.categories.domian.model.CategoryType
 import com.example.myriyal.ui.theme.Black
 import com.example.myriyal.ui.theme.Expense
 import com.example.myriyal.ui.theme.Income

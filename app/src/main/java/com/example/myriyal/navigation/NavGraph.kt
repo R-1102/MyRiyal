@@ -33,10 +33,6 @@ import com.google.firebase.auth.FirebaseAuth
  * - and others
  */
 
-/* if the home screen created make sure that
-if we enter the Home screen the login and signup
-screen doesn't pop out to it again*/
-
 @Composable
 fun NavGraph(
     navController: NavHostController,
@@ -48,7 +44,7 @@ fun NavGraph(
     NavHost(
         navController = navController,
         startDestination = if (notificationViewModel.getStoredFcmToken().isNullOrEmpty()) {
-            Screen.Home.route
+            Screen.SplashScreen.route
         } else {
             Screen.Home.route
         },
@@ -56,7 +52,7 @@ fun NavGraph(
     ) {
         // Authentication Screens with animation
         composable(
-            route = Screen.SplashScreen.route, /*SplashScreen*/
+            route = Screen.SplashScreen.route,
             enterTransition = {
                 slideInVertically(
                     initialOffsetY = { it },

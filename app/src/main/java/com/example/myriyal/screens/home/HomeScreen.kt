@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.myriyal.R
-import com.example.myriyal.screenComponent.CustomCardHomeStatistic
+import com.example.myriyal.ui.screenComponent.CustomCardHomeStatistic
 import com.example.myriyal.screens.profile.presentattion.vmModels.ProfileViewModel
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.screens.records.presentation.vmModels.RecordViewModel
@@ -61,6 +61,7 @@ fun HomeScreen(navController: NavHostController) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(integerResource(id = R.integer.mediumSpace).dp)
+                        .padding(top = integerResource(id = R.integer.mediumSpace).dp )
                 ) {
                     Text(
                         text = stringResource(id = R.string.balance),
@@ -156,7 +157,7 @@ fun HomeScreen(navController: NavHostController) {
         item {
             // "View More" with icon
             ViewMoreComponent(
-                onClick = { navController.navigate("Statistic_Screen") }
+                onClick = { navController.navigate("Statistic") }
             )
         }
     }

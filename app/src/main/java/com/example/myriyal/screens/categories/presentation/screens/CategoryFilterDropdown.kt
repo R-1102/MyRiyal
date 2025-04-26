@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.automirrored.filled.ListAlt
 import androidx.compose.material.icons.automirrored.filled.TrendingDown
 import androidx.compose.material.icons.automirrored.filled.TrendingUp
 import androidx.compose.material3.DropdownMenu
@@ -23,7 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myriyal.R
-import com.example.myriyal.screens.categories.presentation.model.CategoryFilter
+import com.example.myriyal.screens.categories.domian.model.CategoryType
+import com.example.myriyal.screens.categories.domian.model.CategoryFilter
 import com.example.myriyal.screens.categories.presentation.vmModels.CategoryViewModel
 import com.example.myriyal.ui.theme.White
 
@@ -64,7 +64,7 @@ fun CategoryFilterDropdown(
 
             },
             onClick = {
-                categoryViewModel.setFilter(CategoryFilter.ByType(com.example.myriyal.core.local.enums.CategoryType.INCOME))
+                categoryViewModel.setFilter(CategoryFilter.ByType(CategoryType.INCOME))
                 onDismiss()
             }
         )
@@ -91,7 +91,7 @@ fun CategoryFilterDropdown(
 
             },
             onClick = {
-                categoryViewModel.setFilter(CategoryFilter.ByType(com.example.myriyal.core.local.enums.CategoryType.EXPENSE))
+                categoryViewModel.setFilter(CategoryFilter.ByType(CategoryType.EXPENSE))
                 onDismiss()
             }
         )
