@@ -71,6 +71,6 @@ The app features simple visualizations and budget alerts to promote smarter pers
 | **Coroutines** | Asynchronous programming |
 ## 👨‍💻 Authors
 - **Ahad**
-- **Mohamed**
+- **Mohammed**
 - **Renad**
-- **Shahid**
+- **Shahad**
