@@ -1,5 +1,7 @@
 # My Riyal - Expense Tracker Android Mobile App
 
+![App Cover 31](https://github.com/user-attachments/assets/43b69134-a23f-46a6-bf6d-0df6b0199a4c)
+
 ## Project Overview
 My Riyal is a mobile application designed to help users easily track, manage, and analyze their expenses.
 Users can quickly log daily spending, categorize their financial activities, and gain insights into their financial habits.
@@ -69,6 +71,8 @@ The app features simple visualizations and budget alerts to promote smarter pers
 | **Graphing Library** | Compose Charts |
 | **Dependency Injection** | Hilt |
 | **Coroutines** | Asynchronous programming |
+
+
 ## 👨‍💻 Authors
 - **Ahad**
 - **Mohammed**
