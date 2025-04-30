@@ -74,7 +74,7 @@ The app features simple visualizations and budget alerts to promote smarter pers
 
 
 ## 👨‍💻 Authors
-- **Ahad**
-- **Mohammed**
-- **Renad**
-- **Shahad**
+- **Ahad Altalhi**
+- **Mohammed Alharbi**
+- **Renad Alhazmi**
+- **Shahad Aldawsari**
